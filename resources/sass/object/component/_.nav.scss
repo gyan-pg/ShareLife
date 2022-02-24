@@ -1,0 +1,20 @@
+.c-nav {
+  width: 100%;
+  height: $height_header;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 1px 5px 5px #ddd;
+  &__left {
+    display: inline-block;
+    margin-left: 5%;
+    line-height: $height_header;
+  }
+  &__right {
+    display: inline-block;
+    margin-right: 5%;
+    line-height: $height_header;
+  }
+  &__menu {
+    margin-left: $space_m;
+  }
+}

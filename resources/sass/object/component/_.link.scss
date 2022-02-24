@@ -1,0 +1,8 @@
+.c-link {
+  &--router {
+    display: inline-block;
+    padding: $space_xs $space_s;
+    background: #333;
+    color: white;
+  }
+}

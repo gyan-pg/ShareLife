@@ -1,0 +1,21 @@
+body{
+  color: #333;
+  font-family: $font_default;
+  background: $color_bg_default;
+  line-height: 1.6em;
+}
+
+// cursor
+i:hover{
+  cursor: pointer;
+}
+
+// placeholder
+::placeholder{
+  color: $color_font_bright;
+  font-size: $fontsize_s;
+}
+
+a:hover{
+  cursor: pointer;
+}

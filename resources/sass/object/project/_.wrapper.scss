@@ -1,0 +1,11 @@
+.p-wrapper{
+  &--content {
+    min-height: calc(100vh - $height_footer - $height_header);
+  }
+  &--auth {
+    width: 500px;
+    padding-top: $space_2l;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}

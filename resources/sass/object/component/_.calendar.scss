@@ -1,0 +1,35 @@
+.c-calendar {
+  
+  margin: 0 auto;
+  max-width: 900px;
+  &__dotw {
+    display: flex;
+    border-top: $border_default;
+    border-right: $border_default;
+  }
+  &__dotw-name {
+    text-align: center;
+    width: calc(100% / 7);
+    border-left: $border_default;
+    border-bottom: $border_default;
+  }
+  &__row {
+    display: flex;
+    height: 125px;
+    border-left: $border_default;
+  }
+  &__day {
+    width: calc(100% / 7);
+    border-right: $border_default;
+    border-bottom: $border_default;
+  }
+  &__outer-month {
+    background: $color_bg_light_gray;
+  }
+  &__event {
+    color: white;
+    margin-bottom: 1px;
+    height: 25px;
+    line-height: 25px;
+  }
+}

@@ -1,0 +1,9 @@
+.p-container {
+  padding-bottom: $space_2l;
+  &-btn {
+    text-align: center;
+  }
+  &--form-input {
+    margin-bottom: $space_m;
+  }
+}

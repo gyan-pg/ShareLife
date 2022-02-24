@@ -1,0 +1,9 @@
+.c-btn {
+  display: inline-block;
+  font-size: $fontsize_ms;
+  padding: $space_xs $space_ms;
+  &--submit {
+    color: $color_font_white;
+    background: $color_bg_orange;
+  }
+}

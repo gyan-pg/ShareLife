@@ -1,0 +1,112 @@
+// space
+$space_xs: 5px;
+$space_s: 10px;
+$space_ms: 15px;
+$space_m: 20px;
+$space_ml: 30px;
+$space_l: 40px;
+$space_2l: 60px;
+$space_3l: 80px;
+$space_4l: 160px;
+
+// --color--
+// base
+
+// font
+$color_font_default: #333;
+$color_font_bright: #aaa;
+$color_font_white: #fefefe;
+
+//background
+$color_bg_default: #fcfafa;
+$color_bg_disable: #999;
+$color_bg_light_gray: #f3f3f3;
+$color_bg_available: #ccc;
+$color_bg_white: #fff;
+$color_bg_input: #fff;
+$color_bg_orange: rgb(223, 138, 59);
+$color_bg_step_subtitle: rgb(220, 250, 150);
+$color_bg_error: rgb(253, 209, 209);
+
+// box-shadow
+$box_shadow_default: #ededed 0 0 15px;
+
+// border
+// -- color --
+$color_border_default: #bbb;
+$color_border_bright: #ddd;
+$color_border_accent1: rgb(192, 183, 55);
+$color_border_white: #fff;
+
+// -- default style --
+$border_default: 1px solid #bbb;
+$border_step_subtitle: 1px solid rgb(120,150,50);
+$border_bright: 1px solid #eee;
+
+// --fontstyle--
+// font-size
+$fontsize_xs: 10px;
+$fontsize_s: 12px;
+$fontsize_ms: 14px;
+$fontsize_default: 16px;
+$fontsize_subtitle: 20px;
+$fontsize_l: 22px;
+$fontsize_page_title: 24px;
+$fontsize_top_section: 36px;
+$fontsize_top_message: 48px;
+$fontsize_title_back: 120px;
+
+// font-family
+$font_default: 'Noto Sans JP', sans-serif;
+
+// transition
+$transtime_default: .3s;
+
+// height
+$height_header: 80px;
+$height_footer: 80px;
+$height_author: 75px;
+$height_hero: 800px;
+
+// width
+$form_single: 400px;
+
+// default style
+body{
+  color: #333;
+  font-family: $font_default;
+  background: $color_bg_default;
+  line-height: 1.6em;
+}
+
+// cursor
+i:hover{
+  cursor: pointer;
+}
+
+// placeholder
+::placeholder{
+  color: $color_font_bright;
+  font-size: $fontsize_s;
+}
+
+a:hover{
+  cursor: pointer;
+}
+
+$breakpoints: (
+  'sm': 'screen and (max-width: 599px)',
+  'tb': 'screen and (max-width: 1024px)',
+) !default;
+
+@mixin mq($breakpoint: sm){
+  @media #{map-get($breakpoints, $breakpoint)}{
+    @content;
+  }
+}
+
+
+@mixin whiteSpace(){
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
