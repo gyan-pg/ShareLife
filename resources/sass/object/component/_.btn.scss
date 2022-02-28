@@ -2,6 +2,9 @@
   display: inline-block;
   font-size: $fontsize_ms;
   padding: $space_xs $space_ms;
+  &.active {
+    background: orange;
+  }
   &--submit {
     color: $color_font_white;
     background: $color_bg_orange;

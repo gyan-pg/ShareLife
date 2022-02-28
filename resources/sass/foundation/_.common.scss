@@ -6,16 +6,12 @@ body{
 }
 
 // cursor
-i:hover{
+i:hover, a:hover, button:hover {
   cursor: pointer;
 }
 
 // placeholder
-::placeholder{
+::placeholder {
   color: $color_font_bright;
   font-size: $fontsize_s;
-}
-
-a:hover{
-  cursor: pointer;
 }

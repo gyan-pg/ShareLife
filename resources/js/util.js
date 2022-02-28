@@ -30,4 +30,5 @@ export const NOT_FOUND = 404
 export const UNAUTHORIZED = 419
 export const UNPROCESSABLE_ENTITY = 422
 export const INTERNAL_SERVER_ERROR = 500
+export const UNAUTHORIZED_MESSAGE = 'セッション有効期限が切れました。再度ログインをお願いします。'
 export const EMAIL_PATTERN = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]+.[A-Za-z0-9]+$/

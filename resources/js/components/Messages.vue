@@ -1,5 +1,7 @@
 <template>
-  <p v-if="messages">{{messages}}</p>
+  <transition name="fade">
+    <p v-if="messages" class="c-text--flash">{{messages}}</p>
+  </transition>
 </template>
 
 <script>
@@ -11,3 +13,12 @@ export default {
   }
 }
 </script>
+
+<style>
+/* .fade-enter-to, .fade-leave-active{
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to{
+  opacity: 0;
+} */
+</style>

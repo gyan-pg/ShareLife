@@ -2,26 +2,56 @@
   
   margin: 0 auto;
   max-width: 900px;
+
+  &--input {
+    margin: 0 auto;
+    max-width: 300px;
+  }
+  &__header {
+    &--input {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
   &__dotw {
     display: flex;
     border-top: $border_default;
     border-right: $border_default;
+    &--input {
+      @extend .c-calendar__dotw;
+    }
   }
   &__dotw-name {
     text-align: center;
     width: calc(100% / 7);
     border-left: $border_default;
     border-bottom: $border_default;
+    &--input {
+      @extend .c-calendar__dotw-name;
+    }
   }
   &__row {
     display: flex;
     height: 125px;
     border-left: $border_default;
+    &--input {
+      @extend .c-calendar__row;
+      font-size: $fontsize_ms;
+      height: 40px;
+    }
   }
   &__day {
     width: calc(100% / 7);
     border-right: $border_default;
     border-bottom: $border_default;
+    &--input {
+      @extend .c-calendar__day;
+      cursor: pointer;
+      &.active {
+        background: $color_bg_orange;
+      }
+    }
   }
   &__outer-month {
     background: $color_bg_light_gray;
@@ -31,5 +61,7 @@
     margin-bottom: 1px;
     height: 25px;
     line-height: 25px;
+    position: relative;
+    z-index: 1;
   }
 }

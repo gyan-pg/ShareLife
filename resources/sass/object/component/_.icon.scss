@@ -1,0 +1,8 @@
+.c-icon {
+  &--modal-close {
+    display: inline-block;
+    font-size: $fontsize_icon;
+    color: $color_font_white;
+    margin-top: $space_s;
+  }
+}

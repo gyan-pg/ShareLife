@@ -6,4 +6,16 @@
   &--form-input {
     margin-bottom: $space_m;
   }
+  &--form-radio {
+    margin-bottom: $space_m;
+    display: flex;
+    justify-content: space-around;
+  }
+  &--form-select-date {
+
+  }
+  &--input-notice {
+    display: flex;
+    justify-content: end;
+  }
 }

@@ -2,6 +2,7 @@
   padding: $space_m $space_ml;
   border: $border_default;
   border-radius: 10px;
+  background: $color_bg_white;
   &__label {
     display: block;
     font-size: $fontsize_ms;
@@ -17,11 +18,58 @@
   &__textarea {
     display: block;
     width: 100%;
-    height: 200px;
+    height: 100px;
     resize: none;
     border-radius: 5px;
     border: $border_default;
     padding: $space_xs $space_s;
     font-size: $fontsize_ms;
+  }
+  &__radio {
+    display: none;
+  }
+  &__radio-label {
+    &:before {
+      content: '';
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: lime;
+      border: 2px solid #ddd;
+    }
+    &--red {
+      &:before {
+        background: #ff9100;
+      }
+    }
+    &--green {
+      &:before {
+        background: #06f406;
+      }
+    }
+    &--gray {
+      &:before {
+        background: #afafaf;
+      }
+    }
+    &--blue {
+      &:before {
+        background: #46aef3;
+      }
+    }
+    &--yellow {
+      &:before {
+        background: #dceb0e;
+      }
+    }
+    &--checked {
+      &:before {
+        border: solid 2px #333;
+      }
+    }
+  }
+  &__select {
+    border: $border_default;
   }
 }

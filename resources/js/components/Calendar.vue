@@ -14,51 +14,49 @@
         <!-- 日付 -->
         <div v-for="(day, index) in week" :key="index" class="c-calendar__day"
         :class="{'c-calendar__outer-month': currentDate.month() !== day.month}"
-        @drop="dragEnd($event, day.day)" @dragover.prevent>
-          <div>{{ day.date }}</div>
+        @drop="dragEnd($event, day.date)" @dragover.prevent>
+          <div>{{ day.day }}</div>
           <!-- 予定 -->
           <div v-for="dayEvent in day.dayEvents" :key="dayEvent.id">
             <div v-if="dayEvent.width" class="c-calendar__event"
             :style="`width:${dayEvent.width}%;background-color: ${dayEvent.color}`"
-            draggable="true" @dragstart="dragStart($event, dayEvent.id)"><!-- $eventはDOMイベントと呼ばれる -->
-              {{ dayEvent.name }}
+            draggable="true" @dragstart="dragStart($event, dayEvent.id)" @click="eventDetail(dayEvent)"><!-- $eventはDOMイベントと呼ばれる -->
+              {{ formatTitle(dayEvent) }}
             </div>
-            <div v-else style="height:26px"></div>
+            <div v-else style="height:26px;"></div>
           </div>
         </div>
-
       </div>
+      <button type="button" class="c-btn" @click="openForm">予定の新規登録</button>
     </div>
+    
+    <!-- イベント入力フォーム -->
+    <transition name="fade">
+      <EventForm v-if="form_flg" @close-form="closeEventForm()"/>
+    </transition>
+    <!-- イベント詳細 -->
+    <transition name="fade">
+      <EventDetail v-if="detail_flg" />
+    </transition>
+
   </div>
 </template>
 
 <script>
 import dayjs from 'dayjs'
+import EventForm from './EventForm.vue'
+import EventDetail from './EventDetail.vue'
 export default {
   data () {
     return {
       currentDate: dayjs(),
-      events: [
-        { id: 1, name: "ミーティング", start: "2022-02-01", end:"2022-02-01", color:"blue"},
-        { id: 2, name: "イベント", start: "2022-02-02", end:"2022-02-03", color:"limegreen"},
-        { id: 3, name: "会議", start: "2022-02-06", end:"2022-02-06", color:"deepskyblue"},
-        { id: 4, name: "有給", start: "2022-02-08", end:"2022-02-08", color:"dimgray"},
-        { id: 5, name: "海外旅行", start: "2022-02-08", end:"2022-02-16", color:"navy"},
-        { id: 6, name: "誕生日", start: "2022-02-16", end:"2022-02-16", color:"orange"},
-        { id: 7, name: "イベント", start: "2022-02-12", end:"2022-02-15", color:"limegreen"},
-        { id: 8, name: "出張", start: "2022-02-12", end:"2022-02-13", color:"teal"},
-        { id: 9, name: "客先訪問", start: "2022-02-14", end:"2022-02-14", color:"red"},
-        { id: 10, name: "パーティ", start: "2022-02-15", end:"2022-02-15", color:"royalblue"},
-        { id: 12, name: "ミーティング", start: "2022-02-18", end:"2022-02-19", color:"blue"},
-        { id: 13, name: "イベント", start: "2022-02-21", end:"2022-02-21", color:"limegreen"},
-        { id: 14, name: "有給", start: "2022-02-20", end:"2022-02-22", color:"dimgray"},
-        { id: 15, name: "イベント", start: "2022-02-25", end:"2022-02-28", color:"limegreen"},
-        { id: 16, name: "会議", start: "2022-02-21", end:"2022-02-21", color:"deepskyblue"},
-        { id: 17, name: "旅行", start: "2022-02-23", end:"2022-02-24", color:"navy"},
-        { id: 18, name: "ミーティング", start: "2022-02-28", end:"2022-02-28", color:"blue"},
-        { id: 19, name: "会議", start: "2022-02-12", end:"2022-02-12", color:"deepskyblue"},
-      ]
+      form_flg: false,
+      detail_flg: false
     }
+  },
+  components: {
+    EventForm,
+    EventDetail
   },
   computed: {
     calendars () {
@@ -66,6 +64,9 @@ export default {
     },
     currentMonth () {
       return this.currentDate.format('YYYY[年]M[月]')
+    },
+    events () {
+      return this.$store.state.events.event
     }
   },
   methods: {
@@ -81,20 +82,23 @@ export default {
     },
     getCalendar () {
       let startDate = this.getStartDate(this.currentDate) // カレンダーの一番最初の日
-      const endDate = this.getEndDate()
-      const weekNum = Math.ceil(endDate.diff(startDate, 'day') / 7)
+      const endDate = this.getEndDate() // カレンダーの最後の日
+      const weekNum = Math.ceil(endDate.diff(startDate, 'day') / 7) // カレンダーの行数
       let calendars = []
+      // カレンダーの情報を作るループ
+      // 1週間の配列
       for (let week = 0; week < weekNum; week++) {
         let weekRow = []
-        for (let day = 0; day < 7; day++) {
+        // 各日の情報を詰める
+        for (let day = 0; day < 7; day++) { // 0が日曜日、6が金曜日
           let dayEvents = this.getDayEvents(startDate, day) // startDateは処理する日、dayは曜日
           weekRow.push({
-            day: startDate.format('YYYY-MM-DD'),
-            date: startDate.date(), // 日を取得
+            date: startDate.format('YYYY-MM-DD'),
+            day: startDate.date(), // 日を取得
             month: startDate.month(),
             dayEvents: dayEvents
           })
-          startDate = startDate.add(1, 'day')
+          startDate = startDate.add(1, 'day') // 次の日の情報を詰める
         }
         calendars.push(weekRow);
       }
@@ -117,13 +121,13 @@ export default {
     // そのイベントをその日のイベント情報に含める。
     getDayEvents(date, day) {
       let stackIndex = 0 // その日のイベントの番号
-      let dayEvents = []
+      let dayEvents = [] // その日のイベント情報を詰める変数
       let startedEvents = [] // すでに開始されているイベントを保持
-      this.sortedEvents().forEach(event => {
-        let startDate = dayjs(event.start).format('YYYY-MM-DD')
-        let endDate = dayjs(event.end).format('YYYY-MM-DD')
-        let Date = date.format('YYYY-MM-DD')
-        // イベントの開始日から終了日の間の場合
+      this.events.forEach(event => {
+        let startDate = dayjs(event.start).format('YYYY-MM-DD') // イベントがスタートする日
+        let endDate = dayjs(event.end).format('YYYY-MM-DD') // イベントが終わる日
+        let Date = date.format('YYYY-MM-DD') // イベントの情報を確認する日
+        // イベント情報を確認する日が、イベントの開始日から終了日の間の場合
         if(startDate <= Date && endDate >= Date) {
           if (startDate === Date) {
             [stackIndex, dayEvents] = this.getStackEvents(event, day, stackIndex, dayEvents, startedEvents, event.start)
@@ -136,42 +140,38 @@ export default {
       })
       return dayEvents
     },
-    getEventWidth (start, end, day) {
-      let betweenDays = dayjs(end).diff(dayjs(start), 'day')
-      if (betweenDays > 6 - day) {
-        return (6 - day) * 100 + 95
-      } else {
-        return betweenDays * 100 + 95
-      }
-    },
-
     getStackEvents(event, day, stackIndex, dayEvents, startedEvents, start){
       [stackIndex, dayEvents] = this.getStartedEvents(stackIndex, startedEvents, dayEvents)
       let width = this.getEventWidth(start, event.end, day)
-      Object.assign(event,{
-        stackIndex
-      })
+      // event Object にstackindexを追加している
+      // stackIndexはただの数値だが、{}で囲うことでstackIndexというプロパティで中の数値が追加される。
+      Object.assign(event, { stackIndex })
       dayEvents.push({...event, width})
       stackIndex++;
       return [stackIndex,dayEvents];
     },
-
     getStartedEvents(stackIndex, startedEvents, dayEvents){
       let startedEvent
         do{
           startedEvent = startedEvents.find(event => event.stackIndex === stackIndex)
           if(startedEvent) {
-            dayEvents.push(startedEvent) //ダミー領域として利用するため
+            dayEvents.push(startedEvent) // ダミー領域として利用するため
             stackIndex++;
           }
         }while(typeof startedEvent !== 'undefined')
       return [stackIndex, dayEvents]
     },
-    // 昇順に並び替え。DBでソートする場合はいらない。
-    sortedEvents () {
-      return this.events.slice().sort(function (a,b) {
-        return (a.start < b.start) ? -1 : 1
-      })
+    getEventWidth (start, end, day) {
+      let betweenDays = dayjs(end).diff(dayjs(start), 'day') // startとendの差分の日数
+      // 1週間以上の予定の場合、カレンダーの土曜日までラインを伸ばす
+      if (betweenDays > 6){
+        return (6 - day) * 100 + 95
+      }
+      if (betweenDays > 6 - day) {
+        return (6 - day) * 100 + 95
+      } else {
+        return betweenDays * 100 + 95
+      }
     },
     // ドラッグイベント
     // html側の$eventでDOMイベント、第二引数でdayEventのidを送っている
@@ -180,13 +180,41 @@ export default {
       event.dataTransfer.dropEffect = 'move'
       event.dataTransfer.setData('eventId', eventId)
     },
-    dragEnd (event, day) {
+    // dateは移動先の日付
+    dragEnd (event, date) {
       let eventId = event.dataTransfer.getData('eventId')
-      let dragEvent = this.events.find(event => event.id === parseInt(eventId))
-      let betweenDays = dayjs(dragEvent.end).diff(dayjs(dragEvent.start), 'day')
-      dragEvent.start = day
-      dragEvent.end = dayjs(dragEvent.start).add(betweenDays, 'day').format('YYYY-MM-DD')
+      let changeData = {'id': eventId, 'start': date}
+      this.$store.dispatch('events/changeScheduleList', changeData)
+
+      // let eventId = event.dataTransfer.getData('eventId')
+      // let dragEvent = this.events.find(event => event.id === parseInt(eventId))
+      // let betweenDays = dayjs(dragEvent.end).diff(dayjs(dragEvent.start), 'day')
+      // dragEvent.start = day
+      // dragEvent.end = dayjs(dragEvent.start).add(betweenDays, 'day').format('YYYY-MM-DD')
+    },
+    // カレンダーに表示するタイトルを加工する
+    formatTitle (dayEvent) {
+      // スケジュールの日数を確認
+      let scheduleDays = Math.ceil(dayEvent.width/100)
+      // タイトルは1日あたり7文字までとする。
+      if (dayEvent.title.length > scheduleDays * 7) {
+        let returnStr = dayEvent.title.slice(0, (scheduleDays * 7 - 1))
+        return returnStr + '…'
+      }
+      return dayEvent.title
+    },
+    eventDetail (dayEvent) {
+      console.log(dayEvent)
+    },
+    openForm () {
+      this.form_flg = true
+    },
+    closeEventForm () {
+      this.form_flg = false
     }
+  },
+  created () {
+    this.$store.dispatch('events/getScheduleList')
   }
 }
 /*
@@ -199,5 +227,11 @@ dayjs()でdayjsを使用できる。dayjs()のみだと、現在日時を返す�
 .subtract('num', 'day or week or month or year') : num(day/week/month/year)だけ日付を遡った値を返す。
 日付などの差分(diff)の使い方
 dateFrom.diff(dateTo, 'day') : dateFromからdateToまで何日だったか取得できる。monthやhour、dayも可能。
+*/
+/*
+カレンダー中の変数
+date: カレンダーの日付データ[yyyy-mm-dd]
+day: カレンダーの日データ[d]
+month: 月[m] 月は実際の月からマイナス１された値が入っている。
 */
 </script>

@@ -31,6 +31,7 @@
         <button type="submit" class="c-btn c-btn--submit">送信</button>
       </div>
     </form>
+    <button class="c-btn" @click="testMsg">message test</button>
   </div>
 </template>
 
@@ -58,6 +59,9 @@ export default {
     // }
   },
   methods: {
+    testMsg () {
+      this.$store.commit('messages/setMessage', 'testメッセージです。')
+    },
     async login () {
       await this.$store.dispatch('auth/login', this.loginForm)
 

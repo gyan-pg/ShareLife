@@ -47,3 +47,11 @@ Route::delete('/team/invitation', 'TeamController@denyTeam');
 Route::post('/agreement/register', 'AgreementController@register');
 // 決め事の取得
 Route::get('/agreement/{id}/list', 'AgreementController@showList');
+// 予定の登録
+Route::post('/schedule/register', 'ScheduleController@register');
+// 予定の取得
+Route::get('/schedule/show', 'ScheduleController@show');
+// 予定の削除
+Route::delete('/schedule/delete', 'ScheduleController@delete');
+// 予定の変更(ドラッグイベント)
+Route::put('/schedule/changeDay', 'ScheduleController@changeDay');

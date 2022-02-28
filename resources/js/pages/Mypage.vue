@@ -32,6 +32,7 @@
 <script>
 import { OK, EMAIL_PATTERN, UNPROCESSABLE_ENTITY } from '../util'
 import Calendar from '../components/Calendar.vue'
+import EventForm from '../components/EventForm.vue'
 export default {
   data () {
     return {
@@ -44,7 +45,8 @@ export default {
     }
   },
   components: {
-    Calendar
+    Calendar,
+    EventForm
   },
   computed: {
     team () {

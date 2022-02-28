@@ -19,6 +19,7 @@
 @import './object/component/.calendar';
 @import './object/component/.footer';
 @import './object/component/.form';
+@import './object/component/.icon';
 @import './object/component/.link';
 @import './object/component/.logo';
 @import './object/component/.nav';
@@ -29,3 +30,5 @@
 @import './object/project/.wrapper';
 
 // ----- utility -----
+@import './object/utility/.animation';
+@import './object/utility/.utility';

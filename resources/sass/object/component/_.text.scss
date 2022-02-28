@@ -3,4 +3,19 @@
     font-size: $fontsize_s;
     color: red;
   }
+  &--counter {
+    font-size: $fontsize_ms;
+    text-align: right;
+  }
+  &--flash {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    line-height: $height_msg;
+    background: $color_bg_notice;
+    border-radius: 10px;
+    border: solid 1px green;
+  }
 }
