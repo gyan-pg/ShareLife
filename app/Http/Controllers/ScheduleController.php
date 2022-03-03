@@ -34,9 +34,28 @@ class ScheduleController extends Controller
   }
 
   // スケジュールの変更(ドラッグ&ドロップで日付変更)
-  public function changeDay(Request $request) {
+  public function changeDay(Request $request)
+  {
     $schedule = new Schedule();
     $schedule->where('id', $request->id)->update(['start' => $request->start, 'end' => $request->end]);
     Log::debug('done');
+  }
+
+  // スケジュールの削除
+  public function delete($id)
+  {
+    Log::debug($id);
+    // スケジュールのidのバリデーション
+    // 空ではないか
+    if($id === ""){
+      return response()->json(['error'=>'エラーが発生しました。'],422);
+    }
+
+    // 数字であることを確認
+    $result = preg_match('/^[0-9]+$/',$id);
+    // エラー判定
+    if($result){
+      return response()->json(['error'=>'エラーが発生しました。'],422);
+    }
   }
 }

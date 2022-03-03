@@ -20,7 +20,8 @@ try {
  */
 
 // 自作関数
-import { getCookieValue } from './util'
+import { getCookieValue, UNAUTHORIZED, UNAUTHORIZED_MESSAGE } from './util'
+import store from './store'
 
 window.axios = require('axios');
 
@@ -35,9 +36,17 @@ window.axios.interceptors.request.use(config => {
 
 // responseを受け取った後の処理を上書き。第一引数は成功時、第二引数は失敗時の処理。
 // 第一引数はデフォルトのまま、第二引数を変更。同様の処理が多々あるので。
+// エラーで認証切れの際は自動でログインページに飛ばす処理。
 window.axios.interceptors.response.use(
   response => response,
-  error => error.response || error
+  error => {
+    if (error.response.status === UNAUTHORIZED){
+      store.commit('messages/setMessage', UNAUTHORIZED_MESSAGE, {root: true})
+      store.commit('error/setCode', UNAUTHORIZED , {root: true})
+    } else {
+      error => error.response || error
+    }
+  }
 )
 
 /**

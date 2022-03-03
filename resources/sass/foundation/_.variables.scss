@@ -22,6 +22,7 @@ $color_bg_default: #fcfafa;
 $color_bg_disable: #999;
 $color_bg_light_gray: #f3f3f3;
 $color_bg_available: #ccc;
+$color_bg_active: #b7ffff;
 $color_bg_white: #fff;
 $color_bg_input: #fff;
 $color_bg_orange: rgb(223, 138, 59);
@@ -62,7 +63,7 @@ $fontsize_title_back: 120px;
 $font_default: 'Noto Sans JP', sans-serif;
 
 // transition
-$transtime_default: .3s;
+$transtime_default: .5s;
 
 // height
 $height_header: 80px;

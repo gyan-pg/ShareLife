@@ -52,6 +52,6 @@ Route::post('/schedule/register', 'ScheduleController@register');
 // 予定の取得
 Route::get('/schedule/show', 'ScheduleController@show');
 // 予定の削除
-Route::delete('/schedule/delete', 'ScheduleController@delete');
+Route::delete('/schedule/delete/{id}', 'ScheduleController@delete');
 // 予定の変更(ドラッグイベント)
 Route::put('/schedule/changeDay', 'ScheduleController@changeDay');

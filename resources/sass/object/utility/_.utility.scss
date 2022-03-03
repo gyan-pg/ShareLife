@@ -1,4 +1,7 @@
-
+// margin
+.u-mrl-s {
+  margin: 0 $space_s;
+}
 // text-align
 .u-tc {
   text-align: center;
@@ -8,4 +11,8 @@
 }
 .u-tr {
   text-align: right;
+}
+// postion
+.u-pr {
+  position: relative;
 }

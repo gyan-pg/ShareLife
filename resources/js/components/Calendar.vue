@@ -14,7 +14,7 @@
         <!-- 日付 -->
         <div v-for="(day, index) in week" :key="index" class="c-calendar__day"
         :class="{'c-calendar__outer-month': currentDate.month() !== day.month}"
-        @drop="dragEnd($event, day.date)" @dragover.prevent>
+        @drop="dragEnd($event, day.date)" @dragover.prevent @click.self="openForm(day.date)">
           <div>{{ day.day }}</div>
           <!-- 予定 -->
           <div v-for="dayEvent in day.dayEvents" :key="dayEvent.id">
@@ -27,16 +27,17 @@
           </div>
         </div>
       </div>
-      <button type="button" class="c-btn" @click="openForm">予定の新規登録</button>
+      <!-- 場所や見た目を変更する。アイコンがいいかも。 -->
+      <button type="button" class="c-btn" @click="openForm()">予定の新規登録</button>
     </div>
     
     <!-- イベント入力フォーム -->
     <transition name="fade">
-      <EventForm v-if="form_flg" @close-form="closeEventForm()"/>
+      <EventForm v-if="form_flg" @close-form="closeEventForm" :clickDate="clickDate"/>
     </transition>
     <!-- イベント詳細 -->
     <transition name="fade">
-      <EventDetail v-if="detail_flg" />
+      <EventDetail v-if="detail_flg" @close-detail="closeDetail" :clickEvent="clickEvent"/>
     </transition>
 
   </div>
@@ -50,6 +51,8 @@ export default {
   data () {
     return {
       currentDate: dayjs(),
+      clickDate: null,
+      clickEvent: null,
       form_flg: false,
       detail_flg: false
     }
@@ -204,13 +207,18 @@ export default {
       return dayEvent.title
     },
     eventDetail (dayEvent) {
-      console.log(dayEvent)
+      this.detail_flg = true
+      this.clickEvent = dayEvent
     },
-    openForm () {
+    openForm (date = dayjs().format('YYYY-MM-DD')) {
       this.form_flg = true
+      this.clickDate = date
     },
     closeEventForm () {
       this.form_flg = false
+    },
+    closeDetail () {
+      this.detail_flg = false
     }
   },
   created () {

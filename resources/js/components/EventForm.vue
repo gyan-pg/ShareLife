@@ -1,9 +1,29 @@
 <template>
 <!-- event form -->
-  <section class="p-wrapper--modal">
-    <div class="p-wrapper--auth">
+  <section class="p-wrapper--modal" @click.self="closeEventForm">
+    <div class="p-wrapper--event-form">
       <p v-if="errors.server_error" class="c-text--error u-tc">{{ errors.server_error }}</p>
-      <form class="c-form" @submit.prevent="setSchedule">
+      <form class="c-form u-pr" @submit.prevent="setSchedule">
+        <!-- 日時を選択する -->
+        <div class="p-container--form-select-date">
+          <div class="u-tc">
+            <div class="c-form__date" :class="{'active': start_flg }" @click="openStartForm">{{ formatDayStr(schedule.start) }}</div><span class="u-mrl-s">〜</span><div class="c-form__date" :class="{'active': end_flg }" @click="openCloseForm">{{ formatDayStr(schedule.end) }}</div>
+          </div>
+            <!-- <button class="c-btn" :class="{'active': start_flg }" type="button" @click="openStartForm">編集する</button>
+            <button class="c-btn" :class="{'active': end_flg }" type="button" @click="openCloseForm">編集する</button> -->
+          <!-- エラー表示 -->
+          <p v-if="errors.schedule" class="c-text--error">{{ errors.schedule }}</p>
+
+          <!-- 日時選択用カレンダー -->
+          <div class="p-wrapper--small-calendar">
+            <transition name="fade">
+              <SmallCalendar v-if="open_calendar" :end_flg="end_flg" :start_flg="start_flg" 
+              :start="schedule.start" :end="schedule.end" @close-calendar="closeCalendar" @get-date="getDate"/>
+            </transition>
+          </div>
+        </div>
+
+        <!-- タイトル -->
         <label for="agreement-title">タイトル</label>
         <div class="p-container--form-input">
           <input id="agreement-title" class="c-form__input" v-model="schedule.title">
@@ -21,43 +41,9 @@
             <p class="c-text--counter">{{ schedule.detail.length }}/400</p>
           </div>
         </div>
-        <!-- 日時を選択する -->
-        <div class="p-container--form-select-date">
-          <div>
-            <span>開始日</span><span>{{ formatDayStr(schedule.start) }}</span>
-            <button class="c-btn" :class="{'active': start_flg }" type="button" @click="openStartForm">編集する</button>
-          </div>
-          <div>
-            <span>終了日</span><span>{{ formatDayStr(schedule.end) }}</span>
-            <button class="c-btn" :class="{'active': end_flg }" type="button" @click="openCloseForm">編集する</button>
-          </div>
-          <!-- エラー表示 -->
-          <p v-if="errors.schedule" class="c-text--error">{{ errors.schedule }}</p>
-
-          <!-- 日時選択用カレンダー -->
-          <div class="c-calendar--input" v-if="open_calendar">
-            <div class="c-calendar__header--input">
-              <i class="fa-solid fa-arrow-left-long" @click="prevMonth"></i>
-              <span>{{ currentMonth }}</span>
-              <i class="fa-solid fa-arrow-right-long" @click="nextMonth"></i>
-            </div>
-            <ul class="c-calendar__dotw--input">
-              <li v-for="n in 7" :key="n" class="c-calendar__dotw-name">{{ youbi(n - 1) }}</li>
-            </ul>
-            <div v-for="(week, index) in calendars" :key="index" class="c-calendar__row--input">
-              <div v-for="(day, index) in week" :key="index" class="c-calendar__day--input"
-              :class="[{'c-calendar__outer-month': currentDate.month() !== day.month}, 
-              {'active': (start_flg && schedule.start === day.date) || (end_flg && schedule.end === day.date)}]" 
-              @click="getDate(day.date)">
-                {{ day.day }}
-              </div>
-            </div>
-            <button class="c-btn" type="button" @click="closeCalendar">閉じる</button>
-          </div>
-        </div>
 
         <!-- 色選択 -->
-        <label for="agreement-detail">color</label>
+        <label>color</label>
         <div class="p-container--form-radio">
           <label for="radio-red" class="c-form__radio-label c-form__radio-label--red" :class="[schedule.color === '#ff9100' ? 'c-form__radio-label--checked' : '']" ></label> 
           <input id="radio-red" type="radio" value="#ff9100" class="c-form__radio" v-model="schedule.color">
@@ -73,6 +59,9 @@
 
         <button class="c-btn c-btn--submit" type="submit">submit</button>
         <p v-if="errors" class="c-text--error">{{ errors.server }}</p>
+
+        <div class="c-form__mask" :class="{'active': start_flg || end_flg}" @click="closeCalendar"></div>
+
       </form>
       <i class="fa-solid fa-xmark c-icon c-icon--modal-close" @click="closeEventForm"></i>
     </div>
@@ -82,14 +71,20 @@
 <script>
 import dayjs from 'dayjs'
 import {OK, UNPROCESSABLE_ENTITY, INTERNAL_SERVER_ERROR} from '../util'
+import SmallCalendar from './SmallCalendar.vue'
 export default {
+  props: {
+    clickDate: {
+      String
+    }
+  },
   data () {
     return {
       schedule: {
         title: '',
         detail: '',
-        start: dayjs().format('YYYY-MM-DD'),
-        end: dayjs().format('YYYY-MM-DD'),
+        start: null,
+        end: null,
         color: '#ff9100',
       },
       errors: {
@@ -99,24 +94,16 @@ export default {
         color: null,
         server_error: ''
       },
-      calendar: [],
-      currentDate: dayjs(),
       start_flg: false,
       end_flg: false,
       open_calendar: false,
       error_flg: false,
     }
   },
+  components: {
+    SmallCalendar
+  },
   computed: {
-    calendars () {
-      return this.getCalendar();
-    },
-    currentMonth () {
-      return this.currentDate.format('YYYY年MM月')
-    },
-    startSchedule () {
-      return this.start.format('YYYY年MM月DD日')
-    },
     detail_length () {
       return this.schedule.detail.length
     },
@@ -133,6 +120,7 @@ export default {
       this.detailValidation()
       if (!this.error_flg) {
         const response = await axios.post('/api/schedule/register', this.schedule)
+
         if (response.status !== OK) {
           this.errors.server_error = 'サーバーでエラーが発生しました。'
           return false;
@@ -185,49 +173,6 @@ export default {
       const dayOfTheWeek = date.endOf('month').day()
       return date.endOf('month').add(6 - dayOfTheWeek, 'day')
     },
-    getCalendar () {
-      let startDate = this.getStartDate(this.currentDate) // カレンダーの一番最初の日
-      const endDate = this.getEndDate() // カレンダーの最後の日
-      const weekNum = Math.ceil(endDate.diff(startDate, 'day') / 7) // カレンダーの行数
-      let calendars = []
-      // カレンダーの情報を作るループ
-      // 1週間の配列
-      for (let week = 0; week < weekNum; week++) {
-        let weekRow = []
-        // 各日の情報を詰める
-        for (let day = 0; day < 7; day++) { // 0が日曜日、6が金曜日
-          weekRow.push({
-            date: startDate.format('YYYY-MM-DD'),
-            day: startDate.date(), // 日を取得
-            month: startDate.month(),
-          })
-          startDate = startDate.add(1, 'day') // 次の日の情報を詰める
-        }
-        calendars.push(weekRow);
-      }
-      console.log(calendars)
-      return calendars
-    },
-    youbi(dayIndex) {
-      const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-      return week[dayIndex]
-    },
-    prevMonth () {
-      this.currentDate = dayjs(this.currentDate).subtract(1, 'month')
-    },
-    nextMonth () {
-      this.currentDate = dayjs(this.currentDate).add(1, 'month')
-    },
-    getDate (date) {
-      if (this.start_flg) {
-        this.schedule.start = date
-        if (dayjs(this.schedule.end).diff(this.schedule.start) < 0) {
-          this.schedule.end = date
-        }
-      } else {
-        this.schedule.end = date
-      }
-    },
     openStartForm () {
       this.start_flg = !this.start_flg
       this.end_flg = false
@@ -257,6 +202,26 @@ export default {
     },
     closeEventForm () {
       this.$emit('close-form')
+    },
+    getDate (date) {
+      console.log(date)
+      if (this.start_flg) {
+        this.schedule.start = date
+        if (dayjs(this.schedule.end).diff(this.schedule.start) < 0) {
+          this.schedule.end = date
+        }
+      } else {
+        this.schedule.end = date
+      }
+    }
+  },
+  created () {
+    if(this.clickDate) {
+      this.schedule.start = this.clickDate
+      this.schedule.end = this.clickDate
+    } else {
+      this.schedule.start = dayjs().format('YYYY-MM-DD')
+      this.schedule.end = dayjs().format('YYYY-MM-DD')
     }
   }
 }

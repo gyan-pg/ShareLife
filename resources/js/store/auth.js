@@ -61,7 +61,6 @@ const actions = {
       return false
     }
 
-    // respose.status !== OKの時
     context.commit('setApiStatus', false)
     if (response.status === UNPROCESSABLE_ENTITY) {
       context.commit('setRegisterErrorMessages', response.data.errors)
