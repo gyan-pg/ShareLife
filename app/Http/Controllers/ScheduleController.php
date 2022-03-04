@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ScheduleRequest;
 use App\Schedule;
 use App\Team;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -38,7 +39,6 @@ class ScheduleController extends Controller
   {
     $schedule = new Schedule();
     $schedule->where('id', $request->id)->update(['start' => $request->start, 'end' => $request->end]);
-    Log::debug('done');
   }
 
   // スケジュールの削除
@@ -54,8 +54,26 @@ class ScheduleController extends Controller
     // 数字であることを確認
     $result = preg_match('/^[0-9]+$/',$id);
     // エラー判定
-    if($result){
+    if(!$result){
       return response()->json(['error'=>'エラーが発生しました。'],422);
     }
+
+    // 自分の予定であることを確認
+    $schedule = new Schedule();
+    $created_user = $schedule->find($id)->user;
+    if ($created_user->id !== Auth::id()) {
+      return response()->json(['error'=>'エラーが発生しました。'],422);
+    }
+    // バリデーションOK
+    $schedule->where('id', $id)->delete();
+  }
+
+  //スケジュールの更新
+  public function changeSchedule(ScheduleRequest $request)
+  {
+    Log::debug($request);
+    $schedule = new Schedule();
+    $schedule->where('id', $request->id)->update(['title' => $request->title,
+    'detail' => $request->detail, 'start' => $request->start, 'end' => $request->end, 'color' => $request->color]);
   }
 }

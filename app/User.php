@@ -40,4 +40,9 @@ class User extends Authenticatable
     protected $visible = [
       'id', 'name', 'email'
     ];
+
+    public function schedules()
+    {
+      return $this->hasMany('App\Schedule');
+    }
 }

@@ -486,7 +486,7 @@ a:hover {
 body {
   color: #333;
   font-family: "Noto Sans JP", sans-serif;
-  background: #fcfafa;
+  background: #fff;
   line-height: 1.6em;
 }
 
@@ -593,7 +593,7 @@ button:hover {
 }
 
 .c-calendar__outer-month {
-  background: #f3f3f3;
+  background: #eaeaea;
 }
 
 .c-calendar__event {
@@ -663,7 +663,7 @@ button:hover {
   display: inline-block;
   position: relative;
   z-index: 2;
-  background: #f3f3f3;
+  background: #eaeaea;
   padding: 5px 20px;
   border-radius: 10px;
 }
@@ -752,6 +752,13 @@ button:hover {
   margin-top: 10px;
 }
 
+.c-icon--header {
+  background: #eaeaea;
+  padding: 10px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
 .c-link--router {
   display: inline-block;
   padding: 5px 10px;
@@ -805,6 +812,10 @@ button:hover {
   border: solid 1px green;
 }
 
+.c-text--menu:hover {
+  font-size: 14px;
+}
+
 .p-container {
   padding-bottom: 60px;
 }
@@ -826,6 +837,48 @@ button:hover {
 .p-container--input-notice {
   display: flex;
   justify-content: end;
+}
+
+.p-container--header-icon {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.p-container--header-icon::before {
+  transition: 0.5s;
+  cursor: auto;
+  opacity: 0;
+  content: attr(data-text);
+  display: inline-block;
+  position: absolute;
+  font-size: 12px;
+  width: 60px;
+  line-height: 20px;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.p-container--header-icon:hover::before {
+  transition: 0.5s;
+  opacity: 1;
+}
+
+.p-container--header-submenu {
+  padding: 10px;
+  position: absolute;
+  top: 60px;
+  width: 100px;
+  line-height: 30px;
+  border: 1px solid #bbb;
+  font-size: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  box-shadow: #ededed 0 0 15px;
+  border-radius: 10px;
 }
 
 .p-wrapper--content {

@@ -1,8 +1,6 @@
 <template>
   <div>
-    Mypage
     <Calendar />
-    <router-link to="/agreement" class="c-link--router">agree</router-link>
     <!-- パートナーの招待関係 component化する？ -->
     <div v-if="team">
       <!-- 承認待ち表示 -->

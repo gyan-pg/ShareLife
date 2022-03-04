@@ -6,4 +6,10 @@
     color: $color_font_white;
     margin-top: $space_s;
   }
+  &--header {
+    background: $color_bg_light_gray;
+    padding: $space_s;
+    border-radius: 50%;
+    margin-right: $space_s;
+  }
 }

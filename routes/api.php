@@ -43,10 +43,12 @@ Route::post('/team/invitation', 'TeamController@createTeam');
 Route::put('/team/invitation', 'TeamController@approveTeam');
 // 拒否
 Route::delete('/team/invitation', 'TeamController@denyTeam');
+// --- 決め事 ---
 // 決め事の登録
 Route::post('/agreement/register', 'AgreementController@register');
 // 決め事の取得
 Route::get('/agreement/{id}/list', 'AgreementController@showList');
+// --- 予定 ---
 // 予定の登録
 Route::post('/schedule/register', 'ScheduleController@register');
 // 予定の取得
@@ -55,3 +57,5 @@ Route::get('/schedule/show', 'ScheduleController@show');
 Route::delete('/schedule/delete/{id}', 'ScheduleController@delete');
 // 予定の変更(ドラッグイベント)
 Route::put('/schedule/changeDay', 'ScheduleController@changeDay');
+// 予定の変更(イベント詳細から)
+Route::put('/schedule/changeSchedule', 'ScheduleController@changeSchedule');

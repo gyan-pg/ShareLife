@@ -94,6 +94,7 @@ export default {
     },
     sendDate (date) {
       this.$emit('get-date', date)
+      this.closeCalendar()
     },
     closeCalendar () {
       this.$emit('close-calendar')

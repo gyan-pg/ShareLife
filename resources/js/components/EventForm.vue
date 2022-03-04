@@ -43,8 +43,8 @@
         </div>
 
         <!-- 色選択 -->
-        <label>color</label>
         <div class="p-container--form-radio">
+          <label>color</label>
           <label for="radio-red" class="c-form__radio-label c-form__radio-label--red" :class="[schedule.color === '#ff9100' ? 'c-form__radio-label--checked' : '']" ></label> 
           <input id="radio-red" type="radio" value="#ff9100" class="c-form__radio" v-model="schedule.color">
           <label for="radio-blue" class="c-form__radio-label c-form__radio-label--blue" :class="[schedule.color === '#46aef3' ? 'c-form__radio-label--checked' : '']"></label>

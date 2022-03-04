@@ -36,11 +36,6 @@ const actions = {
       context.dispatch('getScheduleList')
       return false
     }
-    if (response.status === UNAUTHORIZED) {
-      context.commit('error/setCode', response.status, { root: true })
-      context.commit('messages/setMessage', UNAUTHORIZED_MESSAGE, { root: true })
-      return false
-    }
   }
 }
 

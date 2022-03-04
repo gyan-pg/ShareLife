@@ -13,4 +13,9 @@ class Schedule extends Model
   protected $visible = [
     'id', 'title', 'detail', 'start', 'end', 'color'
   ];
+
+  public function user()
+  {
+    return $this->belongsTo('App\User');
+  }
 }

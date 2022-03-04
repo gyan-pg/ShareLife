@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>calendar component</p>
     <div class="c-calendar">
       <h2>{{ currentMonth }}</h2>
       <button @click="prevMonth" type="button">前の月</button>
@@ -208,7 +207,16 @@ export default {
     },
     eventDetail (dayEvent) {
       this.detail_flg = true
-      this.clickEvent = dayEvent
+      // dayEventを直接渡してしまうと参照渡しになってしまうので、
+      // ここでは新たにオブジェクトを作成する。
+      this.clickEvent = {
+        'id': dayEvent.id,
+        'title': dayEvent.title,
+        'color': dayEvent.color,
+        'start': dayEvent.start,
+        'end': dayEvent.end,
+        'detail': dayEvent.detail
+      }
     },
     openForm (date = dayjs().format('YYYY-MM-DD')) {
       this.form_flg = true

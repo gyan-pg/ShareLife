@@ -20,7 +20,7 @@ try {
  */
 
 // 自作関数
-import { getCookieValue, UNAUTHORIZED, UNAUTHORIZED_MESSAGE } from './util'
+import { getCookieValue, UNAUTHORIZED, UNAUTHORIZED_MESSAGE, INTERNAL_SERVER_ERROR } from './util'
 import store from './store'
 
 window.axios = require('axios');
@@ -43,8 +43,10 @@ window.axios.interceptors.response.use(
     if (error.response.status === UNAUTHORIZED){
       store.commit('messages/setMessage', UNAUTHORIZED_MESSAGE, {root: true})
       store.commit('error/setCode', UNAUTHORIZED , {root: true})
+    } else if (error.response.status === INTERNAL_SERVER_ERROR) {
+      store.commit('error/setCode', INTERNAL_SERVER_ERROR, {root: true})
     } else {
-      error => error.response || error
+      return error.response || error
     }
   }
 )

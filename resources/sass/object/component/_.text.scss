@@ -18,4 +18,10 @@
     border-radius: 10px;
     border: solid 1px green;
   }
+  &--menu {
+    &:hover {
+      font-size: $fontsize_ms;
+      
+    }
+  }
 }
