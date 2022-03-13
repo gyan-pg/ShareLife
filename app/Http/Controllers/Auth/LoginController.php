@@ -54,8 +54,8 @@ class LoginController extends Controller
       // チームがある場合($resultがある場合)、オーナーとパートナーの情報を詰める
       if ($result) {
         $owner = $member->where('id', $result->user1_id)->first();
-        $partner = $member->where('id', $result->user2_id)->first();
-        $response->push($owner)->push($partner);
+        $teamMember = $member->where('id', $result->user2_id)->first();
+        $response->push($owner)->push($teamMember);
       }
 
       return $response;

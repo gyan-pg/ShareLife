@@ -13,4 +13,9 @@ class Team extends Model
   protected $visible = [
     'id', 'status', 'user1_id', 'user2_id'
   ];
+
+  public function payments()
+  {
+    return $this->hasMany('App\Payment');
+  }
 }

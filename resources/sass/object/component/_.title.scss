@@ -1,0 +1,8 @@
+.c-title {
+  padding: $space_s;
+  &--head {
+    background: $color_main_orange;
+    border-radius: 10px 10px 0 0;
+    color: $color_font_white;
+  }
+}

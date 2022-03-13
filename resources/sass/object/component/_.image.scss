@@ -1,0 +1,10 @@
+.c-image {
+  object-fit: cover;
+  &--profile {
+    width: 100%;
+  }
+  &--profile-edit {
+    width: 200px;
+    height: 200px;
+  }
+}

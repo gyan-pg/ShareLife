@@ -1,8 +1,10 @@
 <template>
   <div>
-    <AgreementForm v-if="showForm" />
-    <AgreementList />
-    <button class="c-btn" @click="appear">show form</button>
+    <transition name="fade">
+      <AgreementForm v-if="showForm" @closeForm="formControll" :editAgreementData="editAgreementData" :editFlg="editFlg"/>
+    </transition>
+    <AgreementList @editAgreement="editAgreement"/>
+    <button class="c-btn" @click="formControll">show form</button>
   </div>
 </template>
 
@@ -12,7 +14,9 @@ import AgreementList from '../components/AgreementList.vue'
 export default {
   data () {
     return {
-      showForm: false
+      showForm: false,
+      editAgreementData: null,
+      editFlg: false
     }
   },
   components: {
@@ -20,8 +24,14 @@ export default {
     AgreementList
   },
   methods: {
-    appear () {
+    formControll () {
       this.showForm = !this.showForm
+      this.editFlg = false
+    },
+    editAgreement (agree) {
+      this.showForm = true
+      this.editAgreementData = agree
+      this.editFlg = true
     }
   }
 }

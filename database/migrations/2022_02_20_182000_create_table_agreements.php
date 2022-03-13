@@ -18,8 +18,8 @@ class CreateTableAgreements extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('team_id');
             $table->string('title');
-            $table->string('content');
-            $table->boolean('approval')->default(0);
+            $table->string('content')->nullable();
+            $table->string('approval')->default(0);
             $table->timestamps();
 
             $table->foreign('team_id')->references('id')->on('teams');

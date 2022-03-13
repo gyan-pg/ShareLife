@@ -10,6 +10,7 @@
   &--flash {
     text-align: center;
     position: fixed;
+    z-index: 10;
     top: 0;
     left: 0;
     width: 100%;
@@ -18,10 +19,20 @@
     border-radius: 10px;
     border: solid 1px green;
   }
+  &--flash-error {
+    @extend .c-text--flash;
+    background: $color_bg_error;
+    border: solid 1px red;
+  }
   &--menu {
     &:hover {
       font-size: $fontsize_ms;
-      
+      text-decoration: underline;
+      cursor: pointer;
     }
+  }
+  &--sending {
+    animation: blink 1s linear infinite;
+    font-size: $fontsize_ms;
   }
 }

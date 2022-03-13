@@ -9,6 +9,9 @@ import Index from '../pages/Index.vue'
 import SystemError from '../pages/errors/System.vue'
 import NotFound from '../pages/errors/NotFound.vue'
 import Agreement from '../pages/Agreement.vue'
+import Adjustment from '../pages/Adjustment.vue'
+import PreRegister from '../pages/PreRegister.vue'
+import Withdraw from '../pages/Withdraw.vue'
 
 // これ書いてないと、router-viewなどが使えない
 Vue.use(VueRouter)
@@ -48,8 +51,8 @@ const routes = [
     }
   },
   {
-    path: '/register',
-    component: Register,
+    path: '/preRegister',
+    component: PreRegister,
     beforeEnter (to, from, next) {
       if (store.getters['auth/check']) {
         next('/mypage')
@@ -57,6 +60,21 @@ const routes = [
         next()
       }
     }
+  },
+  {
+    path: '/register',
+    component: Register,
+    beforeEnter (to, from, next) {
+      if (store.getters['auth/checkToken']) {
+        next()
+      } else {
+        next('/')
+      }
+    }
+  },
+  {
+    path: '/withdraw',
+    component: Withdraw
   },
   {
     path: '/agreement',
@@ -70,8 +88,19 @@ const routes = [
     }
   },
   {
+    path: '/adjustment',
+    component: Adjustment,
+    beforeEnter (to, from, next) {
+      if (store.getters['auth/check']) {
+        next()
+      } else {
+        next('/')
+      }
+    }
+  },
+  {
     path: '/500',
-    component: SystemError
+    component: SystemError,
   },
   {
     path: '*',
@@ -83,6 +112,12 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   routes
+})
+
+// 500エラーを一回すると、errorCodeがリフレッシュされない問題の暫定解決方法。
+router.beforeEach((to, from, next) => {
+  store.commit('error/setCode', null)
+  next()
 })
 
 export default router

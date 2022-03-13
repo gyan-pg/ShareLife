@@ -7,6 +7,11 @@
   }
   &--submit {
     color: $color_font_white;
-    background: $color_bg_orange;
+    background: $color_main_orange;
+    border-radius: 5px;
+    transition: $transtime_default;
+    &:hover {
+      background: $color_bg_orange;
+    }
   }
 }

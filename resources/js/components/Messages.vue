@@ -1,6 +1,7 @@
 <template>
   <transition name="fade">
     <p v-if="messages" class="c-text--flash">{{messages}}</p>
+    <p v-if="errorMessages" class="c-text--flash-error">{{ errorMessages }}</p>
   </transition>
 </template>
 
@@ -9,6 +10,9 @@ export default {
   computed: {
     messages () {
       return this.$store.state.messages.message
+    },
+    errorMessages () {
+      return this.$store.state.messages.errorMessage
     }
   }
 }

@@ -1,11 +1,9 @@
 <template>
   <div>
     <Header />
-    <main class="p-wrapper--content">
-      <div class="p-container">
-        <Messages />
-        <router-view />
-      </div>
+    <main id="l-main">
+      <Messages />
+      <router-view />
     </main>
     <Footer />
   </div>
@@ -42,7 +40,7 @@ export default {
           this.$store.commit('auth/setUser', null)
           this.$store.commit('auth/setTeam', null)
           this.$store.commit('auth/setOwner', null)
-          this.$store.commit('auth/setPartner', null)
+          this.$store.commit('auth/setTeamMember', null)
           this.$router.push('/login')
         }
       },

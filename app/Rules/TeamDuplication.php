@@ -31,6 +31,9 @@ class TeamDuplication implements Rule
       $user = new User();
       $team = new Team();
       $partner_id = $user->select('id')->where('email', $value)->first();
+      if (!$partner_id) {
+        return false;
+      }
       $count = $team->where('user1_id', $partner_id->id)->orWhere('user2_id', $partner_id->id)->count();
       Log::debug($partner_id);
       Log::debug($count);

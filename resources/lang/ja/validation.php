@@ -77,8 +77,8 @@ return [
         'array' => 'The :attribute must not have more than :value items.',
     ],
     'max' => [
-        'numeric' => 'The :attribute may not be greater than :max.',
-        'file' => 'The :attribute may not be greater than :max kilobytes.',
+        'numeric' => ':attributeは:max以内で入力してください。',
+        'file' => '画像は:maxkB以内でお願いします。',
         'string' => ':attributeは:max文字以内で入力してください。',
         'array' => 'The :attribute may not have more than :max items.',
     ],
@@ -119,8 +119,10 @@ return [
     'uuid' => 'The :attribute must be a valid UUID.',
     // --- 以下自作 ---
     'MyEmail' => 'ご自分のEメールアドレスはご利用いただけません',
-    'TeamDuplication' => 'そのアドレスに招待を送ることはできません。',
+    'TeamDuplication' => 'そのEメールアドレスに招待を送ることはできません。',
     'NoUser' => 'ユーザーが登録されていません。',
+    'EmailDuplication' => 'そのEメールアドレスはご利用いただけません。',
+    'TeamMember' => 'エラーが発生しました。再度お試しください。',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -152,7 +154,10 @@ return [
     'attributes' => [
       'email' => 'Eメール',
       'password' => 'パスワード',
-      'name' => 'お名前'
+      'name' => 'お名前',
+      'cost' => '金額',
+      'comment' => 'コメント',
+      'himoku' => '費目'
     ],
 
 ];

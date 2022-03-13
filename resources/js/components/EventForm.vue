@@ -3,7 +3,7 @@
   <section class="p-wrapper--modal" @click.self="closeEventForm">
     <div class="p-wrapper--event-form">
       <p v-if="errors.server_error" class="c-text--error u-tc">{{ errors.server_error }}</p>
-      <form class="c-form u-pr" @submit.prevent="setSchedule">
+      <form class="c-form" @submit.prevent="setSchedule">
         <!-- 日時を選択する -->
         <div class="p-container--form-select-date">
           <div class="u-tc">

@@ -26,9 +26,15 @@ export function getCookieValue (searchKey) {
 // エラーコードの定義
 export const OK = 200
 export const CREATED = 201
+export const UNAUTHORIZED_STATUS = 401
 export const NOT_FOUND = 404
 export const UNAUTHORIZED = 419
 export const UNPROCESSABLE_ENTITY = 422
 export const INTERNAL_SERVER_ERROR = 500
+// その他
+// セッション有効期限切れ
 export const UNAUTHORIZED_MESSAGE = 'セッション有効期限が切れました。再度ログインをお願いします。'
+// Eメールパターン。EMAIL_PATTERN.test(str)で使う。
 export const EMAIL_PATTERN = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]+.[A-Za-z0-9]+$/
+// 半角数字。空欄はNG
+export const NUMBER_PATTERN = /^[0-9]+$/

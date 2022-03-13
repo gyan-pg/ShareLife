@@ -8,6 +8,7 @@
 // ==========================
 // layout
 // ==========================
+@import './layout/.layout';
 
 // ==========================
 // object
@@ -20,10 +21,13 @@
 @import './object/component/.footer';
 @import './object/component/.form';
 @import './object/component/.icon';
+@import './object/component/.image';
+@import './object/component/.invitation';
 @import './object/component/.link';
 @import './object/component/.logo';
 @import './object/component/.nav';
 @import './object/component/.text';
+@import './object/component/.title';
 
 // ----- project -----
 @import './object/project/.container';

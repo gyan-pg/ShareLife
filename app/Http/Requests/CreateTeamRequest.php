@@ -14,6 +14,7 @@ class CreateTeamRequest extends FormRequest
      *
      * @return bool
      */
+
     public function authorize()
     {
         return true;
@@ -31,8 +32,8 @@ class CreateTeamRequest extends FormRequest
             'required',
             'email',
             new MyEmail,
-            new TeamDuplication,
-            new NoUser]
+            new NoUser,
+            new TeamDuplication]
         ];
     }
 }

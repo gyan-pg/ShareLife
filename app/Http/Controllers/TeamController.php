@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTeamRequest;
+use App\Mail\PartnerIvitationEmail;
 use App\Rules\MyEmail;
 use App\Team;
 use App\User;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class TeamController extends Controller
 {
@@ -38,16 +40,16 @@ class TeamController extends Controller
     $team = new Team();
     $user = new User();
     
-    $partner_id = $user->select('id')->where('email', $request->email)->first();
-    // $partner_id = {"id": 1}みたいな形で取得
-
-    $team->fill(['user1_id' => Auth::id(), 'user2_id' => $partner_id->id, 'status' => 'unapproved'])->save();
-    
     $owner = User::find(Auth::id());
+    $partner_id = $user->select('id')->where('email', $request->email)->first();
     $partner = User::find($partner_id->id);
 
-    $response->push($team)->push($owner)->push($partner);
+    Mail::to($request->email)->send(new PartnerIvitationEmail($owner));
 
+    $team->fill(['user1_id' => Auth::id(), 'user2_id' => $partner_id->id, 'status' => 'unapproved'])->save();
+
+
+    $response->push($team)->push($owner)->push($partner);
 
     return $response;
   }
@@ -63,7 +65,12 @@ class TeamController extends Controller
     return $result;
   }
 
-  public function denyTeam () {
-
+  public function denyTeam ()
+  {
+    $user = new User();
+    $team = new Team();
+    $id = Auth::id();
+    
+    $team->where('user2_id', $id)->delete();
   }
 }

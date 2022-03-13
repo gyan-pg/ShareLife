@@ -1,10 +1,7 @@
 <template>
   <div class="p-wrapper--auth">
-    <ul class="c-auth-nav">
-      <li class="c-auth-nav__item"><router-link to="/login">ログイン</router-link></li>
-      <li class="c-auth-nav__item"><router-link to="/register">ユーザー登録</router-link></li>
-    </ul>
     <form class="c-form c-form--login" @submit.prevent="login" novalidate="novalidate">
+      <h1>ログイン</h1>
       <label for="email-login" class="c-form__label">Eメール</label>
       <div class="p-container--form-input">
         <input id="email-login" name="email" class="c-form__input" type="text" v-model="loginForm.email">
@@ -60,7 +57,7 @@ export default {
   },
   methods: {
     testMsg () {
-      this.$store.commit('messages/setMessage', 'testメッセージです。')
+      this.$store.commit('messages/setErrorMessage', 'testメッセージです。')
     },
     async login () {
       await this.$store.dispatch('auth/login', this.loginForm)

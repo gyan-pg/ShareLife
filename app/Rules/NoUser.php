@@ -4,6 +4,7 @@ namespace App\Rules;
 
 use App\User;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Log;
 
 class NoUser implements Rule
 {

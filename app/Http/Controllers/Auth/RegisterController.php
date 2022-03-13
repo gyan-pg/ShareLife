@@ -76,6 +76,7 @@ class RegisterController extends Controller
     // RegistersUsers.phpのメソッドを上書き。登録後、登録したユーザー情報が返却されるようにする。
     protected function registered(Request $request, $user)
     {
+      $user['image'] = '/storage/images/noimage.png';
       return $user;
     }
 }

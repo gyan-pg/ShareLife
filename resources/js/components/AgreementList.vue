@@ -1,26 +1,52 @@
 <template>
   <div>
-    <ul v-if="agreements">
-      <li v-for="agree in agreements" :key="agree.id">{{ agree.title }}</li>
-    </ul>
-    <p v-else>まだ登録されていません。</p>
-    <button @click="getAgreements">test</button>
+    <div class="p-container--agreements">
+      <div>
+        承認済みコーナー
+        <div v-if="approvedAgreements.length">
+          <div v-for="(agree, index) in approvedAgreements" :key="agree.id">
+            <ApprovedAgreementDetail :agree="agree" :index="index" />
+          </div>
+        </div>
+        <p v-else>まだ登録されていません。。</p>
+      </div>
+      <!-- 未承認のagree -->
+      <div>
+        未承認コーナー
+        <ul v-if="suspendedAgreements.length">
+          <li v-for="(agree, index) in suspendedAgreements" :key="agree.id">
+            <SuspendedAgreementDetail :agree="agree" :index="index" @editAgreement="editAgreement" />
+          </li>
+        </ul>
+        <p v-else>まだ登録されていません。</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import SuspendedAgreementDetail from './SuspendedAgreementDetail.vue'
+import ApprovedAgreementDetail from './ApprovedAgreementDetail.vue'
 export default {
-  data () {
-    return {
-      agreements: null
+  components: {
+    SuspendedAgreementDetail,
+    ApprovedAgreementDetail
+  },
+  computed: {
+    suspendedAgreements () {
+      return this.$store.getters['agreements/notApprovedAgreements']
+    },
+    approvedAgreements () {
+      return this.$store.getters['agreements/approvedAgreements']
     }
   },
   methods: {
-    async getAgreements () {
-      const response = await axios.get(`api/agreement/${this.$store.state.auth.team.id}/list`)
-      console.log(response.data)
-      this.agreements = response.data
+    editAgreement (agree) {
+      this.$emit('editAgreement', agree)
     }
+  },
+  created () {
+    this.$store.dispatch('agreements/getAgreements')
   }
 }
 </script>
