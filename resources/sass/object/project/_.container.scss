@@ -94,4 +94,19 @@
     margin: 0 auto;
     padding: $space_s;
   }
+  &--invitation, &--auth {
+    border-radius: 10px;
+    box-shadow: $box_shadow_dark;
+    margin-bottom: $space_2l;
+  }
+  &--notice {
+    margin-top: $space_l;
+    padding: $space_m;
+    border: $border_default;
+    border-radius: 10px;
+  }
+  &--notice-register {
+    padding: $space_m;
+    padding-bottom: 0;
+  }
 }

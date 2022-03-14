@@ -1,14 +1,10 @@
 .c-form {
-  padding: $space_m $space_ml;
-  border: $border_default;
-  border-radius: 10px;
+  padding: $space_ml $space_m;
   background: $color_bg_white;
+  border-radius: 0 0 10px 10px;
   position: relative;
-  &--invitation {
-    padding: $space_ml $space_m;
-  }
   &__label {
-    display: block;
+    display: inline-block;
     font-size: $fontsize_ms;
   }
   &__input {

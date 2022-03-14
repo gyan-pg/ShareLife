@@ -1,18 +1,30 @@
 <template>
   <div class="p-wrapper--invitation">
-
     <div v-if="team">
-      <p v-if="team.status === 'unapproved' && teamOwner">パートナーの承認を待っています。</p>
-      <div v-else-if="!teamOwner && team.status !== 'approve'">
-        <p>{{ owner.name }}({{ owner.email }})さんから招待が届いています。</p>
-        <p>承認しますか？</p>
-        <button class="c-btn c-btn--submit" @click="approve">ok</button><button class="c-btn c-btn--submit" @click="deny">no</button>
+      <!-- 招待を送った人に表示 -->
+      <div class="p-container--pending" v-if="team.status === 'unapproved' && teamOwner">
+        <h2 class="c-title c-title--pending">パートナーに招待を送りました!</h2>
+        <div class="p-container--notice">
+          <p class="c-text--notice">パートナーの承認を待っています。パートナーが承認、または否認するとこの画面は表示されなくなります。</p>
+        </div>
+      </div>
+      <!-- 招待を受け取った人に表示 -->
+      <div class="p-container--pending" v-else-if="!teamOwner && team.status !== 'approve'">
+        <h2 class="c-title c-title--pending">パートナーから招待が届きました！</h2>
+        <div class="p-container--notice">
+          <p class="c-text--notice">{{ owner.name }}({{ owner.email }})さんから招待が届いています。</p>
+          <p class="c-text--notice">承認しますか？</p>
+          <div class="p-container--btn-center u-mt-m">
+            <button class="c-btn c-btn--submit u-mr-s" @click="approve">承認</button>
+            <button class="c-btn c-btn--submit u-ml-s" @click="deny">否認</button>
+          </div>
+        </div>
       </div>
     </div>
-    
-    <section class="c-invitation" v-if="!team">
+    <!-- パートナーに招待を送るフォーム -->
+    <section class="p-container--invitation" v-if="!team">
       <h2 class="c-title c-title--head">チームを結成しましょう！</h2>
-      <form class="c-form--invitation" @submit.prevent="invitation">
+      <form class="c-form" @submit.prevent="invitation">
         <label for="formData.email">パートナーを招待する</label>
         <input id="formData.email" class="c-form__input" v-model="formData.email" placeholder="お相手のEメールアドレスを入力してください。">
         <div class="p-container--error">
@@ -20,7 +32,7 @@
           <span v-if="sending" class="c-text--sending">メールを送信しています。</span>
         </div>
         <div class="p-container--btn-center">
-          <button class="c-btn c-btn--submit">送信</button>
+          <button class="c-btn c-btn--submit" :disabled="sending">送信</button>
         </div>
       </form>
     </section>
@@ -88,27 +100,33 @@ export default {
       }
     },
     async approve () {
+      this.sending = true
       const response = await axios.put('/api/team/invitation', this.$store.state.auth.team)
-      console.log(response)
       if (response.status === OK) {
         this.$store.commit('auth/setTeamStatus', response.data)
         this.$store.commit('messages/setMessage', 'チームを結成しました。')
+        this.sending = false
         return false
       }
 
       this.$store.commit('messages/setErrorMessage', 'エラーが発生しました。')
+      this.sending = false
     },
     async deny () {
+      this.sending = true
       const response = await axios.delete('/api/team/invitation', )
-      console.log(response)
       if (response.status === OK) {
         this.$store.commit('messages/setMessage', 'チーム招待を拒否しました。')
         this.$store.commit('auth/setTeam', null)
         this.$store.commit('auth/setTeamStatus', null)
         this.$store.commit('auth/setOwner', null)
         this.$store.commit('auth/setTeamMember', null)
+        this.sending = false
         return false
       }
+
+      this.$store.commit('messages/setErrorMessage', 'エラーが発生しました。')
+      this.sending = false
     },
     validEmail () {
       this.clearErrors()

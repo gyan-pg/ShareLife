@@ -2,6 +2,23 @@
 .u-mrl-s {
   margin: 0 $space_s;
 }
+.u-mr-s {
+  margin-right: $space_s;
+}
+.u-ml-s {
+  margin-left: $space_s;
+}
+.u-mt-m {
+  margin-top: $space_m;
+}
+// padding 
+.u-pt-s {
+  padding-top: $space_s;
+}
+// color
+.u-c-r {
+  color: $color_font_error;
+}
 // text-align
 .u-tc {
   text-align: center;

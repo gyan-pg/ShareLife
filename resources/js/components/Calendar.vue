@@ -1,35 +1,34 @@
 <template>
-  <div>
-    <div class="c-calendar">
+  <div class="c-calendar">
+    <div class="c-calendar__head-container">
       <h2>{{ currentMonth }}</h2>
       <button @click="prevMonth" type="button">前の月</button>
       <button @click="nextMonth" type="button">次の月</button>
-      <!-- カレンダーの曜日 -->
-      <ul class="c-calendar__dotw">
-        <li v-for="n in 7" :key="n" class="c-calendar__dotw-name">{{ youbi(n - 1) }}</li>
-      </ul>
-      <!-- カレンダー本体 -->
-      <div v-for="(week, index) in calendars" :key="index" class="c-calendar__row">
-        <!-- 日付 -->
-        <div v-for="(day, index) in week" :key="index" class="c-calendar__day"
-        :class="{'c-calendar__outer-month': currentDate.month() !== day.month}"
-        @drop="dragEnd($event, day.date)" @dragover.prevent @click.self="openForm(day.date)">
-          <div>{{ day.day }}</div>
-          <!-- 予定 -->
-          <div v-for="dayEvent in day.dayEvents" :key="dayEvent.id">
-            <div v-if="dayEvent.width" class="c-calendar__event"
-            :style="`width:${dayEvent.width}%;background-color: ${dayEvent.color}`"
-            draggable="true" @dragstart="dragStart($event, dayEvent.id)" @click="eventDetail(dayEvent)"><!-- $eventはDOMイベントと呼ばれる -->
-              {{ formatTitle(dayEvent) }}
-            </div>
-            <div v-else style="height:26px;"></div>
+      <i @click="openForm()" class="fa-solid fa-plus"></i>
+    </div>
+    <!-- カレンダーの曜日 -->
+    <ul class="c-calendar__dotw">
+      <li v-for="n in 7" :key="n" class="c-calendar__dotw-name">{{ youbi(n - 1) }}</li>
+    </ul>
+    <!-- カレンダー本体 -->
+    <div v-for="(week, index) in calendars" :key="index" class="c-calendar__row">
+      <!-- 日付 -->
+      <div v-for="(day, index) in week" :key="index" class="c-calendar__date-container"
+      :class="{'c-calendar__outer-month': currentDate.month() !== day.month}"
+      @drop="dragEnd($event, day.date)" @dragover.prevent @click.self="openForm(day.date)">
+        <div class="c-calendar__date" :class="{'today': today === day.date}">{{ day.day }}</div>
+        <!-- 予定 -->
+        <div v-for="dayEvent in day.dayEvents" :key="dayEvent.id">
+          <div v-if="dayEvent.width" class="c-calendar__event"
+          :style="`width:${dayEvent.width}%;background-color: ${dayEvent.color}`"
+          draggable="true" @dragstart="dragStart($event, dayEvent.id)" @click="eventDetail(dayEvent)"><!-- $eventはDOMイベントと呼ばれる -->
+            {{ formatTitle(dayEvent) }}
           </div>
+          <div v-else style="height:26px;"></div>
         </div>
       </div>
-      <!-- 場所や見た目を変更する。アイコンがいいかも。 -->
-      <button type="button" class="c-btn" @click="openForm()">予定の新規登録</button>
     </div>
-    
+    <button @click="getHoliday">test button</button>
     <!-- イベント入力フォーム -->
     <transition name="fade">
       <EventForm v-if="form_flg" @close-form="closeEventForm" :clickDate="clickDate"/>
@@ -38,7 +37,6 @@
     <transition name="fade">
       <EventDetail v-if="detail_flg" @close-detail="closeDetail" :clickEvent="clickEvent"/>
     </transition>
-
   </div>
 </template>
 
@@ -50,6 +48,7 @@ export default {
   data () {
     return {
       currentDate: dayjs(),
+      today: null,
       clickDate: null,
       clickEvent: null,
       form_flg: false,
@@ -227,10 +226,14 @@ export default {
     },
     closeDetail () {
       this.detail_flg = false
+    },
+    getHoliday () {
+      this.$store.dispatch('events/getHolidayList', this.currentDate.year())
     }
   },
   created () {
     this.$store.dispatch('events/getScheduleList')
+    this.today = this.currentDate.format('YYYY-MM-DD')
   }
 }
 /*

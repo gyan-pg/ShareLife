@@ -1,35 +1,40 @@
 <template>
-  <div class="p-wrapper--auth">
-    <form class="c-form c-form--login" @submit.prevent="login" novalidate="novalidate">
-      <h1>ログイン</h1>
-      <label for="email-login" class="c-form__label">Eメール</label>
-      <div class="p-container--form-input">
-        <input id="email-login" name="email" class="c-form__input" type="text" v-model="loginForm.email">
-        <!-- エラー表示 -->
-        <div v-if="loginErrors">
-          <ul v-if="loginErrors.email">
-            <li v-for="msg in loginErrors.email" :key="msg" class="c-text--error">{{ msg }}</li>
-          </ul>
+  <article class="p-wrapper--auth">
+    <section class="p-container--auth">
+      <h2 class="c-title c-title--head">ログイン</h2>
+      <form class="c-form c-form--login" @submit.prevent="login" novalidate="novalidate">
+        <label for="email-login" class="c-form__label">Eメール</label>
+        <div class="p-container--form-input">
+          <input id="email-login" name="email" class="c-form__input" type="text" v-model="loginForm.email">
+          <!-- エラー表示 -->
+          <div class="p-container--error">
+            <div v-if="loginErrors">
+              <ul v-if="loginErrors.email">
+                <li v-for="msg in loginErrors.email" :key="msg" class="c-text--error">{{ msg }}</li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <label for="password-login" class="c-form__label">パスワード</label>
-      <div class="p-container--form-input">
-        <input id="password-login" name="password" class="c-form__input" type="password" v-model="loginForm.password">
-        <!-- エラー表示 -->
-        <div v-if="loginErrors">
-          <ul v-if="loginErrors.password">
-            <li v-for="msg in loginErrors.password" :key="msg" class="c-text--error">{{ msg }}</li>
-          </ul>
+        <label for="password-login" class="c-form__label">パスワード</label>
+        <div class="p-container--form-input">
+          <input id="password-login" name="password" class="c-form__input" type="password" v-model="loginForm.password">
+          <!-- エラー表示 -->
+          <div class="p-container--error">
+            <div v-if="loginErrors">
+              <ul v-if="loginErrors.password">
+                <li v-for="msg in loginErrors.password" :key="msg" class="c-text--error">{{ msg }}</li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="p-container-btn">
-        <button type="submit" class="c-btn c-btn--submit">送信</button>
-      </div>
-    </form>
-    <button class="c-btn" @click="testMsg">message test</button>
-  </div>
+        <div class="p-container--btn-center">
+          <button type="submit" class="c-btn c-btn--submit">送信</button>
+        </div>
+      </form>
+    </section>
+  </article>
 </template>
 
 <script>
@@ -56,9 +61,6 @@ export default {
     // }
   },
   methods: {
-    testMsg () {
-      this.$store.commit('messages/setErrorMessage', 'testメッセージです。')
-    },
     async login () {
       await this.$store.dispatch('auth/login', this.loginForm)
 

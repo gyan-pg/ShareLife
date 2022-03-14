@@ -1,22 +1,27 @@
 <template>
-  <div class="p-wrapper--auth">
-    <form class="c-form c-form--login" @submit.prevent="submit" novalidate="novalidate">
-      <h1>仮会員登録</h1>
-      <p>確認用のEメールをお送りいたします。下記フォームに使用可能なメールアドレスを入力してください。</p>
-      <p>※一部ご利用いただけないメールアドレスがあります。</p>
-      <label for="email" class="c-form__label">Eメール</label><span v-if="sending" class="c-text--sending">メールを送信しています。</span>
-      <div class="p-container--form-input">
-        <input id="email" class="c-form__input" type="email" v-model="preRegisterForm.email">
-        <!-- エラー表示 -->
-        <div v-if="error">
-          <span v-for="(err, index) in error" :key="index" class="c-text--error">{{ err }}</span>
+  <article class="p-wrapper--auth">
+    <section class="p-container--auth">
+      <h2 class="c-title c-title--head">仮会員登録</h2>
+      <form class="c-form c-form--login" @submit.prevent="submit" novalidate="novalidate">
+        <p class="c-text--notice">確認用のEメールをお送りいたします。下記フォームに使用可能なメールアドレスを入力してください。</p>
+        <p class="c-text--notice">※一部ご利用いただけないメールアドレスがあります。</p>
+        <label for="email" class="c-form__label">Eメール</label>
+        <div class="p-container--form-input">
+          <input id="email" class="c-form__input" type="email" v-model="preRegisterForm.email">
+          <!-- エラー表示 -->
+          <div class="p-container--error">
+            <div v-if="error">
+              <span v-for="(err, index) in error" :key="index" class="c-text--error">{{ err }}</span>
+            </div>
+            <span v-if="sending" class="c-text--sending">メールを送信しています。</span>
+          </div>
         </div>
-      </div>
-      <div class="p-container-btn">
-        <button type="submit" class="c-btn c-btn--submit" :disabled="sending">送信</button>
-      </div>
-    </form>
-  </div>
+        <div class="p-container--btn-center">
+          <button type="submit" class="c-btn c-btn--submit" :disabled="sending">送信</button>
+        </div>
+      </form>
+    </section>
+  </article>
 </template>
 
 <script>

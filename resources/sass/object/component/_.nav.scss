@@ -3,7 +3,7 @@
   height: $height_header;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0 1px 5px 5px #ddd;
+  border-bottom: $border_default;
   &__left {
     display: inline-block;
     margin-left: 5%;

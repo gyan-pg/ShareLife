@@ -1,7 +1,7 @@
 .c-text {
   &--error {
     font-size: $fontsize_s;
-    color: red;
+    color: $color_font_error;
   }
   &--counter {
     font-size: $fontsize_ms;
@@ -33,6 +33,10 @@
   }
   &--sending {
     animation: blink 1s linear infinite;
+    font-size: $fontsize_s;
+    color: $color_font_bright;
+  }
+  &--notice {
     font-size: $fontsize_ms;
   }
 }

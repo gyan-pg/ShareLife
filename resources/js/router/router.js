@@ -68,7 +68,7 @@ const routes = [
       if (store.getters['auth/checkToken']) {
         next()
       } else {
-        next('/')
+        next('preRegister')
       }
     }
   },

@@ -15,11 +15,12 @@ $color_main_green: #96CEB4;// main1
 $color_main_cream: #FFEEAD;// main2
 $color_main_red: #D9534F;// accent1
 $color_main_orange: #FFAD60;// accent2
-
+$color_main_blue: #dbf9fd;
 
 // font
 $color_font_default: #333;
-$color_font_bright: #aaa;
+$color_font_bright: #999;
+$color_font_error: #e47777;
 $color_font_white: #fefefe;
 
 //background
@@ -56,8 +57,8 @@ $fontsize_xs: 10px;
 $fontsize_s: 12px;
 $fontsize_ms: 14px;
 $fontsize_default: 16px;
-$fontsize_subtitle: 20px;
-$fontsize_l: 22px;
+$fontsize_section: 20px;
+// $fontsize_l: 22px;
 $fontsize_page_title: 24px;
 $fontsize_icon: 30px;
 $fontsize_top_section: 36px;

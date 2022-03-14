@@ -1,50 +1,51 @@
 <template>
   <div class="p-wrapper--auth">
-    <div v-if="notice_flg">
-      <p>この画面は30分間有効です。</p>
-      <p>ブラウザを閉じたり、再読み込みしないでください。</p>
-      <button type="button" class="c-btn" @click="closeNotice">閉じる</button>
-    </div>
-    <form class="c-form c-form--login" @submit.prevent="register" novalidate="novalidate">
-      <h1>ユーザー登録</h1>
-      <label for="name" class="c-form__label">お名前</label>
-      <div class="p-container--form-input">
-        <input id="name" class="c-form__input" type="text" v-model="registerForm.name">
-        <!-- エラー表示 -->
-        <div v-if="registerErrors">
-          <ul v-if="registerErrors.name">
-            <li v-for="msg in registerErrors.name" :key="msg" class="c-text--error">{{ msg }}</li>
-          </ul>
+    <section class="p-container--auth">
+      <h2 class="c-title c-title--head">ユーザー登録</h2>
+      <div class="p-container--notice-register" v-if="notice_flg">
+        <div class="c-text--notice u-c-r">この画面は30分間有効です。<br>ブラウザを閉じたり、再読み込みしないでください。</div>
+      </div>
+      <form class="c-form c-form--login u-pt-s" @submit.prevent="register" novalidate="novalidate">
+        <label for="name" class="c-form__label">お名前</label>
+        <div class="p-container--form-input">
+          <input id="name" class="c-form__input" type="text" v-model="registerForm.name">
+          <!-- エラー表示 -->
+          <div v-if="registerErrors">
+            <ul v-if="registerErrors.name">
+              <li v-for="msg in registerErrors.name" :key="msg" class="c-text--error">{{ msg }}</li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <label for="email" class="c-form__label">Eメール</label>
-      <p>{{registerForm.email}}</p>
-      
-      <label for="password" class="c-form__label">パスワード</label>
-      <div class="p-container--form-input">
-        <input id="password" class="c-form__input" type="password" v-model="registerForm.password">
-        <!-- エラー表示 -->
-        <div v-if="registerErrors">
-          <ul v-if="registerErrors.password">
-            <li v-for="msg in registerErrors.password" :key="msg" class="c-text--error">{{ msg }}</li>
-          </ul>
+        <label for="email" class="c-form__label">Eメール</label>
+        <p>{{registerForm.email}}</p>
+        
+        <label for="password" class="c-form__label">パスワード</label>
+        <div class="p-container--form-input">
+          <input id="password" class="c-form__input" type="password" v-model="registerForm.password">
+          <!-- エラー表示 -->
+          <div v-if="registerErrors">
+            <ul v-if="registerErrors.password">
+              <li v-for="msg in registerErrors.password" :key="msg" class="c-text--error">{{ msg }}</li>
+            </ul>
+          </div>
         </div>
-      </div>
-      
-      <label for="password-confirmation" class="c-form__label">パスワード(再入力)</label>
-      <div class="p-container--form-input">
-        <input id="password-confirmation" class="c-form__input" type="password" v-model="registerForm.password_confirmation">
-      </div>
+        
+        <label for="password-confirmation" class="c-form__label">パスワード(再入力)</label>
+        <div class="p-container--form-input">
+          <input id="password-confirmation" class="c-form__input" type="password" v-model="registerForm.password_confirmation">
+        </div>
 
-      <label for="register-token" class="c-form__label">トークン</label>
-      <div class="p-container--form-input">
-        <input id="register-token" class="c-form__input" type="text" v-model="token">
-      </div>
-      <div class="p-container-btn">
-        <button type="submit" class="c-btn c-btn--submit" :disabled="sending">送信</button>
-      </div>
-    </form>
+        <label for="register-token" class="c-form__label">トークン</label>
+        <div class="p-container--form-input">
+          <input id="register-token" class="c-form__input" type="text" v-model="token">
+        </div>
+        <div class="p-container-btn">
+          <button type="submit" class="c-btn c-btn--submit" :disabled="sending">送信</button>
+        </div>
+      </form>
+    </section>
+
   </div>
 </template>
 

@@ -2908,8 +2908,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
-//
-//
 
 
 
@@ -2917,6 +2915,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   data: function data() {
     return {
       currentDate: dayjs__WEBPACK_IMPORTED_MODULE_0___default()(),
+      today: null,
       clickDate: null,
       clickEvent: null,
       form_flg: false,
@@ -3143,10 +3142,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     },
     closeDetail: function closeDetail() {
       this.detail_flg = false;
+    },
+    getHoliday: function getHoliday() {
+      this.$store.dispatch('events/getHolidayList', this.currentDate.year());
     }
   },
   created: function created() {
     this.$store.dispatch('events/getScheduleList');
+    this.today = this.currentDate.format('YYYY-MM-DD');
   }
 });
 /*
@@ -3908,6 +3911,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4006,15 +4021,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                _this2.sending = true;
+                _context2.next = 3;
                 return axios.put('/api/team/invitation', _this2.$store.state.auth.team);
 
-              case 2:
+              case 3:
                 response = _context2.sent;
-                console.log(response);
 
                 if (!(response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                  _context2.next = 8;
+                  _context2.next = 9;
                   break;
                 }
 
@@ -4022,12 +4037,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this2.$store.commit('messages/setMessage', 'チームを結成しました。');
 
+                _this2.sending = false;
                 return _context2.abrupt("return", false);
 
-              case 8:
+              case 9:
                 _this2.$store.commit('messages/setErrorMessage', 'エラーが発生しました。');
 
-              case 9:
+                _this2.sending = false;
+
+              case 11:
               case "end":
                 return _context2.stop();
             }
@@ -4044,15 +4062,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
+                _this3.sending = true;
+                _context3.next = 3;
                 return axios["delete"]('/api/team/invitation');
 
-              case 2:
+              case 3:
                 response = _context3.sent;
-                console.log(response);
 
                 if (!(response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                  _context3.next = 11;
+                  _context3.next = 12;
                   break;
                 }
 
@@ -4066,9 +4084,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this3.$store.commit('auth/setTeamMember', null);
 
+                _this3.sending = false;
                 return _context3.abrupt("return", false);
 
-              case 11:
+              case 12:
+                _this3.$store.commit('messages/setErrorMessage', 'エラーが発生しました。');
+
+                _this3.sending = false;
+
+              case 14:
               case "end":
                 return _context3.stop();
             }
@@ -4938,6 +4962,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4957,9 +4986,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   })),
   methods: {
-    testMsg: function testMsg() {
-      this.$store.commit('messages/setErrorMessage', 'testメッセージです。');
-    },
     login: function login() {
       var _this = this;
 
@@ -5047,6 +5073,11 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5169,6 +5200,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -43414,127 +43446,125 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "c-calendar" },
     [
+      _c("div", { staticClass: "c-calendar__head-container" }, [
+        _c("h2", [_vm._v(_vm._s(_vm.currentMonth))]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { attrs: { type: "button" }, on: { click: _vm.prevMonth } },
+          [_vm._v("前の月")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { attrs: { type: "button" }, on: { click: _vm.nextMonth } },
+          [_vm._v("次の月")]
+        ),
+        _vm._v(" "),
+        _c("i", {
+          staticClass: "fa-solid fa-plus",
+          on: {
+            click: function ($event) {
+              return _vm.openForm()
+            },
+          },
+        }),
+      ]),
+      _vm._v(" "),
       _c(
-        "div",
-        { staticClass: "c-calendar" },
-        [
-          _c("h2", [_vm._v(_vm._s(_vm.currentMonth))]),
-          _vm._v(" "),
-          _c(
-            "button",
-            { attrs: { type: "button" }, on: { click: _vm.prevMonth } },
-            [_vm._v("前の月")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            { attrs: { type: "button" }, on: { click: _vm.nextMonth } },
-            [_vm._v("次の月")]
-          ),
-          _vm._v(" "),
-          _c(
-            "ul",
-            { staticClass: "c-calendar__dotw" },
-            _vm._l(7, function (n) {
-              return _c(
-                "li",
-                { key: n, staticClass: "c-calendar__dotw-name" },
-                [_vm._v(_vm._s(_vm.youbi(n - 1)))]
-              )
-            }),
-            0
-          ),
-          _vm._v(" "),
-          _vm._l(_vm.calendars, function (week, index) {
+        "ul",
+        { staticClass: "c-calendar__dotw" },
+        _vm._l(7, function (n) {
+          return _c("li", { key: n, staticClass: "c-calendar__dotw-name" }, [
+            _vm._v(_vm._s(_vm.youbi(n - 1))),
+          ])
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.calendars, function (week, index) {
+        return _c(
+          "div",
+          { key: index, staticClass: "c-calendar__row" },
+          _vm._l(week, function (day, index) {
             return _c(
               "div",
-              { key: index, staticClass: "c-calendar__row" },
-              _vm._l(week, function (day, index) {
-                return _c(
-                  "div",
-                  {
-                    key: index,
-                    staticClass: "c-calendar__day",
-                    class: {
-                      "c-calendar__outer-month":
-                        _vm.currentDate.month() !== day.month,
-                    },
-                    on: {
-                      drop: function ($event) {
-                        return _vm.dragEnd($event, day.date)
-                      },
-                      dragover: function ($event) {
-                        $event.preventDefault()
-                      },
-                      click: function ($event) {
-                        if ($event.target !== $event.currentTarget) {
-                          return null
-                        }
-                        return _vm.openForm(day.date)
-                      },
-                    },
+              {
+                key: index,
+                staticClass: "c-calendar__date-container",
+                class: {
+                  "c-calendar__outer-month":
+                    _vm.currentDate.month() !== day.month,
+                },
+                on: {
+                  drop: function ($event) {
+                    return _vm.dragEnd($event, day.date)
                   },
-                  [
-                    _c("div", [_vm._v(_vm._s(day.day))]),
-                    _vm._v(" "),
-                    _vm._l(day.dayEvents, function (dayEvent) {
-                      return _c("div", { key: dayEvent.id }, [
-                        dayEvent.width
-                          ? _c(
-                              "div",
-                              {
-                                staticClass: "c-calendar__event",
-                                style:
-                                  "width:" +
-                                  dayEvent.width +
-                                  "%;background-color: " +
-                                  dayEvent.color,
-                                attrs: { draggable: "true" },
-                                on: {
-                                  dragstart: function ($event) {
-                                    return _vm.dragStart($event, dayEvent.id)
-                                  },
-                                  click: function ($event) {
-                                    return _vm.eventDetail(dayEvent)
-                                  },
-                                },
-                              },
-                              [
-                                _vm._v(
-                                  "\n            " +
-                                    _vm._s(_vm.formatTitle(dayEvent)) +
-                                    "\n          "
-                                ),
-                              ]
-                            )
-                          : _c("div", { staticStyle: { height: "26px" } }),
-                      ])
-                    }),
-                  ],
-                  2
-                )
-              }),
-              0
-            )
-          }),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "c-btn",
-              attrs: { type: "button" },
-              on: {
-                click: function ($event) {
-                  return _vm.openForm()
+                  dragover: function ($event) {
+                    $event.preventDefault()
+                  },
+                  click: function ($event) {
+                    if ($event.target !== $event.currentTarget) {
+                      return null
+                    }
+                    return _vm.openForm(day.date)
+                  },
                 },
               },
-            },
-            [_vm._v("予定の新規登録")]
-          ),
-        ],
-        2
-      ),
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "c-calendar__date",
+                    class: { today: _vm.today === day.date },
+                  },
+                  [_vm._v(_vm._s(day.day))]
+                ),
+                _vm._v(" "),
+                _vm._l(day.dayEvents, function (dayEvent) {
+                  return _c("div", { key: dayEvent.id }, [
+                    dayEvent.width
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "c-calendar__event",
+                            style:
+                              "width:" +
+                              dayEvent.width +
+                              "%;background-color: " +
+                              dayEvent.color,
+                            attrs: { draggable: "true" },
+                            on: {
+                              dragstart: function ($event) {
+                                return _vm.dragStart($event, dayEvent.id)
+                              },
+                              click: function ($event) {
+                                return _vm.eventDetail(dayEvent)
+                              },
+                            },
+                          },
+                          [
+                            _vm._v(
+                              "\n          " +
+                                _vm._s(_vm.formatTitle(dayEvent)) +
+                                "\n        "
+                            ),
+                          ]
+                        )
+                      : _c("div", { staticStyle: { height: "26px" } }),
+                  ])
+                }),
+              ],
+              2
+            )
+          }),
+          0
+        )
+      }),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.getHoliday } }, [_vm._v("test button")]),
       _vm._v(" "),
       _c(
         "transition",
@@ -43564,7 +43594,7 @@ var render = function () {
         1
       ),
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -44655,43 +44685,60 @@ var render = function () {
     _vm.team
       ? _c("div", [
           _vm.team.status === "unapproved" && _vm.teamOwner
-            ? _c("p", [_vm._v("パートナーの承認を待っています。")])
-            : !_vm.teamOwner && _vm.team.status !== "approve"
-            ? _c("div", [
-                _c("p", [
-                  _vm._v(
-                    _vm._s(_vm.owner.name) +
-                      "(" +
-                      _vm._s(_vm.owner.email) +
-                      ")さんから招待が届いています。"
-                  ),
+            ? _c("div", { staticClass: "p-container--pending" }, [
+                _c("h2", { staticClass: "c-title c-title--pending" }, [
+                  _vm._v("パートナーに招待を送りました!"),
                 ]),
                 _vm._v(" "),
-                _c("p", [_vm._v("承認しますか？")]),
+                _vm._m(0),
+              ])
+            : !_vm.teamOwner && _vm.team.status !== "approve"
+            ? _c("div", { staticClass: "p-container--pending" }, [
+                _c("h2", { staticClass: "c-title c-title--pending" }, [
+                  _vm._v("パートナーから招待が届きました！"),
+                ]),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "c-btn c-btn--submit",
-                    on: { click: _vm.approve },
-                  },
-                  [_vm._v("ok")]
-                ),
-                _c(
-                  "button",
-                  {
-                    staticClass: "c-btn c-btn--submit",
-                    on: { click: _vm.deny },
-                  },
-                  [_vm._v("no")]
-                ),
+                _c("div", { staticClass: "p-container--notice" }, [
+                  _c("p", { staticClass: "c-text--notice" }, [
+                    _vm._v(
+                      _vm._s(_vm.owner.name) +
+                        "(" +
+                        _vm._s(_vm.owner.email) +
+                        ")さんから招待が届いています。"
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "c-text--notice" }, [
+                    _vm._v("承認しますか？"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-container--btn-center u-mt-m" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "c-btn c-btn--submit u-mr-s",
+                        on: { click: _vm.approve },
+                      },
+                      [_vm._v("承認")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "c-btn c-btn--submit u-ml-s",
+                        on: { click: _vm.deny },
+                      },
+                      [_vm._v("否認")]
+                    ),
+                  ]),
+                ]),
               ])
             : _vm._e(),
         ])
       : _vm._e(),
     _vm._v(" "),
     !_vm.team
-      ? _c("section", { staticClass: "c-invitation" }, [
+      ? _c("section", { staticClass: "p-container--invitation" }, [
           _c("h2", { staticClass: "c-title c-title--head" }, [
             _vm._v("チームを結成しましょう！"),
           ]),
@@ -44699,7 +44746,7 @@ var render = function () {
           _c(
             "form",
             {
-              staticClass: "c-form--invitation",
+              staticClass: "c-form",
               on: {
                 submit: function ($event) {
                   $event.preventDefault()
@@ -44751,7 +44798,16 @@ var render = function () {
                   : _vm._e(),
               ]),
               _vm._v(" "),
-              _vm._m(0),
+              _c("div", { staticClass: "p-container--btn-center" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "c-btn c-btn--submit",
+                    attrs: { disabled: _vm.sending },
+                  },
+                  [_vm._v("送信")]
+                ),
+              ]),
             ]
           ),
         ])
@@ -44763,8 +44819,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-container--btn-center" }, [
-      _c("button", { staticClass: "c-btn c-btn--submit" }, [_vm._v("送信")]),
+    return _c("div", { staticClass: "p-container--notice" }, [
+      _c("p", { staticClass: "c-text--notice" }, [
+        _vm._v(
+          "パートナーの承認を待っています。パートナーが承認、または否認するとこの画面は表示されなくなります。"
+        ),
+      ]),
     ])
   },
 ]
@@ -45394,124 +45454,130 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-wrapper--auth" }, [
-    _c(
-      "form",
-      {
-        staticClass: "c-form c-form--login",
-        attrs: { novalidate: "novalidate" },
-        on: {
-          submit: function ($event) {
-            $event.preventDefault()
-            return _vm.login.apply(null, arguments)
+  return _c("article", { staticClass: "p-wrapper--auth" }, [
+    _c("section", { staticClass: "p-container--auth" }, [
+      _c("h2", { staticClass: "c-title c-title--head" }, [_vm._v("ログイン")]),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "c-form c-form--login",
+          attrs: { novalidate: "novalidate" },
+          on: {
+            submit: function ($event) {
+              $event.preventDefault()
+              return _vm.login.apply(null, arguments)
+            },
           },
         },
-      },
-      [
-        _c("h1", [_vm._v("ログイン")]),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "c-form__label", attrs: { for: "email-login" } },
-          [_vm._v("Eメール")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-container--form-input" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.loginForm.email,
-                expression: "loginForm.email",
-              },
-            ],
-            staticClass: "c-form__input",
-            attrs: { id: "email-login", name: "email", type: "text" },
-            domProps: { value: _vm.loginForm.email },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.loginForm, "email", $event.target.value)
-              },
-            },
-          }),
+        [
+          _c(
+            "label",
+            { staticClass: "c-form__label", attrs: { for: "email-login" } },
+            [_vm._v("Eメール")]
+          ),
           _vm._v(" "),
-          _vm.loginErrors
-            ? _c("div", [
-                _vm.loginErrors.email
-                  ? _c(
-                      "ul",
-                      _vm._l(_vm.loginErrors.email, function (msg) {
-                        return _c(
-                          "li",
-                          { key: msg, staticClass: "c-text--error" },
-                          [_vm._v(_vm._s(msg))]
+          _c("div", { staticClass: "p-container--form-input" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.loginForm.email,
+                  expression: "loginForm.email",
+                },
+              ],
+              staticClass: "c-form__input",
+              attrs: { id: "email-login", name: "email", type: "text" },
+              domProps: { value: _vm.loginForm.email },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.loginForm, "email", $event.target.value)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-container--error" }, [
+              _vm.loginErrors
+                ? _c("div", [
+                    _vm.loginErrors.email
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.loginErrors.email, function (msg) {
+                            return _c(
+                              "li",
+                              { key: msg, staticClass: "c-text--error" },
+                              [_vm._v(_vm._s(msg))]
+                            )
+                          }),
+                          0
                         )
-                      }),
-                      0
-                    )
-                  : _vm._e(),
-              ])
-            : _vm._e(),
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "c-form__label", attrs: { for: "password-login" } },
-          [_vm._v("パスワード")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-container--form-input" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.loginForm.password,
-                expression: "loginForm.password",
-              },
-            ],
-            staticClass: "c-form__input",
-            attrs: { id: "password-login", name: "password", type: "password" },
-            domProps: { value: _vm.loginForm.password },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.loginForm, "password", $event.target.value)
-              },
-            },
-          }),
+                      : _vm._e(),
+                  ])
+                : _vm._e(),
+            ]),
+          ]),
           _vm._v(" "),
-          _vm.loginErrors
-            ? _c("div", [
-                _vm.loginErrors.password
-                  ? _c(
-                      "ul",
-                      _vm._l(_vm.loginErrors.password, function (msg) {
-                        return _c(
-                          "li",
-                          { key: msg, staticClass: "c-text--error" },
-                          [_vm._v(_vm._s(msg))]
+          _c(
+            "label",
+            { staticClass: "c-form__label", attrs: { for: "password-login" } },
+            [_vm._v("パスワード")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--form-input" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.loginForm.password,
+                  expression: "loginForm.password",
+                },
+              ],
+              staticClass: "c-form__input",
+              attrs: {
+                id: "password-login",
+                name: "password",
+                type: "password",
+              },
+              domProps: { value: _vm.loginForm.password },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.loginForm, "password", $event.target.value)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-container--error" }, [
+              _vm.loginErrors
+                ? _c("div", [
+                    _vm.loginErrors.password
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.loginErrors.password, function (msg) {
+                            return _c(
+                              "li",
+                              { key: msg, staticClass: "c-text--error" },
+                              [_vm._v(_vm._s(msg))]
+                            )
+                          }),
+                          0
                         )
-                      }),
-                      0
-                    )
-                  : _vm._e(),
-              ])
-            : _vm._e(),
-        ]),
-        _vm._v(" "),
-        _vm._m(0),
-      ]
-    ),
-    _vm._v(" "),
-    _c("button", { staticClass: "c-btn", on: { click: _vm.testMsg } }, [
-      _vm._v("message test"),
+                      : _vm._e(),
+                  ])
+                : _vm._e(),
+            ]),
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+        ]
+      ),
     ]),
   ])
 }
@@ -45520,7 +45586,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-container-btn" }, [
+    return _c("div", { staticClass: "p-container--btn-center" }, [
       _c(
         "button",
         { staticClass: "c-btn c-btn--submit", attrs: { type: "submit" } },
@@ -45582,89 +45648,100 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-wrapper--auth" }, [
-    _c(
-      "form",
-      {
-        staticClass: "c-form c-form--login",
-        attrs: { novalidate: "novalidate" },
-        on: {
-          submit: function ($event) {
-            $event.preventDefault()
-            return _vm.submit.apply(null, arguments)
+  return _c("article", { staticClass: "p-wrapper--auth" }, [
+    _c("section", { staticClass: "p-container--auth" }, [
+      _c("h2", { staticClass: "c-title c-title--head" }, [
+        _vm._v("仮会員登録"),
+      ]),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "c-form c-form--login",
+          attrs: { novalidate: "novalidate" },
+          on: {
+            submit: function ($event) {
+              $event.preventDefault()
+              return _vm.submit.apply(null, arguments)
+            },
           },
         },
-      },
-      [
-        _c("h1", [_vm._v("仮会員登録")]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "確認用のEメールをお送りいたします。下記フォームに使用可能なメールアドレスを入力してください。"
-          ),
-        ]),
-        _vm._v(" "),
-        _c("p", [_vm._v("※一部ご利用いただけないメールアドレスがあります。")]),
-        _vm._v(" "),
-        _c("label", { staticClass: "c-form__label", attrs: { for: "email" } }, [
-          _vm._v("Eメール"),
-        ]),
-        _vm.sending
-          ? _c("span", { staticClass: "c-text--sending" }, [
-              _vm._v("メールを送信しています。"),
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-container--form-input" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.preRegisterForm.email,
-                expression: "preRegisterForm.email",
-              },
-            ],
-            staticClass: "c-form__input",
-            attrs: { id: "email", type: "email" },
-            domProps: { value: _vm.preRegisterForm.email },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.preRegisterForm, "email", $event.target.value)
-              },
-            },
-          }),
+        [
+          _c("p", { staticClass: "c-text--notice" }, [
+            _vm._v(
+              "確認用のEメールをお送りいたします。下記フォームに使用可能なメールアドレスを入力してください。"
+            ),
+          ]),
           _vm._v(" "),
-          _vm.error
-            ? _c(
-                "div",
-                _vm._l(_vm.error, function (err, index) {
-                  return _c(
-                    "span",
-                    { key: index, staticClass: "c-text--error" },
-                    [_vm._v(_vm._s(err))]
-                  )
-                }),
-                0
-              )
-            : _vm._e(),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-container-btn" }, [
+          _c("p", { staticClass: "c-text--notice" }, [
+            _vm._v("※一部ご利用いただけないメールアドレスがあります。"),
+          ]),
+          _vm._v(" "),
           _c(
-            "button",
-            {
-              staticClass: "c-btn c-btn--submit",
-              attrs: { type: "submit", disabled: _vm.sending },
-            },
-            [_vm._v("送信")]
+            "label",
+            { staticClass: "c-form__label", attrs: { for: "email" } },
+            [_vm._v("Eメール")]
           ),
-        ]),
-      ]
-    ),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--form-input" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.preRegisterForm.email,
+                  expression: "preRegisterForm.email",
+                },
+              ],
+              staticClass: "c-form__input",
+              attrs: { id: "email", type: "email" },
+              domProps: { value: _vm.preRegisterForm.email },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.preRegisterForm, "email", $event.target.value)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-container--error" }, [
+              _vm.error
+                ? _c(
+                    "div",
+                    _vm._l(_vm.error, function (err, index) {
+                      return _c(
+                        "span",
+                        { key: index, staticClass: "c-text--error" },
+                        [_vm._v(_vm._s(err))]
+                      )
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.sending
+                ? _c("span", { staticClass: "c-text--sending" }, [
+                    _vm._v("メールを送信しています。"),
+                  ])
+                : _vm._e(),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--btn-center" }, [
+            _c(
+              "button",
+              {
+                staticClass: "c-btn c-btn--submit",
+                attrs: { type: "submit", disabled: _vm.sending },
+              },
+              [_vm._v("送信")]
+            ),
+          ]),
+        ]
+      ),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -45690,221 +45767,228 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "p-wrapper--auth" }, [
-    _vm.notice_flg
-      ? _c("div", [
-          _c("p", [_vm._v("この画面は30分間有効です。")]),
-          _vm._v(" "),
-          _c("p", [_vm._v("ブラウザを閉じたり、再読み込みしないでください。")]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "c-btn",
-              attrs: { type: "button" },
-              on: { click: _vm.closeNotice },
+    _c("section", { staticClass: "p-container--auth" }, [
+      _c("h2", { staticClass: "c-title c-title--head" }, [
+        _vm._v("ユーザー登録"),
+      ]),
+      _vm._v(" "),
+      _vm.notice_flg
+        ? _c("div", { staticClass: "p-container--notice-register" }, [
+            _vm._m(0),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "c-form c-form--login u-pt-s",
+          attrs: { novalidate: "novalidate" },
+          on: {
+            submit: function ($event) {
+              $event.preventDefault()
+              return _vm.register.apply(null, arguments)
             },
-            [_vm._v("閉じる")]
-          ),
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        staticClass: "c-form c-form--login",
-        attrs: { novalidate: "novalidate" },
-        on: {
-          submit: function ($event) {
-            $event.preventDefault()
-            return _vm.register.apply(null, arguments)
           },
         },
-      },
-      [
-        _c("h1", [_vm._v("ユーザー登録")]),
-        _vm._v(" "),
-        _c("label", { staticClass: "c-form__label", attrs: { for: "name" } }, [
-          _vm._v("お名前"),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-container--form-input" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.registerForm.name,
-                expression: "registerForm.name",
-              },
-            ],
-            staticClass: "c-form__input",
-            attrs: { id: "name", type: "text" },
-            domProps: { value: _vm.registerForm.name },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.registerForm, "name", $event.target.value)
-              },
-            },
-          }),
-          _vm._v(" "),
-          _vm.registerErrors
-            ? _c("div", [
-                _vm.registerErrors.name
-                  ? _c(
-                      "ul",
-                      _vm._l(_vm.registerErrors.name, function (msg) {
-                        return _c(
-                          "li",
-                          { key: msg, staticClass: "c-text--error" },
-                          [_vm._v(_vm._s(msg))]
-                        )
-                      }),
-                      0
-                    )
-                  : _vm._e(),
-              ])
-            : _vm._e(),
-        ]),
-        _vm._v(" "),
-        _c("label", { staticClass: "c-form__label", attrs: { for: "email" } }, [
-          _vm._v("Eメール"),
-        ]),
-        _vm._v(" "),
-        _c("p", [_vm._v(_vm._s(_vm.registerForm.email))]),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "c-form__label", attrs: { for: "password" } },
-          [_vm._v("パスワード")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-container--form-input" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.registerForm.password,
-                expression: "registerForm.password",
-              },
-            ],
-            staticClass: "c-form__input",
-            attrs: { id: "password", type: "password" },
-            domProps: { value: _vm.registerForm.password },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.registerForm, "password", $event.target.value)
-              },
-            },
-          }),
-          _vm._v(" "),
-          _vm.registerErrors
-            ? _c("div", [
-                _vm.registerErrors.password
-                  ? _c(
-                      "ul",
-                      _vm._l(_vm.registerErrors.password, function (msg) {
-                        return _c(
-                          "li",
-                          { key: msg, staticClass: "c-text--error" },
-                          [_vm._v(_vm._s(msg))]
-                        )
-                      }),
-                      0
-                    )
-                  : _vm._e(),
-              ])
-            : _vm._e(),
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "c-form__label",
-            attrs: { for: "password-confirmation" },
-          },
-          [_vm._v("パスワード(再入力)")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-container--form-input" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.registerForm.password_confirmation,
-                expression: "registerForm.password_confirmation",
-              },
-            ],
-            staticClass: "c-form__input",
-            attrs: { id: "password-confirmation", type: "password" },
-            domProps: { value: _vm.registerForm.password_confirmation },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(
-                  _vm.registerForm,
-                  "password_confirmation",
-                  $event.target.value
-                )
-              },
-            },
-          }),
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "c-form__label", attrs: { for: "register-token" } },
-          [_vm._v("トークン")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-container--form-input" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.token,
-                expression: "token",
-              },
-            ],
-            staticClass: "c-form__input",
-            attrs: { id: "register-token", type: "text" },
-            domProps: { value: _vm.token },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.token = $event.target.value
-              },
-            },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-container-btn" }, [
+        [
           _c(
-            "button",
-            {
-              staticClass: "c-btn c-btn--submit",
-              attrs: { type: "submit", disabled: _vm.sending },
-            },
-            [_vm._v("送信")]
+            "label",
+            { staticClass: "c-form__label", attrs: { for: "name" } },
+            [_vm._v("お名前")]
           ),
-        ]),
-      ]
-    ),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--form-input" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.registerForm.name,
+                  expression: "registerForm.name",
+                },
+              ],
+              staticClass: "c-form__input",
+              attrs: { id: "name", type: "text" },
+              domProps: { value: _vm.registerForm.name },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.registerForm, "name", $event.target.value)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _vm.registerErrors
+              ? _c("div", [
+                  _vm.registerErrors.name
+                    ? _c(
+                        "ul",
+                        _vm._l(_vm.registerErrors.name, function (msg) {
+                          return _c(
+                            "li",
+                            { key: msg, staticClass: "c-text--error" },
+                            [_vm._v(_vm._s(msg))]
+                          )
+                        }),
+                        0
+                      )
+                    : _vm._e(),
+                ])
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "c-form__label", attrs: { for: "email" } },
+            [_vm._v("Eメール")]
+          ),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.registerForm.email))]),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "c-form__label", attrs: { for: "password" } },
+            [_vm._v("パスワード")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--form-input" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.registerForm.password,
+                  expression: "registerForm.password",
+                },
+              ],
+              staticClass: "c-form__input",
+              attrs: { id: "password", type: "password" },
+              domProps: { value: _vm.registerForm.password },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.registerForm, "password", $event.target.value)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _vm.registerErrors
+              ? _c("div", [
+                  _vm.registerErrors.password
+                    ? _c(
+                        "ul",
+                        _vm._l(_vm.registerErrors.password, function (msg) {
+                          return _c(
+                            "li",
+                            { key: msg, staticClass: "c-text--error" },
+                            [_vm._v(_vm._s(msg))]
+                          )
+                        }),
+                        0
+                      )
+                    : _vm._e(),
+                ])
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "c-form__label",
+              attrs: { for: "password-confirmation" },
+            },
+            [_vm._v("パスワード(再入力)")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--form-input" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.registerForm.password_confirmation,
+                  expression: "registerForm.password_confirmation",
+                },
+              ],
+              staticClass: "c-form__input",
+              attrs: { id: "password-confirmation", type: "password" },
+              domProps: { value: _vm.registerForm.password_confirmation },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.registerForm,
+                    "password_confirmation",
+                    $event.target.value
+                  )
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "c-form__label", attrs: { for: "register-token" } },
+            [_vm._v("トークン")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--form-input" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.token,
+                  expression: "token",
+                },
+              ],
+              staticClass: "c-form__input",
+              attrs: { id: "register-token", type: "text" },
+              domProps: { value: _vm.token },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.token = $event.target.value
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container-btn" }, [
+            _c(
+              "button",
+              {
+                staticClass: "c-btn c-btn--submit",
+                attrs: { type: "submit", disabled: _vm.sending },
+              },
+              [_vm._v("送信")]
+            ),
+          ]),
+        ]
+      ),
+    ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "c-text--notice u-c-r" }, [
+      _vm._v("この画面は30分間有効です。"),
+      _c("br"),
+      _vm._v("ブラウザを閉じたり、再読み込みしないでください。"),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -64736,7 +64820,7 @@ var routes = [{
     if (_store_index__WEBPACK_IMPORTED_MODULE_2__["default"].getters['auth/checkToken']) {
       next();
     } else {
-      next('/');
+      next('preRegister');
     }
   }
 }, {
@@ -65255,11 +65339,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var state = {
-  event: []
+  event: [],
+  holiday: {}
 };
 var mutations = {
   setEvent: function setEvent(state, event) {
     state.event = event;
+  },
+  setHolidays: function setHolidays(state, holidays) {
+    state.holiday = holidays;
   }
 };
 var actions = {
@@ -65332,6 +65420,31 @@ var actions = {
           }
         }
       }, _callee2);
+    }))();
+  },
+  getHolidayList: function getHolidayList(context, year) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("https://holidays-jp.github.io/api/v1/".concat(year, "/date.json"));
+
+            case 2:
+              response = _context3.sent;
+
+              if (response.status === _util__WEBPACK_IMPORTED_MODULE_3__["OK"]) {
+                console.log(response);
+              }
+
+            case 4:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
     }))();
   }
 };

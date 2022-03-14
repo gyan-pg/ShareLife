@@ -3,12 +3,16 @@ import dayjs from 'dayjs'
 import { OK, UNAUTHORIZED, UNAUTHORIZED_MESSAGE } from '../util'
 
 const state = {
-  event: []
+  event: [],
+  holiday: {}
 }
 
 const mutations = {
   setEvent (state, event) {
     state.event = event
+  },
+  setHolidays (state, holidays) {
+    state.holiday = holidays
   }
 }
 
@@ -35,6 +39,12 @@ const actions = {
       // stateの更新
       context.dispatch('getScheduleList')
       return false
+    }
+  },
+  async getHolidayList (context, year) {
+    const response = await axios.get(`https://holidays-jp.github.io/api/v1/${year}/date.json`)
+    if (response.status === OK) {
+      console.log(response)
     }
   }
 }

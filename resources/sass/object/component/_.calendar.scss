@@ -1,11 +1,14 @@
 .c-calendar {
-  
-  margin: 0 auto;
-  max-width: 900px;
-
+  margin-bottom: -1px;
   &--input {
     margin: 0 auto;
     max-width: 300px;
+  }
+  &__head-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: $space_s $space_m;
   }
   &__header {
     &--input {
@@ -41,12 +44,17 @@
       height: 40px;
     }
   }
-  &__day {
+  &__date {
+    &.today {
+      background: $color_main_blue;
+    }
+  }
+  &__date-container {
     width: calc(100% / 7);
     border-right: $border_default;
     border-bottom: $border_default;
     &--input {
-      @extend .c-calendar__day;
+      @extend .c-calendar__date-container;
       cursor: pointer;
       &.active {
         background: $color_bg_orange;

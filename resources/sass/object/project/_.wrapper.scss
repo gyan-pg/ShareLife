@@ -6,9 +6,8 @@
   }
   &--auth {
     width: 500px;
+    margin: auto;
     padding-top: $space_2l;
-    margin-right: auto;
-    margin-left: auto;
   }
   &--event-form {
     @extend .p-wrapper--auth;
