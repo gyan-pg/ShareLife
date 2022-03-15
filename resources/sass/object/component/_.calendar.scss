@@ -1,5 +1,7 @@
 .c-calendar {
-  margin-bottom: -1px;
+  &__body {
+    height: calc(100vh - $height_footer - $height_footer - $height_head_container - $height_head_dotw)
+  }
   &--input {
     margin: 0 auto;
     max-width: 300px;
@@ -8,7 +10,11 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: $space_s $space_m;
+    height: $height_head_container;
+    line-height: $height_head_container;
+  }
+  &__current-date {
+    margin: 0 $space_ml;
   }
   &__header {
     &--input {
@@ -19,8 +25,10 @@
   }
   &__dotw {
     display: flex;
-    border-top: $border_default;
-    border-right: $border_default;
+    border-top: $border_bright;
+    border-right: $border_bright;
+    height: $height_head_dotw;
+    line-height: $height_head_dotw;
     &--input {
       @extend .c-calendar__dotw;
     }
@@ -28,16 +36,17 @@
   &__dotw-name {
     text-align: center;
     width: calc(100% / 7);
-    border-left: $border_default;
-    border-bottom: $border_default;
+    border-left: $border_bright;
+    border-bottom: $border_bright;
     &--input {
       @extend .c-calendar__dotw-name;
     }
   }
   &__row {
     display: flex;
-    height: 125px;
-    border-left: $border_default;
+    height: calc((100% - $height_head_container - $height_head_dotw) / 5);
+    // height: 125px;
+    border-left: $border_bright;
     &--input {
       @extend .c-calendar__row;
       font-size: $fontsize_ms;
@@ -45,14 +54,31 @@
     }
   }
   &__date {
+    margin-bottom: 3px;
+    height: 25px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+  }
+  &__day {
+    font-size: $fontsize_s;
+    padding: 0 $space_xs;
+    display: inline-block;
+    border-bottom: $border_bright;
+    border-right: $border_bright;
     &.today {
-      background: $color_main_blue;
+      background: $color_active_bg;
+      color: $color_active_font;
+      font-weight: bold;
     }
   }
   &__date-container {
     width: calc(100% / 7);
-    border-right: $border_default;
-    border-bottom: $border_default;
+    border-right: $border_bright;
+    border-bottom: $border_bright;
+    &:hover {
+      background: $color_bg_bright_gray;
+    }
     &--input {
       @extend .c-calendar__date-container;
       cursor: pointer;
@@ -65,14 +91,31 @@
     background: $color_bg_light_gray;
   }
   &__event {
-    color: white;
-    margin-bottom: 1px;
-    height: 25px;
-    line-height: 25px;
+    color: $color_font_white;
+    padding-left: $space_s;
+    margin-bottom: 3px;
+    height: 20px;
+    line-height: 20px;
+    font-size: $fontsize_s;
     position: relative;
     z-index: 1;
+    border-radius: 3px;
     &:hover {
       cursor: pointer;
+    }
+  }
+  &__holiday {
+    @extend .c-calendar__event;
+    padding: 0;
+    text-align: center;
+    background: $color_main_red;
+    height: 25px;
+    line-height: 25px;
+    margin-bottom: 0;
+    width: 98%;
+    display: inline-block;
+    &:hover {
+      cursor: auto;
     }
   }
   &--small {

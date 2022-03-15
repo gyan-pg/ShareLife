@@ -42,9 +42,29 @@ const actions = {
     }
   },
   async getHolidayList (context, year) {
-    const response = await axios.get(`https://holidays-jp.github.io/api/v1/${year}/date.json`)
+    const response = await axios.get(`/api/getHoliday/${year}`)
     if (response.status === OK) {
-      console.log(response)
+      console.log(response.data)
+      const holidays = response.data
+      let holidayList = []
+      Object.keys(holidays).forEach( key => {
+        let obj = {}
+        const key_color = 'color'
+        const key_start = 'start'
+        const key_end = 'end'
+        const key_title = 'title'
+        const value_color = '#dceb0e'
+        const value_start = key
+        const value_end = key
+        console.log(key)
+        obj[key_color] = value_color
+        obj[key_start] = value_start
+        obj[key_end] = value_end
+        obj[key_title] = holidays[key]
+        holidayList.push(obj)
+      })
+      console.log(holidayList)
+      context.commit('setHolidays', response.data)
     }
   }
 }

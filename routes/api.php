@@ -87,3 +87,6 @@ Route::get('/adjustment/himoku/get', 'AdjustmentController@getHimoku');
 Route::get('/adjustment/show/{date}', 'AdjustmentController@show');
 // 精算の削除
 Route::delete('/adjustment/delete/{id}', 'AdjustmentController@delete');
+
+// 休日一覧の取得
+Route::get('/getHoliday/{year}', 'ScheduleController@getHoliday');

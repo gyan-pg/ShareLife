@@ -26,7 +26,8 @@ $color_font_white: #fefefe;
 //background
 $color_bg_default: #fcfafa;
 $color_bg_disable: #999;
-$color_bg_light_gray: #eaeaea;
+$color_bg_light_gray: #f8f8f8;
+$color_bg_bright_gray: #f9f9f9;
 $color_bg_available: #ccc;
 $color_bg_active: #b7ffff;
 $color_bg_white: #fff;
@@ -34,6 +35,10 @@ $color_bg_input: #fff;
 $color_bg_orange: rgb(223, 138, 59);
 $color_bg_error: rgb(253, 209, 209);
 $color_bg_notice: #94d2bd;
+
+// active
+$color_active_font: #77a18e;
+$color_active_bg: #d2fce8;
 
 // box-shadow
 $box_shadow_default: #ededed 0 0 15px;
@@ -58,7 +63,7 @@ $fontsize_s: 12px;
 $fontsize_ms: 14px;
 $fontsize_default: 16px;
 $fontsize_section: 20px;
-// $fontsize_l: 22px;
+$fontsize_l: 22px;
 $fontsize_page_title: 24px;
 $fontsize_icon: 30px;
 $fontsize_top_section: 36px;
@@ -68,6 +73,7 @@ $fontsize_title_back: 120px;
 
 // font-family
 $font_default: 'Noto Sans JP', sans-serif;
+$font_soft: "M PLUS Rounded 1c";
 
 // transition
 $transtime_default: .5s;
@@ -75,6 +81,9 @@ $transtime_default: .5s;
 // height
 $height_header: 80px;
 $height_footer: 80px;
+$height_head_container: 50px;
+$height_head_dotw: 30px;
+
 $height_author: 75px;
 $height_msg: 60px;
 $height_hero: 800px;

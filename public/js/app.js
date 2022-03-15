@@ -2908,6 +2908,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2915,11 +2919,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   data: function data() {
     return {
       currentDate: dayjs__WEBPACK_IMPORTED_MODULE_0___default()(),
+      currentYear: null,
+      // apiで取得できる祝日の年数に限りがあるため、当日の年を記録しておく。
+      changeYear: null,
+      // カレンダーを進めていって、年が変更になった場合に代入
       today: null,
       clickDate: null,
       clickEvent: null,
       form_flg: false,
-      detail_flg: false
+      detail_flg: false,
+      calendar_row_num: null
     };
   },
   components: {
@@ -2935,6 +2944,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     },
     events: function events() {
       return this.$store.state.events.event;
+    },
+    holidays: function holidays() {
+      return this.$store.state.events.holiday;
+    },
+    rowHeight: function rowHeight() {
+      return 100 / this.calendar_row_num;
     }
   },
   methods: {
@@ -2958,6 +2973,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
       var weekNum = Math.ceil(endDate.diff(startDate, 'day') / 7); // カレンダーの行数
 
+      this.calendar_row_num = weekNum;
       var calendars = []; // カレンダーの情報を作るループ
       // 1週間の配列
 
@@ -3078,13 +3094,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       // 1週間以上の予定の場合、カレンダーの土曜日までラインを伸ばす
 
       if (betweenDays > 6) {
-        return (6 - day) * 100 + 95;
+        return (6 - day) * 100 + 98;
       }
 
       if (betweenDays > 6 - day) {
-        return (6 - day) * 100 + 95;
+        return (6 - day) * 100 + 98;
       } else {
-        return betweenDays * 100 + 95;
+        return betweenDays * 100 + 98;
       }
     },
     // ドラッグイベント
@@ -3112,7 +3128,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       // スケジュールの日数を確認
       var scheduleDays = Math.ceil(dayEvent.width / 100); // タイトルは1日あたり7文字までとする。
 
-      if (dayEvent.title.length > scheduleDays * 7) {
+      if (dayEvent.title.length > scheduleDays * 20) {
         var returnStr = dayEvent.title.slice(0, scheduleDays * 7 - 1);
         return returnStr + '…';
       }
@@ -3150,6 +3166,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   created: function created() {
     this.$store.dispatch('events/getScheduleList');
     this.today = this.currentDate.format('YYYY-MM-DD');
+    this.currentYear = this.changeYear = dayjs__WEBPACK_IMPORTED_MODULE_0___default()().year();
+    this.getHoliday();
+  },
+  watch: {
+    currentDate: function currentDate(newValue) {
+      if (newValue.year() !== this.changeYear) {
+        if (Math.abs(newValue.year() - this.currentYear) > 1) {
+          // apiでは翌年、去年の祝日までしか取得できないので、それ以上の期間の場合apiからデータを取得しない。
+          return false;
+        }
+
+        this.getHoliday();
+        this.changeYear = newValue.year();
+      }
+    }
   }
 });
 /*
@@ -43449,22 +43480,22 @@ var render = function () {
     { staticClass: "c-calendar" },
     [
       _c("div", { staticClass: "c-calendar__head-container" }, [
-        _c("h2", [_vm._v(_vm._s(_vm.currentMonth))]),
-        _vm._v(" "),
-        _c(
-          "button",
-          { attrs: { type: "button" }, on: { click: _vm.prevMonth } },
-          [_vm._v("前の月")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { attrs: { type: "button" }, on: { click: _vm.nextMonth } },
-          [_vm._v("次の月")]
-        ),
+        _c("h2", { staticClass: "c-calendar__current-date" }, [
+          _vm._v(_vm._s(_vm.currentMonth)),
+        ]),
         _vm._v(" "),
         _c("i", {
-          staticClass: "fa-solid fa-plus",
+          staticClass: "fa-solid fa-caret-left c-icon--forward",
+          on: { click: _vm.prevMonth },
+        }),
+        _vm._v(" "),
+        _c("i", {
+          staticClass: "fa-solid fa-caret-right c-icon--forward",
+          on: { click: _vm.nextMonth },
+        }),
+        _vm._v(" "),
+        _c("i", {
+          staticClass: "fa-solid fa-plus c-icon--forward",
           on: {
             click: function ($event) {
               return _vm.openForm()
@@ -43484,87 +43515,106 @@ var render = function () {
         0
       ),
       _vm._v(" "),
-      _vm._l(_vm.calendars, function (week, index) {
-        return _c(
-          "div",
-          { key: index, staticClass: "c-calendar__row" },
-          _vm._l(week, function (day, index) {
-            return _c(
-              "div",
-              {
-                key: index,
-                staticClass: "c-calendar__date-container",
-                class: {
-                  "c-calendar__outer-month":
-                    _vm.currentDate.month() !== day.month,
+      _c(
+        "div",
+        { staticClass: "c-calendar__body" },
+        _vm._l(_vm.calendars, function (week, index) {
+          return _c(
+            "div",
+            {
+              key: index,
+              staticClass: "c-calendar__row",
+              style: { height: _vm.rowHeight + "%" },
+            },
+            _vm._l(week, function (day, index) {
+              return _c(
+                "div",
+                {
+                  key: index,
+                  staticClass: "c-calendar__date-container",
+                  class: {
+                    "c-calendar__outer-month":
+                      _vm.currentDate.month() !== day.month,
+                  },
+                  on: {
+                    drop: function ($event) {
+                      return _vm.dragEnd($event, day.date)
+                    },
+                    dragover: function ($event) {
+                      $event.preventDefault()
+                    },
+                    click: function ($event) {
+                      if ($event.target !== $event.currentTarget) {
+                        return null
+                      }
+                      return _vm.openForm(day.date)
+                    },
+                  },
                 },
-                on: {
-                  drop: function ($event) {
-                    return _vm.dragEnd($event, day.date)
-                  },
-                  dragover: function ($event) {
-                    $event.preventDefault()
-                  },
-                  click: function ($event) {
-                    if ($event.target !== $event.currentTarget) {
-                      return null
-                    }
-                    return _vm.openForm(day.date)
-                  },
-                },
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "c-calendar__date",
-                    class: { today: _vm.today === day.date },
-                  },
-                  [_vm._v(_vm._s(day.day))]
-                ),
-                _vm._v(" "),
-                _vm._l(day.dayEvents, function (dayEvent) {
-                  return _c("div", { key: dayEvent.id }, [
-                    dayEvent.width
+                [
+                  _c("div", { staticClass: "c-calendar__date" }, [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "c-calendar__day c-text--calendar",
+                        class: { today: _vm.today === day.date },
+                      },
+                      [_vm._v(_vm._s(day.day))]
+                    ),
+                    _vm._v(" "),
+                    _vm.holidays[day.date]
                       ? _c(
-                          "div",
+                          "span",
                           {
-                            staticClass: "c-calendar__event",
-                            style:
-                              "width:" +
-                              dayEvent.width +
-                              "%;background-color: " +
-                              dayEvent.color,
-                            attrs: { draggable: "true" },
-                            on: {
-                              dragstart: function ($event) {
-                                return _vm.dragStart($event, dayEvent.id)
-                              },
-                              click: function ($event) {
-                                return _vm.eventDetail(dayEvent)
+                            staticClass: "c-calendar__holiday c-text--calendar",
+                          },
+                          [_vm._v(_vm._s(_vm.holidays[day.date]))]
+                        )
+                      : _vm._e(),
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(day.dayEvents, function (dayEvent) {
+                    return _c("div", { key: dayEvent.id }, [
+                      dayEvent.width
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "c-calendar__event",
+                              style:
+                                "width:" +
+                                dayEvent.width +
+                                "%;background-color: " +
+                                dayEvent.color,
+                              attrs: { draggable: "true" },
+                              on: {
+                                dragstart: function ($event) {
+                                  return _vm.dragStart($event, dayEvent.id)
+                                },
+                                click: function ($event) {
+                                  return _vm.eventDetail(dayEvent)
+                                },
                               },
                             },
-                          },
-                          [
-                            _vm._v(
-                              "\n          " +
-                                _vm._s(_vm.formatTitle(dayEvent)) +
-                                "\n        "
-                            ),
-                          ]
-                        )
-                      : _c("div", { staticStyle: { height: "26px" } }),
-                  ])
-                }),
-              ],
-              2
-            )
-          }),
-          0
-        )
-      }),
-      _vm._v(" "),
-      _c("button", { on: { click: _vm.getHoliday } }, [_vm._v("test button")]),
+                            [
+                              _vm._v(
+                                "\n            " +
+                                  _vm._s(_vm.formatTitle(dayEvent)) +
+                                  "\n          "
+                              ),
+                            ]
+                          )
+                        : _c("div", { staticStyle: { height: "26px" } }),
+                    ])
+                  }),
+                ],
+                2
+              )
+            }),
+            0
+          )
+        }),
+        0
+      ),
       _vm._v(" "),
       _c(
         "transition",
@@ -43594,7 +43644,7 @@ var render = function () {
         1
       ),
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
@@ -65424,19 +65474,39 @@ var actions = {
   },
   getHolidayList: function getHolidayList(context, year) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-      var response;
+      var response, holidays, holidayList;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("https://holidays-jp.github.io/api/v1/".concat(year, "/date.json"));
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/getHoliday/".concat(year));
 
             case 2:
               response = _context3.sent;
 
               if (response.status === _util__WEBPACK_IMPORTED_MODULE_3__["OK"]) {
-                console.log(response);
+                console.log(response.data);
+                holidays = response.data;
+                holidayList = [];
+                Object.keys(holidays).forEach(function (key) {
+                  var obj = {};
+                  var key_color = 'color';
+                  var key_start = 'start';
+                  var key_end = 'end';
+                  var key_title = 'title';
+                  var value_color = '#dceb0e';
+                  var value_start = key;
+                  var value_end = key;
+                  console.log(key);
+                  obj[key_color] = value_color;
+                  obj[key_start] = value_start;
+                  obj[key_end] = value_end;
+                  obj[key_title] = holidays[key];
+                  holidayList.push(obj);
+                });
+                console.log(holidayList);
+                context.commit('setHolidays', response.data);
               }
 
             case 4:

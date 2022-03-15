@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Client;
 use App\Http\Requests\ScheduleRequest;
 use App\Schedule;
 use App\Team;
@@ -79,5 +80,17 @@ class ScheduleController extends Controller
     $schedule = new Schedule();
     $schedule->where('id', $request->id)->update(['title' => $request->title,
     'detail' => $request->detail, 'start' => $request->start, 'end' => $request->end, 'color' => $request->color]);
+  }
+
+  public function getHoliday($year)
+  {
+    $url = "https://holidays-jp.github.io/api/v1/".$year."/date.json";
+    $method = "GET";
+
+    $client = new Client();
+
+    $response = $client->request($method, $url);
+    
+    return $response;
   }
 }

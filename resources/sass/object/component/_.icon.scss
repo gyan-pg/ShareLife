@@ -11,4 +11,25 @@
     padding: $space_s;
     border-radius: 50%;
   }
+  &--forward {
+    display: inline-block;
+    border-radius: 5px;
+    background: $color_bg_light_gray;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: $fontsize_section;
+    margin-left: $space_s;
+    color: $color_font_bright;
+    transition: $transtime_default;
+    &:first-of-type {
+      margin-left: 0;
+    }
+    &:hover {
+      transition: $transtime_default;
+      color: $color_active_font;
+      background: $color_active_bg;
+    }
+  }
 }

@@ -1,34 +1,38 @@
 <template>
   <div class="c-calendar">
     <div class="c-calendar__head-container">
-      <h2>{{ currentMonth }}</h2>
-      <button @click="prevMonth" type="button">前の月</button>
-      <button @click="nextMonth" type="button">次の月</button>
-      <i @click="openForm()" class="fa-solid fa-plus"></i>
+      <h2 class="c-calendar__current-date">{{ currentMonth }}</h2>
+      <i @click="prevMonth" class="fa-solid fa-caret-left c-icon--forward"></i>
+      <i @click="nextMonth" class="fa-solid fa-caret-right c-icon--forward"></i>
+      <i @click="openForm()" class="fa-solid fa-plus c-icon--forward"></i>
     </div>
     <!-- カレンダーの曜日 -->
     <ul class="c-calendar__dotw">
       <li v-for="n in 7" :key="n" class="c-calendar__dotw-name">{{ youbi(n - 1) }}</li>
     </ul>
     <!-- カレンダー本体 -->
-    <div v-for="(week, index) in calendars" :key="index" class="c-calendar__row">
-      <!-- 日付 -->
-      <div v-for="(day, index) in week" :key="index" class="c-calendar__date-container"
-      :class="{'c-calendar__outer-month': currentDate.month() !== day.month}"
-      @drop="dragEnd($event, day.date)" @dragover.prevent @click.self="openForm(day.date)">
-        <div class="c-calendar__date" :class="{'today': today === day.date}">{{ day.day }}</div>
-        <!-- 予定 -->
-        <div v-for="dayEvent in day.dayEvents" :key="dayEvent.id">
-          <div v-if="dayEvent.width" class="c-calendar__event"
-          :style="`width:${dayEvent.width}%;background-color: ${dayEvent.color}`"
-          draggable="true" @dragstart="dragStart($event, dayEvent.id)" @click="eventDetail(dayEvent)"><!-- $eventはDOMイベントと呼ばれる -->
-            {{ formatTitle(dayEvent) }}
+    <div class="c-calendar__body">
+      <div v-for="(week, index) in calendars" :key="index" class="c-calendar__row" :style="{height: rowHeight+'%'}">
+        <!-- 日付 -->
+        <div v-for="(day, index) in week" :key="index" class="c-calendar__date-container"
+        :class="{'c-calendar__outer-month': currentDate.month() !== day.month}"
+        @drop="dragEnd($event, day.date)" @dragover.prevent @click.self="openForm(day.date)">
+          <div class="c-calendar__date">
+            <span class="c-calendar__day c-text--calendar" :class="{'today': today === day.date}">{{ day.day }}</span>
+            <span v-if="holidays[day.date]" class="c-calendar__holiday c-text--calendar">{{holidays[day.date]}}</span>
           </div>
-          <div v-else style="height:26px;"></div>
+          <!-- 予定の表示 -->
+          <div v-for="dayEvent in day.dayEvents" :key="dayEvent.id">
+            <div v-if="dayEvent.width" class="c-calendar__event"
+            :style="`width:${dayEvent.width}%;background-color: ${dayEvent.color}`"
+            draggable="true" @dragstart="dragStart($event, dayEvent.id)" @click="eventDetail(dayEvent)"><!-- $eventはDOMイベントと呼ばれる -->
+              {{ formatTitle(dayEvent) }}
+            </div>
+            <div v-else style="height:26px;"></div>
+          </div>
         </div>
       </div>
     </div>
-    <button @click="getHoliday">test button</button>
     <!-- イベント入力フォーム -->
     <transition name="fade">
       <EventForm v-if="form_flg" @close-form="closeEventForm" :clickDate="clickDate"/>
@@ -48,11 +52,14 @@ export default {
   data () {
     return {
       currentDate: dayjs(),
+      currentYear: null, // apiで取得できる祝日の年数に限りがあるため、当日の年を記録しておく。
+      changeYear: null, // カレンダーを進めていって、年が変更になった場合に代入
       today: null,
       clickDate: null,
       clickEvent: null,
       form_flg: false,
-      detail_flg: false
+      detail_flg: false,
+      calendar_row_num: null,
     }
   },
   components: {
@@ -68,6 +75,12 @@ export default {
     },
     events () {
       return this.$store.state.events.event
+    },
+    holidays () {
+      return this.$store.state.events.holiday
+    },
+    rowHeight () {
+      return 100 / this.calendar_row_num
     }
   },
   methods: {
@@ -85,6 +98,7 @@ export default {
       let startDate = this.getStartDate(this.currentDate) // カレンダーの一番最初の日
       const endDate = this.getEndDate() // カレンダーの最後の日
       const weekNum = Math.ceil(endDate.diff(startDate, 'day') / 7) // カレンダーの行数
+      this.calendar_row_num = weekNum
       let calendars = []
       // カレンダーの情報を作るループ
       // 1週間の配列
@@ -166,12 +180,12 @@ export default {
       let betweenDays = dayjs(end).diff(dayjs(start), 'day') // startとendの差分の日数
       // 1週間以上の予定の場合、カレンダーの土曜日までラインを伸ばす
       if (betweenDays > 6){
-        return (6 - day) * 100 + 95
+        return (6 - day) * 100 + 98
       }
       if (betweenDays > 6 - day) {
-        return (6 - day) * 100 + 95
+        return (6 - day) * 100 + 98
       } else {
-        return betweenDays * 100 + 95
+        return betweenDays * 100 + 98
       }
     },
     // ドラッグイベント
@@ -198,7 +212,7 @@ export default {
       // スケジュールの日数を確認
       let scheduleDays = Math.ceil(dayEvent.width/100)
       // タイトルは1日あたり7文字までとする。
-      if (dayEvent.title.length > scheduleDays * 7) {
+      if (dayEvent.title.length > scheduleDays * 20) {
         let returnStr = dayEvent.title.slice(0, (scheduleDays * 7 - 1))
         return returnStr + '…'
       }
@@ -234,6 +248,19 @@ export default {
   created () {
     this.$store.dispatch('events/getScheduleList')
     this.today = this.currentDate.format('YYYY-MM-DD')
+    this.currentYear = this.changeYear = dayjs().year()
+    this.getHoliday()
+  },
+  watch: {
+    currentDate (newValue) {
+      if (newValue.year() !== this.changeYear) {
+        if (Math.abs(newValue.year() - this.currentYear) > 1) {// apiでは翌年、去年の祝日までしか取得できないので、それ以上の期間の場合apiからデータを取得しない。
+          return false
+        }
+        this.getHoliday()
+        this.changeYear = newValue.year()
+      }
+    }
   }
 }
 /*
