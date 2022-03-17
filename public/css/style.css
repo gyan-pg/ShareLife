@@ -479,6 +479,10 @@ i:hover {
   font-size: 12px;
 }
 
+input {
+  color: #333;
+}
+
 a:hover {
   cursor: pointer;
 }
@@ -535,13 +539,13 @@ button:hover {
 
 .c-btn--submit {
   color: #fefefe;
-  background: #FFAD60;
+  background: #96CEB4;
   border-radius: 5px;
   transition: 0.5s;
 }
 
 .c-btn--submit:hover {
-  background: #df8a3b;
+  background: #74ac92;
 }
 
 .c-calendar__body {
@@ -569,6 +573,7 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
 }
 
 .c-calendar__dotw,
@@ -580,12 +585,24 @@ button:hover {
   line-height: 30px;
 }
 
+.c-calendar__dotw--input {
+  border-right: none;
+}
+
 .c-calendar__dotw-name,
 .c-calendar__dotw-name--input {
   text-align: center;
   width: 14.2857142857%;
   border-left: 1px solid #eee;
   border-bottom: 1px solid #eee;
+}
+
+.c-calendar__dotw-name--small {
+  border-left: 1px solid #eee;
+}
+
+.c-calendar__dotw-name--small:first-of-type {
+  border-left: none;
 }
 
 .c-calendar__row,
@@ -598,6 +615,8 @@ button:hover {
 .c-calendar__row--input {
   font-size: 14px;
   height: 40px;
+  align-items: center;
+  border: none;
 }
 
 .c-calendar__date {
@@ -606,20 +625,44 @@ button:hover {
   line-height: 25px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .c-calendar__day {
   font-size: 12px;
-  padding: 0 5px;
   display: inline-block;
   border-bottom: 1px solid #eee;
   border-right: 1px solid #eee;
+  width: 26px;
+  text-align: center;
 }
 
 .c-calendar__day.today {
   background: #d2fce8;
   color: #77a18e;
   font-weight: bold;
+}
+
+.c-calendar__day--input {
+  width: 14.2857142857%;
+  text-align: center;
+}
+
+.c-calendar__day--inner {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  border-radius: 50%;
+  line-height: 30px;
+}
+
+.c-calendar__day--inner:hover {
+  cursor: pointer;
+  background: #fff8f8;
+}
+
+.c-calendar__day--inner.active {
+  background: #d2fce8;
 }
 
 .c-calendar__date-container,
@@ -667,11 +710,11 @@ button:hover {
 .c-calendar__holiday {
   padding: 0;
   text-align: center;
+  padding: 0 10%;
   background: #D9534F;
   height: 25px;
   line-height: 25px;
   margin-bottom: 0;
-  width: 98%;
   display: inline-block;
 }
 
@@ -681,13 +724,17 @@ button:hover {
 
 .c-calendar--small {
   box-shadow: 0px 0px 10px #ccc;
-  width: 300px;
+  width: 280px;
   background: #fff;
   position: absolute;
-  left: 50%;
-  top: 20px;
+  left: 82%;
   transform: translateX(-50%);
   z-index: 2;
+  border-radius: 10px;
+}
+
+.c-calendar--small.left {
+  left: 40%;
 }
 
 .c-footer {
@@ -703,8 +750,18 @@ button:hover {
   position: relative;
 }
 
+.c-form--event {
+  border-radius: 10px;
+}
+
 .c-form__label {
   display: inline-block;
+  font-size: 14px;
+}
+
+.c-form__label--event {
+  white-space: nowrap;
+  margin-right: 20px;
   font-size: 14px;
 }
 
@@ -716,6 +773,31 @@ button:hover {
   padding: 5px 10px;
   font-size: 14px;
   margin-top: 10px;
+}
+
+.c-form__input--event {
+  margin: 0;
+}
+
+.c-form__input--title {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  border-bottom: 3px solid #96CEB4;
+  font-size: 20px;
+  padding: 5px 10px;
+}
+
+.c-form__input--title::-moz-placeholder {
+  font-size: 20px;
+}
+
+.c-form__input--title:-ms-input-placeholder {
+  font-size: 20px;
+}
+
+.c-form__input--title::placeholder {
+  font-size: 20px;
 }
 
 .c-form__textarea {
@@ -750,14 +832,17 @@ button:hover {
   display: none;
 }
 
+.c-form__radio-label {
+  position: relative;
+}
+
 .c-form__radio-label:before {
   content: "";
-  display: inline-block;
+  display: block;
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: lime;
-  border: 2px solid #ddd;
+  position: relative;
 }
 
 .c-form__radio-label--red:before {
@@ -780,8 +865,16 @@ button:hover {
   background: #dceb0e;
 }
 
-.c-form__radio-label--checked:before {
-  border: solid 2px #333;
+.c-form__radio-label--checked:after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  border: 1px solid #bbb;
 }
 
 .c-form__select {
@@ -834,6 +927,16 @@ button:hover {
   background: #f8f8f8;
   padding: 10px;
   border-radius: 50%;
+  transition: 0.5s;
+}
+
+.c-icon--header:hover {
+  transition: 0.5s;
+  background: #d2fce8;
+}
+
+.c-icon--header.active {
+  background: #d2fce8;
 }
 
 .c-icon--forward {
@@ -860,18 +963,33 @@ button:hover {
   background: #d2fce8;
 }
 
+.c-icon--form-item {
+  line-height: 40px;
+  width: 100%;
+  text-align: center;
+  color: #96CEB4;
+}
+
 .c-image {
   -o-object-fit: cover;
      object-fit: cover;
 }
 
 .c-image--profile {
-  width: 100%;
+  width: 89px;
+  height: 89px;
 }
 
 .c-image--profile-edit {
   width: 200px;
   height: 200px;
+}
+
+.c-image--event-profile {
+  width: 60px;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid #eee;
 }
 
 .c-link--router {
@@ -998,6 +1116,10 @@ button:hover {
   text-align: center;
 }
 
+.p-container--btn-right {
+  text-align: right;
+}
+
 .p-container--error {
   width: 100%;
   height: 26px;
@@ -1007,15 +1129,28 @@ button:hover {
   margin-bottom: 20px;
 }
 
-.p-container--form-radio {
-  margin-bottom: 20px;
+.p-container--form-calendar {
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+}
+
+.p-container--form-radio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 40px;
+  height: 40px;
+  width: 100%;
+}
+
+.p-container--form-select-date {
+  margin-bottom: 20px;
 }
 
 .p-container--input-notice {
   display: flex;
   justify-content: end;
+  height: 20px;
 }
 
 .p-container--header-icon {
@@ -1118,6 +1253,26 @@ button:hover {
   padding-bottom: 0;
 }
 
+.p-container--form-row {
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.p-container--form-left {
+  width: 20%;
+}
+
+.p-container--form-right {
+  width: 80%;
+}
+
+.p-container--event-profile {
+  height: 60px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .p-wrapper--invitation {
   width: 500px;
   max-width: 100vw;
@@ -1149,7 +1304,7 @@ button:hover {
   left: 0;
   height: 100vh;
   width: 100vw;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .p-wrapper--small-calendar {

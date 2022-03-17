@@ -3,16 +3,32 @@
   <section class="p-wrapper--modal" @click.self="closeEventForm">
     <div class="p-wrapper--event-form">
       <p v-if="errors.server_error" class="c-text--error u-tc">{{ errors.server_error }}</p>
-      <form class="c-form" @submit.prevent="setSchedule">
-        <!-- 日時を選択する -->
-        <div class="p-container--form-select-date">
-          <div class="u-tc">
-            <div class="c-form__date" :class="{'active': start_flg }" @click="openStartForm">{{ formatDayStr(schedule.start) }}</div><span class="u-mrl-s">〜</span><div class="c-form__date" :class="{'active': end_flg }" @click="openCloseForm">{{ formatDayStr(schedule.end) }}</div>
+      <form class="c-form c-form--event" @submit.prevent="setSchedule">
+        
+        <!-- タイトル -->
+        <div class="p-container--form-input">
+          <input id="agreement-title" class="c-form__input--title" v-model="schedule.title" placeholder="タイトル">
+          <div class="p-container--input-notice">
+            <p v-if="errors.title" class="c-text--error">{{ errors.title }}</p>
           </div>
-            <!-- <button class="c-btn" :class="{'active': start_flg }" type="button" @click="openStartForm">編集する</button>
-            <button class="c-btn" :class="{'active': end_flg }" type="button" @click="openCloseForm">編集する</button> -->
+        </div>
+
+        <!-- 日時を選択する -->
+        <div class="p-container--form-input">
+          <div class="p-container--form-row">
+            <div class="p-container--form-left">
+              <label class="c-form__label--event"><span class="material-icons c-icon--form-item">schedule</span></label>
+            </div>
+            <div class="p-container--form-right">
+              <div class="u-tc">
+                <div class="c-form__date" :class="{'active': start_flg }" @click="openStartForm">{{ formatDayStr(schedule.start) }}</div><span class="u-mrl-s">〜</span><div class="c-form__date" :class="{'active': end_flg }" @click="openCloseForm">{{ formatDayStr(schedule.end) }}</div>
+              </div>
+            </div>
+          </div>
           <!-- エラー表示 -->
-          <p v-if="errors.schedule" class="c-text--error">{{ errors.schedule }}</p>
+          <div class="p-container--input-notice">
+            <p v-if="errors.schedule" class="c-text--error">{{ errors.schedule }}</p>
+          </div>
 
           <!-- 日時選択用カレンダー -->
           <div class="p-wrapper--small-calendar">
@@ -23,47 +39,55 @@
           </div>
         </div>
 
-        <!-- タイトル -->
-        <label for="agreement-title">タイトル</label>
+        <!-- コメント -->
         <div class="p-container--form-input">
-          <input id="agreement-title" class="c-form__input" v-model="schedule.title">
-          <div class="p-container--input-notice">
-            <p v-if="errors.title" class="c-text--error">{{ errors.title }}</p>
-            <p class="c-text--counter">{{ schedule.title.length }}/40</p>
+          <div class="p-container--form-row">
+            <div class="p-container--form-left">
+              <label for="agreement-detail" class="c-form__label--event"><span class="material-icons c-icon--form-item">notes</span></label>
+            </div>
+            <div class="p-container--form-right">
+              <input id="agreement-detail" class="c-form__input c-form__input--event" v-model="schedule.detail">
+            </div>
           </div>
-        </div>
-
-        <label for="agreement-detail">詳細</label>
-        <div class="p-container--form-input">
-          <textarea id="agreement-detail" class="c-form__textarea" v-model="schedule.detail"></textarea>
           <div class="p-container--input-notice">
             <p v-if="errors.detail" class="c-text--error">{{ errors.detail }}</p>
-            <p class="c-text--counter">{{ schedule.detail.length }}/400</p>
           </div>
         </div>
 
         <!-- 色選択 -->
-        <div class="p-container--form-radio">
-          <label>color</label>
-          <label for="radio-red" class="c-form__radio-label c-form__radio-label--red" :class="[schedule.color === '#ff9100' ? 'c-form__radio-label--checked' : '']" ></label> 
-          <input id="radio-red" type="radio" value="#ff9100" class="c-form__radio" v-model="schedule.color">
-          <label for="radio-blue" class="c-form__radio-label c-form__radio-label--blue" :class="[schedule.color === '#46aef3' ? 'c-form__radio-label--checked' : '']"></label>
-          <input id="radio-blue" type="radio" value="#46aef3" class="c-form__radio" v-model="schedule.color">
-          <label for="radio-green" class="c-form__radio-label c-form__radio-label--green" :class="[schedule.color === '#06f406' ? 'c-form__radio-label--checked' : '']"></label>
-          <input id="radio-green" type="radio" value="#06f406" class="c-form__radio" v-model="schedule.color">
-          <label for="radio-yellow" class="c-form__radio-label c-form__radio-label--yellow" :class="[schedule.color === '#dceb0e' ? 'c-form__radio-label--checked' : '']"></label>
-          <input id="radio-yellow" type="radio" value="#dceb0e" class="c-form__radio" v-model="schedule.color">
-          <label for="radio-gray" class="c-form__radio-label c-form__radio-label--gray" :class="[schedule.color === '#afafaf' ? 'c-form__radio-label--checked' : '']"></label>
-          <input id="radio-gray" type="radio" value="#afafaf" class="c-form__radio" v-model="schedule.color">
+        <div class="p-container--form-input">
+          <div class="p-container--form-event-input">
+            <div class="p-container--form-row">
+              <div class="p-container--form-left">
+                <label class="c-form__label--event"><span class="material-icons c-icon--form-item">label</span></label>
+              </div>
+              <div class="p-container--form-right">
+                <div class="p-container--form-radio">
+                  <label for="radio-red" class="c-form__radio-label c-form__radio-label--red" :class="[schedule.color === '#ff9100' ? 'c-form__radio-label--checked' : '']" ></label> 
+                  <input id="radio-red" type="radio" value="#ff9100" class="c-form__radio" v-model="schedule.color">
+                  <label for="radio-blue" class="c-form__radio-label c-form__radio-label--blue" :class="[schedule.color === '#46aef3' ? 'c-form__radio-label--checked' : '']"></label>
+                  <input id="radio-blue" type="radio" value="#46aef3" class="c-form__radio" v-model="schedule.color">
+                  <label for="radio-green" class="c-form__radio-label c-form__radio-label--green" :class="[schedule.color === '#06f406' ? 'c-form__radio-label--checked' : '']"></label>
+                  <input id="radio-green" type="radio" value="#06f406" class="c-form__radio" v-model="schedule.color">
+                  <label for="radio-yellow" class="c-form__radio-label c-form__radio-label--yellow" :class="[schedule.color === '#dceb0e' ? 'c-form__radio-label--checked' : '']"></label>
+                  <input id="radio-yellow" type="radio" value="#dceb0e" class="c-form__radio" v-model="schedule.color">
+                  <label for="radio-gray" class="c-form__radio-label c-form__radio-label--gray" :class="[schedule.color === '#afafaf' ? 'c-form__radio-label--checked' : '']"></label>
+                  <input id="radio-gray" type="radio" value="#afafaf" class="c-form__radio" v-model="schedule.color">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <button class="c-btn c-btn--submit" type="submit">submit</button>
+        <div class="p-container--btn-right">
+          <button class="c-btn c-btn--submit" type="submit" :disabled="sending">保存</button>
+          <button class="c-btn c-btn--submit" type="button" @click="closeEventForm">閉じる</button>
+        </div>
         <p v-if="errors" class="c-text--error">{{ errors.server }}</p>
 
         <div class="c-form__mask" :class="{'active': start_flg || end_flg}" @click="closeCalendar"></div>
 
       </form>
-      <i class="fa-solid fa-xmark c-icon c-icon--modal-close" @click="closeEventForm"></i>
     </div>
   </section>
 </template>
@@ -98,6 +122,7 @@ export default {
       end_flg: false,
       open_calendar: false,
       error_flg: false,
+      sending: false
     }
   },
   components: {
@@ -113,6 +138,7 @@ export default {
   },
   methods: {
     async setSchedule () {
+      this.sending = true
       this.cleanErrorMessages()
       this.error_flg = false
       this.scheduleValidation()
@@ -129,6 +155,7 @@ export default {
         this.$store.dispatch('events/getScheduleList')
         this.closeEventForm()
       }
+      this.sending = false
     },
     //開始日と終了日のバリデーション
     scheduleValidation () {

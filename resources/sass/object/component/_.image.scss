@@ -1,10 +1,17 @@
 .c-image {
   object-fit: cover;
   &--profile {
-    width: 100%;
+    width: 89px;
+    height: 89px;
   }
   &--profile-edit {
     width: 200px;
     height: 200px;
+  }
+  &--event-profile {
+    width: $height_event_user_image;
+    height: 100%;
+    border-radius: 50%;
+    border: $border_bright;
   }
 }

@@ -2,11 +2,14 @@
 <!-- event detail -->
   <section class="p-wrapper--modal" @click.self="closeDetail">
     <div class="p-wrapper--event-form">
-      <form class="c-form" onsubmit="return false;">
+      <form class="c-form c-form--event" onsubmit="return false;">
+        <div class="p-container--event-profile">
+          <img v-if="image !== '/storage/images/noimage.png'" class="c-image c-image--event-profile" :src="image">
+          <span v-else>{{ name }}</span>
+        </div>
         <p v-if="error" class="c-text--error">{{ error }}</p>
         <div>
           <div><div class="c-form__date" :class="{'active': start_flg }" @click="openStartForm">{{formatDayStr(schedule.start)}}</div><div class="c-form__date" :class="{'active': end_flg }" @click="openCloseForm">{{formatDayStr(schedule.end)}}</div></div>
-          <div>image</div>
         </div>
         
         <!-- 日時選択用カレンダー -->
@@ -76,11 +79,21 @@ export default {
       edit_flg_detail: false,
       edit_flg_color: false,
       open_calendar: false,
-      error: null
+      error: null,
+      image: null,
+      name: null
     }
   },
   components: {
     SmallCalendar
+  },
+  computed: {
+    myImage () {
+      return this.$store.state.auth.user.image
+    },
+    partnerImage () {
+      return this.$store.getters['auth/partner'].image
+    }
   },
   methods: {
     closeDetail () {
@@ -158,11 +171,17 @@ export default {
         this.$store.commit('messages/setMessage', '予定を更新しました。')
         return false
       }
-
     }
   },
   created () {
-     this.schedule = this.clickEvent
+    this.schedule = this.clickEvent
+    // 自分のスケジュールか判断する。
+    if (this.clickEvent.user_id === this.$store.state.auth.user.id) {
+      this.image = this.myImage
+      this.name = this.$store.state.auth.user.name
+    } else {
+      this.image = this.partnerImage
+    }
   }
 }
 </script>

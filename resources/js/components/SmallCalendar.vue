@@ -1,19 +1,18 @@
 <template>
-  <div class="c-calendar--small">
+  <div class="c-calendar--small" :class="{'left': start_flg}">
     <div class="c-calendar__header--input">
-      <i class="fa-solid fa-arrow-left-long" @click="prevMonth"></i>
+      <i class="fa-solid fa-caret-left c-icon--forward" @click="prevMonth"></i>
       <span>{{ currentMonth }}</span>
-      <i class="fa-solid fa-arrow-right-long" @click="nextMonth"></i>
+      <i class="fa-solid fa-caret-right c-icon--forward" @click="nextMonth"></i>
     </div>
     <ul class="c-calendar__dotw--input">
-      <li v-for="n in 7" :key="n" class="c-calendar__dotw-name">{{ youbi(n - 1) }}</li>
+      <li v-for="n in 7" :key="n" class="c-calendar__dotw-name c-calendar__dotw-name--small">{{ youbi(n - 1) }}</li>
     </ul>
     <div v-for="(week, index) in calendars" :key="index" class="c-calendar__row--input">
-      <div v-for="(day, index) in week" :key="index" class="c-calendar__day--input"
-      :class="[{'c-calendar__outer-month': currentDate.month() !== day.month}, 
-      {'active': (start_flg && start === day.date) || (end_flg && end === day.date)}]" 
-      @click="sendDate(day.date)">
-        {{ day.day }}
+      <div v-for="(day, index) in week" :key="index" class="c-calendar__day--input" @click="sendDate(day.date)">
+        <div class="c-calendar__day--inner"
+        :class="[{'c-calendar__outer-month': currentDate.month() !== day.month}, 
+        {'active': (start_flg && start === day.date) || (end_flg && end === day.date)}]">{{ day.day }}</div>
       </div>
     </div>
   </div>

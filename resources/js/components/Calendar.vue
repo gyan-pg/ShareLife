@@ -20,6 +20,7 @@
           <div class="c-calendar__date">
             <span class="c-calendar__day c-text--calendar" :class="{'today': today === day.date}">{{ day.day }}</span>
             <span v-if="holidays[day.date]" class="c-calendar__holiday c-text--calendar">{{holidays[day.date]}}</span>
+            <div style="width: 26px; height: 26px"></div>
           </div>
           <!-- 予定の表示 -->
           <div v-for="dayEvent in day.dayEvents" :key="dayEvent.id">
@@ -28,7 +29,7 @@
             draggable="true" @dragstart="dragStart($event, dayEvent.id)" @click="eventDetail(dayEvent)"><!-- $eventはDOMイベントと呼ばれる -->
               {{ formatTitle(dayEvent) }}
             </div>
-            <div v-else style="height:26px;"></div>
+            <div v-else style="height:23px;"></div>
           </div>
         </div>
       </div>
@@ -228,7 +229,8 @@ export default {
         'color': dayEvent.color,
         'start': dayEvent.start,
         'end': dayEvent.end,
-        'detail': dayEvent.detail
+        'detail': dayEvent.detail,
+        'user_id': dayEvent.user_id
       }
     },
     openForm (date = dayjs().format('YYYY-MM-DD')) {

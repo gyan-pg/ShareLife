@@ -3,9 +3,17 @@
   background: $color_bg_white;
   border-radius: 0 0 10px 10px;
   position: relative;
+  &--event {
+    border-radius: 10px;
+  }
   &__label {
     display: inline-block;
     font-size: $fontsize_ms;
+    &--event {
+      white-space: nowrap;
+      margin-right: $space_m;
+      font-size: $fontsize_ms;
+    }
   }
   &__input {
     display: block;
@@ -15,6 +23,20 @@
     padding: $space_xs $space_s;
     font-size: $fontsize_ms;
     margin-top: $space_s;
+    &--event {
+      margin: 0;
+    }
+    &--title {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      border-bottom: 3px solid $color_main_green;
+      font-size: $fontsize_section;
+      padding: $space_xs $space_s;
+      &::placeholder {
+        font-size: $fontsize_section;
+      }
+    }
   }
   &__textarea {
     display: block;
@@ -44,14 +66,14 @@
     display: none;
   }
   &__radio-label {
+    position: relative;
     &:before {
       content: '';
-      display: inline-block;
+      display: block;
       width: 30px;
       height: 30px;
       border-radius: 50%;
-      background: lime;
-      border: 2px solid #ddd;
+      position: relative;
     }
     &--red {
       &:before {
@@ -79,8 +101,16 @@
       }
     }
     &--checked {
-      &:before {
-        border: solid 2px #333;
+      &:after {
+        content: '';
+        display: block;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        border: $border_default;
       }
     }
   }

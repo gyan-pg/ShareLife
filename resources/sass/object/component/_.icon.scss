@@ -10,6 +10,14 @@
     background: $color_bg_light_gray;
     padding: $space_s;
     border-radius: 50%;
+    transition: $transtime_default;
+    &:hover {
+      transition: $transtime_default;
+      background: $color_active_bg_green;
+    }
+    &.active {
+      background: $color_active_bg_green;
+    }
   }
   &--forward {
     display: inline-block;
@@ -29,7 +37,13 @@
     &:hover {
       transition: $transtime_default;
       color: $color_active_font;
-      background: $color_active_bg;
+      background: $color_active_bg_green;
     }
+  }
+  &--form-item {
+    line-height: $height_form_row;
+    width: 100%;
+    text-align: center;
+    color: $color_main_green;
   }
 }

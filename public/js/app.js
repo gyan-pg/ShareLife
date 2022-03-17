@@ -2912,6 +2912,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
 
 
 
@@ -3145,7 +3146,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         'color': dayEvent.color,
         'start': dayEvent.start,
         'end': dayEvent.end,
-        'detail': dayEvent.detail
+        'detail': dayEvent.detail,
+        'user_id': dayEvent.user_id
       };
     },
     openForm: function openForm() {
@@ -3283,6 +3285,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -3302,11 +3307,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       edit_flg_detail: false,
       edit_flg_color: false,
       open_calendar: false,
-      error: null
+      error: null,
+      image: null,
+      name: null
     };
   },
   components: {
     SmallCalendar: _SmallCalendar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  computed: {
+    myImage: function myImage() {
+      return this.$store.state.auth.user.image;
+    },
+    partnerImage: function partnerImage() {
+      return this.$store.getters['auth/partner'].image;
+    }
   },
   methods: {
     closeDetail: function closeDetail() {
@@ -3444,7 +3459,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   created: function created() {
-    this.schedule = this.clickEvent;
+    this.schedule = this.clickEvent; // 自分のスケジュールか判断する。
+
+    if (this.clickEvent.user_id === this.$store.state.auth.user.id) {
+      this.image = this.myImage;
+      this.name = this.$store.state.auth.user.name;
+    } else {
+      this.image = this.partnerImage;
+    }
   }
 });
 
@@ -3471,6 +3493,30 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3569,7 +3615,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       start_flg: false,
       end_flg: false,
       open_calendar: false,
-      error_flg: false
+      error_flg: false,
+      sending: false
     };
   },
   components: {
@@ -3593,6 +3640,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _this.sending = true;
+
                 _this.cleanErrorMessages();
 
                 _this.error_flg = false;
@@ -3604,32 +3653,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.detailValidation();
 
                 if (_this.error_flg) {
-                  _context.next = 15;
+                  _context.next = 16;
                   break;
                 }
 
-                _context.next = 8;
+                _context.next = 9;
                 return axios.post('/api/schedule/register', _this.schedule);
 
-              case 8:
+              case 9:
                 response = _context.sent;
 
                 if (!(response.status !== _util__WEBPACK_IMPORTED_MODULE_2__["OK"])) {
-                  _context.next = 12;
+                  _context.next = 13;
                   break;
                 }
 
                 _this.errors.server_error = 'サーバーでエラーが発生しました。';
                 return _context.abrupt("return", false);
 
-              case 12:
+              case 13:
                 _this.$store.commit('messages/setMessage', 'スケジュールを登録しました。');
 
                 _this.$store.dispatch('events/getScheduleList');
 
                 _this.closeEventForm();
 
-              case 15:
+              case 16:
+                _this.sending = false;
+
+              case 17:
               case "end":
                 return _context.stop();
             }
@@ -3807,12 +3859,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+var CALENDAR = 1;
+var LEDGER = 2;
+var AGREEMENT = 3;
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      show_page: null,
       show_menu_flg: false,
       show_prof_flg: false,
-      show_edit_flg: false
+      show_edit_flg: false,
+      CALENDAR: CALENDAR,
+      LEDGER: LEDGER,
+      AGREEMENT: AGREEMENT
     };
   },
   components: {
@@ -3880,7 +3939,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     closeProfileEdit: function closeProfileEdit() {
       this.show_edit_flg = false;
+    },
+    pageChange: function pageChange(num) {
+      this.show_page = num;
     }
+  },
+  mounted: function mounted() {
+    this.show_page = this.CALENDAR;
   },
   // directivesオプションでローカルディレクティブに登録することで、
   // ライブラリの機能が使用できるようになる。
@@ -4574,7 +4639,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_0__);
-//
 //
 //
 //
@@ -43571,6 +43635,10 @@ var render = function () {
                           [_vm._v(_vm._s(_vm.holidays[day.date]))]
                         )
                       : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", {
+                      staticStyle: { width: "26px", height: "26px" },
+                    }),
                   ]),
                   _vm._v(" "),
                   _vm._l(day.dayEvents, function (dayEvent) {
@@ -43603,7 +43671,7 @@ var render = function () {
                               ),
                             ]
                           )
-                        : _c("div", { staticStyle: { height: "26px" } }),
+                        : _c("div", { staticStyle: { height: "23px" } }),
                     ])
                   }),
                 ],
@@ -43686,8 +43754,20 @@ var render = function () {
       _c("div", { staticClass: "p-wrapper--event-form" }, [
         _c(
           "form",
-          { staticClass: "c-form", attrs: { onsubmit: "return false;" } },
+          {
+            staticClass: "c-form c-form--event",
+            attrs: { onsubmit: "return false;" },
+          },
           [
+            _c("div", { staticClass: "p-container--event-profile" }, [
+              _vm.image !== "/storage/images/noimage.png"
+                ? _c("img", {
+                    staticClass: "c-image c-image--event-profile",
+                    attrs: { src: _vm.image },
+                  })
+                : _c("span", [_vm._v(_vm._s(_vm.name))]),
+            ]),
+            _vm._v(" "),
             _vm.error
               ? _c("p", { staticClass: "c-text--error" }, [
                   _vm._v(_vm._s(_vm.error)),
@@ -43715,8 +43795,6 @@ var render = function () {
                   [_vm._v(_vm._s(_vm.formatDayStr(_vm.schedule.end)))]
                 ),
               ]),
-              _vm._v(" "),
-              _c("div", [_vm._v("image")]),
             ]),
             _vm._v(" "),
             _c(
@@ -44126,7 +44204,7 @@ var render = function () {
         _c(
           "form",
           {
-            staticClass: "c-form",
+            staticClass: "c-form c-form--event",
             on: {
               submit: function ($event) {
                 $event.preventDefault()
@@ -44135,34 +44213,74 @@ var render = function () {
             },
           },
           [
-            _c("div", { staticClass: "p-container--form-select-date" }, [
-              _c("div", { staticClass: "u-tc" }, [
-                _c(
-                  "div",
+            _c("div", { staticClass: "p-container--form-input" }, [
+              _c("input", {
+                directives: [
                   {
-                    staticClass: "c-form__date",
-                    class: { active: _vm.start_flg },
-                    on: { click: _vm.openStartForm },
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.schedule.title,
+                    expression: "schedule.title",
                   },
-                  [_vm._v(_vm._s(_vm.formatDayStr(_vm.schedule.start)))]
-                ),
-                _c("span", { staticClass: "u-mrl-s" }, [_vm._v("〜")]),
-                _c(
-                  "div",
-                  {
-                    staticClass: "c-form__date",
-                    class: { active: _vm.end_flg },
-                    on: { click: _vm.openCloseForm },
+                ],
+                staticClass: "c-form__input--title",
+                attrs: { id: "agreement-title", placeholder: "タイトル" },
+                domProps: { value: _vm.schedule.title },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.schedule, "title", $event.target.value)
                   },
-                  [_vm._v(_vm._s(_vm.formatDayStr(_vm.schedule.end)))]
-                ),
+                },
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "p-container--input-notice" }, [
+                _vm.errors.title
+                  ? _c("p", { staticClass: "c-text--error" }, [
+                      _vm._v(_vm._s(_vm.errors.title)),
+                    ])
+                  : _vm._e(),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-container--form-input" }, [
+              _c("div", { staticClass: "p-container--form-row" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "p-container--form-right" }, [
+                  _c("div", { staticClass: "u-tc" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "c-form__date",
+                        class: { active: _vm.start_flg },
+                        on: { click: _vm.openStartForm },
+                      },
+                      [_vm._v(_vm._s(_vm.formatDayStr(_vm.schedule.start)))]
+                    ),
+                    _c("span", { staticClass: "u-mrl-s" }, [_vm._v("〜")]),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "c-form__date",
+                        class: { active: _vm.end_flg },
+                        on: { click: _vm.openCloseForm },
+                      },
+                      [_vm._v(_vm._s(_vm.formatDayStr(_vm.schedule.end)))]
+                    ),
+                  ]),
+                ]),
               ]),
               _vm._v(" "),
-              _vm.errors.schedule
-                ? _c("p", { staticClass: "c-text--error" }, [
-                    _vm._v(_vm._s(_vm.errors.schedule)),
-                  ])
-                : _vm._e(),
+              _c("div", { staticClass: "p-container--input-notice" }, [
+                _vm.errors.schedule
+                  ? _c("p", { staticClass: "c-text--error" }, [
+                      _vm._v(_vm._s(_vm.errors.schedule)),
+                    ])
+                  : _vm._e(),
+              ]),
               _vm._v(" "),
               _c(
                 "div",
@@ -44194,72 +44312,34 @@ var render = function () {
               ),
             ]),
             _vm._v(" "),
-            _c("label", { attrs: { for: "agreement-title" } }, [
-              _vm._v("タイトル"),
-            ]),
-            _vm._v(" "),
             _c("div", { staticClass: "p-container--form-input" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.schedule.title,
-                    expression: "schedule.title",
-                  },
-                ],
-                staticClass: "c-form__input",
-                attrs: { id: "agreement-title" },
-                domProps: { value: _vm.schedule.title },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.schedule, "title", $event.target.value)
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "p-container--input-notice" }, [
-                _vm.errors.title
-                  ? _c("p", { staticClass: "c-text--error" }, [
-                      _vm._v(_vm._s(_vm.errors.title)),
-                    ])
-                  : _vm._e(),
+              _c("div", { staticClass: "p-container--form-row" }, [
+                _vm._m(1),
                 _vm._v(" "),
-                _c("p", { staticClass: "c-text--counter" }, [
-                  _vm._v(_vm._s(_vm.schedule.title.length) + "/40"),
+                _c("div", { staticClass: "p-container--form-right" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.schedule.detail,
+                        expression: "schedule.detail",
+                      },
+                    ],
+                    staticClass: "c-form__input c-form__input--event",
+                    attrs: { id: "agreement-detail" },
+                    domProps: { value: _vm.schedule.detail },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.schedule, "detail", $event.target.value)
+                      },
+                    },
+                  }),
                 ]),
               ]),
-            ]),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "agreement-detail" } }, [
-              _vm._v("詳細"),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "p-container--form-input" }, [
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.schedule.detail,
-                    expression: "schedule.detail",
-                  },
-                ],
-                staticClass: "c-form__textarea",
-                attrs: { id: "agreement-detail" },
-                domProps: { value: _vm.schedule.detail },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.schedule, "detail", $event.target.value)
-                  },
-                },
-              }),
               _vm._v(" "),
               _c("div", { staticClass: "p-container--input-notice" }, [
                 _vm.errors.detail
@@ -44267,167 +44347,221 @@ var render = function () {
                       _vm._v(_vm._s(_vm.errors.detail)),
                     ])
                   : _vm._e(),
-                _vm._v(" "),
-                _c("p", { staticClass: "c-text--counter" }, [
-                  _vm._v(_vm._s(_vm.schedule.detail.length) + "/400"),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-container--form-input" }, [
+              _c("div", { staticClass: "p-container--form-event-input" }, [
+                _c("div", { staticClass: "p-container--form-row" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-container--form-right" }, [
+                    _c("div", { staticClass: "p-container--form-radio" }, [
+                      _c("label", {
+                        staticClass:
+                          "c-form__radio-label c-form__radio-label--red",
+                        class: [
+                          _vm.schedule.color === "#ff9100"
+                            ? "c-form__radio-label--checked"
+                            : "",
+                        ],
+                        attrs: { for: "radio-red" },
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.schedule.color,
+                            expression: "schedule.color",
+                          },
+                        ],
+                        staticClass: "c-form__radio",
+                        attrs: {
+                          id: "radio-red",
+                          type: "radio",
+                          value: "#ff9100",
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.schedule.color, "#ff9100"),
+                        },
+                        on: {
+                          change: function ($event) {
+                            return _vm.$set(_vm.schedule, "color", "#ff9100")
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("label", {
+                        staticClass:
+                          "c-form__radio-label c-form__radio-label--blue",
+                        class: [
+                          _vm.schedule.color === "#46aef3"
+                            ? "c-form__radio-label--checked"
+                            : "",
+                        ],
+                        attrs: { for: "radio-blue" },
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.schedule.color,
+                            expression: "schedule.color",
+                          },
+                        ],
+                        staticClass: "c-form__radio",
+                        attrs: {
+                          id: "radio-blue",
+                          type: "radio",
+                          value: "#46aef3",
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.schedule.color, "#46aef3"),
+                        },
+                        on: {
+                          change: function ($event) {
+                            return _vm.$set(_vm.schedule, "color", "#46aef3")
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("label", {
+                        staticClass:
+                          "c-form__radio-label c-form__radio-label--green",
+                        class: [
+                          _vm.schedule.color === "#06f406"
+                            ? "c-form__radio-label--checked"
+                            : "",
+                        ],
+                        attrs: { for: "radio-green" },
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.schedule.color,
+                            expression: "schedule.color",
+                          },
+                        ],
+                        staticClass: "c-form__radio",
+                        attrs: {
+                          id: "radio-green",
+                          type: "radio",
+                          value: "#06f406",
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.schedule.color, "#06f406"),
+                        },
+                        on: {
+                          change: function ($event) {
+                            return _vm.$set(_vm.schedule, "color", "#06f406")
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("label", {
+                        staticClass:
+                          "c-form__radio-label c-form__radio-label--yellow",
+                        class: [
+                          _vm.schedule.color === "#dceb0e"
+                            ? "c-form__radio-label--checked"
+                            : "",
+                        ],
+                        attrs: { for: "radio-yellow" },
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.schedule.color,
+                            expression: "schedule.color",
+                          },
+                        ],
+                        staticClass: "c-form__radio",
+                        attrs: {
+                          id: "radio-yellow",
+                          type: "radio",
+                          value: "#dceb0e",
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.schedule.color, "#dceb0e"),
+                        },
+                        on: {
+                          change: function ($event) {
+                            return _vm.$set(_vm.schedule, "color", "#dceb0e")
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("label", {
+                        staticClass:
+                          "c-form__radio-label c-form__radio-label--gray",
+                        class: [
+                          _vm.schedule.color === "#afafaf"
+                            ? "c-form__radio-label--checked"
+                            : "",
+                        ],
+                        attrs: { for: "radio-gray" },
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.schedule.color,
+                            expression: "schedule.color",
+                          },
+                        ],
+                        staticClass: "c-form__radio",
+                        attrs: {
+                          id: "radio-gray",
+                          type: "radio",
+                          value: "#afafaf",
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.schedule.color, "#afafaf"),
+                        },
+                        on: {
+                          change: function ($event) {
+                            return _vm.$set(_vm.schedule, "color", "#afafaf")
+                          },
+                        },
+                      }),
+                    ]),
+                  ]),
                 ]),
               ]),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "p-container--form-radio" }, [
-              _c("label", [_vm._v("color")]),
-              _vm._v(" "),
-              _c("label", {
-                staticClass: "c-form__radio-label c-form__radio-label--red",
-                class: [
-                  _vm.schedule.color === "#ff9100"
-                    ? "c-form__radio-label--checked"
-                    : "",
-                ],
-                attrs: { for: "radio-red" },
-              }),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.schedule.color,
-                    expression: "schedule.color",
-                  },
-                ],
-                staticClass: "c-form__radio",
-                attrs: { id: "radio-red", type: "radio", value: "#ff9100" },
-                domProps: { checked: _vm._q(_vm.schedule.color, "#ff9100") },
-                on: {
-                  change: function ($event) {
-                    return _vm.$set(_vm.schedule, "color", "#ff9100")
-                  },
+            _c("div", { staticClass: "p-container--btn-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "c-btn c-btn--submit",
+                  attrs: { type: "submit", disabled: _vm.sending },
                 },
-              }),
+                [_vm._v("保存")]
+              ),
               _vm._v(" "),
-              _c("label", {
-                staticClass: "c-form__radio-label c-form__radio-label--blue",
-                class: [
-                  _vm.schedule.color === "#46aef3"
-                    ? "c-form__radio-label--checked"
-                    : "",
-                ],
-                attrs: { for: "radio-blue" },
-              }),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.schedule.color,
-                    expression: "schedule.color",
-                  },
-                ],
-                staticClass: "c-form__radio",
-                attrs: { id: "radio-blue", type: "radio", value: "#46aef3" },
-                domProps: { checked: _vm._q(_vm.schedule.color, "#46aef3") },
-                on: {
-                  change: function ($event) {
-                    return _vm.$set(_vm.schedule, "color", "#46aef3")
-                  },
+              _c(
+                "button",
+                {
+                  staticClass: "c-btn c-btn--submit",
+                  attrs: { type: "button" },
+                  on: { click: _vm.closeEventForm },
                 },
-              }),
-              _vm._v(" "),
-              _c("label", {
-                staticClass: "c-form__radio-label c-form__radio-label--green",
-                class: [
-                  _vm.schedule.color === "#06f406"
-                    ? "c-form__radio-label--checked"
-                    : "",
-                ],
-                attrs: { for: "radio-green" },
-              }),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.schedule.color,
-                    expression: "schedule.color",
-                  },
-                ],
-                staticClass: "c-form__radio",
-                attrs: { id: "radio-green", type: "radio", value: "#06f406" },
-                domProps: { checked: _vm._q(_vm.schedule.color, "#06f406") },
-                on: {
-                  change: function ($event) {
-                    return _vm.$set(_vm.schedule, "color", "#06f406")
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c("label", {
-                staticClass: "c-form__radio-label c-form__radio-label--yellow",
-                class: [
-                  _vm.schedule.color === "#dceb0e"
-                    ? "c-form__radio-label--checked"
-                    : "",
-                ],
-                attrs: { for: "radio-yellow" },
-              }),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.schedule.color,
-                    expression: "schedule.color",
-                  },
-                ],
-                staticClass: "c-form__radio",
-                attrs: { id: "radio-yellow", type: "radio", value: "#dceb0e" },
-                domProps: { checked: _vm._q(_vm.schedule.color, "#dceb0e") },
-                on: {
-                  change: function ($event) {
-                    return _vm.$set(_vm.schedule, "color", "#dceb0e")
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c("label", {
-                staticClass: "c-form__radio-label c-form__radio-label--gray",
-                class: [
-                  _vm.schedule.color === "#afafaf"
-                    ? "c-form__radio-label--checked"
-                    : "",
-                ],
-                attrs: { for: "radio-gray" },
-              }),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.schedule.color,
-                    expression: "schedule.color",
-                  },
-                ],
-                staticClass: "c-form__radio",
-                attrs: { id: "radio-gray", type: "radio", value: "#afafaf" },
-                domProps: { checked: _vm._q(_vm.schedule.color, "#afafaf") },
-                on: {
-                  change: function ($event) {
-                    return _vm.$set(_vm.schedule, "color", "#afafaf")
-                  },
-                },
-              }),
+                [_vm._v("閉じる")]
+              ),
             ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "c-btn c-btn--submit", attrs: { type: "submit" } },
-              [_vm._v("submit")]
-            ),
             _vm._v(" "),
             _vm.errors
               ? _c("p", { staticClass: "c-text--error" }, [
@@ -44442,16 +44576,55 @@ var render = function () {
             }),
           ]
         ),
-        _vm._v(" "),
-        _c("i", {
-          staticClass: "fa-solid fa-xmark c-icon c-icon--modal-close",
-          on: { click: _vm.closeEventForm },
-        }),
       ]),
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-container--form-left" }, [
+      _c("label", { staticClass: "c-form__label--event" }, [
+        _c("span", { staticClass: "material-icons c-icon--form-item" }, [
+          _vm._v("schedule"),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-container--form-left" }, [
+      _c(
+        "label",
+        {
+          staticClass: "c-form__label--event",
+          attrs: { for: "agreement-detail" },
+        },
+        [
+          _c("span", { staticClass: "material-icons c-icon--form-item" }, [
+            _vm._v("notes"),
+          ]),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-container--form-left" }, [
+      _c("label", { staticClass: "c-form__label--event" }, [
+        _c("span", { staticClass: "material-icons c-icon--form-item" }, [
+          _vm._v("label"),
+        ]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -44550,17 +44723,51 @@ var render = function () {
                 _c("span", [_vm._v(_vm._s(_vm.userEmail))]),
                 _vm._v(" "),
                 _vm.checkTeam
+                  ? _c("router-link", { attrs: { to: "/mypage" } }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "p-container--header-icon",
+                          attrs: { "data-text": "カレンダー" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.pageChange(_vm.CALENDAR)
+                            },
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "fa-solid fa-calendar-days c-icon--header",
+                            class: [
+                              _vm.show_page === _vm.CALENDAR ? "active" : "",
+                            ],
+                          }),
+                        ]
+                      ),
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.checkTeam
                   ? _c("router-link", { attrs: { to: "/adjustment" } }, [
                       _c(
                         "div",
                         {
                           staticClass: "p-container--header-icon",
                           attrs: { "data-text": "わりかん！" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.pageChange(_vm.LEDGER)
+                            },
+                          },
                         },
                         [
                           _c("i", {
                             staticClass:
                               "fa-solid fa-money-check-dollar c-icon--header",
+                            class: [
+                              _vm.show_page === _vm.LEDGER ? "active" : "",
+                            ],
                           }),
                         ]
                       ),
@@ -44574,28 +44781,18 @@ var render = function () {
                         {
                           staticClass: "p-container--header-icon",
                           attrs: { "data-text": "きめごと！" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.pageChange(_vm.AGREEMENT)
+                            },
+                          },
                         },
                         [
                           _c("i", {
                             staticClass: "fa-solid fa-book c-icon--header",
-                          }),
-                        ]
-                      ),
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.checkTeam
-                  ? _c("router-link", { attrs: { to: "/mypage" } }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "p-container--header-icon",
-                          attrs: { "data-text": "カレンダー" },
-                        },
-                        [
-                          _c("i", {
-                            staticClass:
-                              "fa-solid fa-calendar-days c-icon--header",
+                            class: [
+                              _vm.show_page === _vm.AGREEMENT ? "active" : "",
+                            ],
                           }),
                         ]
                       ),
@@ -45199,18 +45396,18 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "c-calendar--small" },
+    { staticClass: "c-calendar--small", class: { left: _vm.start_flg } },
     [
       _c("div", { staticClass: "c-calendar__header--input" }, [
         _c("i", {
-          staticClass: "fa-solid fa-arrow-left-long",
+          staticClass: "fa-solid fa-caret-left c-icon--forward",
           on: { click: _vm.prevMonth },
         }),
         _vm._v(" "),
         _c("span", [_vm._v(_vm._s(_vm.currentMonth))]),
         _vm._v(" "),
         _c("i", {
-          staticClass: "fa-solid fa-arrow-right-long",
+          staticClass: "fa-solid fa-caret-right c-icon--forward",
           on: { click: _vm.nextMonth },
         }),
       ]),
@@ -45219,9 +45416,14 @@ var render = function () {
         "ul",
         { staticClass: "c-calendar__dotw--input" },
         _vm._l(7, function (n) {
-          return _c("li", { key: n, staticClass: "c-calendar__dotw-name" }, [
-            _vm._v(_vm._s(_vm.youbi(n - 1))),
-          ])
+          return _c(
+            "li",
+            {
+              key: n,
+              staticClass: "c-calendar__dotw-name c-calendar__dotw-name--small",
+            },
+            [_vm._v(_vm._s(_vm.youbi(n - 1)))]
+          )
         }),
         0
       ),
@@ -45236,24 +45438,32 @@ var render = function () {
               {
                 key: index,
                 staticClass: "c-calendar__day--input",
-                class: [
-                  {
-                    "c-calendar__outer-month":
-                      _vm.currentDate.month() !== day.month,
-                  },
-                  {
-                    active:
-                      (_vm.start_flg && _vm.start === day.date) ||
-                      (_vm.end_flg && _vm.end === day.date),
-                  },
-                ],
                 on: {
                   click: function ($event) {
                     return _vm.sendDate(day.date)
                   },
                 },
               },
-              [_vm._v("\n      " + _vm._s(day.day) + "\n    ")]
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "c-calendar__day--inner",
+                    class: [
+                      {
+                        "c-calendar__outer-month":
+                          _vm.currentDate.month() !== day.month,
+                      },
+                      {
+                        active:
+                          (_vm.start_flg && _vm.start === day.date) ||
+                          (_vm.end_flg && _vm.end === day.date),
+                      },
+                    ],
+                  },
+                  [_vm._v(_vm._s(day.day))]
+                ),
+              ]
             )
           }),
           0
@@ -65474,7 +65684,7 @@ var actions = {
   },
   getHolidayList: function getHolidayList(context, year) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-      var response, holidays, holidayList;
+      var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -65486,26 +65696,6 @@ var actions = {
               response = _context3.sent;
 
               if (response.status === _util__WEBPACK_IMPORTED_MODULE_3__["OK"]) {
-                console.log(response.data);
-                holidays = response.data;
-                holidayList = [];
-                Object.keys(holidays).forEach(function (key) {
-                  var obj = {};
-                  var key_color = 'color';
-                  var key_start = 'start';
-                  var key_end = 'end';
-                  var key_title = 'title';
-                  var value_color = '#dceb0e';
-                  var value_start = key;
-                  var value_end = key;
-                  console.log(key);
-                  obj[key_color] = value_color;
-                  obj[key_start] = value_start;
-                  obj[key_end] = value_end;
-                  obj[key_title] = holidays[key];
-                  holidayList.push(obj);
-                });
-                console.log(holidayList);
                 context.commit('setHolidays', response.data);
               }
 

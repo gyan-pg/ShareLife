@@ -11,7 +11,7 @@ class Schedule extends Model
   ];
 
   protected $visible = [
-    'id', 'title', 'detail', 'start', 'end', 'color'
+    'id', 'title', 'detail','user_id', 'start', 'end', 'color'
   ];
 
   public function user()
