@@ -57,15 +57,21 @@ class AgreementController extends Controller
   // 決め事の削除
   public function delete($id)
   {
+    $team = new Team();
     // 決め事のidのバリデーション
     // 空ではないか
     $this->CheckId($id);
-    
+    Log::debug('id');
+    Log::debug($id);
     $agreement = new Agreement();
-    // 自分の決め事であることを確認
-    $created_user = $agreement->find($id)->user;
-    Log::debug($created_user);
-    if ($created_user->id !== Auth::id()) {
+    // 自分のチームの決め事であることを確認
+    $team_id = $agreement->find($id);
+    Log::debug('team_id');
+    Log::debug($team_id);
+    $my_team = $team->where('user1_id', Auth::id())->orWhere('user2_id', Auth::id())->first();
+    Log::debug('my_team');
+    Log::debug($my_team->id);
+    if ($team_id->team_id !== $my_team->id) {
       return response()->json(['error'=>'エラーが発生しました。'],422);
     }
 
@@ -135,7 +141,7 @@ class AgreementController extends Controller
   // 承認ステータスのバリデーション
   public function CheckStatus($result, $team_id)
   {
-    if($result->user_id === Auth::id() || $result->approval === '0' || $result->team_id !== $team_id){
+    if($result->user_id === Auth::id() || $result->team_id !== $team_id || $result->approval !== '0'){
       abort(response()->json(['error'=>'エラーが発生しました。'],422));
     }
   }

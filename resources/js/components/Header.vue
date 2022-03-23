@@ -11,18 +11,18 @@
       </div>
       <!-- ログイン時に表示 -->
       <div v-else class="c-nav__right">
-        <span>{{ userEmail }}</span>
-        <router-link to="/mypage" v-if="checkTeam"><div class="p-container--header-icon" data-text="カレンダー" @click="pageChange(CALENDAR)"><i class="fa-solid fa-calendar-days c-icon--header" :class="[show_page === CALENDAR ? 'active' : '']"></i></div></router-link>
-        <router-link to="/adjustment" v-if="checkTeam"><div class="p-container--header-icon" data-text="わりかん！" @click="pageChange(LEDGER)"><i class="fa-solid fa-money-check-dollar c-icon--header" :class="[show_page === LEDGER ? 'active' : '']"></i></div></router-link>
-        <router-link to="/agreement" v-if="checkTeam"><div class="p-container--header-icon" data-text="きめごと！" @click="pageChange(AGREEMENT)"><i class="fa-solid fa-book c-icon--header" :class="[show_page === AGREEMENT ? 'active' : '']"></i></div></router-link>
-        <div class="p-container--header-icon" data-text="ユーザー！" v-click-outside="closeProfile"><i class="fa-solid fa-user c-icon--header" @click="showProfile" ></i>
+        <router-link to="/mypage" v-if="checkTeam"><div class="p-container--header-icon" data-text="カレンダー"><span class="material-icons c-icon--header" :class="[page === CALENDAR ? 'active' : '']">calendar_month</span></div></router-link>
+        <router-link to="/adjustment" v-if="checkTeam"><div class="p-container--header-icon" data-text="わりかん！"><span class="material-icons c-icon--header" :class="[page === ADJUSTMENT ? 'active' : '']">payments</span></div></router-link>
+        <router-link to="/agreement" v-if="checkTeam"><div class="p-container--header-icon" data-text="きめごと！"><span class="material-icons c-icon--header" :class="[page === AGREEMENT ? 'active' : '']">library_books</span></div></router-link>
+        <div class="p-container--header-icon" data-text="ユーザー！" v-click-outside="closeProfile"><span class="material-icons c-icon--header" @click="showProfile">person</span>
           <transition name="fade">
             <Profile v-if="show_prof_flg" @openProfEdit="openProfileEdit"/>
           </transition>
         </div>
 
         <div class="p-container--header-icon" data-text="その他" @click="showSmallMenu" v-click-outside="closeSmallMenu">
-          <i class="fa-solid fa-gear c-icon--header"></i>
+          <span class="material-icons c-icon--header">logout</span>
+          <!-- <i class="fa-solid fa-gear c-icon--header"></i> -->
           <transition name="fade">
             <div v-if="show_menu_flg" class="p-container--header-submenu">
               <span class="c-text--menu" @click="logout">ログアウト</span>
@@ -42,18 +42,15 @@
 import ClickOutside from 'vue-click-outside'
 import Profile from './Profile.vue'
 import ProfileEditForm from './ProfileEditForm.vue'
-const CALENDAR = 1
-const LEDGER = 2
-const AGREEMENT = 3
+import { ADJUSTMENT, CALENDAR, AGREEMENT} from '../util'
 export default {
   data () {
     return {
-      show_page: null,
       show_menu_flg: false,
       show_prof_flg: false,
       show_edit_flg: false,
+      ADJUSTMENT,
       CALENDAR,
-      LEDGER,
       AGREEMENT
     }
   },
@@ -70,6 +67,9 @@ export default {
     },
     checkTeam () {
       return this.$store.getters['auth/checkTeam']
+    },
+    page () {
+      return this.$store.state.page.page
     }
   },
   methods: {
@@ -98,13 +98,7 @@ export default {
     },
     closeProfileEdit () {
       this.show_edit_flg = false
-    },
-    pageChange (num) {
-      this.show_page = num
     }
-  },
-  mounted () {
-    this.show_page = this.CALENDAR
   },
   // directivesオプションでローカルディレクティブに登録することで、
   // ライブラリの機能が使用できるようになる。

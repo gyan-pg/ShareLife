@@ -1,5 +1,6 @@
 <template>
   <div class="c-calendar">
+    <!-- カレンダーの月を進める -->
     <div class="c-calendar__head-container">
       <h2 class="c-calendar__current-date">{{ currentMonth }}</h2>
       <i @click="prevMonth" class="fa-solid fa-caret-left c-icon--forward"></i>
@@ -11,20 +12,22 @@
       <li v-for="n in 7" :key="n" class="c-calendar__dotw-name">{{ youbi(n - 1) }}</li>
     </ul>
     <!-- カレンダー本体 -->
-    <div class="c-calendar__body">
+    <div class="c-calendar__body" ref="calendarBody">
       <div v-for="(week, index) in calendars" :key="index" class="c-calendar__row" :style="{height: rowHeight+'%'}">
         <!-- 日付 -->
         <div v-for="(day, index) in week" :key="index" class="c-calendar__date-container"
         :class="{'c-calendar__outer-month': currentDate.month() !== day.month}"
         @drop="dragEnd($event, day.date)" @dragover.prevent @click.self="openForm(day.date)">
-          <div class="c-calendar__date">
-            <span class="c-calendar__day c-text--calendar" :class="{'today': today === day.date}">{{ day.day }}</span>
+          <div class="c-calendar__date" @click.self="openForm(day.date)">
+            <span class="c-calendar__day c-text--calendar"
+            :class="{'today': today === day.date, 'red': day.dotw === 0 || holidays[day.date], 'blue': day.dotw === 6}">{{ day.day }}</span>
             <span v-if="holidays[day.date]" class="c-calendar__holiday c-text--calendar">{{holidays[day.date]}}</span>
             <div style="width: 26px; height: 26px"></div>
           </div>
           <!-- 予定の表示 -->
-          <div v-for="dayEvent in day.dayEvents" :key="dayEvent.id">
+          <div v-for="(dayEvent, index) in day.dayEvents" :key="dayEvent.id">
             <div v-if="dayEvent.width" class="c-calendar__event"
+            :class="{'hide': index + 1 > eventNum}"
             :style="`width:${dayEvent.width}%;background-color: ${dayEvent.color}`"
             draggable="true" @dragstart="dragStart($event, dayEvent.id)" @click="eventDetail(dayEvent)"><!-- $eventはDOMイベントと呼ばれる -->
               {{ formatTitle(dayEvent) }}
@@ -36,11 +39,11 @@
     </div>
     <!-- イベント入力フォーム -->
     <transition name="fade">
-      <EventForm v-if="form_flg" @close-form="closeEventForm" :clickDate="clickDate"/>
+      <EventForm v-if="form_flg" @close-form="closeEventForm" :clickDate="clickDate" :editEvent="editEvent"/>
     </transition>
     <!-- イベント詳細 -->
     <transition name="fade">
-      <EventDetail v-if="detail_flg" @close-detail="closeDetail" :clickEvent="clickEvent"/>
+      <EventDetail v-if="detail_flg" @close-detail="closeDetail" @edit-schedule="editSchedule" :clickEvent="clickEvent"/>
     </transition>
   </div>
 </template>
@@ -49,6 +52,7 @@
 import dayjs from 'dayjs'
 import EventForm from './EventForm.vue'
 import EventDetail from './EventDetail.vue'
+import { CALENDAR } from '../util'
 export default {
   data () {
     return {
@@ -61,6 +65,9 @@ export default {
       form_flg: false,
       detail_flg: false,
       calendar_row_num: null,
+      editEvent: null,
+      eventNum: null,// 日付のますに表示するイベントの数
+      height: window.innerHeight
     }
   },
   components: {
@@ -112,7 +119,8 @@ export default {
             date: startDate.format('YYYY-MM-DD'),
             day: startDate.date(), // 日を取得
             month: startDate.month(),
-            dayEvents: dayEvents
+            dayEvents: dayEvents,
+            dotw: day
           })
           startDate = startDate.add(1, 'day') // 次の日の情報を詰める
         }
@@ -233,25 +241,46 @@ export default {
         'user_id': dayEvent.user_id
       }
     },
+    editSchedule (event) {
+      this.detail_flg = false
+      this.form_flg = true
+      this.editEvent = event
+    },
     openForm (date = dayjs().format('YYYY-MM-DD')) {
       this.form_flg = true
       this.clickDate = date
     },
     closeEventForm () {
       this.form_flg = false
+      this.editEvent = null
     },
     closeDetail () {
       this.detail_flg = false
     },
     getHoliday () {
       this.$store.dispatch('events/getHolidayList', this.currentDate.year())
+    },
+    handleResize () {
+      this.height = window.innerHeight
+      this.checkEventNum()
+    },
+    // 一つの日付のマスに表示する、イベントの数を制御
+    checkEventNum () {
+      const dom = this.$refs.calendarBody
+      const rect = dom.getBoundingClientRect()
+      this.eventNum = Math.floor((rect.height / this.calendar_row_num - 28) / 23)
     }
   },
   created () {
     this.$store.dispatch('events/getScheduleList')
     this.today = this.currentDate.format('YYYY-MM-DD')
     this.currentYear = this.changeYear = dayjs().year()
+    this.$store.commit('page/setPage', CALENDAR)
     this.getHoliday()
+  },
+  mounted () {
+    window.addEventListener('resize', this.handleResize)
+    this.checkEventNum()
   },
   watch: {
     currentDate (newValue) {

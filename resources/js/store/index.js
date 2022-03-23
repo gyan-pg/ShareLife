@@ -8,6 +8,7 @@ import events from './events'
 import agreements from './agreements'
 import himoku from './himoku'
 import payments from './payments'
+import page from './page'
 
 Vue.use(Vuex)
 
@@ -19,7 +20,8 @@ const store = new Vuex.Store({
     events,
     agreements,
     himoku,
-    payments
+    payments,
+    page
   }
 })
 

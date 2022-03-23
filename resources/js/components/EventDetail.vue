@@ -5,56 +5,43 @@
       <form class="c-form c-form--event" onsubmit="return false;">
         <div class="p-container--event-profile">
           <img v-if="image !== '/storage/images/noimage.png'" class="c-image c-image--event-profile" :src="image">
-          <span v-else>{{ name }}</span>
+          <span class="c-text--detail-name" v-else>{{ name }}</span>
         </div>
-        <p v-if="error" class="c-text--error">{{ error }}</p>
-        <div>
-          <div><div class="c-form__date" :class="{'active': start_flg }" @click="openStartForm">{{formatDayStr(schedule.start)}}</div><div class="c-form__date" :class="{'active': end_flg }" @click="openCloseForm">{{formatDayStr(schedule.end)}}</div></div>
-        </div>
-        
-        <!-- 日時選択用カレンダー -->
-        <div class="p-wrapper--small-calendar">
-          <transition name="fade">
-            <SmallCalendar v-if="open_calendar" :end_flg="end_flg" :start_flg="start_flg" 
-            :start="schedule.start" :end="schedule.end" @close-calendar="closeCalendar" @get-date="getDate"/>
-          </transition>
-        </div>
-        
+
         <!-- title -->
-        <div>タイトル<i v-if="edit_flg_title" @click="editTitle" class="fa-solid fa-circle-check c-icon"></i><i v-if="!edit_flg_title" @click="editTitle" class="fa-regular fa-plus c-icon"></i></div>
-        <p v-if="!edit_flg_title" @click="editTitle">{{ schedule.title }}</p>
-        <input v-if="edit_flg_title" class="c-form__input" v-model="schedule.title">
+        <div class="p-container--event-title">
+          <span class="c-title--event-detail">{{ schedule.title }}</span>
+        </div>
+
+        <!-- date -->
+        <div class="p-container--form-row u-mb-m">
+          <div class="p-container--form-left">
+            <span class="material-icons c-icon--form-item">schedule</span>
+          </div>
+          <div class="p-container--form-right p-container--event-date">
+            <span class="c-date">{{formatDayStr(schedule.start)}}</span><span class="material-icons c-icon--date">start</span><span class="c-date">{{formatDayStr(schedule.end)}}</span>
+          </div>
+        </div>
         
         <!-- detail -->
-        <div>詳細<i v-if="edit_flg_detail" @click="editDetail" class="fa-solid fa-circle-check c-icon"></i><i v-if="!edit_flg_detail" @click="editDetail" class="fa-regular fa-plus c-icon"></i></div>
-        <p v-if="!edit_flg_detail" @click="editDetail">{{ schedule.detail }}</p>
-        <textarea v-if="edit_flg_detail" class="c-form__textarea" v-model="schedule.detail"></textarea>
-        
-        <!-- color -->
-        
-        <div>color<i v-if="edit_flg_color" @click="editColor" class="fa-solid fa-circle-check c-icon"></i><i v-if="!edit_flg_color" @click="editColor" class="fa-regular fa-plus c-icon"></i></div>
-        <div v-if="edit_flg_color" class="p-container--form-radio">
-          <label for="radio-red" class="c-form__radio-label c-form__radio-label--red" :class="[schedule.color === '#ff9100' ? 'c-form__radio-label--checked' : '']" ></label> 
-          <input id="radio-red" type="radio" value="#ff9100" class="c-form__radio" v-model="schedule.color">
-          <label for="radio-blue" class="c-form__radio-label c-form__radio-label--blue" :class="[schedule.color === '#46aef3' ? 'c-form__radio-label--checked' : '']"></label>
-          <input id="radio-blue" type="radio" value="#46aef3" class="c-form__radio" v-model="schedule.color">
-          <label for="radio-green" class="c-form__radio-label c-form__radio-label--green" :class="[schedule.color === '#06f406' ? 'c-form__radio-label--checked' : '']"></label>
-          <input id="radio-green" type="radio" value="#06f406" class="c-form__radio" v-model="schedule.color">
-          <label for="radio-yellow" class="c-form__radio-label c-form__radio-label--yellow" :class="[schedule.color === '#dceb0e' ? 'c-form__radio-label--checked' : '']"></label>
-          <input id="radio-yellow" type="radio" value="#dceb0e" class="c-form__radio" v-model="schedule.color">
-          <label for="radio-gray" class="c-form__radio-label c-form__radio-label--gray" :class="[schedule.color === '#afafaf' ? 'c-form__radio-label--checked' : '']"></label>
-          <input id="radio-gray" type="radio" value="#afafaf" class="c-form__radio" v-model="schedule.color">
+        <div v-if="schedule.detail" class="p-container--form-row p-container--form-detail u-mb-m">
+          <div class="p-container--form-left u-d-t">
+            <span class="material-icons c-icon--form-item u-d-tc u-vm">notes</span>
+          </div>
+          <div class="p-container--form-right">
+            <span class="c-text c-text--schedule-detail">{{ schedule.detail }}</span>
+          </div>
         </div>
 
         <!-- 更新・削除・閉じる -->
-        <button class="c-form__detail-update" type="button" :class="{'active': edit_flg}" :disabled="!edit_flg" @click="changeSchedule">更新</button>
-        <button class="c-form__detail-update" type="button" @click="deleteSchedule">削除</button>
-        <button class="c-form__detail-update" type="button" @click="closeDetail">閉じる</button>
-
+        <div class="p-container--btn-right">
+          <button v-if="my_schedule" class="c-btn c-btn--submit" type="button" @click="editSchedule">編集</button>
+          <button v-if="my_schedule" class="c-btn c-btn--submit" type="button" @click="deleteSchedule">削除</button>
+          <button class="c-btn c-btn--submit" type="button" @click="closeDetail">閉じる</button>
+        </div>
         <div class="c-form__mask" :class="{'active': start_flg || end_flg}" @click="closeCalendar"></div>
 
       </form>
-      <i class="fa-solid fa-xmark c-icon c-icon--modal-close" @click="closeDetail"></i>
     </div>
   </section>
 </template>
@@ -81,7 +68,8 @@ export default {
       open_calendar: false,
       error: null,
       image: null,
-      name: null
+      name: null,
+      my_schedule: false
     }
   },
   components: {
@@ -134,7 +122,7 @@ export default {
       }
     },
     formatDayStr (str) {
-      const result = str.substr(0,4)+'年'+str.substr(5,2)+'月'+str.substr(8,2)+'日'
+      const result = str.substr(5,2)+'月'+str.substr(8,2)+'日'
       return result
     },
     editTitle () {
@@ -161,26 +149,20 @@ export default {
       this.closeDetail()
       this.$store.commit('messages/setMessage', '予定を削除しました。')
     },
-    async changeSchedule () {
-      this.error = null
-      const response = await axios.put('/api/schedule/changeSchedule', this.schedule)
-      
-      if (response.status === OK) {
-        this.$store.dispatch('events/getScheduleList')
-        this.closeDetail()
-        this.$store.commit('messages/setMessage', '予定を更新しました。')
-        return false
-      }
+    editSchedule () {
+      this.$emit('edit-schedule', this.clickEvent)
     }
   },
   created () {
     this.schedule = this.clickEvent
     // 自分のスケジュールか判断する。
     if (this.clickEvent.user_id === this.$store.state.auth.user.id) {
+      this.my_schedule = true
       this.image = this.myImage
       this.name = this.$store.state.auth.user.name
     } else {
       this.image = this.partnerImage
+      this.name = this.$store.getters["auth/partner"].name
     }
   }
 }

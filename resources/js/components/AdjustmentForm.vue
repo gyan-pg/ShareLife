@@ -1,86 +1,148 @@
 <template>
-  <div>
-    <p>固定費入力フォーム<i class="fa-regular fa-plus" @click="openKotei"></i></p>
-    <div v-if="open_kotei">
-      <p>金額</p>
-      <input class="c-form__input" type="text" v-model="kotei.cost">
+  <section class="p-wrapper--adjustment-form">
+    <button class="c-btn c-btn--form-tab-hendo" :class="{'active': open_hendo === true}" type="button" @click="openHendo">変動費入力</button>
+    <button class="c-btn c-btn--form-tab-kotei" :class="{'active': open_kotei === true}" type="button" @click="openKotei">固定費入力</button>
+
+    <!-- 変動費の入力 -->
+    <div class="p-container--adjustment-hendo" v-if="open_hendo">
+      <!-- 金額 -->
+      <div class="p-container--adjustment-form-row">
+        <div class="p-container--adjustment-form-row__left">
+          <label for="payments-hendo"><span class="material-icons c-icon--adjustment-form">payments</span></label>
+        </div>
+        <div class="p-container--adjustment-form-row__right">
+          <input id="payments-hendo" class="c-form__input--adjustment" type="text" placeholder="金額を入力してください。" v-model="hendo.cost">
+        </div>
+      </div>
       <!-- エラー表示 -->
-      <div v-if="error_flg">
-        <!-- サーバーからのエラー文 -->
-        <span class="c-text--error" v-for="(error, index) in error.kotei.cost" :key="index">{{ error }}</span>
+      <div class="p-container--input-notice">
+        <div v-if="error_flg"><span class="c-text--error" v-for="(error, index) in error.hendo.cost" :key="index">{{ error }}</span></div>
       </div>
 
-      <p>コメント</p>
-      <input class="c-form__input" type="text" v-model="kotei.comment">
+      <!-- コメント -->
+      <div class="p-container--adjustment-form-row">
+        <div class="p-container--adjustment-form-row__left">
+          <label for="comment-hendo"><span class="material-icons c-icon--adjustment-form">notes</span></label>
+        </div>
+        <div class="p-container--adjustment-form-row__right">
+          <input id="comment-hendo" class="c-form__input--adjustment" type="text" placeholder="コメントがあれば入力してください。" v-model="hendo.comment">
+        </div>
+      </div>
       <!-- エラー表示 -->
-      <div v-if="error_flg">
-        <span class="c-text--error" v-for="(error, index) in error.kotei.comment" :key="index">{{ error }}</span>
+      <div class="p-container--input-notice">
+        <div v-if="error_flg"><span class="c-text--error" v-for="(error, index) in error.hendo.comment" :key="index">{{ error }}</span></div>
       </div>
 
       <!-- 費目 -->
-      <p>費目</p>
-      <select class="c-form__select" v-model="kotei.himoku">
-        <option value hidden>選択してください</option>
-        <option v-for="(himoku, index) in kotei_list" :key="index" :value="himoku">{{ himoku }}</option>
-      </select>
+      <div class="p-container--adjustment-form-row">
+        <div class="p-container--adjustment-form-row__left">
+          <label for="himoku-hendo"><span class="material-icons c-icon--adjustment-form">menu_book</span></label>
+        </div>
+        <div class="p-container--adjustment-form-row__right">
+          <select id="himoku-hendo" class="c-form__select--adjustment" v-model="hendo.himoku">
+            <option value hidden>選択してください</option>
+            <option v-for="(himoku, index) in hendo_list" :key="index" :value="himoku">{{ himoku }}</option>
+          </select>
+        </div>
+      </div>
       <!-- エラー表示 -->
-      <div v-if="error_flg">
-        <span class="c-text--error" v-for="(error, index) in error.kotei.himoku" :key="index">{{ error }}</span>
+      <div class="p-container--input-notice">
+        <!-- サーバーからのエラー文 -->
+        <div v-if="error_flg"><span class="c-text--error" v-for="(error, index) in error.hendo.himoku" :key="index">{{ error }}</span></div>
+      </div>
+
+      <!-- 支払った人 -->
+      <div class="p-container--adjustment-form-row">
+        <div class="p-container--adjustment-form-row__left">
+          <label for="person-hendo"><span class="material-icons c-icon--adjustment-form">people</span></label>
+        </div>
+        <div class="p-container--adjustment-form-row__right">
+          <select id="person-hendo" class="c-form__select--adjustment" v-model="hendo.user">
+            <option :value="user_info.id" selected>{{ user_info.name }}</option>
+            <option :value="partner_info.id">{{ partner_info.name }}</option>
+          </select>
+        </div>
+      </div>
+      <!-- エラー表示 -->
+      <div class="p-container--input-notice">
+        <div v-if="error_flg"><span class="c-text--error" v-for="(error, index) in error.hendo.user" :key="index">{{ error }}</span></div>
+      </div>
+
+      <div class="p-container--btn-right">
+        <button type="button" class="c-btn c-btn--submit" @click="submitHendo">登録</button>
+      </div>
+    </div>
+
+    <!-- 固定費の入力フォーム -->
+    <!-- 金額 -->
+    <div class="p-container--adjustment-kotei" v-if="open_kotei">
+      <div class="p-container--adjustment-form-row">
+        <div class="p-container--adjustment-form-row__left">
+          <label for="payments-kotei"><span class="material-icons c-icon--adjustment-form">payments</span></label>
+        </div>
+        <div class="p-container--adjustment-form-row__right">
+          <input id="payments-kotei" class="c-form__input--adjustment-red" type="text" placeholder="金額を入力してください。" v-model="kotei.cost">
+        </div>
+      </div>
+      <!-- エラー表示 -->
+      <div class="p-container--input-notice">
+        <div v-if="error_flg"><span class="c-text--error" v-for="(error, index) in error.kotei.cost" :key="index">{{ error }}</span></div>
+      </div>
+
+      <!-- コメント -->
+      <div class="p-container--adjustment-form-row">
+        <div class="p-container--adjustment-form-row__left">
+          <label for="comment-kotei"><span class="material-icons c-icon--adjustment-form">notes</span></label>
+        </div>
+        <div class="p-container--adjustment-form-row__right">
+          <input id="comment-kotei" class="c-form__input--adjustment-red" type="text" placeholder="コメントがあれば入力してください。" v-model="kotei.comment">
+        </div>
+        </div>
+      <!-- エラー表示 -->
+      <div class="p-container--input-notice">
+        <div v-if="error_flg"><span class="c-text--error" v-for="(error, index) in error.kotei.comment" :key="index">{{ error }}</span></div>
+      </div>
+
+      <!-- 費目 -->
+      <div class="p-container--adjustment-form-row">
+        <div class="p-container--adjustment-form-row__left">
+          <label for="himoku-kotei"><span class="material-icons c-icon--adjustment-form">menu_book</span></label>
+        </div>
+        <div class="p-container--adjustment-form-row__right">
+          <select id="himoku-kotei" class="c-form__select--adjustment-red" v-model="kotei.himoku">
+            <option value hidden>選択してください</option>
+            <option v-for="(himoku, index) in kotei_list" :key="index" :value="himoku">{{ himoku }}</option>
+          </select>
+        </div>
+      </div>
+      <!-- エラー表示 -->
+      <div class="p-container--input-notice">
+        <div v-if="error_flg"><span class="c-text--error" v-for="(error, index) in error.kotei.himoku" :key="index">{{ error }}</span></div>
       </div>
       
-      <p>支払った人</p>
-      <select class="c-form__select" v-model="kotei.user">
-        <option :value="user_info.id" selected>{{ user_info.name }}</option>
-        <option :value="partner_info.id">{{ partner_info.name }}</option>
-      </select>
+      <!-- 支払った人 -->
+      <div class="p-container--adjustment-form-row">
+        <div class="p-container--adjustment-form-row__left">
+          <label for="person-kotei"><span class="material-icons c-icon--adjustment-form">people</span></label>
+        </div>
+        <div class="p-container--adjustment-form-row__right">
+          <select id="person-kotei" class="c-form__select--adjustment-red" v-model="kotei.user">
+            <option :value="user_info.id" selected>{{ user_info.name }}</option>
+            <option :value="partner_info.id">{{ partner_info.name }}</option>
+          </select>
+        </div>
+      </div>
       <!-- エラー表示 -->
-      <div v-if="error_flg">
-        <span class="c-text--error" v-for="(error, index) in error.kotei.user" :key="index">{{ error }}</span>
+      <div class="p-container--input-notice">
+        <div v-if="error_flg"><span class="c-text--error" v-for="(error, index) in error.kotei.user" :key="index">{{ error }}</span></div>
       </div>
 
-      <button type="button" class="c-btn c-btn--submit" @click="submitKotei">登録</button>
+      <div class="p-container--btn-right">
+        <button type="button" class="c-btn c-btn--submit-red" @click="submitKotei">登録</button>
+      </div>
     </div>
 
-    <p>変動費入力フォーム<i class="fa-regular fa-plus" @click="openHendo"></i></p>
-    <div v-if="open_hendo">
-      食費、交遊費、その他
-      <p>金額</p>
-      <input class="c-form__input" type="text" v-model="hendo.cost">
-      <!-- エラー表示 -->
-      <div v-if="error_flg">
-        <!-- サーバーからのエラー文 -->
-        <span class="c-text--error" v-for="(error, index) in error.hendo.cost" :key="index">{{ error }}</span>
-      </div>
-      <p>コメント</p>
-      <input class="c-form__input" type="text" v-model="hendo.comment">
-      <!-- エラー表示 -->
-      <div v-if="error_flg">
-        <span class="c-text--error" v-for="(error, index) in error.hendo.comment" :key="index">{{ error }}</span>
-      </div>
-
-      <select class="c-form__select" v-model="hendo.himoku">
-        <option value hidden>選択してください</option>
-        <option v-for="(himoku, index) in hendo_list" :key="index" :value="himoku">{{ himoku }}</option>
-      </select>
-      <!-- エラー表示 -->
-      <div v-if="error_flg">
-        <!-- サーバーからのエラー文 -->
-        <span class="c-text--error" v-for="(error, index) in error.hendo.himoku" :key="index">{{ error }}</span>
-      </div>
-
-      <p>支払った人</p>
-      <select class="c-form__select" v-model="hendo.user">
-        <option :value="user_info.id" selected>{{ user_info.name }}</option>
-        <option :value="partner_info.id">{{ partner_info.name }}</option>
-      </select>
-      <!-- エラー表示 -->
-      <div v-if="error_flg">
-        <span class="c-text--error" v-for="(error, index) in error.hendo.user" :key="index">{{ error }}</span>
-      </div>
-
-      <button type="button" class="c-btn c-btn--submit" @click="submitHendo">登録</button>
-    </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -110,7 +172,7 @@ export default {
       },
       error_flg: false,
       open_kotei: false,
-      open_hendo: false
+      open_hendo: true
     }
   },
   computed: {
@@ -155,7 +217,6 @@ export default {
             this.kotei[key] = null
           }
         }
-        this.open_kotei = false
       }
     },
     async submitHendo () {
@@ -186,7 +247,6 @@ export default {
             this.hendo[key] = null
           }
         }
-        this.open_hendo = false
       }
     },
     async submit (data) {
@@ -234,12 +294,18 @@ export default {
       return false
     },
     openKotei () {
-      this.open_kotei = !this.open_kotei
-      this.error_flg = false
+      if (this.open_kotei === false) {
+        this.open_kotei = !this.open_kotei
+        this.open_hendo = !this.open_hendo
+        this.error_flg = false
+      }
     },
     openHendo () {
-      this.open_hendo = !this.open_hendo
-      this.error_flg = false
+      if (this.open_hendo === false) {
+        this.open_hendo = !this.open_hendo
+        this.open_kotei = !this.open_kotei
+        this.error_flg = false
+      }
     }
   },
   created () {

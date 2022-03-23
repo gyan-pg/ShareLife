@@ -5,7 +5,13 @@
       <div class="p-container--pending" v-if="team.status === 'unapproved' && teamOwner">
         <h2 class="c-title c-title--pending">パートナーに招待を送りました!</h2>
         <div class="p-container--notice">
+          <div class="u-tc">
+            <p class="c-title--wait u-tc">pleese wait...</p>
+          </div>
           <p class="c-text--notice">パートナーの承認を待っています。パートナーが承認、または否認するとこの画面は表示されなくなります。</p>
+        </div>
+        <div class="p-container--wait">
+          <img class="c-image c-image--wait" src="/storage/images/coffee.jpeg" alt="ちょっと待ってねの画像">
         </div>
       </div>
       <!-- 招待を受け取った人に表示 -->

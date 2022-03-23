@@ -1,12 +1,13 @@
 <template>
   <section class="p-wrapper--profile">
     <div class="p-container--profile">
-      <p>{{userInfo.name}}</p>
-      <p>{{userInfo.email}}</p>
+      <div class="p-container--user-title">
+        <span class="c-title--user-name">{{userInfo.name}}</span>
+      </div>
       <div class="p-container--image-profile">
         <img class="c-image c-image--profile" :src="userInfo.image">
       </div>
-      <i class="fa-solid fa-ellipsis" @click="openProfEdit"></i>
+      <span class="material-icons c-icon--profile" @click="openProfEdit">more_horiz</span>
     </div>
   </section>
 </template>

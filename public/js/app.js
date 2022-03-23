@@ -2123,6 +2123,68 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2149,7 +2211,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       error_flg: false,
       open_kotei: false,
-      open_hendo: false
+      open_hendo: true
     };
   },
   computed: {
@@ -2186,7 +2248,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.error.kotei.comment = _this.validComment(_this.kotei.comment);
 
                 if (_this.error_flg) {
-                  _context.next = 14;
+                  _context.next = 13;
                   break;
                 }
 
@@ -2213,9 +2275,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 }
 
-                _this.open_kotei = false;
-
-              case 14:
+              case 13:
               case "end":
                 return _context.stop();
             }
@@ -2242,7 +2302,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this2.error.hendo.comment = _this2.validComment(_this2.hendo.comment);
 
                 if (_this2.error_flg) {
-                  _context2.next = 17;
+                  _context2.next = 16;
                   break;
                 }
 
@@ -2273,9 +2333,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 }
 
-                _this2.open_hendo = false;
-
-              case 17:
+              case 16:
               case "end":
                 return _context2.stop();
             }
@@ -2360,12 +2418,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return false;
     },
     openKotei: function openKotei() {
-      this.open_kotei = !this.open_kotei;
-      this.error_flg = false;
+      if (this.open_kotei === false) {
+        this.open_kotei = !this.open_kotei;
+        this.open_hendo = !this.open_hendo;
+        this.error_flg = false;
+      }
     },
     openHendo: function openHendo() {
-      this.open_hendo = !this.open_hendo;
-      this.error_flg = false;
+      if (this.open_hendo === false) {
+        this.open_hendo = !this.open_hendo;
+        this.open_kotei = !this.open_kotei;
+        this.error_flg = false;
+      }
     }
   },
   created: function created() {
@@ -2377,10 +2441,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AdjustmentTable.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AdjustmentTable.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AdjustmentResult.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AdjustmentResult.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2388,7 +2452,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2411,52 +2477,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {};
-  },
-  computed: {
-    kotei_list: function kotei_list() {
-      return this.$store.getters['payments/getKoteiPayments'];
+  props: {
+    item: {
+      type: Object,
+      required: true
     },
-    hendo_list: function hendo_list() {
-      return this.$store.getters['payments/getHendoPayments'];
-    },
-    currentMonth: function currentMonth() {
-      return this.$store.state.payments.currentDate.format('YYYY[年]MM[月]');
-    },
-    totalPayments: function totalPayments() {
-      return this.$store.getters['payments/totalPayments'];
-    },
-    myPayments: function myPayments() {
-      return this.$store.getters['payments/myPayments'];
-    },
-    // 計算結果が負の値ならもらう。正なら払う。
-    resultPayments: function resultPayments() {
-      return this.totalPayments / 2 - this.myPayments;
+    image: {
+      type: String,
+      required: true
     }
   },
+  data: function data() {
+    return {
+      comment_flg: false
+    };
+  },
   methods: {
+    openComment: function openComment() {
+      this.comment_flg = !this.comment_flg;
+    },
+    closeComment: function closeComment() {
+      this.comment_flg = false;
+    },
     deletePayment: function deletePayment(id) {
       var _this = this;
 
@@ -2466,7 +2511,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (_util__WEBPACK_IMPORTED_MODULE_1__["NUMBER_PATTERN"].test(id)) {
+                if (_util__WEBPACK_IMPORTED_MODULE_2__["NUMBER_PATTERN"].test(id)) {
                   _context.next = 3;
                   break;
                 }
@@ -2482,11 +2527,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 5:
                 response = _context.sent;
 
-                if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__["OK"]) {
                   _this.$store.commit('messages/setMessage', 'レコードを削除しました。');
 
                   _this.$store.dispatch('payments/getPayments');
-                } else if (response.data === _util__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTITY"]) {
+                } else if (response.data === _util__WEBPACK_IMPORTED_MODULE_2__["UNPROCESSABLE_ENTITY"]) {
                   _this.$store.commit('messages/setErrorMessage', 'エラーが発生しました。');
                 }
 
@@ -2497,21 +2542,187 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
-    },
-    nextMonth: function nextMonth() {
-      this.$store.commit('payments/nextMonth');
-      this.$store.dispatch('payments/getPayments');
-    },
-    prevMonth: function prevMonth() {
-      this.$store.commit('payments/prevMonth');
-      this.$store.dispatch('payments/getPayments');
-    },
-    userName: function userName(id) {
-      if (this.$store.state.auth.user.id === id) {
-        return this.$store.state.auth.user.name;
-      } else {
-        return this.$store.getters['auth/partner'].name;
+    }
+  },
+  directives: {
+    ClickOutside: vue_click_outside__WEBPACK_IMPORTED_MODULE_1___default.a
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AdjustmentTable.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AdjustmentTable.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AdjustmentForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdjustmentForm.vue */ "./resources/js/components/AdjustmentForm.vue");
+/* harmony import */ var _AdjustmentResult_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdjustmentResult.vue */ "./resources/js/components/AdjustmentResult.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      kotei_over: false,
+      hendo_over: false,
+      kotei_open: false,
+      hendo_open: false,
+      show_list_num: 3
+    };
+  },
+  components: {
+    AdjustmentForm: _AdjustmentForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    AdjustmentResult: _AdjustmentResult_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  computed: {
+    kotei_list: function kotei_list() {
+      var list = this.$store.getters['payments/getKoteiPayments'];
+
+      if (list.length > this.show_list_num) {
+        this.kotei_over = true;
+
+        if (this.kotei_open) {
+          return list;
+        } else {
+          return list.slice(0, 3);
+        }
       }
+
+      this.kotei_over = false;
+      return list;
+    },
+    hendo_list: function hendo_list() {
+      var list = this.$store.getters['payments/getHendoPayments'];
+
+      if (list.length > this.show_list_num) {
+        this.hendo_over = true;
+
+        if (this.hendo_open) {
+          return list;
+        } else {
+          return list.slice(0, 3);
+        }
+      }
+
+      this.hendo_over = false;
+      return list;
+    },
+    currentMonth: function currentMonth() {
+      return this.$store.state.payments.currentDate.format('YYYY[年]MM[月]');
+    },
+    totalPayments: function totalPayments() {
+      if (this.$store.getters['payments/totalPayments']) {
+        return this.$store.getters['payments/totalPayments'];
+      }
+    },
+    myPayments: function myPayments() {
+      return this.$store.getters['payments/myPayments'];
+    },
+    // 計算結果が負の値ならもらう。正なら払う。
+    resultPayments: function resultPayments() {
+      return this.totalPayments / 2 - this.myPayments;
+    },
+    totalKoteiPayments: function totalKoteiPayments() {
+      var koteiPayments = this.$store.getters['payments/getKoteiPayments'];
+      var sum = 0;
+      koteiPayments.forEach(function (element) {
+        sum += element.cost;
+      });
+      return sum;
+    },
+    totalHendoPayments: function totalHendoPayments() {
+      var hendoPayments = this.$store.getters['payments/getHendoPayments'];
+      var sum = 0;
+      hendoPayments.forEach(function (element) {
+        sum += element.cost;
+      });
+      return sum;
     },
     resultText: function resultText() {
       // 負の値なら相手からもらう
@@ -2526,6 +2737,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         return 'お支払いが登録されていません。';
       }
+    }
+  },
+  methods: {
+    nextMonth: function nextMonth() {
+      this.$store.commit('payments/nextMonth');
+      this.$store.dispatch('payments/getPayments');
+    },
+    prevMonth: function prevMonth() {
+      this.$store.commit('payments/prevMonth');
+      this.$store.dispatch('payments/getPayments');
+    },
+    userImage: function userImage(id) {
+      if (this.$store.state.auth.user.id === id) {
+        return this.$store.state.auth.user.image;
+      } else {
+        return this.$store.getters['auth/partner'].image;
+      }
+    },
+    openKoteiList: function openKoteiList() {
+      this.kotei_open = !this.kotei_open;
+    },
+    openHendoList: function openHendoList() {
+      this.hendo_open = !this.hendo_open;
     }
   }
 });
@@ -2581,6 +2815,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2601,8 +2844,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         team_id: null,
         user_id: null
       },
-      errors: null,
-      submitMsg: '登録する'
+      errors: null
     };
   },
   methods: {
@@ -2721,7 +2963,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.agreement.content = this.editAgreementData.content;
       this.agreement.id = this.editAgreementData.id;
       this.agreement.user_id = this.editAgreementData.user_id;
-      this.submitMsg = '保存する';
     }
   }
 });
@@ -2739,6 +2980,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SuspendedAgreementDetail_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SuspendedAgreementDetail.vue */ "./resources/js/components/SuspendedAgreementDetail.vue");
 /* harmony import */ var _ApprovedAgreementDetail_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ApprovedAgreementDetail.vue */ "./resources/js/components/ApprovedAgreementDetail.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2801,6 +3047,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2812,6 +3069,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     index: {
@@ -2829,7 +3091,57 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     openContent: function openContent() {
       this.open_flg = !this.open_flg;
+    },
+    closeContent: function closeContent() {
+      this.open_flg = false;
+    },
+    deleteAgreement: function deleteAgreement() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var result, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                result = confirm('このルールを消去しますか？');
+                console.log(_this.agree.id);
+
+                if (!result) {
+                  _context.next = 8;
+                  break;
+                }
+
+                _context.next = 5;
+                return axios["delete"]("/api/agreement/".concat(_this.agree.id));
+
+              case 5:
+                response = _context.sent;
+
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__["OK"]) {
+                  _this.$store.commit('messages/setMessage', 'ルールを削除しました');
+
+                  _this.$store.dispatch('agreements/getAgreements');
+                }
+
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__["UNPROCESSABLE_ENTITY"]) {
+                  _this.$store.commit('messages/setErrorMessage', 'サーバーでエラーが発生しました。');
+                }
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     }
+  },
+  directives: {
+    ClickOutside: vue_click_outside__WEBPACK_IMPORTED_MODULE_1___default.a
+  },
+  created: function created() {
+    console.log(this.agree);
   }
 });
 
@@ -2848,6 +3160,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _EventForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EventForm.vue */ "./resources/js/components/EventForm.vue");
 /* harmony import */ var _EventDetail_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EventDetail.vue */ "./resources/js/components/EventDetail.vue");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -2913,6 +3226,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -2929,7 +3246,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       clickEvent: null,
       form_flg: false,
       detail_flg: false,
-      calendar_row_num: null
+      calendar_row_num: null,
+      editEvent: null,
+      eventNum: null,
+      // 日付のますに表示するイベントの数
+      height: window.innerHeight
     };
   },
   components: {
@@ -2990,7 +3311,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
             day: startDate.date(),
             // 日を取得
             month: startDate.month(),
-            dayEvents: dayEvents
+            dayEvents: dayEvents,
+            dotw: day
           });
           startDate = startDate.add(1, 'day'); // 次の日の情報を詰める
         }
@@ -3150,6 +3472,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         'user_id': dayEvent.user_id
       };
     },
+    editSchedule: function editSchedule(event) {
+      this.detail_flg = false;
+      this.form_flg = true;
+      this.editEvent = event;
+    },
     openForm: function openForm() {
       var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : dayjs__WEBPACK_IMPORTED_MODULE_0___default()().format('YYYY-MM-DD');
       this.form_flg = true;
@@ -3157,19 +3484,35 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     },
     closeEventForm: function closeEventForm() {
       this.form_flg = false;
+      this.editEvent = null;
     },
     closeDetail: function closeDetail() {
       this.detail_flg = false;
     },
     getHoliday: function getHoliday() {
       this.$store.dispatch('events/getHolidayList', this.currentDate.year());
+    },
+    handleResize: function handleResize() {
+      this.height = window.innerHeight;
+      this.checkEventNum();
+    },
+    // 一つの日付のマスに表示する、イベントの数を制御
+    checkEventNum: function checkEventNum() {
+      var dom = this.$refs.calendarBody;
+      var rect = dom.getBoundingClientRect();
+      this.eventNum = Math.floor((rect.height / this.calendar_row_num - 28) / 23);
     }
   },
   created: function created() {
     this.$store.dispatch('events/getScheduleList');
     this.today = this.currentDate.format('YYYY-MM-DD');
     this.currentYear = this.changeYear = dayjs__WEBPACK_IMPORTED_MODULE_0___default()().year();
+    this.$store.commit('page/setPage', _util__WEBPACK_IMPORTED_MODULE_3__["CALENDAR"]);
     this.getHoliday();
+  },
+  mounted: function mounted() {
+    window.addEventListener('resize', this.handleResize);
+    this.checkEventNum();
   },
   watch: {
     currentDate: function currentDate(newValue) {
@@ -3275,19 +3618,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -3309,7 +3639,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       open_calendar: false,
       error: null,
       image: null,
-      name: null
+      name: null,
+      my_schedule: false
     };
   },
   components: {
@@ -3366,7 +3697,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     formatDayStr: function formatDayStr(str) {
-      var result = str.substr(0, 4) + '年' + str.substr(5, 2) + '月' + str.substr(8, 2) + '日';
+      var result = str.substr(5, 2) + '月' + str.substr(8, 2) + '日';
       return result;
     },
     editTitle: function editTitle() {
@@ -3420,52 +3751,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    changeSchedule: function changeSchedule() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _this2.error = null;
-                _context2.next = 3;
-                return axios.put('/api/schedule/changeSchedule', _this2.schedule);
-
-              case 3:
-                response = _context2.sent;
-
-                if (!(response.status === _util__WEBPACK_IMPORTED_MODULE_3__["OK"])) {
-                  _context2.next = 9;
-                  break;
-                }
-
-                _this2.$store.dispatch('events/getScheduleList');
-
-                _this2.closeDetail();
-
-                _this2.$store.commit('messages/setMessage', '予定を更新しました。');
-
-                return _context2.abrupt("return", false);
-
-              case 9:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
+    editSchedule: function editSchedule() {
+      this.$emit('edit-schedule', this.clickEvent);
     }
   },
   created: function created() {
     this.schedule = this.clickEvent; // 自分のスケジュールか判断する。
 
     if (this.clickEvent.user_id === this.$store.state.auth.user.id) {
+      this.my_schedule = true;
       this.image = this.myImage;
       this.name = this.$store.state.auth.user.name;
     } else {
       this.image = this.partnerImage;
+      this.name = this.$store.getters["auth/partner"].name;
     }
   }
 });
@@ -3587,6 +3886,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -3594,6 +3894,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: {
     clickDate: {
       String: String
+    },
+    editEvent: {
+      type: [Object, null],
+      "default": null
     }
   },
   data: function data() {
@@ -3616,6 +3920,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       end_flg: false,
       open_calendar: false,
       error_flg: false,
+      edit_flg: false,
       sending: false
     };
   },
@@ -3624,10 +3929,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     detail_length: function detail_length() {
-      return this.schedule.detail.length;
+      if (this.schedule.detail === null) {
+        return 0;
+      } else {
+        return this.schedule.detail.length;
+      }
     },
     title_length: function title_length() {
-      return this.schedule.title.length;
+      if (this.schedule.title === null) {
+        return 0;
+      } else {
+        return this.schedule.title.length;
+      }
     }
   },
   methods: {
@@ -3653,7 +3966,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.detailValidation();
 
                 if (_this.error_flg) {
-                  _context.next = 16;
+                  _context.next = 17;
                   break;
                 }
 
@@ -3664,29 +3977,86 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
 
                 if (!(response.status !== _util__WEBPACK_IMPORTED_MODULE_2__["OK"])) {
-                  _context.next = 13;
+                  _context.next = 14;
                   break;
                 }
 
                 _this.errors.server_error = 'サーバーでエラーが発生しました。';
+                _this.sending = false;
                 return _context.abrupt("return", false);
 
-              case 13:
+              case 14:
                 _this.$store.commit('messages/setMessage', 'スケジュールを登録しました。');
 
                 _this.$store.dispatch('events/getScheduleList');
 
                 _this.closeEventForm();
 
-              case 16:
+              case 17:
                 _this.sending = false;
 
-              case 17:
+              case 18:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
+      }))();
+    },
+    changeSchedule: function changeSchedule() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _this2.sending = true;
+
+                _this2.cleanErrorMessages();
+
+                _this2.error_flg = false;
+
+                _this2.scheduleValidation();
+
+                _this2.titleValidation();
+
+                _this2.detailValidation();
+
+                if (_this2.error_flg) {
+                  _context2.next = 15;
+                  break;
+                }
+
+                _context2.next = 9;
+                return axios.put('/api/schedule/changeSchedule', _this2.schedule);
+
+              case 9:
+                response = _context2.sent;
+
+                if (!(response.status === _util__WEBPACK_IMPORTED_MODULE_2__["OK"])) {
+                  _context2.next = 15;
+                  break;
+                }
+
+                _this2.$store.dispatch('events/getScheduleList');
+
+                _this2.closeEventForm();
+
+                _this2.$store.commit('messages/setMessage', '予定を更新しました。');
+
+                return _context2.abrupt("return", false);
+
+              case 15:
+                _this2.sending = false;
+
+              case 16:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     },
     //開始日と終了日のバリデーション
@@ -3783,12 +4153,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   created: function created() {
+    // カレンダーの日付マスを押した時
     if (this.clickDate) {
       this.schedule.start = this.clickDate;
-      this.schedule.end = this.clickDate;
+      this.schedule.end = this.clickDate; // 新規作成の時
     } else {
       this.schedule.start = dayjs__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY-MM-DD');
       this.schedule.end = dayjs__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY-MM-DD');
+    } // 詳細から編集を押した時
+
+
+    if (this.editEvent) {
+      this.edit_flg = true;
+      this.schedule = this.editEvent;
     }
   }
 });
@@ -3810,6 +4187,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Profile_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Profile.vue */ "./resources/js/components/Profile.vue");
 /* harmony import */ var _ProfileEditForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProfileEditForm.vue */ "./resources/js/components/ProfileEditForm.vue");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3859,19 +4237,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var CALENDAR = 1;
-var LEDGER = 2;
-var AGREEMENT = 3;
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      show_page: null,
       show_menu_flg: false,
       show_prof_flg: false,
       show_edit_flg: false,
-      CALENDAR: CALENDAR,
-      LEDGER: LEDGER,
-      AGREEMENT: AGREEMENT
+      ADJUSTMENT: _util__WEBPACK_IMPORTED_MODULE_4__["ADJUSTMENT"],
+      CALENDAR: _util__WEBPACK_IMPORTED_MODULE_4__["CALENDAR"],
+      AGREEMENT: _util__WEBPACK_IMPORTED_MODULE_4__["AGREEMENT"]
     };
   },
   components: {
@@ -3887,6 +4262,9 @@ var AGREEMENT = 3;
     },
     checkTeam: function checkTeam() {
       return this.$store.getters['auth/checkTeam'];
+    },
+    page: function page() {
+      return this.$store.state.page.page;
     }
   },
   methods: {
@@ -3939,13 +4317,7 @@ var AGREEMENT = 3;
     },
     closeProfileEdit: function closeProfileEdit() {
       this.show_edit_flg = false;
-    },
-    pageChange: function pageChange(num) {
-      this.show_page = num;
     }
-  },
-  mounted: function mounted() {
-    this.show_page = this.CALENDAR;
   },
   // directivesオプションでローカルディレクティブに登録することで、
   // ライブラリの機能が使用できるようになる。
@@ -3977,6 +4349,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4276,6 +4654,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4317,6 +4696,27 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4445,6 +4845,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.preview = null; // resetされたことを検知
 
       this.reset_flg = true;
+      this.errors_js.image = null;
       this.$el.querySelector('input[type="file"]').value = null;
     },
     submit: function submit() {
@@ -4764,7 +5165,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -4792,6 +5195,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -4813,7 +5219,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
-    deleteAgreement: function deleteAgreement(id) {
+    deleteAgreement: function deleteAgreement() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -4823,18 +5229,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios["delete"]("/api/agreement/".concat(id));
+                return axios["delete"]("/api/agreement/".concat(_this.agree.id));
 
               case 2:
                 response = _context.sent;
 
-                if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__["OK"]) {
                   _this.$store.commit('messages/setMessage', '削除完了しました。');
 
                   _this.$store.dispatch('agreements/getAgreements');
                 }
 
-              case 4:
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__["UNPROCESSABLE_ENTITY"]) {
+                  _this.$store.commit('messages/setErrorMessage', 'サーバーでエラーが発生しました。');
+                }
+
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -4860,13 +5270,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context2.sent;
 
-                if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__["OK"]) {
                   _this2.$store.commit('messages/setMessage', '承認しました。');
 
                   _this2.$store.dispatch('agreements/getAgreements');
                 }
 
-              case 4:
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__["UNPROCESSABLE_ENTITY"]) {
+                  _this2.$store.commit('messages/setErrorMessage', 'サーバーでエラーが発生しました。');
+                }
+
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -4892,13 +5306,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context3.sent;
 
-                if (response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"]) {
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__["OK"]) {
                   _this3.$store.commit('messages/setMessage', '拒否しました。');
 
                   _this3.$store.dispatch('agreements/getAgreements');
                 }
 
-              case 4:
+                if (response.status === _util__WEBPACK_IMPORTED_MODULE_2__["UNPROCESSABLE_ENTITY"]) {
+                  _this3.$store.commit('messages/setErrorMessage', 'サーバーでエラーが発生しました。');
+                }
+
+              case 5:
               case "end":
                 return _context3.stop();
             }
@@ -4911,7 +5329,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     openContent: function openContent() {
       this.open_flg = !this.open_flg;
+    },
+    closeContent: function closeContent() {
+      this.open_flg = false;
     }
+  },
+  directives: {
+    ClickOutside: vue_click_outside__WEBPACK_IMPORTED_MODULE_1___default.a
   }
 });
 
@@ -4926,9 +5350,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_AdjustmentForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/AdjustmentForm.vue */ "./resources/js/components/AdjustmentForm.vue");
-/* harmony import */ var _components_AdjustmentTable_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/AdjustmentTable.vue */ "./resources/js/components/AdjustmentTable.vue");
-//
+/* harmony import */ var _components_AdjustmentTable_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/AdjustmentTable.vue */ "./resources/js/components/AdjustmentTable.vue");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
 //
 //
 //
@@ -4939,11 +5362,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    AdjustmentForm: _components_AdjustmentForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    AdjustmentTable: _components_AdjustmentTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    AdjustmentTable: _components_AdjustmentTable_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   created: function created() {
     this.$store.dispatch('payments/getPayments');
+    this.$store.commit('page/setPage', _util__WEBPACK_IMPORTED_MODULE_1__["ADJUSTMENT"]);
   }
 });
 
@@ -4960,6 +5383,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_AgreementForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/AgreementForm.vue */ "./resources/js/components/AgreementForm.vue");
 /* harmony import */ var _components_AgreementList_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/AgreementList.vue */ "./resources/js/components/AgreementList.vue");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
 //
 //
 //
@@ -4970,6 +5394,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4994,6 +5421,9 @@ __webpack_require__.r(__webpack_exports__);
       this.editAgreementData = agree;
       this.editFlg = true;
     }
+  },
+  created: function created() {
+    this.$store.commit('page/setPage', _util__WEBPACK_IMPORTED_MODULE_2__["AGREEMENT"]);
   }
 });
 
@@ -5463,6 +5893,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5492,6 +5926,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.$store.commit('messages/setMessage', '退会処理が完了しました。ご利用ありがとうございました。');
 
                   _this.$router.push('/');
+                } else {
+                  _this.$store.commit('messages/setErrorMessage', '退会処理に失敗しました。管理者にご連絡ください。');
                 }
 
               case 4:
@@ -9905,7 +10341,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* \n<template>\n  <div v-show=\"value\" class=\"photo-form\">\n    <h2 class=\"title\">Submit a photo</h2>\n    <div v-show=\"loading\" class=\"panel\">\n      <loader-component>Sending your photo...</loader-component>\n    </div>\n    <form v-show=\"!loading\" class=\"form\" @submit.prevent=\"submit\">\n      <div class=\"errors\" v-if=\"errors\">\n        <ul v-if=\"errors.photo\">\n          <li v-for=\"msg in errors.photo\" :key=\"msg\">{{ msg }}</li>\n        </ul>\n      </div>\n      <input class=\"form__item\" type=\"file\" @change=\"onFileChange\">\n      <output clalss=\"form__output\" v-if=\"preview\">\n        <img :src=\"preview\" alt=\"\">\n      </output>\n      <div class=\"form__button\">\n        <button type=\"submit\" class=\"button button--inverse\">submit</button>\n        <button type=\"button\" class=\"button button--inverse\" @click=\"reset\">cancel</button>\n      </div>\n    </form>\n  </div>\n</template>\n\n<script>\nimport { CREATED, UNPROCESSABLE_ENTITY } from '../util'\nimport Loader from './Loader.vue'\nexport default {\n  props: {\n    value: {\n      type: Boolean,\n      required: true\n    }\n  },\n  data: function() {\n    return {\n      loading: false,\n      preview: null,\n      photo: null,\n      errors: null\n    }\n  },\n  components: {\n    'loader-component': Loader\n  },\n  methods: {\n    // フォームでファイルが選択されたら実行される\n    onFileChange (event) {\n      // 何も選択されていなかったら処理中断\n      if (event.target.files.length === 0) {\n        this.reset()\n        return false\n      }\n\n      // ファイルが画像ではなかったら処理中断\n      if (! event.target.files[0].type.match('image.*')) {\n        this.reset()\n        return false\n      }\n\n      // FileReaderクラスのインスタンスを取得\n      const reader = new FileReader()\n\n      // ファイルを読み込む\n      // 読み込まれたファイルはデータURL形式で受け取れる\n      reader.readAsDataURL(event.target.files[0])\n\n      // ファイルを読み込み終わったタイミングで実行する処理\n      // FileReader().onloadはファイルの読み込みが正常に完了した場合に発火するイベント。\n      reader.onload = e => {\n        // previewに読み込み結果（データURL）を代入する\n        // previewに値が入ると<output>につけたv-ifがtrueと判定される\n        // また<output>内部の<img>のsrc属性はpreviewの値を参照しているので\n        // 結果として画像が表示される\n        this.preview = e.target.result\n      }\n      this.photo = event.target.files[0]\n      console.log(event)\n    },\n    reset () {\n      this.preview = ''\n      this.photo = null\n      // this.$elはコンポーネントそのもののDOM要素を指す。\n      // よって、このコンポーネントのテンプレート内のDOM全てをさす。\n      // その中からinputの中身を直接nullにしている。\n      // nullは意図的に何もないよ、ということを示す値。真偽判定で偽となる。\n      this.$el.querySelector('input[type=\"file\"]').value = null\n      // console.log(this.$el)\n    },\n    async submit () {\n      this.loading = true\n      const formData = new FormData()\n      // FormData()オブジェクト自体は、サーバーにデータを送信する際に使用するオブジェクト。\n      // FormData().appendでkey, valueの形でデータを追加する。\n      // お決まりパターンらしい。\n      formData.append('photo', this.photo)\n      // ajax通信でファイルを送る際には、formDataオブジェクトを送る。\n      const response = await axios.post('/api/photos', formData)\n\n      this.loading = false\n\n      console.log(response)\n\n      // エラーハンドリング サーバー側からエラーの文言が帰ってきた時\n      // 表示されているウィンドウを閉じないようにするために、resetメソッドの前に配置\n      if (response.status === UNPROCESSABLE_ENTITY) {\n        this.errors = response.data.errors\n        return false\n      }\n\n      this.reset()\n      // 親コンポーネントにinputに対応するメソッドは書かれていないが、第二引数にfalseとすることで、\n      // 親コンポーネントに渡る値がfalseとなる結果、親コンポーネントのphoto-formのv-showが偽と判断されて表示されなくなる。\n      // 今回のように親コンポーネントから子コンポーネントへv-modelでpropsが渡っている場合にこのようなことができる。\n      // ということらしいが、ややこしいので、自分で書くときはちゃんと省略せずに書こうと思います。\n      this.$emit('input', false)\n\n      // エラーハンドリング なんか失敗した時\n      if (response.status !== CREATED) {\n        this.$store.commit('error/setCode', response.status)\n        return false\n      }\n\n      // メッセージ登録\n      this.$store.commit('message/setContent', {\n        content: '写真が投稿されました！',\n        timeout: 6000\n      })\n      \n      \n      this.$router.push(`/photos/${response.data.id}`) // pushの引数はテンプレートリテラル``(バッククォート)で書くこと。\n    }\n  }\n}\n</script>\n*/\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* \n<template>\n  <div v-show=\"value\" class=\"photo-form\">\n    <h2 class=\"title\">Submit a photo</h2>\n    <div v-show=\"loading\" class=\"panel\">\n      <loader-component>Sending your photo...</loader-component>\n    </div>\n    <form v-show=\"!loading\" class=\"form\" @submit.prevent=\"submit\">\n      <div class=\"errors\" v-if=\"errors\">\n        <ul v-if=\"errors.photo\">\n          <li v-for=\"msg in errors.photo\" :key=\"msg\">{{ msg }}</li>\n        </ul>\n      </div>\n      <input class=\"form__item\" type=\"file\" @change=\"onFileChange\">\n      <output clalss=\"form__output\" v-if=\"preview\">\n        <img :src=\"preview\" alt=\"\">\n      </output>\n      <div class=\"form__button\">\n        <button type=\"submit\" class=\"button button--inverse\">submit</button>\n        <button type=\"button\" class=\"button button--inverse\" @click=\"reset\">cancel</button>\n      </div>\n    </form>\n  </div>\n</template>\n\n<script>\nimport { CREATED, UNPROCESSABLE_ENTITY } from '../util'\nimport Loader from './Loader.vue'\nexport default {\n  props: {\n    value: {\n      type: Boolean,\n      required: true\n    }\n  },\n  data: function() {\n    return {\n      loading: false,\n      preview: null,\n      photo: null,\n      errors: null\n    }\n  },\n  components: {\n    'loader-component': Loader\n  },\n  methods: {\n    // フォームでファイルが選択されたら実行される\n    onFileChange (event) {\n      // 何も選択されていなかったら処理中断\n      if (event.target.files.length === 0) {\n        this.reset()\n        return false\n      }\n\n      // ファイルが画像ではなかったら処理中断\n      if (! event.target.files[0].type.match('image.*')) {\n        this.reset()\n        return false\n      }\n\n      // FileReaderクラスのインスタンスを取得\n      const reader = new FileReader()\n\n      // ファイルを読み込む\n      // 読み込まれたファイルはデータURL形式で受け取れる\n      reader.readAsDataURL(event.target.files[0])\n\n      // ファイルを読み込み終わったタイミングで実行する処理\n      // FileReader().onloadはファイルの読み込みが正常に完了した場合に発火するイベント。\n      reader.onload = e => {\n        // previewに読み込み結果（データURL）を代入する\n        // previewに値が入ると<output>につけたv-ifがtrueと判定される\n        // また<output>内部の<img>のsrc属性はpreviewの値を参照しているので\n        // 結果として画像が表示される\n        this.preview = e.target.result\n      }\n      this.photo = event.target.files[0]\n      console.log(event)\n    },\n    reset () {\n      this.preview = ''\n      this.photo = null\n      // this.$elはコンポーネントそのもののDOM要素を指す。\n      // よって、このコンポーネントのテンプレート内のDOM全てをさす。\n      // その中からinputの中身を直接nullにしている。\n      // nullは意図的に何もないよ、ということを示す値。真偽判定で偽となる。\n      this.$el.querySelector('input[type=\"file\"]').value = null\n      // console.log(this.$el)\n    },\n    async submit () {\n      this.loading = true\n      const formData = new FormData()\n      // FormData()オブジェクト自体は、サーバーにデータを送信する際に使用するオブジェクト。\n      // FormData().appendでkey, valueの形でデータを追加する。\n      // お決まりパターンらしい。\n      formData.append('photo', this.photo)\n      // ajax通信でファイルを送る際には、formDataオブジェクトを送る。\n      const response = await axios.post('/api/photos', formData)\n\n      this.loading = false\n\n      console.log(response)\n\n      // エラーハンドリング サーバー側からエラーの文言が帰ってきた時\n      // 表示されているウィンドウを閉じないようにするために、resetメソッドの前に配置\n      if (response.status === UNPROCESSABLE_ENTITY) {\n        this.errors = response.data.errors\n        return false\n      }\n\n      this.reset()\n      // 親コンポーネントにinputに対応するメソッドは書かれていないが、第二引数にfalseとすることで、\n      // 親コンポーネントに渡る値がfalseとなる結果、親コンポーネントのphoto-formのv-showが偽と判断されて表示されなくなる。\n      // 今回のように親コンポーネントから子コンポーネントへv-modelでpropsが渡っている場合にこのようなことができる。\n      // ということらしいが、ややこしいので、自分で書くときはちゃんと省略せずに書こうと思います。\n      this.$emit('input', false)\n\n      // エラーハンドリング なんか失敗した時\n      if (response.status !== CREATED) {\n        this.$store.commit('error/setCode', response.status)\n        return false\n      }\n\n      // メッセージ登録\n      this.$store.commit('message/setContent', {\n        content: '写真が投稿されました！',\n        timeout: 6000\n      })\n      \n      \n      this.$router.push(`/photos/${response.data.id}`) // pushの引数はテンプレートリテラル``(バッククォート)で書くこと。\n    }\n  }\n}\n</script>\n*/\n", ""]);
 
 // exports
 
@@ -42683,449 +43119,796 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("p", [
-      _vm._v("固定費入力フォーム"),
-      _c("i", {
-        staticClass: "fa-regular fa-plus",
-        on: { click: _vm.openKotei },
-      }),
-    ]),
-    _vm._v(" "),
-    _vm.open_kotei
-      ? _c("div", [
-          _c("p", [_vm._v("金額")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.kotei.cost,
-                expression: "kotei.cost",
-              },
-            ],
-            staticClass: "c-form__input",
-            attrs: { type: "text" },
-            domProps: { value: _vm.kotei.cost },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.kotei, "cost", $event.target.value)
-              },
-            },
-          }),
-          _vm._v(" "),
-          _vm.error_flg
-            ? _c(
-                "div",
-                _vm._l(_vm.error.kotei.cost, function (error, index) {
-                  return _c(
-                    "span",
-                    { key: index, staticClass: "c-text--error" },
-                    [_vm._v(_vm._s(error))]
-                  )
-                }),
-                0
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c("p", [_vm._v("コメント")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.kotei.comment,
-                expression: "kotei.comment",
-              },
-            ],
-            staticClass: "c-form__input",
-            attrs: { type: "text" },
-            domProps: { value: _vm.kotei.comment },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.kotei, "comment", $event.target.value)
-              },
-            },
-          }),
-          _vm._v(" "),
-          _vm.error_flg
-            ? _c(
-                "div",
-                _vm._l(_vm.error.kotei.comment, function (error, index) {
-                  return _c(
-                    "span",
-                    { key: index, staticClass: "c-text--error" },
-                    [_vm._v(_vm._s(error))]
-                  )
-                }),
-                0
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c("p", [_vm._v("費目")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.kotei.himoku,
-                  expression: "kotei.himoku",
-                },
-              ],
-              staticClass: "c-form__select",
-              on: {
-                change: function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.kotei,
-                    "himoku",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                },
-              },
-            },
-            [
-              _c("option", { attrs: { value: "", hidden: "" } }, [
-                _vm._v("選択してください"),
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.kotei_list, function (himoku, index) {
-                return _c(
-                  "option",
-                  { key: index, domProps: { value: himoku } },
-                  [_vm._v(_vm._s(himoku))]
-                )
-              }),
-            ],
-            2
-          ),
-          _vm._v(" "),
-          _vm.error_flg
-            ? _c(
-                "div",
-                _vm._l(_vm.error.kotei.himoku, function (error, index) {
-                  return _c(
-                    "span",
-                    { key: index, staticClass: "c-text--error" },
-                    [_vm._v(_vm._s(error))]
-                  )
-                }),
-                0
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c("p", [_vm._v("支払った人")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.kotei.user,
-                  expression: "kotei.user",
-                },
-              ],
-              staticClass: "c-form__select",
-              on: {
-                change: function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.kotei,
-                    "user",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                },
-              },
-            },
-            [
-              _c(
-                "option",
-                {
-                  attrs: { selected: "" },
-                  domProps: { value: _vm.user_info.id },
-                },
-                [_vm._v(_vm._s(_vm.user_info.name))]
-              ),
-              _vm._v(" "),
-              _c("option", { domProps: { value: _vm.partner_info.id } }, [
-                _vm._v(_vm._s(_vm.partner_info.name)),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _vm.error_flg
-            ? _c(
-                "div",
-                _vm._l(_vm.error.kotei.user, function (error, index) {
-                  return _c(
-                    "span",
-                    { key: index, staticClass: "c-text--error" },
-                    [_vm._v(_vm._s(error))]
-                  )
-                }),
-                0
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "c-btn c-btn--submit",
-              attrs: { type: "button" },
-              on: { click: _vm.submitKotei },
-            },
-            [_vm._v("登録")]
-          ),
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v("変動費入力フォーム"),
-      _c("i", {
-        staticClass: "fa-regular fa-plus",
+  return _c("section", { staticClass: "p-wrapper--adjustment-form" }, [
+    _c(
+      "button",
+      {
+        staticClass: "c-btn c-btn--form-tab-hendo",
+        class: { active: _vm.open_hendo === true },
+        attrs: { type: "button" },
         on: { click: _vm.openHendo },
-      }),
-    ]),
+      },
+      [_vm._v("変動費入力")]
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "c-btn c-btn--form-tab-kotei",
+        class: { active: _vm.open_kotei === true },
+        attrs: { type: "button" },
+        on: { click: _vm.openKotei },
+      },
+      [_vm._v("固定費入力")]
+    ),
     _vm._v(" "),
     _vm.open_hendo
-      ? _c("div", [
-          _vm._v("\n    食費、交遊費、その他\n    "),
-          _c("p", [_vm._v("金額")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.hendo.cost,
-                expression: "hendo.cost",
-              },
-            ],
-            staticClass: "c-form__input",
-            attrs: { type: "text" },
-            domProps: { value: _vm.hendo.cost },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.hendo, "cost", $event.target.value)
-              },
-            },
-          }),
-          _vm._v(" "),
-          _vm.error_flg
-            ? _c(
-                "div",
-                _vm._l(_vm.error.hendo.cost, function (error, index) {
-                  return _c(
-                    "span",
-                    { key: index, staticClass: "c-text--error" },
-                    [_vm._v(_vm._s(error))]
-                  )
+      ? _c("div", { staticClass: "p-container--adjustment-hendo" }, [
+          _c("div", { staticClass: "p-container--adjustment-form-row" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "p-container--adjustment-form-row__right" },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.hendo.cost,
+                      expression: "hendo.cost",
+                    },
+                  ],
+                  staticClass: "c-form__input--adjustment",
+                  attrs: {
+                    id: "payments-hendo",
+                    type: "text",
+                    placeholder: "金額を入力してください。",
+                  },
+                  domProps: { value: _vm.hendo.cost },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.hendo, "cost", $event.target.value)
+                    },
+                  },
                 }),
-                0
-              )
-            : _vm._e(),
+              ]
+            ),
+          ]),
           _vm._v(" "),
-          _c("p", [_vm._v("コメント")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.hendo.comment,
-                expression: "hendo.comment",
-              },
-            ],
-            staticClass: "c-form__input",
-            attrs: { type: "text" },
-            domProps: { value: _vm.hendo.comment },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.hendo, "comment", $event.target.value)
-              },
-            },
-          }),
-          _vm._v(" "),
-          _vm.error_flg
-            ? _c(
-                "div",
-                _vm._l(_vm.error.hendo.comment, function (error, index) {
-                  return _c(
-                    "span",
-                    { key: index, staticClass: "c-text--error" },
-                    [_vm._v(_vm._s(error))]
-                  )
-                }),
-                0
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.hendo.himoku,
-                  expression: "hendo.himoku",
-                },
-              ],
-              staticClass: "c-form__select",
-              on: {
-                change: function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.hendo,
-                    "himoku",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                },
-              },
-            },
-            [
-              _c("option", { attrs: { value: "", hidden: "" } }, [
-                _vm._v("選択してください"),
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.hendo_list, function (himoku, index) {
-                return _c(
-                  "option",
-                  { key: index, domProps: { value: himoku } },
-                  [_vm._v(_vm._s(himoku))]
+          _c("div", { staticClass: "p-container--input-notice" }, [
+            _vm.error_flg
+              ? _c(
+                  "div",
+                  _vm._l(_vm.error.hendo.cost, function (error, index) {
+                    return _c(
+                      "span",
+                      { key: index, staticClass: "c-text--error" },
+                      [_vm._v(_vm._s(error))]
+                    )
+                  }),
+                  0
                 )
-              }),
-            ],
-            2
-          ),
+              : _vm._e(),
+          ]),
           _vm._v(" "),
-          _vm.error_flg
-            ? _c(
-                "div",
-                _vm._l(_vm.error.hendo.himoku, function (error, index) {
-                  return _c(
-                    "span",
-                    { key: index, staticClass: "c-text--error" },
-                    [_vm._v(_vm._s(error))]
-                  )
+          _c("div", { staticClass: "p-container--adjustment-form-row" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "p-container--adjustment-form-row__right" },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.hendo.comment,
+                      expression: "hendo.comment",
+                    },
+                  ],
+                  staticClass: "c-form__input--adjustment",
+                  attrs: {
+                    id: "comment-hendo",
+                    type: "text",
+                    placeholder: "コメントがあれば入力してください。",
+                  },
+                  domProps: { value: _vm.hendo.comment },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.hendo, "comment", $event.target.value)
+                    },
+                  },
                 }),
-                0
-              )
-            : _vm._e(),
+              ]
+            ),
+          ]),
           _vm._v(" "),
-          _c("p", [_vm._v("支払った人")]),
+          _c("div", { staticClass: "p-container--input-notice" }, [
+            _vm.error_flg
+              ? _c(
+                  "div",
+                  _vm._l(_vm.error.hendo.comment, function (error, index) {
+                    return _c(
+                      "span",
+                      { key: index, staticClass: "c-text--error" },
+                      [_vm._v(_vm._s(error))]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e(),
+          ]),
           _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.hendo.user,
-                  expression: "hendo.user",
-                },
-              ],
-              staticClass: "c-form__select",
-              on: {
-                change: function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.hendo,
-                    "user",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                },
+          _c("div", { staticClass: "p-container--adjustment-form-row" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "p-container--adjustment-form-row__right" },
+              [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.hendo.himoku,
+                        expression: "hendo.himoku",
+                      },
+                    ],
+                    staticClass: "c-form__select--adjustment",
+                    attrs: { id: "himoku-hendo" },
+                    on: {
+                      change: function ($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function (o) {
+                            return o.selected
+                          })
+                          .map(function (o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.hendo,
+                          "himoku",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                    },
+                  },
+                  [
+                    _c("option", { attrs: { value: "", hidden: "" } }, [
+                      _vm._v("選択してください"),
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.hendo_list, function (himoku, index) {
+                      return _c(
+                        "option",
+                        { key: index, domProps: { value: himoku } },
+                        [_vm._v(_vm._s(himoku))]
+                      )
+                    }),
+                  ],
+                  2
+                ),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--input-notice" }, [
+            _vm.error_flg
+              ? _c(
+                  "div",
+                  _vm._l(_vm.error.hendo.himoku, function (error, index) {
+                    return _c(
+                      "span",
+                      { key: index, staticClass: "c-text--error" },
+                      [_vm._v(_vm._s(error))]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--adjustment-form-row" }, [
+            _vm._m(3),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "p-container--adjustment-form-row__right" },
+              [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.hendo.user,
+                        expression: "hendo.user",
+                      },
+                    ],
+                    staticClass: "c-form__select--adjustment",
+                    attrs: { id: "person-hendo" },
+                    on: {
+                      change: function ($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function (o) {
+                            return o.selected
+                          })
+                          .map(function (o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.hendo,
+                          "user",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                    },
+                  },
+                  [
+                    _c(
+                      "option",
+                      {
+                        attrs: { selected: "" },
+                        domProps: { value: _vm.user_info.id },
+                      },
+                      [_vm._v(_vm._s(_vm.user_info.name))]
+                    ),
+                    _vm._v(" "),
+                    _c("option", { domProps: { value: _vm.partner_info.id } }, [
+                      _vm._v(_vm._s(_vm.partner_info.name)),
+                    ]),
+                  ]
+                ),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--input-notice" }, [
+            _vm.error_flg
+              ? _c(
+                  "div",
+                  _vm._l(_vm.error.hendo.user, function (error, index) {
+                    return _c(
+                      "span",
+                      { key: index, staticClass: "c-text--error" },
+                      [_vm._v(_vm._s(error))]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--btn-right" }, [
+            _c(
+              "button",
+              {
+                staticClass: "c-btn c-btn--submit",
+                attrs: { type: "button" },
+                on: { click: _vm.submitHendo },
               },
-            },
-            [
-              _c(
-                "option",
-                {
-                  attrs: { selected: "" },
-                  domProps: { value: _vm.user_info.id },
-                },
-                [_vm._v(_vm._s(_vm.user_info.name))]
-              ),
-              _vm._v(" "),
-              _c("option", { domProps: { value: _vm.partner_info.id } }, [
-                _vm._v(_vm._s(_vm.partner_info.name)),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _vm.error_flg
-            ? _c(
-                "div",
-                _vm._l(_vm.error.hendo.user, function (error, index) {
-                  return _c(
-                    "span",
-                    { key: index, staticClass: "c-text--error" },
-                    [_vm._v(_vm._s(error))]
-                  )
-                }),
-                0
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "c-btn c-btn--submit",
-              attrs: { type: "button" },
-              on: { click: _vm.submitHendo },
-            },
-            [_vm._v("登録")]
-          ),
+              [_vm._v("登録")]
+            ),
+          ]),
         ])
       : _vm._e(),
+    _vm._v(" "),
+    _vm.open_kotei
+      ? _c("div", { staticClass: "p-container--adjustment-kotei" }, [
+          _c("div", { staticClass: "p-container--adjustment-form-row" }, [
+            _vm._m(4),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "p-container--adjustment-form-row__right" },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.kotei.cost,
+                      expression: "kotei.cost",
+                    },
+                  ],
+                  staticClass: "c-form__input--adjustment-red",
+                  attrs: {
+                    id: "payments-kotei",
+                    type: "text",
+                    placeholder: "金額を入力してください。",
+                  },
+                  domProps: { value: _vm.kotei.cost },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.kotei, "cost", $event.target.value)
+                    },
+                  },
+                }),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--input-notice" }, [
+            _vm.error_flg
+              ? _c(
+                  "div",
+                  _vm._l(_vm.error.kotei.cost, function (error, index) {
+                    return _c(
+                      "span",
+                      { key: index, staticClass: "c-text--error" },
+                      [_vm._v(_vm._s(error))]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--adjustment-form-row" }, [
+            _vm._m(5),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "p-container--adjustment-form-row__right" },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.kotei.comment,
+                      expression: "kotei.comment",
+                    },
+                  ],
+                  staticClass: "c-form__input--adjustment-red",
+                  attrs: {
+                    id: "comment-kotei",
+                    type: "text",
+                    placeholder: "コメントがあれば入力してください。",
+                  },
+                  domProps: { value: _vm.kotei.comment },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.kotei, "comment", $event.target.value)
+                    },
+                  },
+                }),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--input-notice" }, [
+            _vm.error_flg
+              ? _c(
+                  "div",
+                  _vm._l(_vm.error.kotei.comment, function (error, index) {
+                    return _c(
+                      "span",
+                      { key: index, staticClass: "c-text--error" },
+                      [_vm._v(_vm._s(error))]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--adjustment-form-row" }, [
+            _vm._m(6),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "p-container--adjustment-form-row__right" },
+              [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.kotei.himoku,
+                        expression: "kotei.himoku",
+                      },
+                    ],
+                    staticClass: "c-form__select--adjustment-red",
+                    attrs: { id: "himoku-kotei" },
+                    on: {
+                      change: function ($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function (o) {
+                            return o.selected
+                          })
+                          .map(function (o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.kotei,
+                          "himoku",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                    },
+                  },
+                  [
+                    _c("option", { attrs: { value: "", hidden: "" } }, [
+                      _vm._v("選択してください"),
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.kotei_list, function (himoku, index) {
+                      return _c(
+                        "option",
+                        { key: index, domProps: { value: himoku } },
+                        [_vm._v(_vm._s(himoku))]
+                      )
+                    }),
+                  ],
+                  2
+                ),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--input-notice" }, [
+            _vm.error_flg
+              ? _c(
+                  "div",
+                  _vm._l(_vm.error.kotei.himoku, function (error, index) {
+                    return _c(
+                      "span",
+                      { key: index, staticClass: "c-text--error" },
+                      [_vm._v(_vm._s(error))]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--adjustment-form-row" }, [
+            _vm._m(7),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "p-container--adjustment-form-row__right" },
+              [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.kotei.user,
+                        expression: "kotei.user",
+                      },
+                    ],
+                    staticClass: "c-form__select--adjustment-red",
+                    attrs: { id: "person-kotei" },
+                    on: {
+                      change: function ($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function (o) {
+                            return o.selected
+                          })
+                          .map(function (o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.kotei,
+                          "user",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                    },
+                  },
+                  [
+                    _c(
+                      "option",
+                      {
+                        attrs: { selected: "" },
+                        domProps: { value: _vm.user_info.id },
+                      },
+                      [_vm._v(_vm._s(_vm.user_info.name))]
+                    ),
+                    _vm._v(" "),
+                    _c("option", { domProps: { value: _vm.partner_info.id } }, [
+                      _vm._v(_vm._s(_vm.partner_info.name)),
+                    ]),
+                  ]
+                ),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--input-notice" }, [
+            _vm.error_flg
+              ? _c(
+                  "div",
+                  _vm._l(_vm.error.kotei.user, function (error, index) {
+                    return _c(
+                      "span",
+                      { key: index, staticClass: "c-text--error" },
+                      [_vm._v(_vm._s(error))]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--btn-right" }, [
+            _c(
+              "button",
+              {
+                staticClass: "c-btn c-btn--submit-red",
+                attrs: { type: "button" },
+                on: { click: _vm.submitKotei },
+              },
+              [_vm._v("登録")]
+            ),
+          ]),
+        ])
+      : _vm._e(),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "p-container--adjustment-form-row__left" },
+      [
+        _c("label", { attrs: { for: "payments-hendo" } }, [
+          _c(
+            "span",
+            { staticClass: "material-icons c-icon--adjustment-form" },
+            [_vm._v("payments")]
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "p-container--adjustment-form-row__left" },
+      [
+        _c("label", { attrs: { for: "comment-hendo" } }, [
+          _c(
+            "span",
+            { staticClass: "material-icons c-icon--adjustment-form" },
+            [_vm._v("notes")]
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "p-container--adjustment-form-row__left" },
+      [
+        _c("label", { attrs: { for: "himoku-hendo" } }, [
+          _c(
+            "span",
+            { staticClass: "material-icons c-icon--adjustment-form" },
+            [_vm._v("menu_book")]
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "p-container--adjustment-form-row__left" },
+      [
+        _c("label", { attrs: { for: "person-hendo" } }, [
+          _c(
+            "span",
+            { staticClass: "material-icons c-icon--adjustment-form" },
+            [_vm._v("people")]
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "p-container--adjustment-form-row__left" },
+      [
+        _c("label", { attrs: { for: "payments-kotei" } }, [
+          _c(
+            "span",
+            { staticClass: "material-icons c-icon--adjustment-form" },
+            [_vm._v("payments")]
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "p-container--adjustment-form-row__left" },
+      [
+        _c("label", { attrs: { for: "comment-kotei" } }, [
+          _c(
+            "span",
+            { staticClass: "material-icons c-icon--adjustment-form" },
+            [_vm._v("notes")]
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "p-container--adjustment-form-row__left" },
+      [
+        _c("label", { attrs: { for: "himoku-kotei" } }, [
+          _c(
+            "span",
+            { staticClass: "material-icons c-icon--adjustment-form" },
+            [_vm._v("menu_book")]
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "p-container--adjustment-form-row__left" },
+      [
+        _c("label", { attrs: { for: "person-kotei" } }, [
+          _c(
+            "span",
+            { staticClass: "material-icons c-icon--adjustment-form" },
+            [_vm._v("people")]
+          ),
+        ]),
+      ]
+    )
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AdjustmentResult.vue?vue&type=template&id=09c4a955&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AdjustmentResult.vue?vue&type=template&id=09c4a955& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "p-container--adjustment-result" }, [
+    _c(
+      "div",
+      { staticClass: "p-container--adjustment-result__left" },
+      [
+        _vm._v("\n    " + _vm._s(_vm.item.himoku)),
+        _vm.item.comment
+          ? _c(
+              "span",
+              {
+                directives: [
+                  {
+                    name: "click-outside",
+                    rawName: "v-click-outside",
+                    value: _vm.closeComment,
+                    expression: "closeComment",
+                  },
+                ],
+                staticClass: "material-icons c-icon--adjustment-comment",
+                on: { click: _vm.openComment },
+              },
+              [_vm._v("chat")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _c("transition", { attrs: { name: "slideup" } }, [
+          _vm.comment_flg
+            ? _c("div", { staticClass: "c-popup" }, [
+                _vm._v(_vm._s(_vm.item.comment)),
+              ])
+            : _vm._e(),
+        ]),
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-container--adjustment-result__left" }, [
+      _vm._v(_vm._s(_vm.item.cost) + "円"),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-container--adjustment-result__right" }, [
+      _c("img", {
+        staticClass: "c-image c-image--adjustment-sumbnail",
+        attrs: { src: _vm.image },
+      }),
+    ]),
+    _vm._v(" "),
+    _c(
+      "span",
+      {
+        staticClass: "material-icons c-icon--adjustment-delete",
+        on: {
+          click: function ($event) {
+            return _vm.deletePayment(_vm.item.id)
+          },
+        },
+      },
+      [_vm._v("delete")]
+    ),
   ])
 }
 var staticRenderFns = []
@@ -43151,99 +43934,264 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", [
-    _c("p", [_vm._v(_vm._s(_vm.currentMonth))]),
-    _vm._v(" "),
-    _c("button", { staticClass: "c-btn", on: { click: _vm.prevMonth } }, [
-      _vm._v("前月"),
-    ]),
-    _c("button", { staticClass: "c-btn", on: { click: _vm.nextMonth } }, [
-      _vm._v("翌月"),
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c("p", [_vm._v("固定")]),
+    _c("div", { staticClass: "p-container--top-adjustment" }, [
+      _c(
+        "div",
+        { staticClass: "p-container--top-adjustment__left" },
+        [
+          _c(
+            "div",
+            { staticClass: "p-container--top-adjustment__left-frame" },
+            [
+              _c("div", { staticClass: "c-date--adjustment" }, [
+                _vm._v(_vm._s(_vm.currentMonth)),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "p-container--btn-center" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "c-btn--prev",
+                    attrs: { type: "button" },
+                    on: { click: _vm.prevMonth },
+                  },
+                  [
+                    _c("i", { staticClass: "fa-solid fa-caret-left" }),
+                    _vm._v("前月"),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "c-btn--next",
+                    attrs: { type: "button" },
+                    on: { click: _vm.nextMonth },
+                  },
+                  [
+                    _vm._v("翌月"),
+                    _c("i", { staticClass: "fa-solid fa-caret-right" }),
+                  ]
+                ),
+              ]),
+            ]
+          ),
+          _vm._v(" "),
+          _c("AdjustmentForm"),
+        ],
+        1
+      ),
       _vm._v(" "),
-      _vm.kotei_list.length
-        ? _c("div", [
-            _c(
-              "ul",
-              _vm._l(_vm.kotei_list, function (kotei) {
-                return _c("li", { key: kotei.id }, [
-                  _vm._v(
-                    "\n          " +
-                      _vm._s(kotei.himoku) +
-                      _vm._s(kotei.cost) +
-                      "円"
-                  ),
-                  _c("span", [_vm._v(_vm._s(_vm.userName(kotei.user_id)))]),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "c-btn c-btn--delete",
-                      on: {
-                        click: function ($event) {
-                          return _vm.deletePayment(kotei.id)
-                        },
-                      },
-                    },
-                    [_vm._v("削除")]
-                  ),
+      _c("div", { staticClass: "p-container--top-adjustment__right" }, [
+        _c("div", { staticClass: "p-container--top-adjustment__right-frame" }, [
+          _c("h2", { staticClass: "c-title c-title--pending" }, [
+            _vm._v("集計"),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--adjustment-row" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm.totalPayments
+              ? _c("p", { staticClass: "c-text u-mt-s" }, [
+                  _vm._v(_vm._s(_vm.totalPayments) + "円"),
                 ])
-              }),
-              0
-            ),
-          ])
-        : _c("div", [_vm._v("登録されていません。")]),
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c("p", [_vm._v("変動")]),
-      _vm._v(" "),
-      _vm.hendo_list.length
-        ? _c("div", [
-            _c(
-              "ul",
-              _vm._l(_vm.hendo_list, function (hendo) {
-                return _c("li", { key: hendo.id }, [
-                  _vm._v(
-                    "\n          " +
-                      _vm._s(hendo.himoku) +
-                      _vm._s(hendo.cost) +
-                      "円"
-                  ),
-                  _c("span", [_vm._v(_vm._s(_vm.userName(hendo.user_id)))]),
+              : _c("p", { staticClass: "c-text u-mt-s" }, [
+                  _vm._v("お支払いが登録されていません。"),
+                ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--adjustment-row" }, [
+            _c("div", { staticClass: "p-container--adjustment-row__title" }, [
+              _c("span", { staticClass: "material-icons c-icon--adjustment" }, [
+                _vm._v("restaurant"),
+              ]),
+              _vm._v(" "),
+              _c("h3", { staticClass: "c-title--section-adjustment" }, [
+                _vm._v("変動費"),
+              ]),
+              _vm._v(" "),
+              _vm.hendo_list.length
+                ? _c("div", { staticClass: "c-text c-text--result" }, [
+                    _vm._v("合計" + _vm._s(_vm.totalHendoPayments) + "円"),
+                  ])
+                : _vm._e(),
+            ]),
+            _vm._v(" "),
+            _vm.hendo_list.length
+              ? _c("div", [
                   _c(
-                    "button",
-                    {
-                      staticClass: "c-btn c-btn--delete",
-                      on: {
-                        click: function ($event) {
-                          return _vm.deletePayment(hendo.id)
-                        },
-                      },
-                    },
-                    [_vm._v("削除")]
+                    "ul",
+                    _vm._l(_vm.hendo_list, function (hendo) {
+                      return _c(
+                        "li",
+                        { key: hendo.id },
+                        [
+                          _c("AdjustmentResult", {
+                            attrs: {
+                              item: hendo,
+                              image: _vm.userImage(hendo.user_id),
+                            },
+                          }),
+                        ],
+                        1
+                      )
+                    }),
+                    0
                   ),
+                  _vm._v(" "),
+                  _vm.hendo_over
+                    ? _c(
+                        "div",
+                        { staticClass: "p-container--adjustment-expand" },
+                        [
+                          !_vm.hendo_open
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "material-icons c-icon--adjustment-expand",
+                                  on: { click: _vm.openHendoList },
+                                },
+                                [_vm._v("add_circle")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.hendo_open
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "material-icons c-icon--adjustment-expand",
+                                  on: { click: _vm.openHendoList },
+                                },
+                                [_vm._v("remove_circle")]
+                              )
+                            : _vm._e(),
+                        ]
+                      )
+                    : _vm._e(),
                 ])
-              }),
-              0
-            ),
-          ])
-        : _c("div", [_vm._v("登録されていません。")]),
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c("p", [_vm._v("総経費")]),
-      _vm._v(" "),
-      _c("span", [_vm._v(_vm._s(_vm.totalPayments) + "円")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("お支払い計算")]),
-      _vm._v(" "),
-      _c("span", [_vm._v(_vm._s(_vm.resultText()))]),
+              : _c("div", { staticClass: "c-text" }, [
+                  _vm._v("登録されていません。"),
+                ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--adjustment-row" }, [
+            _c("div", { staticClass: "p-container--adjustment-row__title" }, [
+              _c("span", { staticClass: "material-icons c-icon--adjustment" }, [
+                _vm._v("other_houses"),
+              ]),
+              _vm._v(" "),
+              _c("h3", { staticClass: "c-title--section-adjustment" }, [
+                _vm._v("固定費"),
+              ]),
+              _vm._v(" "),
+              _vm.kotei_list.length
+                ? _c("div", { staticClass: "c-text c-text--result" }, [
+                    _vm._v("合計" + _vm._s(_vm.totalKoteiPayments) + "円"),
+                  ])
+                : _vm._e(),
+            ]),
+            _vm._v(" "),
+            _vm.kotei_list.length
+              ? _c("div", [
+                  _c(
+                    "ul",
+                    _vm._l(_vm.kotei_list, function (kotei) {
+                      return _c(
+                        "li",
+                        { key: kotei.id },
+                        [
+                          _c("AdjustmentResult", {
+                            attrs: {
+                              item: kotei,
+                              image: _vm.userImage(kotei.user_id),
+                            },
+                          }),
+                        ],
+                        1
+                      )
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _vm.kotei_over
+                    ? _c(
+                        "div",
+                        { staticClass: "p-container--adjustment-expand" },
+                        [
+                          !_vm.kotei_open
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "material-icons c-icon--adjustment-expand",
+                                  on: { click: _vm.openKoteiList },
+                                },
+                                [_vm._v("add_circle")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.kotei_open
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "material-icons c-icon--adjustment-expand",
+                                  on: { click: _vm.openKoteiList },
+                                },
+                                [_vm._v("remove_circle")]
+                              )
+                            : _vm._e(),
+                        ]
+                      )
+                    : _vm._e(),
+                ])
+              : _c("div", { staticClass: "c-text" }, [
+                  _vm._v("登録されていません。"),
+                ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-container--adjustment-row" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("p", { staticClass: "c-text u-mt-s" }, [
+              _vm._v(_vm._s(_vm.resultText)),
+            ]),
+          ]),
+        ]),
+      ]),
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-container--adjustment-row__title" }, [
+      _c("span", { staticClass: "material-icons c-icon--adjustment" }, [
+        _vm._v("currency_yen"),
+      ]),
+      _c("h3", { staticClass: "c-title--section-adjustment" }, [
+        _vm._v("総支出"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-container--adjustment-row__title" }, [
+      _c("span", { staticClass: "material-icons c-icon--adjustment" }, [
+        _vm._v("receipt_long"),
+      ]),
+      _c("h3", { staticClass: "c-title--section-adjustment" }, [
+        _vm._v("お支払い計算"),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -43283,7 +44231,7 @@ var render = function () {
         _c(
           "form",
           {
-            staticClass: "c-form",
+            staticClass: "c-form c-form--event",
             on: {
               submit: function ($event) {
                 $event.preventDefault()
@@ -43292,10 +44240,6 @@ var render = function () {
             },
           },
           [
-            _c("label", { attrs: { for: "agreement-title" } }, [
-              _vm._v("title"),
-            ]),
-            _vm._v(" "),
             _c("div", { staticClass: "p-container--form-input" }, [
               _c("input", {
                 directives: [
@@ -43306,8 +44250,8 @@ var render = function () {
                     expression: "agreement.title",
                   },
                 ],
-                staticClass: "c-form__input",
-                attrs: { id: "agreement-title" },
+                staticClass: "c-form__input--title",
+                attrs: { id: "agreement-title", placeholder: "タイトル" },
                 domProps: { value: _vm.agreement.title },
                 on: {
                   input: function ($event) {
@@ -43319,76 +44263,89 @@ var render = function () {
                 },
               }),
               _vm._v(" "),
-              _vm.errors
-                ? _c("div", [
-                    _vm.errors.title
-                      ? _c(
-                          "ul",
-                          _vm._l(_vm.errors.title, function (msg) {
-                            return _c(
-                              "li",
-                              { key: msg, staticClass: "c-text--error" },
-                              [_vm._v(_vm._s(msg))]
-                            )
-                          }),
-                          0
+              _c("div", { staticClass: "p-container--input-notice" }, [
+                _vm.errors
+                  ? _c(
+                      "ul",
+                      _vm._l(_vm.errors.title, function (msg) {
+                        return _c(
+                          "li",
+                          { key: msg, staticClass: "c-text--error" },
+                          [_vm._v(_vm._s(msg))]
                         )
-                      : _vm._e(),
-                  ])
-                : _vm._e(),
-            ]),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "agreement-content" } }, [
-              _vm._v("content"),
+                      }),
+                      0
+                    )
+                  : _vm._e(),
+              ]),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "p-container--form-input" }, [
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.agreement.content,
-                    expression: "agreement.content",
-                  },
-                ],
-                staticClass: "c-form__textarea",
-                attrs: { id: "agreement-content" },
-                domProps: { value: _vm.agreement.content },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.agreement, "content", $event.target.value)
-                  },
-                },
-              }),
+              _c("div", { staticClass: "p-container--form-row" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "p-container--form-right" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.agreement.content,
+                        expression: "agreement.content",
+                      },
+                    ],
+                    staticClass: "c-form__input c-form__input--event",
+                    attrs: { id: "agreement-detail" },
+                    domProps: { value: _vm.agreement.content },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.agreement, "content", $event.target.value)
+                      },
+                    },
+                  }),
+                ]),
+              ]),
               _vm._v(" "),
-              _vm.errors
-                ? _c("div", [
-                    _vm.errors.content
-                      ? _c(
-                          "ul",
-                          _vm._l(_vm.errors.content, function (msg) {
-                            return _c(
-                              "li",
-                              { key: msg, staticClass: "c-text--error" },
-                              [_vm._v(_vm._s(msg))]
-                            )
-                          }),
-                          0
+              _c("div", { staticClass: "p-container--input-notice" }, [
+                _vm.errors
+                  ? _c(
+                      "ul",
+                      _vm._l(_vm.errors.content, function (msg) {
+                        return _c(
+                          "li",
+                          { key: msg, staticClass: "c-text--error" },
+                          [_vm._v(_vm._s(msg))]
                         )
-                      : _vm._e(),
-                  ])
-                : _vm._e(),
+                      }),
+                      0
+                    )
+                  : _vm._e(),
+              ]),
             ]),
             _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "c-btn c-btn--submit", attrs: { type: "submit" } },
-              [_vm._v(_vm._s(_vm.submitMsg))]
-            ),
+            _c("div", { staticClass: "p-container--btn-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "c-btn c-btn--submit",
+                  attrs: { type: "submit" },
+                },
+                [_vm._v("保存")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "c-btn c-btn--submit",
+                  attrs: { type: "button" },
+                  on: { click: _vm.closeForm },
+                },
+                [_vm._v("閉じる")]
+              ),
+            ]),
             _vm._v(" "),
             _vm.errors
               ? _c("p", { staticClass: "c-text--error" }, [
@@ -43401,7 +44358,27 @@ var render = function () {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-container--form-left" }, [
+      _c(
+        "label",
+        {
+          staticClass: "c-form__label--event",
+          attrs: { for: "agreement-detail" },
+        },
+        [
+          _c("span", { staticClass: "material-icons c-icon--form-item" }, [
+            _vm._v("notes"),
+          ]),
+        ]
+      ),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -43424,51 +44401,65 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "p-container--agreements" }, [
-      _c("div", [
-        _vm._v("\n      承認済みコーナー\n      "),
-        _vm.approvedAgreements.length
-          ? _c(
-              "div",
-              _vm._l(_vm.approvedAgreements, function (agree, index) {
-                return _c(
-                  "div",
-                  { key: agree.id },
-                  [
-                    _c("ApprovedAgreementDetail", {
-                      attrs: { agree: agree, index: index },
-                    }),
-                  ],
-                  1
-                )
-              }),
-              0
-            )
-          : _c("p", [_vm._v("まだ登録されていません。。")]),
+    _c("h2", { staticClass: "c-title c-title--pending" }, [
+      _vm._v("我が家のルール！"),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-container--agreements-row" }, [
+      _c("h3", { staticClass: "c-title c-title--section-agreements" }, [
+        _vm._v("承認済"),
       ]),
       _vm._v(" "),
-      _c("div", [
-        _vm._v("\n      未承認コーナー\n      "),
-        _vm.suspendedAgreements.length
-          ? _c(
-              "ul",
-              _vm._l(_vm.suspendedAgreements, function (agree, index) {
-                return _c(
-                  "li",
-                  { key: agree.id },
-                  [
-                    _c("SuspendedAgreementDetail", {
-                      attrs: { agree: agree, index: index },
-                      on: { editAgreement: _vm.editAgreement },
-                    }),
-                  ],
-                  1
-                )
-              }),
-              0
-            )
-          : _c("p", [_vm._v("まだ登録されていません。")]),
+      _vm.approvedAgreements.length
+        ? _c(
+            "ul",
+            { staticClass: "p-container--agreements-content" },
+            _vm._l(_vm.approvedAgreements, function (agree, index) {
+              return _c(
+                "li",
+                { key: agree.id, staticClass: "p-container--agreements-item" },
+                [
+                  _c("ApprovedAgreementDetail", {
+                    attrs: { agree: agree, index: index },
+                  }),
+                ],
+                1
+              )
+            }),
+            0
+          )
+        : _c("div", { staticClass: "p-container--agreements-content" }, [
+            _c("p", [_vm._v("登録されていません。")]),
+          ]),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-container--agreements-row-red u-mb-m" }, [
+      _c("h3", { staticClass: "c-title c-title--section-agreements-red" }, [
+        _vm._v("審議中"),
       ]),
+      _vm._v(" "),
+      _vm.suspendedAgreements.length
+        ? _c(
+            "ul",
+            { staticClass: "p-container--agreements-content" },
+            _vm._l(_vm.suspendedAgreements, function (agree, index) {
+              return _c(
+                "li",
+                { key: agree.id, staticClass: "p-container--agreements-item" },
+                [
+                  _c("SuspendedAgreementDetail", {
+                    attrs: { agree: agree, index: index },
+                    on: { editAgreement: _vm.editAgreement },
+                  }),
+                ],
+                1
+              )
+            }),
+            0
+          )
+        : _c("div", { staticClass: "p-container--agreements-content" }, [
+            _c("p", [_vm._v("登録されていません。")]),
+          ]),
     ]),
   ])
 }
@@ -43494,28 +44485,58 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("span", [_vm._v("No." + _vm._s(_vm.index + 1))]),
-      _vm._v(" "),
-      _c("span", [_vm._v(_vm._s(_vm.agree.title))]),
-      _vm._v(" "),
-      _vm.agree.content
-        ? _c("i", {
-            staticClass: "fa-solid fa-arrow-up-right-from-square",
-            on: { click: _vm.openContent },
-          })
-        : _vm._e(),
-      _vm._v(" "),
-      _c("transition", { attrs: { name: "fade" } }, [
-        _vm.open_flg
-          ? _c("div", [_vm._v(_vm._s(_vm.agree.content))])
+  return _c("div", [
+    _c("span", { staticClass: "c-text--number" }, [
+      _vm._v("No." + _vm._s(_vm.index + 1)),
+    ]),
+    _vm._v(" "),
+    _c("span", { staticClass: "c-text--content" }, [
+      _vm._v(_vm._s(_vm.agree.title)),
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "p-container--agreements-detail" },
+      [
+        _vm.agree.content
+          ? _c(
+              "span",
+              {
+                directives: [
+                  {
+                    name: "click-outside",
+                    rawName: "v-click-outside",
+                    value: _vm.closeContent,
+                    expression: "closeContent",
+                  },
+                ],
+                staticClass: "material-icons c-icon--adjustment-comment",
+                on: { click: _vm.openContent },
+              },
+              [_vm._v("chat")]
+            )
           : _vm._e(),
-      ]),
-    ],
-    1
-  )
+        _vm._v(" "),
+        _c(
+          "span",
+          {
+            staticClass: "material-icons c-icon--agreement-delete",
+            on: { click: _vm.deleteAgreement },
+          },
+          [_vm._v("delete")]
+        ),
+        _vm._v(" "),
+        _c("transition", { attrs: { name: "slideup" } }, [
+          _vm.open_flg
+            ? _c("div", { staticClass: "c-popup c-popup--agreement" }, [
+                _vm._v(_vm._s(_vm.agree.content)),
+              ])
+            : _vm._e(),
+        ]),
+      ],
+      1
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43581,7 +44602,7 @@ var render = function () {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "c-calendar__body" },
+        { ref: "calendarBody", staticClass: "c-calendar__body" },
         _vm._l(_vm.calendars, function (week, index) {
           return _c(
             "div",
@@ -43616,38 +44637,58 @@ var render = function () {
                   },
                 },
                 [
-                  _c("div", { staticClass: "c-calendar__date" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "c-calendar__day c-text--calendar",
-                        class: { today: _vm.today === day.date },
+                  _c(
+                    "div",
+                    {
+                      staticClass: "c-calendar__date",
+                      on: {
+                        click: function ($event) {
+                          if ($event.target !== $event.currentTarget) {
+                            return null
+                          }
+                          return _vm.openForm(day.date)
+                        },
                       },
-                      [_vm._v(_vm._s(day.day))]
-                    ),
-                    _vm._v(" "),
-                    _vm.holidays[day.date]
-                      ? _c(
-                          "span",
-                          {
-                            staticClass: "c-calendar__holiday c-text--calendar",
+                    },
+                    [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "c-calendar__day c-text--calendar",
+                          class: {
+                            today: _vm.today === day.date,
+                            red: day.dotw === 0 || _vm.holidays[day.date],
+                            blue: day.dotw === 6,
                           },
-                          [_vm._v(_vm._s(_vm.holidays[day.date]))]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("div", {
-                      staticStyle: { width: "26px", height: "26px" },
-                    }),
-                  ]),
+                        },
+                        [_vm._v(_vm._s(day.day))]
+                      ),
+                      _vm._v(" "),
+                      _vm.holidays[day.date]
+                        ? _c(
+                            "span",
+                            {
+                              staticClass:
+                                "c-calendar__holiday c-text--calendar",
+                            },
+                            [_vm._v(_vm._s(_vm.holidays[day.date]))]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("div", {
+                        staticStyle: { width: "26px", height: "26px" },
+                      }),
+                    ]
+                  ),
                   _vm._v(" "),
-                  _vm._l(day.dayEvents, function (dayEvent) {
+                  _vm._l(day.dayEvents, function (dayEvent, index) {
                     return _c("div", { key: dayEvent.id }, [
                       dayEvent.width
                         ? _c(
                             "div",
                             {
                               staticClass: "c-calendar__event",
+                              class: { hide: index + 1 > _vm.eventNum },
                               style:
                                 "width:" +
                                 dayEvent.width +
@@ -43690,7 +44731,7 @@ var render = function () {
         [
           _vm.form_flg
             ? _c("EventForm", {
-                attrs: { clickDate: _vm.clickDate },
+                attrs: { clickDate: _vm.clickDate, editEvent: _vm.editEvent },
                 on: { "close-form": _vm.closeEventForm },
               })
             : _vm._e(),
@@ -43705,7 +44746,10 @@ var render = function () {
           _vm.detail_flg
             ? _c("EventDetail", {
                 attrs: { clickEvent: _vm.clickEvent },
-                on: { "close-detail": _vm.closeDetail },
+                on: {
+                  "close-detail": _vm.closeDetail,
+                  "edit-schedule": _vm.editSchedule,
+                },
               })
             : _vm._e(),
         ],
@@ -43765,382 +44809,96 @@ var render = function () {
                     staticClass: "c-image c-image--event-profile",
                     attrs: { src: _vm.image },
                   })
-                : _c("span", [_vm._v(_vm._s(_vm.name))]),
+                : _c("span", { staticClass: "c-text--detail-name" }, [
+                    _vm._v(_vm._s(_vm.name)),
+                  ]),
             ]),
             _vm._v(" "),
-            _vm.error
-              ? _c("p", { staticClass: "c-text--error" }, [
-                  _vm._v(_vm._s(_vm.error)),
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("div", [
-              _c("div", [
-                _c(
-                  "div",
-                  {
-                    staticClass: "c-form__date",
-                    class: { active: _vm.start_flg },
-                    on: { click: _vm.openStartForm },
-                  },
-                  [_vm._v(_vm._s(_vm.formatDayStr(_vm.schedule.start)))]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "c-form__date",
-                    class: { active: _vm.end_flg },
-                    on: { click: _vm.openCloseForm },
-                  },
-                  [_vm._v(_vm._s(_vm.formatDayStr(_vm.schedule.end)))]
-                ),
+            _c("div", { staticClass: "p-container--event-title" }, [
+              _c("span", { staticClass: "c-title--event-detail" }, [
+                _vm._v(_vm._s(_vm.schedule.title)),
               ]),
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "p-wrapper--small-calendar" },
-              [
-                _c(
-                  "transition",
-                  { attrs: { name: "fade" } },
+            _c("div", { staticClass: "p-container--form-row u-mb-m" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "p-container--form-right p-container--event-date",
+                },
+                [
+                  _c("span", { staticClass: "c-date" }, [
+                    _vm._v(_vm._s(_vm.formatDayStr(_vm.schedule.start))),
+                  ]),
+                  _c("span", { staticClass: "material-icons c-icon--date" }, [
+                    _vm._v("start"),
+                  ]),
+                  _c("span", { staticClass: "c-date" }, [
+                    _vm._v(_vm._s(_vm.formatDayStr(_vm.schedule.end))),
+                  ]),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _vm.schedule.detail
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "p-container--form-row p-container--form-detail u-mb-m",
+                  },
                   [
-                    _vm.open_calendar
-                      ? _c("SmallCalendar", {
-                          attrs: {
-                            end_flg: _vm.end_flg,
-                            start_flg: _vm.start_flg,
-                            start: _vm.schedule.start,
-                            end: _vm.schedule.end,
-                          },
-                          on: {
-                            "close-calendar": _vm.closeCalendar,
-                            "get-date": _vm.getDate,
-                          },
-                        })
-                      : _vm._e(),
-                  ],
-                  1
-                ),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", [
-              _vm._v("タイトル"),
-              _vm.edit_flg_title
-                ? _c("i", {
-                    staticClass: "fa-solid fa-circle-check c-icon",
-                    on: { click: _vm.editTitle },
-                  })
-                : _vm._e(),
-              !_vm.edit_flg_title
-                ? _c("i", {
-                    staticClass: "fa-regular fa-plus c-icon",
-                    on: { click: _vm.editTitle },
-                  })
-                : _vm._e(),
-            ]),
-            _vm._v(" "),
-            !_vm.edit_flg_title
-              ? _c("p", { on: { click: _vm.editTitle } }, [
-                  _vm._v(_vm._s(_vm.schedule.title)),
-                ])
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "p-container--form-right" }, [
+                      _c(
+                        "span",
+                        { staticClass: "c-text c-text--schedule-detail" },
+                        [_vm._v(_vm._s(_vm.schedule.detail))]
+                      ),
+                    ]),
+                  ]
+                )
               : _vm._e(),
             _vm._v(" "),
-            _vm.edit_flg_title
-              ? _c("input", {
-                  directives: [
+            _c("div", { staticClass: "p-container--btn-right" }, [
+              _vm.my_schedule
+                ? _c(
+                    "button",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.schedule.title,
-                      expression: "schedule.title",
+                      staticClass: "c-btn c-btn--submit",
+                      attrs: { type: "button" },
+                      on: { click: _vm.editSchedule },
                     },
-                  ],
-                  staticClass: "c-form__input",
-                  domProps: { value: _vm.schedule.title },
-                  on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.schedule, "title", $event.target.value)
-                    },
-                  },
-                })
-              : _vm._e(),
-            _vm._v(" "),
-            _c("div", [
-              _vm._v("詳細"),
-              _vm.edit_flg_detail
-                ? _c("i", {
-                    staticClass: "fa-solid fa-circle-check c-icon",
-                    on: { click: _vm.editDetail },
-                  })
+                    [_vm._v("編集")]
+                  )
                 : _vm._e(),
-              !_vm.edit_flg_detail
-                ? _c("i", {
-                    staticClass: "fa-regular fa-plus c-icon",
-                    on: { click: _vm.editDetail },
-                  })
-                : _vm._e(),
-            ]),
-            _vm._v(" "),
-            !_vm.edit_flg_detail
-              ? _c("p", { on: { click: _vm.editDetail } }, [
-                  _vm._v(_vm._s(_vm.schedule.detail)),
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.edit_flg_detail
-              ? _c("textarea", {
-                  directives: [
+              _vm._v(" "),
+              _vm.my_schedule
+                ? _c(
+                    "button",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.schedule.detail,
-                      expression: "schedule.detail",
+                      staticClass: "c-btn c-btn--submit",
+                      attrs: { type: "button" },
+                      on: { click: _vm.deleteSchedule },
                     },
-                  ],
-                  staticClass: "c-form__textarea",
-                  domProps: { value: _vm.schedule.detail },
-                  on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.schedule, "detail", $event.target.value)
-                    },
-                  },
-                })
-              : _vm._e(),
-            _vm._v(" "),
-            _c("div", [
-              _vm._v("color"),
-              _vm.edit_flg_color
-                ? _c("i", {
-                    staticClass: "fa-solid fa-circle-check c-icon",
-                    on: { click: _vm.editColor },
-                  })
+                    [_vm._v("削除")]
+                  )
                 : _vm._e(),
-              !_vm.edit_flg_color
-                ? _c("i", {
-                    staticClass: "fa-regular fa-plus c-icon",
-                    on: { click: _vm.editColor },
-                  })
-                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "c-btn c-btn--submit",
+                  attrs: { type: "button" },
+                  on: { click: _vm.closeDetail },
+                },
+                [_vm._v("閉じる")]
+              ),
             ]),
-            _vm._v(" "),
-            _vm.edit_flg_color
-              ? _c("div", { staticClass: "p-container--form-radio" }, [
-                  _c("label", {
-                    staticClass: "c-form__radio-label c-form__radio-label--red",
-                    class: [
-                      _vm.schedule.color === "#ff9100"
-                        ? "c-form__radio-label--checked"
-                        : "",
-                    ],
-                    attrs: { for: "radio-red" },
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.schedule.color,
-                        expression: "schedule.color",
-                      },
-                    ],
-                    staticClass: "c-form__radio",
-                    attrs: { id: "radio-red", type: "radio", value: "#ff9100" },
-                    domProps: {
-                      checked: _vm._q(_vm.schedule.color, "#ff9100"),
-                    },
-                    on: {
-                      change: function ($event) {
-                        return _vm.$set(_vm.schedule, "color", "#ff9100")
-                      },
-                    },
-                  }),
-                  _vm._v(" "),
-                  _c("label", {
-                    staticClass:
-                      "c-form__radio-label c-form__radio-label--blue",
-                    class: [
-                      _vm.schedule.color === "#46aef3"
-                        ? "c-form__radio-label--checked"
-                        : "",
-                    ],
-                    attrs: { for: "radio-blue" },
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.schedule.color,
-                        expression: "schedule.color",
-                      },
-                    ],
-                    staticClass: "c-form__radio",
-                    attrs: {
-                      id: "radio-blue",
-                      type: "radio",
-                      value: "#46aef3",
-                    },
-                    domProps: {
-                      checked: _vm._q(_vm.schedule.color, "#46aef3"),
-                    },
-                    on: {
-                      change: function ($event) {
-                        return _vm.$set(_vm.schedule, "color", "#46aef3")
-                      },
-                    },
-                  }),
-                  _vm._v(" "),
-                  _c("label", {
-                    staticClass:
-                      "c-form__radio-label c-form__radio-label--green",
-                    class: [
-                      _vm.schedule.color === "#06f406"
-                        ? "c-form__radio-label--checked"
-                        : "",
-                    ],
-                    attrs: { for: "radio-green" },
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.schedule.color,
-                        expression: "schedule.color",
-                      },
-                    ],
-                    staticClass: "c-form__radio",
-                    attrs: {
-                      id: "radio-green",
-                      type: "radio",
-                      value: "#06f406",
-                    },
-                    domProps: {
-                      checked: _vm._q(_vm.schedule.color, "#06f406"),
-                    },
-                    on: {
-                      change: function ($event) {
-                        return _vm.$set(_vm.schedule, "color", "#06f406")
-                      },
-                    },
-                  }),
-                  _vm._v(" "),
-                  _c("label", {
-                    staticClass:
-                      "c-form__radio-label c-form__radio-label--yellow",
-                    class: [
-                      _vm.schedule.color === "#dceb0e"
-                        ? "c-form__radio-label--checked"
-                        : "",
-                    ],
-                    attrs: { for: "radio-yellow" },
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.schedule.color,
-                        expression: "schedule.color",
-                      },
-                    ],
-                    staticClass: "c-form__radio",
-                    attrs: {
-                      id: "radio-yellow",
-                      type: "radio",
-                      value: "#dceb0e",
-                    },
-                    domProps: {
-                      checked: _vm._q(_vm.schedule.color, "#dceb0e"),
-                    },
-                    on: {
-                      change: function ($event) {
-                        return _vm.$set(_vm.schedule, "color", "#dceb0e")
-                      },
-                    },
-                  }),
-                  _vm._v(" "),
-                  _c("label", {
-                    staticClass:
-                      "c-form__radio-label c-form__radio-label--gray",
-                    class: [
-                      _vm.schedule.color === "#afafaf"
-                        ? "c-form__radio-label--checked"
-                        : "",
-                    ],
-                    attrs: { for: "radio-gray" },
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.schedule.color,
-                        expression: "schedule.color",
-                      },
-                    ],
-                    staticClass: "c-form__radio",
-                    attrs: {
-                      id: "radio-gray",
-                      type: "radio",
-                      value: "#afafaf",
-                    },
-                    domProps: {
-                      checked: _vm._q(_vm.schedule.color, "#afafaf"),
-                    },
-                    on: {
-                      change: function ($event) {
-                        return _vm.$set(_vm.schedule, "color", "#afafaf")
-                      },
-                    },
-                  }),
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "c-form__detail-update",
-                class: { active: _vm.edit_flg },
-                attrs: { type: "button", disabled: !_vm.edit_flg },
-                on: { click: _vm.changeSchedule },
-              },
-              [_vm._v("更新")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "c-form__detail-update",
-                attrs: { type: "button" },
-                on: { click: _vm.deleteSchedule },
-              },
-              [_vm._v("削除")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "c-form__detail-update",
-                attrs: { type: "button" },
-                on: { click: _vm.closeDetail },
-              },
-              [_vm._v("閉じる")]
-            ),
             _vm._v(" "),
             _c("div", {
               staticClass: "c-form__mask",
@@ -44149,16 +44907,34 @@ var render = function () {
             }),
           ]
         ),
-        _vm._v(" "),
-        _c("i", {
-          staticClass: "fa-solid fa-xmark c-icon c-icon--modal-close",
-          on: { click: _vm.closeDetail },
-        }),
       ]),
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-container--form-left" }, [
+      _c("span", { staticClass: "material-icons c-icon--form-item" }, [
+        _vm._v("schedule"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-container--form-left u-d-t" }, [
+      _c(
+        "span",
+        { staticClass: "material-icons c-icon--form-item u-d-tc u-vm" },
+        [_vm._v("notes")]
+      ),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -44543,14 +45319,28 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "p-container--btn-right" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "c-btn c-btn--submit",
-                  attrs: { type: "submit", disabled: _vm.sending },
-                },
-                [_vm._v("保存")]
-              ),
+              _vm.edit_flg
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "c-btn c-btn--submit",
+                      attrs: { type: "button", disabled: _vm.sending },
+                      on: { click: _vm.changeSchedule },
+                    },
+                    [_vm._v("更新")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.edit_flg
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "c-btn c-btn--submit",
+                      attrs: { type: "submit", disabled: _vm.sending },
+                    },
+                    [_vm._v("保存")]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _c(
                 "button",
@@ -44720,8 +45510,6 @@ var render = function () {
               "div",
               { staticClass: "c-nav__right" },
               [
-                _c("span", [_vm._v(_vm._s(_vm.userEmail))]),
-                _vm._v(" "),
                 _vm.checkTeam
                   ? _c("router-link", { attrs: { to: "/mypage" } }, [
                       _c(
@@ -44729,20 +45517,18 @@ var render = function () {
                         {
                           staticClass: "p-container--header-icon",
                           attrs: { "data-text": "カレンダー" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.pageChange(_vm.CALENDAR)
-                            },
-                          },
                         },
                         [
-                          _c("i", {
-                            staticClass:
-                              "fa-solid fa-calendar-days c-icon--header",
-                            class: [
-                              _vm.show_page === _vm.CALENDAR ? "active" : "",
-                            ],
-                          }),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "material-icons c-icon--header",
+                              class: [
+                                _vm.page === _vm.CALENDAR ? "active" : "",
+                              ],
+                            },
+                            [_vm._v("calendar_month")]
+                          ),
                         ]
                       ),
                     ])
@@ -44755,20 +45541,18 @@ var render = function () {
                         {
                           staticClass: "p-container--header-icon",
                           attrs: { "data-text": "わりかん！" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.pageChange(_vm.LEDGER)
-                            },
-                          },
                         },
                         [
-                          _c("i", {
-                            staticClass:
-                              "fa-solid fa-money-check-dollar c-icon--header",
-                            class: [
-                              _vm.show_page === _vm.LEDGER ? "active" : "",
-                            ],
-                          }),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "material-icons c-icon--header",
+                              class: [
+                                _vm.page === _vm.ADJUSTMENT ? "active" : "",
+                              ],
+                            },
+                            [_vm._v("payments")]
+                          ),
                         ]
                       ),
                     ])
@@ -44781,19 +45565,18 @@ var render = function () {
                         {
                           staticClass: "p-container--header-icon",
                           attrs: { "data-text": "きめごと！" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.pageChange(_vm.AGREEMENT)
-                            },
-                          },
                         },
                         [
-                          _c("i", {
-                            staticClass: "fa-solid fa-book c-icon--header",
-                            class: [
-                              _vm.show_page === _vm.AGREEMENT ? "active" : "",
-                            ],
-                          }),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "material-icons c-icon--header",
+                              class: [
+                                _vm.page === _vm.AGREEMENT ? "active" : "",
+                              ],
+                            },
+                            [_vm._v("library_books")]
+                          ),
                         ]
                       ),
                     ])
@@ -44814,10 +45597,14 @@ var render = function () {
                     attrs: { "data-text": "ユーザー！" },
                   },
                   [
-                    _c("i", {
-                      staticClass: "fa-solid fa-user c-icon--header",
-                      on: { click: _vm.showProfile },
-                    }),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "material-icons c-icon--header",
+                        on: { click: _vm.showProfile },
+                      },
+                      [_vm._v("person")]
+                    ),
                     _vm._v(" "),
                     _c(
                       "transition",
@@ -44851,7 +45638,11 @@ var render = function () {
                     on: { click: _vm.showSmallMenu },
                   },
                   [
-                    _c("i", { staticClass: "fa-solid fa-gear c-icon--header" }),
+                    _c(
+                      "span",
+                      { staticClass: "material-icons c-icon--header" },
+                      [_vm._v("logout")]
+                    ),
                     _vm._v(" "),
                     _c("transition", { attrs: { name: "fade" } }, [
                       _vm.show_menu_flg
@@ -44938,6 +45729,8 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _vm._m(0),
+                _vm._v(" "),
+                _vm._m(1),
               ])
             : !_vm.teamOwner && _vm.team.status !== "approve"
             ? _c("div", { staticClass: "p-container--pending" }, [
@@ -45067,11 +45860,31 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "p-container--notice" }, [
+      _c("div", { staticClass: "u-tc" }, [
+        _c("p", { staticClass: "c-title--wait u-tc" }, [
+          _vm._v("pleese wait..."),
+        ]),
+      ]),
+      _vm._v(" "),
       _c("p", { staticClass: "c-text--notice" }, [
         _vm._v(
           "パートナーの承認を待っています。パートナーが承認、または否認するとこの画面は表示されなくなります。"
         ),
       ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-container--wait" }, [
+      _c("img", {
+        staticClass: "c-image c-image--wait",
+        attrs: {
+          src: "/storage/images/coffee.jpeg",
+          alt: "ちょっと待ってねの画像",
+        },
+      }),
     ])
   },
 ]
@@ -45134,9 +45947,11 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "p-wrapper--profile" }, [
     _c("div", { staticClass: "p-container--profile" }, [
-      _c("p", [_vm._v(_vm._s(_vm.userInfo.name))]),
-      _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.userInfo.email))]),
+      _c("div", { staticClass: "p-container--user-title" }, [
+        _c("span", { staticClass: "c-title--user-name" }, [
+          _vm._v(_vm._s(_vm.userInfo.name)),
+        ]),
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "p-container--image-profile" }, [
         _c("img", {
@@ -45145,10 +45960,14 @@ var render = function () {
         }),
       ]),
       _vm._v(" "),
-      _c("i", {
-        staticClass: "fa-solid fa-ellipsis",
-        on: { click: _vm.openProfEdit },
-      }),
+      _c(
+        "span",
+        {
+          staticClass: "material-icons c-icon--profile",
+          on: { click: _vm.openProfEdit },
+        },
+        [_vm._v("more_horiz")]
+      ),
     ]),
   ])
 }
@@ -45192,7 +46011,7 @@ var render = function () {
         _c(
           "form",
           {
-            staticClass: "c-form",
+            staticClass: "c-form c-form--event",
             on: {
               submit: function ($event) {
                 $event.preventDefault()
@@ -45201,145 +46020,155 @@ var render = function () {
             },
           },
           [
-            _c("label", { attrs: { for: "agreement-title" } }, [
-              _vm._v("name"),
+            _c("div", { staticClass: "p-container--form-row" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "p-container--form-right" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.userInfo.name,
+                      expression: "userInfo.name",
+                    },
+                  ],
+                  staticClass: "c-form__input c-form__input--underline",
+                  attrs: {
+                    id: "profile-name",
+                    placeholder: "お名前を入力してください。",
+                  },
+                  domProps: { value: _vm.userInfo.name },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.userInfo, "name", $event.target.value)
+                    },
+                  },
+                }),
+              ]),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "p-container--form-input" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.userInfo.name,
-                    expression: "userInfo.name",
-                  },
-                ],
-                staticClass: "c-form__input",
-                attrs: { id: "agreement-title" },
-                domProps: { value: _vm.userInfo.name },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.userInfo, "name", $event.target.value)
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _vm.error_flg
-                ? _c("div", [
-                    _vm.errors_js.name
-                      ? _c("span", { staticClass: "c-text--error" }, [
-                          _vm._v(_vm._s(_vm.errors_js.name)),
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.errors.name
-                      ? _c(
-                          "div",
-                          _vm._l(_vm.errors.name, function (error, index) {
-                            return _c(
-                              "span",
-                              { key: index, staticClass: "c-text--error" },
-                              [_vm._v(_vm._s(error))]
-                            )
-                          }),
-                          0
-                        )
-                      : _vm._e(),
+            _c("div", { staticClass: "p-container--input-notice" }, [
+              _vm.error_flg && _vm.errors_js.name
+                ? _c("span", { staticClass: "c-text--error" }, [
+                    _vm._v(_vm._s(_vm.errors_js.name)),
                   ])
                 : _vm._e(),
-            ]),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "profile-email" } }, [_vm._v("email")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "p-container--form-input" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.userInfo.email,
-                    expression: "userInfo.email",
-                  },
-                ],
-                staticClass: "c-form__input",
-                attrs: { id: "profile-email" },
-                domProps: { value: _vm.userInfo.email },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.userInfo, "email", $event.target.value)
-                  },
-                },
-              }),
               _vm._v(" "),
-              _vm.error_flg
-                ? _c("div", [
-                    _vm.errors_js.email
-                      ? _c("span", { staticClass: "c-text--error" }, [
-                          _vm._v(_vm._s(_vm.errors_js.email)),
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.errors.email
-                      ? _c(
-                          "div",
-                          _vm._l(_vm.errors.email, function (error, index) {
-                            return _c(
-                              "span",
-                              { key: index, staticClass: "c-text--error" },
-                              [_vm._v(_vm._s(error))]
-                            )
-                          }),
-                          0
-                        )
-                      : _vm._e(),
-                  ])
-                : _vm._e(),
-            ]),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "profile-image" } }, [_vm._v("image")]),
-            _vm._v(" "),
-            _vm.error_flg
-              ? _c("div", [
-                  _vm.errors_js.image
-                    ? _c("span", { staticClass: "c-text--error" }, [
-                        _vm._v(_vm._s(_vm.errors_js.image)),
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.errors.image
-                    ? _c(
-                        "div",
-                        _vm._l(_vm.errors.image, function (error, index) {
-                          return _c(
-                            "span",
-                            { key: index, staticClass: "c-text--error" },
-                            [_vm._v(_vm._s(error))]
-                          )
-                        }),
-                        0
+              _vm.error_flg && _vm.errors.name
+                ? _c(
+                    "div",
+                    _vm._l(_vm.errors.name, function (error, index) {
+                      return _c(
+                        "span",
+                        { key: index, staticClass: "c-text--error" },
+                        [_vm._v(_vm._s(error))]
                       )
-                    : _vm._e(),
-                ])
-              : _vm._e(),
+                    }),
+                    0
+                  )
+                : _vm._e(),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-container--form-row" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "p-container--form-right" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.userInfo.email,
+                      expression: "userInfo.email",
+                    },
+                  ],
+                  staticClass: "c-form__input c-form__input--underline",
+                  attrs: {
+                    id: "profile-email",
+                    placeholder: "Eメールアドレスを入力してください。",
+                  },
+                  domProps: { value: _vm.userInfo.email },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.userInfo, "email", $event.target.value)
+                    },
+                  },
+                }),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-container--input-notice" }, [
+              _vm.error_flg && _vm.errors_js.email
+                ? _c("span", { staticClass: "c-text--error" }, [
+                    _vm._v(_vm._s(_vm.errors_js.email)),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.error_flg && _vm.errors.email
+                ? _c(
+                    "div",
+                    _vm._l(_vm.errors.email, function (error, index) {
+                      return _c(
+                        "span",
+                        { key: index, staticClass: "c-text--error" },
+                        [_vm._v(_vm._s(error))]
+                      )
+                    }),
+                    0
+                  )
+                : _vm._e(),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-container--form-row" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "p-container--form-right" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "c-btn c-btn--clear",
+                    attrs: { type: "button" },
+                    on: { click: _vm.reset },
+                  },
+                  [_vm._v("画像をクリア")]
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "p-container--input-notice u-mb-s u-d-f-jc" },
+              [
+                _vm.error_flg && _vm.errors_js.image
+                  ? _c("span", { staticClass: "c-text--error" }, [
+                      _vm._v(_vm._s(_vm.errors_js.image)),
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.error_flg && _vm.errors.image
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.errors.image, function (error, index) {
+                        return _c(
+                          "span",
+                          { key: index, staticClass: "c-text--error" },
+                          [_vm._v(_vm._s(error))]
+                        )
+                      }),
+                      0
+                    )
+                  : _vm._e(),
+              ]
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "p-container--form-input" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "c-btn",
-                  attrs: { type: "button" },
-                  on: { click: _vm.reset },
-                },
-                [_vm._v("画像をクリア")]
-              ),
-              _vm._v(" "),
               _c("div", { staticClass: "p-container--image-profile-edit" }, [
                 _c("input", {
                   staticClass: "c-form__image",
@@ -45358,21 +46187,81 @@ var render = function () {
               ]),
             ]),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "c-btn c-btn--submit",
-                attrs: { type: "submit", disabled: _vm.sending },
-              },
-              [_vm._v("保存する")]
-            ),
+            _c("div", { staticClass: "p-container--btn-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "c-btn c-btn--submit",
+                  attrs: { type: "submit", disabled: _vm.sending },
+                },
+                [_vm._v("保存する")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "c-btn c-btn--submit",
+                  attrs: { type: "button" },
+                  on: { click: _vm.closeProfileEdit },
+                },
+                [_vm._v("閉じる")]
+              ),
+            ]),
           ]
         ),
       ]),
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-container--form-left" }, [
+      _c(
+        "label",
+        { staticClass: "c-form__label--event", attrs: { for: "profile-name" } },
+        [
+          _c("span", { staticClass: "material-icons c-icon--form-item" }, [
+            _vm._v("face"),
+          ]),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-container--form-left" }, [
+      _c(
+        "label",
+        {
+          staticClass: "c-form__label--event",
+          attrs: { for: "profile-email" },
+        },
+        [
+          _c("span", { staticClass: "material-icons c-icon--form-item" }, [
+            _vm._v("email"),
+          ]),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-container--form-left" }, [
+      _c("label", { attrs: { for: "profile-image" } }, [
+        _c("span", { staticClass: "material-icons c-icon--form-item" }, [
+          _vm._v("image"),
+        ]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -45495,98 +46384,111 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("span", [_vm._v("No." + _vm._s(_vm.index + 1))]),
-      _vm._v(" "),
-      _c("span", [_vm._v(_vm._s(_vm.agree.title))]),
-      _vm._v(" "),
-      _vm.agree.content
-        ? _c("i", {
-            staticClass: "fa-solid fa-arrow-up-right-from-square",
-            on: { click: _vm.openContent },
-          })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.agree.user_id === _vm.myId
-        ? _c(
-            "button",
-            {
-              staticClass: "c-btn",
-              attrs: { type: "button" },
-              on: {
-                click: function ($event) {
-                  return _vm.deleteAgreement(_vm.agree.id)
-                },
-              },
-            },
-            [_vm._v("削除")]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.agree.user_id === _vm.myId
-        ? _c(
-            "button",
-            {
-              staticClass: "c-btn",
-              attrs: { type: "button" },
-              on: {
-                click: function ($event) {
-                  return _vm.editAgreement(_vm.agree)
-                },
-              },
-            },
-            [_vm._v("編集")]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.agree.approval === "deny"
-        ? _c("span", [
-            _vm._v("パートナーに否認されました。内容を修正しましょう！"),
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.agree.user_id !== _vm.myId
-        ? _c("div", [
-            _c(
-              "button",
+  return _c("div", [
+    _c("span", { staticClass: "c-text--number-orange" }, [
+      _vm._v("No." + _vm._s(_vm.index + 1)),
+    ]),
+    _vm._v(" "),
+    _c("span", [_vm._v(_vm._s(_vm.agree.title))]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "p-container--agreements-detail" },
+      [
+        _vm.agree.content
+          ? _c(
+              "span",
               {
-                staticClass: "c-btn",
-                attrs: { type: "button" },
-                on: {
-                  click: function ($event) {
-                    return _vm.approveAgreement(_vm.agree.id)
+                directives: [
+                  {
+                    name: "click-outside",
+                    rawName: "v-click-outside",
+                    value: _vm.closeContent,
+                    expression: "closeContent",
                   },
-                },
+                ],
+                staticClass: "material-icons c-icon--adjustment-comment",
+                on: { click: _vm.openContent },
               },
-              [_vm._v("承認する")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "c-btn",
-                attrs: { type: "button" },
-                on: {
-                  click: function ($event) {
-                    return _vm.denyAgreement(_vm.agree.id)
-                  },
-                },
-              },
-              [_vm._v("承認しない")]
-            ),
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("transition", { attrs: { name: "fade" } }, [
-        _vm.open_flg
-          ? _c("div", [_vm._v(_vm._s(_vm.agree.content))])
+              [_vm._v("chat")]
+            )
           : _vm._e(),
-      ]),
-    ],
-    1
-  )
+        _vm._v(" "),
+        _c("transition", { attrs: { name: "slideup" } }, [
+          _vm.open_flg
+            ? _c("div", { staticClass: "c-popup c-popup--agreement" }, [
+                _vm._v(_vm._s(_vm.agree.content)),
+              ])
+            : _vm._e(),
+        ]),
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _vm.agree.user_id === _vm.myId
+      ? _c(
+          "span",
+          {
+            staticClass: "material-icons c-icon--agreement-delete",
+            on: { click: _vm.deleteAgreement },
+          },
+          [_vm._v("delete")]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.agree.user_id === _vm.myId
+      ? _c(
+          "span",
+          {
+            staticClass: "material-icons c-icon--agreement-delete",
+            on: {
+              click: function ($event) {
+                return _vm.editAgreement(_vm.agree)
+              },
+            },
+          },
+          [_vm._v("edit")]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.agree.approval === "deny"
+      ? _c("span", [
+          _vm._v("パートナーに否認されました。内容を修正しましょう！"),
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.agree.user_id !== _vm.myId
+      ? _c("div", [
+          _c(
+            "button",
+            {
+              staticClass: "c-btn",
+              attrs: { type: "button" },
+              on: {
+                click: function ($event) {
+                  return _vm.approveAgreement(_vm.agree.id)
+                },
+              },
+            },
+            [_vm._v("承認する")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "c-btn",
+              attrs: { type: "button" },
+              on: {
+                click: function ($event) {
+                  return _vm.denyAgreement(_vm.agree.id)
+                },
+              },
+            },
+            [_vm._v("承認しない")]
+          ),
+        ])
+      : _vm._e(),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -45613,7 +46515,7 @@ var render = function () {
   return _c(
     "div",
     { staticClass: "p-wrapper--adjustment" },
-    [_c("AdjustmentForm"), _vm._v(" "), _c("AdjustmentTable")],
+    [_c("AdjustmentTable")],
     1
   )
 }
@@ -45640,8 +46542,11 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "section",
+    { staticClass: "p-container--agreements" },
     [
+      _c("AgreementList", { on: { editAgreement: _vm.editAgreement } }),
+      _vm._v(" "),
       _c(
         "transition",
         { attrs: { name: "fade" } },
@@ -45659,10 +46564,15 @@ var render = function () {
         1
       ),
       _vm._v(" "),
-      _c("AgreementList", { on: { editAgreement: _vm.editAgreement } }),
-      _vm._v(" "),
-      _c("button", { staticClass: "c-btn", on: { click: _vm.formControll } }, [
-        _vm._v("show form"),
+      _c("div", { staticClass: "p-container--btn-right" }, [
+        _c(
+          "button",
+          {
+            staticClass: "c-btn c-btn--submit",
+            on: { click: _vm.formControll },
+          },
+          [_vm._v("新しいルール")]
+        ),
       ]),
     ],
     1
@@ -46222,7 +47132,7 @@ var render = function () {
             }),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "p-container-btn" }, [
+          _c("div", { staticClass: "p-container--btn-center" }, [
             _c(
               "button",
               {
@@ -46271,17 +47181,24 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "p-container--withdraw" }, [
-    _c("h1", [_vm._v("退会ページ")]),
+    _c("h2", { staticClass: "c-title c-title--head" }, [_vm._v("退会ページ")]),
     _vm._v(" "),
-    _c("p", [_vm._v("下記ボタンを押すと退会が確定します。")]),
-    _vm._v(" "),
-    _c("p", [_vm._v("チームの予定や支払いなどの情報は全て削除されます。")]),
-    _vm._v(" "),
-    _c(
-      "button",
-      { staticClass: "c-btn c-btn--submit", on: { click: _vm.submit } },
-      [_vm._v("退会する")]
-    ),
+    _c("div", { staticClass: "p-container--withdraw-body" }, [
+      _c("p", [_vm._v("下記ボタンを押すと退会が確定します。")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("チームの予定や支払いなどの情報は全て削除されます。")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "p-container--btn-center u-mt-m" }, [
+        _c(
+          "button",
+          {
+            staticClass: "c-btn c-btn--submit-navy",
+            on: { click: _vm.submit },
+          },
+          [_vm._v("退会する")]
+        ),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -63298,6 +64215,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/AdjustmentResult.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/AdjustmentResult.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AdjustmentResult_vue_vue_type_template_id_09c4a955___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdjustmentResult.vue?vue&type=template&id=09c4a955& */ "./resources/js/components/AdjustmentResult.vue?vue&type=template&id=09c4a955&");
+/* harmony import */ var _AdjustmentResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdjustmentResult.vue?vue&type=script&lang=js& */ "./resources/js/components/AdjustmentResult.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AdjustmentResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AdjustmentResult_vue_vue_type_template_id_09c4a955___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AdjustmentResult_vue_vue_type_template_id_09c4a955___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AdjustmentResult.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/AdjustmentResult.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/AdjustmentResult.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdjustmentResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AdjustmentResult.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AdjustmentResult.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdjustmentResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AdjustmentResult.vue?vue&type=template&id=09c4a955&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/AdjustmentResult.vue?vue&type=template&id=09c4a955& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdjustmentResult_vue_vue_type_template_id_09c4a955___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AdjustmentResult.vue?vue&type=template&id=09c4a955& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AdjustmentResult.vue?vue&type=template&id=09c4a955&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdjustmentResult_vue_vue_type_template_id_09c4a955___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdjustmentResult_vue_vue_type_template_id_09c4a955___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/AdjustmentTable.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/components/AdjustmentTable.vue ***!
@@ -65821,6 +66807,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _agreements__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./agreements */ "./resources/js/store/agreements.js");
 /* harmony import */ var _himoku__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./himoku */ "./resources/js/store/himoku.js");
 /* harmony import */ var _payments__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./payments */ "./resources/js/store/payments.js");
+/* harmony import */ var _page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./page */ "./resources/js/store/page.js");
+
 
 
 
@@ -65839,7 +66827,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     events: _events__WEBPACK_IMPORTED_MODULE_5__["default"],
     agreements: _agreements__WEBPACK_IMPORTED_MODULE_6__["default"],
     himoku: _himoku__WEBPACK_IMPORTED_MODULE_7__["default"],
-    payments: _payments__WEBPACK_IMPORTED_MODULE_8__["default"]
+    payments: _payments__WEBPACK_IMPORTED_MODULE_8__["default"],
+    page: _page__WEBPACK_IMPORTED_MODULE_9__["default"]
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (store);
@@ -65871,6 +66860,31 @@ var mutations = {
     setTimeout(function () {
       state.errorMessage = '';
     }, 3000);
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: state,
+  mutations: mutations
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/page.js":
+/*!************************************!*\
+  !*** ./resources/js/store/page.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var state = {
+  page: null
+};
+var mutations = {
+  setPage: function setPage(state, page) {
+    state.page = page;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -65926,7 +66940,7 @@ var mutations = {
 var getters = {
   getKoteiPayments: function getKoteiPayments(state) {
     return state.payments.filter(function (elm) {
-      if (elm.type === 'kotei' || elm.type === 'monthly') {
+      if (elm.type === 'kotei') {
         return true;
       }
     });
@@ -65995,7 +67009,7 @@ var actions = {
 /*!******************************!*\
   !*** ./resources/js/util.js ***!
   \******************************/
-/*! exports provided: getCookieValue, OK, CREATED, UNAUTHORIZED_STATUS, NOT_FOUND, UNAUTHORIZED, UNPROCESSABLE_ENTITY, INTERNAL_SERVER_ERROR, UNAUTHORIZED_MESSAGE, EMAIL_PATTERN, NUMBER_PATTERN */
+/*! exports provided: getCookieValue, OK, CREATED, UNAUTHORIZED_STATUS, NOT_FOUND, UNAUTHORIZED, UNPROCESSABLE_ENTITY, INTERNAL_SERVER_ERROR, UNAUTHORIZED_MESSAGE, EMAIL_PATTERN, NUMBER_PATTERN, CALENDAR, ADJUSTMENT, AGREEMENT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66011,6 +67025,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UNAUTHORIZED_MESSAGE", function() { return UNAUTHORIZED_MESSAGE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EMAIL_PATTERN", function() { return EMAIL_PATTERN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NUMBER_PATTERN", function() { return NUMBER_PATTERN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CALENDAR", function() { return CALENDAR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADJUSTMENT", function() { return ADJUSTMENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AGREEMENT", function() { return AGREEMENT; });
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -66064,7 +67081,11 @@ var UNAUTHORIZED_MESSAGE = 'セッション有効期限が切れました。再�
 
 var EMAIL_PATTERN = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]+.[A-Za-z0-9]+$/; // 半角数字。空欄はNG
 
-var NUMBER_PATTERN = /^[0-9]+$/;
+var NUMBER_PATTERN = /^[0-9]+$/; // 定数
+
+var CALENDAR = 1;
+var ADJUSTMENT = 2;
+var AGREEMENT = 3;
 
 /***/ }),
 

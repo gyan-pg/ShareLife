@@ -24,8 +24,8 @@ class AgreementRequest extends FormRequest
     public function rules()
     {
         return [
-          'title' => 'required|max:100',
-          'content' => 'max:400'
+          'title' => 'required|max:30',
+          'content' => 'max:100'
         ];
     }
 }

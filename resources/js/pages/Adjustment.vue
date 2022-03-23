@@ -1,20 +1,19 @@
 <template>
   <div class="p-wrapper--adjustment">
-    <AdjustmentForm />
     <AdjustmentTable />
   </div>
 </template>
 
 <script>
-import AdjustmentForm from '../components/AdjustmentForm.vue'
 import AdjustmentTable from '../components/AdjustmentTable.vue'
+import { ADJUSTMENT } from '../util'
 export default {
   components: {
-    AdjustmentForm,
     AdjustmentTable
   },
   created () {
     this.$store.dispatch('payments/getPayments')
+    this.$store.commit('page/setPage', ADJUSTMENT)
   }
 }
 </script>

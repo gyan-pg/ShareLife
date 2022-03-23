@@ -22,8 +22,8 @@ class CreateTableAgreements extends Migration
             $table->string('approval')->default(0);
             $table->timestamps();
 
-            $table->foreign('team_id')->references('id')->on('teams');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

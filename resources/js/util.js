@@ -38,3 +38,7 @@ export const UNAUTHORIZED_MESSAGE = 'セッション有効期限が切れまし�
 export const EMAIL_PATTERN = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]+.[A-Za-z0-9]+$/
 // 半角数字。空欄はNG
 export const NUMBER_PATTERN = /^[0-9]+$/
+// 定数
+export const CALENDAR = 1
+export const ADJUSTMENT = 2
+export const AGREEMENT = 3

@@ -1,38 +1,56 @@
 <template>
   <section class="p-wrapper--modal" @click.self="closeProfileEdit">
     <div class="p-wrapper--agreement-form">
-      <form class="c-form" @submit.prevent="submit">
-        <label for="agreement-title">name</label>
-        <div class="p-container--form-input">
-          <input id="agreement-title" class="c-form__input" v-model="userInfo.name">
-          <div v-if="error_flg">
-            <!-- このコンポーネントでのバリデーション結果 -->
-            <span v-if="errors_js.name" class="c-text--error">{{ errors_js.name }}</span>
-            <!-- サーバー側からのエラーの表示 -->
-            <div v-if="errors.name"><span class="c-text--error" v-for="(error, index) in errors.name" :key="index">{{ error }}</span></div>
+      <form class="c-form c-form--event" @submit.prevent="submit">
+
+        <!-- 名前 -->
+        <div class="p-container--form-row">
+          <div class="p-container--form-left">
+            <label for="profile-name" class="c-form__label--event"><span class="material-icons c-icon--form-item">face</span></label>
           </div>
+          <div class="p-container--form-right">
+            <input id="profile-name" class="c-form__input c-form__input--underline" placeholder="お名前を入力してください。" v-model="userInfo.name">
+          </div>
+        </div>
+        <div class="p-container--input-notice">
+          <!-- このコンポーネントでのバリデーション結果 -->
+          <span v-if="error_flg && errors_js.name" class="c-text--error">{{ errors_js.name }}</span>
+          <!-- サーバー側からのエラーの表示 -->
+          <div v-if="error_flg && errors.name"><span class="c-text--error" v-for="(error, index) in errors.name" :key="index">{{ error }}</span></div>
         </div>
 
-        <label for="profile-email">email</label>
-        <div class="p-container--form-input">
-          <input id="profile-email" class="c-form__input" v-model="userInfo.email">
-          <div v-if="error_flg">
-            <!-- このコンポーネントでのバリデーション結果 -->
-            <span v-if="errors_js.email" class="c-text--error">{{ errors_js.email }}</span>
-            <!-- サーバー側からのエラーの表示 -->
-            <div v-if="errors.email"><span class="c-text--error" v-for="(error, index) in errors.email" :key="index">{{ error }}</span></div>
+        <div class="p-container--form-row">
+          <div class="p-container--form-left">
+            <label for="profile-email" class="c-form__label--event"><span class="material-icons c-icon--form-item">email</span></label>
+          </div>
+          <div class="p-container--form-right">
+            <input id="profile-email" class="c-form__input c-form__input--underline" placeholder="Eメールアドレスを入力してください。" v-model="userInfo.email">
           </div>
         </div>
-        <label for="profile-image">image</label>
-         <div v-if="error_flg">
-            <!-- このコンポーネントでのバリデーション結果 -->
-            <span v-if="errors_js.image" class="c-text--error">{{ errors_js.image }}</span>
-            <!-- サーバー側からのエラーの表示 -->
-            <div v-if="errors.image"><span class="c-text--error" v-for="(error, index) in errors.image" :key="index">{{ error }}</span></div>
+        <div class="p-container--input-notice">
+          <!-- このコンポーネントでのバリデーション結果 -->
+          <span v-if="error_flg && errors_js.email" class="c-text--error">{{ errors_js.email }}</span>
+          <!-- サーバー側からのエラーの表示 -->
+          <div v-if="error_flg && errors.email"><span class="c-text--error" v-for="(error, index) in errors.email" :key="index">{{ error }}</span></div>
+        </div>
+
+        <!-- 画像 -->
+        <div class="p-container--form-row">
+          <div class="p-container--form-left">
+            <label for="profile-image"><span class="material-icons c-icon--form-item">image</span></label>
           </div>
+          <div class="p-container--form-right">
+            <button type="button" class="c-btn c-btn--clear" @click="reset">画像をクリア</button>
+          </div>
+        </div>
+         <div class="p-container--input-notice u-mb-s u-d-f-jc">
+            <!-- このコンポーネントでのバリデーション結果 -->
+            <span v-if="error_flg && errors_js.image" class="c-text--error">{{ errors_js.image }}</span>
+            <!-- サーバー側からのエラーの表示 -->
+            <div v-if="error_flg && errors.image"><span class="c-text--error" v-for="(error, index) in errors.image" :key="index">{{ error }}</span></div>
+          </div>
+
         <div class="p-container--form-input">
-          <button type="button" class="c-btn" @click="reset">画像をクリア</button>
-          
           <div class="p-container--image-profile-edit">
             <input id="profile-image" type="file" class="c-form__image" @change="onFileChange">
             <output>
@@ -40,7 +58,10 @@
             </output>
           </div>
         </div>
-        <button class="c-btn c-btn--submit" type="submit" :disabled="sending">保存する</button>
+        <div class="p-container--btn-right">
+          <button class="c-btn c-btn--submit" type="submit" :disabled="sending">保存する</button>
+          <button class="c-btn c-btn--submit" type="button" @click="closeProfileEdit">閉じる</button>
+        </div>
       </form>
     </div>
   </section>
@@ -127,6 +148,7 @@ export default {
       this.preview = null
       // resetされたことを検知
       this.reset_flg = true
+      this.errors_js.image = null
       this.$el.querySelector('input[type="file"]').value = null
     },
 

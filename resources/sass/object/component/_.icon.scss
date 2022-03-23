@@ -11,6 +11,8 @@
     padding: $space_s;
     border-radius: 50%;
     transition: $transtime_default;
+    font-size: $fontsize_default;
+    cursor: pointer;
     &:hover {
       transition: $transtime_default;
       background: $color_active_bg_green;
@@ -27,7 +29,7 @@
     width: 30px;
     text-align: center;
     line-height: 30px;
-    font-size: $fontsize_section;
+    font-size: $fontsize_ml;
     margin-left: $space_s;
     color: $color_font_bright;
     transition: $transtime_default;
@@ -45,5 +47,59 @@
     width: 100%;
     text-align: center;
     color: $color_main_green;
+  }
+  &--date {
+    line-height: $height_form_row;
+    color: $color_main_green;
+    display: inline-block;
+    margin: 0 $space_ml;
+  }
+  &--adjustment {
+    margin-right: $space_m;
+    color: $color_main_orange;
+  }
+  &--adjustment-form {
+    line-height: $height_adjustment_form_row;
+  }
+  &--adjustment-delete {
+    color: $color_font_bright;
+    transition: $transtime_default;
+    line-height: $height_adjustment_form_row;
+    margin-left: $space_m;
+    &:hover {
+      cursor: pointer;
+      color: $color_font_available;
+    }
+  }
+  &--adjustment-comment {
+    @extend .c-icon--adjustment-delete;
+    margin-left: $space_s;
+    vertical-align: middle;
+  }
+  &--adjustment-expand {
+    @extend .c-icon--adjustment-delete;
+    margin-left: 0;
+    display: inline-block;
+    line-height: $height_adjustment_form_row;
+    padding: 0 $space_m;
+    position: relative;
+    z-index: 2;
+    background: white;
+  }
+  &--agreement-delete {
+    @extend .c-icon--adjustment-delete;
+    margin-left: $space_xs;
+    vertical-align: middle;
+  }
+  &--profile {
+    font-size: $fontsize_m;
+    padding: $space_s;
+    border-radius: 50%;
+    background: $color_bg_light_gray;
+    cursor: pointer;
+    transition: $transtime_default;
+    &:hover {
+      background: $color_active_bg_green;
+    }
   }
 }

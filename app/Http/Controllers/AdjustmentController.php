@@ -65,7 +65,7 @@ class AdjustmentController extends Controller
 
     $payment = new Payment();
     $team_id = $this->getTeamId();
-    $result = $payment->where('team_id', $team_id)->whereYear('register_date', $year)->whereMonth('register_date', $month)->get();
+    $result = $payment->where('team_id', $team_id)->whereYear('register_date', $year)->whereMonth('register_date', $month)->orderBy('created_at', 'DESC')->get();
 
     return $result;
   }

@@ -23,7 +23,7 @@ const mutations = {
 const getters = {
   getKoteiPayments: state => {
     return state.payments.filter(elm => {
-      if (elm.type === 'kotei' || elm.type === 'monthly') {
+      if (elm.type === 'kotei') {
         return true
       }
     })

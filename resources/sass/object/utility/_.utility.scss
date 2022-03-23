@@ -8,8 +8,20 @@
 .u-ml-s {
   margin-left: $space_s;
 }
+.u-mt-s {
+  margin-top: $space_s;
+}
 .u-mt-m {
   margin-top: $space_m;
+}
+.u-mb-s {
+  margin-bottom: $space_s;
+}
+.u-mb-m {
+  margin-bottom: $space_m;
+}
+.u-mb-l {
+  margin-bottom: $space_l;
 }
 // padding 
 .u-pt-s {
@@ -29,7 +41,21 @@
 .u-tr {
   text-align: right;
 }
+.u-vm {
+  vertical-align: middle;
+}
 // postion
 .u-pr {
   position: relative;
+}
+// display
+.u-d-t {
+  display: table;
+}
+.u-d-tc {
+  display: table-cell;
+}
+.u-d-f-jc {
+  display: flex;
+  justify-content: center;
 }

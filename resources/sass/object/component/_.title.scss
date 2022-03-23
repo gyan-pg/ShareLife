@@ -1,6 +1,6 @@
 .c-title {
   padding: $space_s;
-  font-size: $fontsize_section;
+  font-size: $fontsize_ml;
   &--head {
     background: $color_main_orange;
     border-radius: 10px 10px 0 0;
@@ -25,5 +25,46 @@
       left: 0;
       clip-path: polygon(10% 10%, 12% 10%, 14% 90%, 12% 90%);
     }
+  }
+  &--event-detail {
+    padding: 0 $space_m;
+    border-bottom: 3px solid $color_main_green;
+  }
+  &--section-adjustment {
+    font-size: $fontsize_default;
+    padding: 0 $space_s;
+    border-bottom: 3px solid $color_main_orange;
+  }
+  &--section-agreements {
+    font-size: $fontsize_m;
+    font-family: $font_soft;
+    line-height: $height_agreement_title;
+    &:before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      position: relative;
+      top: 3px;
+      margin-right: $space_m;
+      background: $color_main_green;
+      border-radius: 50%;
+    }
+  }
+  &--section-agreements-red {
+    @extend .c-title--section-agreements;
+    &:before {
+      background: $color_main_light_red;
+    }
+  }
+  &--user-name {
+    text-align: center;
+    border-bottom: 2px solid $color_main_navy;
+    padding: 0 $space_s;
+  }
+  &--wait {
+    @extend .c-title--user-name;
+    display: inline-block;
+    margin-bottom: $space_s;
   }
 }

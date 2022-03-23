@@ -20,8 +20,8 @@ class CreateTableTeams extends Migration
             $table->string('status')->default('unapproved');
             $table->timestamps();
 
-            $table->foreign('user1_id')->references('id')->on('users');
-            $table->foreign('user2_id')->references('id')->on('users');
+            $table->foreign('user1_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user2_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

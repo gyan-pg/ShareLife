@@ -3,6 +3,8 @@
     width: 500px;
     max-width: 100vw;
     margin: 0 auto;
+    padding-top: $space_2l;
+    min-height: calc(100vh - $height_header - $height_footer);
   }
   &--auth {
     width: 500px;
@@ -41,5 +43,8 @@
   &--adjustment {
     width: 900px;
     margin: 0 auto;
+  }
+  &--adjustment-form {
+    margin-top: $space_l;
   }
 }

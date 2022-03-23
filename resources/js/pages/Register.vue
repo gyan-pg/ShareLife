@@ -40,7 +40,7 @@
         <div class="p-container--form-input">
           <input id="register-token" class="c-form__input" type="text" v-model="token">
         </div>
-        <div class="p-container-btn">
+        <div class="p-container--btn-center">
           <button type="submit" class="c-btn c-btn--submit" :disabled="sending">送信</button>
         </div>
       </form>

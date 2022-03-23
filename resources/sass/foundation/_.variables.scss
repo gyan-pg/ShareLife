@@ -13,13 +13,20 @@ $space_4l: 160px;
 // main https://colorhunt.co/palette/96ceb4ffeeadd9534fffad60
 $color_main_green: #96CEB4;// main1
 $color_main_cream: #FFEEAD;// main2
+$color_main_light_cream: #FFffbe;
 $color_main_red: #D9534F;// accent1
+$color_main_light_red: #f7b1af;
 $color_main_orange: #FFAD60;// accent2
+$color_main_light_orange: #ffcf82;
+$color_main_navy: #88c3ca;
+$color_main_sky: #aae5ec;
 $color_main_blue: #dbf9fd;
+$color_main_bright_gray: #eee;
 
 // font
 $color_font_default: #333;
 $color_font_bright: #999;
+$color_font_available: rgb(141, 180, 148);
 $color_font_error: #e47777;
 $color_font_white: #fefefe;
 
@@ -28,13 +35,14 @@ $color_bg_default: #fcfafa;
 $color_bg_disable: #999;
 $color_bg_light_gray: #f8f8f8;
 $color_bg_bright_gray: #f9f9f9;
-$color_bg_available: #ccc;
 $color_bg_active: #b7ffff;
 $color_bg_white: #fff;
 $color_bg_input: #fff;
 $color_bg_orange: rgb(223, 138, 59);
 $color_bg_error: rgb(253, 209, 209);
 $color_bg_notice: #94d2bd;
+$color_bg_light_red: #ffefef;
+$color_bg_light_green: #f6fff5;
 
 // active
 $color_active_font: #77a18e;
@@ -64,8 +72,10 @@ $fontsize_xs: 10px;
 $fontsize_s: 12px;
 $fontsize_ms: 14px;
 $fontsize_default: 16px;
-$fontsize_section: 20px;
+$fontsize_m: 18px;
+$fontsize_ml: 20px;
 $fontsize_l: 22px;
+$fontsize_2l: 26px;
 $fontsize_page_title: 24px;
 $fontsize_icon: 30px;
 $fontsize_top_section: 36px;
@@ -87,6 +97,9 @@ $height_head_container: 50px;
 $height_event_user_image: 60px;
 $height_head_dotw: 30px;
 $height_form_row: 40px;
+$height_adjustment_form_row: 30px;
+$height_agreement_content_row: 30px;
+$height_agreement_title: 25px;
 
 $height_author: 75px;
 $height_msg: 60px;

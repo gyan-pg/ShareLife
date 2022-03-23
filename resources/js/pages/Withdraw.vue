@@ -1,9 +1,13 @@
 <template>
 <section class="p-container--withdraw">
-  <h1>退会ページ</h1>
-  <p>下記ボタンを押すと退会が確定します。</p>
-  <p>チームの予定や支払いなどの情報は全て削除されます。</p>
-  <button class="c-btn c-btn--submit" @click="submit">退会する</button>
+  <h2 class="c-title c-title--head">退会ページ</h2>
+  <div class="p-container--withdraw-body">
+    <p>下記ボタンを押すと退会が確定します。</p>
+    <p>チームの予定や支払いなどの情報は全て削除されます。</p>
+    <div class="p-container--btn-center u-mt-m">
+      <button class="c-btn c-btn--submit-navy" @click="submit">退会する</button>
+    </div>
+  </div>
 </section>
 </template>
 
@@ -21,6 +25,8 @@ export default {
         this.$store.commit('auth/setTeam', null)
         this.$store.commit('messages/setMessage', '退会処理が完了しました。ご利用ありがとうございました。')
         this.$router.push('/')
+      } else {
+        this.$store.commit('messages/setErrorMessage', '退会処理に失敗しました。管理者にご連絡ください。')
       }
     }
   }

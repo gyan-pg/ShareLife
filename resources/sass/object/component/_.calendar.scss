@@ -1,6 +1,7 @@
 .c-calendar {
   &__body {
-    height: calc(100vh - $height_footer - $height_footer - $height_head_container - $height_head_dotw)
+    height: calc(100vh - $height_footer - $height_footer - $height_head_container - $height_head_dotw);
+    min-height: 200px;
   }
   &--input {
     margin: 0 auto;
@@ -53,7 +54,7 @@
   &__row {
     display: flex;
     height: calc((100% - $height_head_container - $height_head_dotw) / 5);
-    // height: 125px;
+    min-height: 30px;
     border-left: $border_bright;
     &--input {
       @extend .c-calendar__row;
@@ -82,6 +83,14 @@
       background: $color_active_bg_green;
       color: $color_active_font;
       font-weight: bold;
+    }
+    &.red {
+      color: $color_main_red;
+      font-weight: 700;
+    }
+    &.blue {
+      color: rgb(81, 81, 243);
+      font-weight: 700;
     }
     &--input {
       width: calc(100% / 7);
@@ -130,6 +139,9 @@
     position: relative;
     z-index: 1;
     border-radius: 3px;
+    &.hide {
+      display: none;
+    }
     &:hover {
       cursor: pointer;
     }

@@ -2,27 +2,36 @@
   <section class="p-wrapper--modal" @click.self="closeForm">
 
     <div class="p-wrapper--agreement-form">
-      <form class="c-form" @submit.prevent="register">
-        <label for="agreement-title">title</label>
+      <form class="c-form c-form--event" @submit.prevent="register">
         <div class="p-container--form-input">
-          <input id="agreement-title" class="c-form__input" v-model="agreement.title">
-          <div v-if="errors">
-            <ul v-if="errors.title">
+          <input id="agreement-title" class="c-form__input--title" placeholder="タイトル" v-model="agreement.title">
+          <div class="p-container--input-notice">
+            <ul v-if="errors">
               <li v-for="msg in errors.title" :key="msg" class="c-text--error">{{ msg }}</li>
             </ul>
           </div>
         </div>
 
-        <label for="agreement-content">content</label>
         <div class="p-container--form-input">
-          <textarea id="agreement-content" class="c-form__textarea" v-model="agreement.content"></textarea>
-          <div v-if="errors">
-            <ul v-if="errors.content">
+          <div class="p-container--form-row">
+            <div class="p-container--form-left">
+              <label for="agreement-detail" class="c-form__label--event"><span class="material-icons c-icon--form-item">notes</span></label>
+            </div>
+            <div class="p-container--form-right">
+              <input id="agreement-detail" class="c-form__input c-form__input--event" v-model="agreement.content">
+            </div>
+          </div>
+          <div class="p-container--input-notice">
+            <ul v-if="errors">
               <li v-for="msg in errors.content" :key="msg" class="c-text--error">{{ msg }}</li>
             </ul>
           </div>
         </div>
-        <button class="c-btn c-btn--submit" type="submit">{{ submitMsg }}</button>
+
+        <div class="p-container--btn-right">
+          <button class="c-btn c-btn--submit" type="submit">保存</button>
+          <button class="c-btn c-btn--submit" type="button" @click="closeForm">閉じる</button>
+        </div>
         <p v-if="errors" class="c-text--error">{{ errors.server }}</p>
       </form>
     </div>
@@ -51,7 +60,6 @@ export default {
         user_id: null
       },
       errors: null,
-      submitMsg: '登録する'
     }
   },
   methods: {
@@ -107,7 +115,6 @@ export default {
       this.agreement.content = this.editAgreementData.content
       this.agreement.id = this.editAgreementData.id
       this.agreement.user_id = this.editAgreementData.user_id
-      this.submitMsg = '保存する'
     }
   }
 }

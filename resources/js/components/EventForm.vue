@@ -80,7 +80,8 @@
         </div>
 
         <div class="p-container--btn-right">
-          <button class="c-btn c-btn--submit" type="submit" :disabled="sending">保存</button>
+          <button v-if="edit_flg" class="c-btn c-btn--submit" type="button" @click="changeSchedule" :disabled="sending">更新</button>
+          <button v-if="!edit_flg" class="c-btn c-btn--submit" type="submit" :disabled="sending">保存</button>
           <button class="c-btn c-btn--submit" type="button" @click="closeEventForm">閉じる</button>
         </div>
         <p v-if="errors" class="c-text--error">{{ errors.server }}</p>
@@ -100,6 +101,10 @@ export default {
   props: {
     clickDate: {
       String
+    },
+    editEvent: {
+      type: [Object, null],
+      default: null
     }
   },
   data () {
@@ -122,6 +127,7 @@ export default {
       end_flg: false,
       open_calendar: false,
       error_flg: false,
+      edit_flg: false,
       sending: false
     }
   },
@@ -130,10 +136,18 @@ export default {
   },
   computed: {
     detail_length () {
-      return this.schedule.detail.length
+      if (this.schedule.detail === null) {
+        return 0
+      } else {
+        return this.schedule.detail.length
+      }
     },
     title_length () {
-      return this.schedule.title.length
+      if (this.schedule.title === null) {
+        return 0
+      } else {
+        return this.schedule.title.length
+      }
     }
   },
   methods: {
@@ -149,11 +163,30 @@ export default {
 
         if (response.status !== OK) {
           this.errors.server_error = 'サーバーでエラーが発生しました。'
+          this.sending = false
           return false;
         }
         this.$store.commit('messages/setMessage', 'スケジュールを登録しました。')
         this.$store.dispatch('events/getScheduleList')
         this.closeEventForm()
+      }
+      this.sending = false
+    },
+    async changeSchedule () {
+      this.sending = true
+      this.cleanErrorMessages()
+      this.error_flg = false
+      this.scheduleValidation()
+      this.titleValidation()
+      this.detailValidation()
+      if (!this.error_flg){
+        const response = await axios.put('/api/schedule/changeSchedule', this.schedule)
+        if (response.status === OK) {
+          this.$store.dispatch('events/getScheduleList')
+          this.closeEventForm()
+          this.$store.commit('messages/setMessage', '予定を更新しました。')
+          return false
+        }
       }
       this.sending = false
     },
@@ -243,12 +276,19 @@ export default {
     }
   },
   created () {
-    if(this.clickDate) {
+    // カレンダーの日付マスを押した時
+    if (this.clickDate) {
       this.schedule.start = this.clickDate
       this.schedule.end = this.clickDate
+    // 新規作成の時
     } else {
       this.schedule.start = dayjs().format('YYYY-MM-DD')
       this.schedule.end = dayjs().format('YYYY-MM-DD')
+    }
+    // 詳細から編集を押した時
+    if (this.editEvent) {
+      this.edit_flg = true
+      this.schedule = this.editEvent
     }
   }
 }

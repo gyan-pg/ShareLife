@@ -1,4 +1,5 @@
 .c-text {
+  font-size: $fontsize_ms;
   &--error {
     font-size: $fontsize_s;
     color: $color_font_error;
@@ -41,5 +42,36 @@
   }
   &--calendar {
     font-family: $font_soft;
+  }
+  &--detail-name {
+    line-height: $height_event_user_image;
+  }
+  &--schedule-detail {
+    line-height: $height_form_row;
+  }
+  &--result {
+    padding: 0 $space_s;
+    border-bottom: 3px solid $color_main_orange;
+  }
+  &--agreement-content {
+    &:before {
+      content: attr(data-text);
+      display: block;
+      position: absolute;
+      background: red;
+    }
+  }
+  &--number {
+    display: inline-block;
+    background: $color_main_green;
+    color: white;
+    padding: 0 $space_s;
+    border-radius: 5px;
+    margin-right: $space_s;
+    line-height: $height_agreement_content_row;
+  }
+  &--number-orange {
+    @extend .c-text--number;
+    background: $color_main_orange;
   }
 }

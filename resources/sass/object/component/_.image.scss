@@ -1,5 +1,8 @@
 .c-image {
   object-fit: cover;
+  &--wait {
+    width: 100%;
+  }
   &--profile {
     width: 89px;
     height: 89px;
@@ -13,5 +16,10 @@
     height: 100%;
     border-radius: 50%;
     border: $border_bright;
+  }
+  &--adjustment-sumbnail {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
   }
 }

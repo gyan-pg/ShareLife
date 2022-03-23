@@ -157,7 +157,9 @@ return [
       'name' => 'お名前',
       'cost' => '金額',
       'comment' => 'コメント',
-      'himoku' => '費目'
+      'content' => '内容',
+      'himoku' => '費目',
+      'title' => 'タイトル'
     ],
 
 ];

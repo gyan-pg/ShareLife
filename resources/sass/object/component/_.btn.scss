@@ -2,9 +2,6 @@
   display: inline-block;
   font-size: $fontsize_ms;
   padding: $space_xs $space_ms;
-  &.active {
-    background: orange;
-  }
   &--submit {
     color: $color_font_white;
     background: $color_main_green;
@@ -13,5 +10,67 @@
     &:hover {
       background: $color_active_bg_green2;
     }
+  }
+  &--submit-red {
+    @extend .c-btn--submit;
+    background: $color_main_light_red;
+    &:hover {
+      background: $color_main_red;
+    }
+  }
+  &--submit-navy {
+    @extend .c-btn--submit;
+    background: $color_main_navy;
+    transition: $transtime_default;
+    &:hover {
+      background: $color_main_sky;
+    }
+  }
+  &--clear {
+    line-height: $height_form_row;
+    padding: 0 $space_s;
+    background: $color_main_light_orange;
+    color: white;
+    border-radius: 5px;
+    transition: $transtime_default;
+    &:hover {
+      background: $color_main_orange;
+    }
+  }
+  &--prev, &--next {
+    background: $color_bg_light_gray;
+    padding: $space_xs $space_m;
+    font-size: $fontsize_ms;
+    transition: $transtime_default;
+    color: $color_font_bright;
+    &:hover {
+      background: $color_active_bg_green;
+      color: $color_active_font;
+    }
+  }
+  &--prev {
+    border-radius: 15px 5px 5px 15px;
+    margin-right: $space_s;
+  }
+  &--next {
+    border-radius: 5px 15px 15px 5px;
+    margin-left: $space_s;
+  }
+  &--form-tab-hendo, &--form-tab-kotei {
+    border: $border_default;
+    border-radius: 5px 5px 0 0;
+    border-bottom: none;
+    position: relative;
+    top: 1px;
+    z-index: 1;
+    &.active {
+      z-index: 3;
+    }
+  }
+  &--form-tab-hendo {
+    background: $color_bg_light_green;
+  }
+  &--form-tab-kotei {
+    background: $color_bg_light_red;
   }
 }
