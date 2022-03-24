@@ -832,6 +832,41 @@ button:hover {
   left: 40%;
 }
 
+.c-calendar__hidden-container {
+  position: relative;
+}
+
+.c-calendar__hidden-event {
+  position: absolute;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  top: -28px;
+  right: 10px;
+  border: 1px solid #bbb;
+  border-radius: 50%;
+  background: white;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0px 0px 10px #aaa;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.c-calendar__hidden-event:hover {
+  background: #d2fce8;
+}
+
+.c-calendar__container-event-list {
+  position: absolute;
+  border-radius: 10px;
+  box-shadow: #ededed 0 0 15px;
+  width: 200px;
+  background: white;
+  border: 1px solid #bbb;
+  padding: 10px;
+}
+
 .c-date {
   line-height: 40px;
   display: inline-block;
@@ -1794,7 +1829,7 @@ button:hover {
 
 .p-wrapper--modal {
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   top: 0;
   left: 0;
   height: 100vh;

@@ -173,4 +173,36 @@
       left: 40%;
     }
   }
+  &__hidden-container {
+    position: relative;
+  }
+  &__hidden-event {
+    position: absolute;
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+    top: -28px;
+    right: 10px;
+    border: $border_default;
+    border-radius: 50%;
+    background: white;
+    text-align: center;
+    font-size: $fontsize_ms;
+    box-shadow: 0px 0px 10px #aaa;
+    cursor: pointer;
+    transition: $transtime_default;
+    &:hover {
+      background: $color_active_bg_green;
+    }
+  }
+  &__container-event-list {
+    position: absolute;
+    border-radius: 10px;
+    box-shadow: $box_shadow_default;
+    width: 200px;
+    background: white;
+    border: $border_default;
+    padding: $space_s;
+
+  }
 }

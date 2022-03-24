@@ -25,15 +25,7 @@
             <div style="width: 26px; height: 26px"></div>
           </div>
           <!-- 予定の表示 -->
-          <div v-for="(dayEvent, index) in day.dayEvents" :key="dayEvent.id">
-            <div v-if="dayEvent.width" class="c-calendar__event"
-            :class="{'hide': index + 1 > eventNum}"
-            :style="`width:${dayEvent.width}%;background-color: ${dayEvent.color}`"
-            draggable="true" @dragstart="dragStart($event, dayEvent.id)" @click="eventDetail(dayEvent)"><!-- $eventはDOMイベントと呼ばれる -->
-              {{ formatTitle(dayEvent) }}
-            </div>
-            <div v-else style="height:23px;"></div>
-          </div>
+          <CalendarSchedule :Events="day.dayEvents" :eventNum="eventNum" @eventDetail="eventDetail" @dragStart="dragStart"/>
         </div>
       </div>
     </div>
@@ -52,6 +44,7 @@
 import dayjs from 'dayjs'
 import EventForm from './EventForm.vue'
 import EventDetail from './EventDetail.vue'
+import CalendarSchedule from './CalendarSchedule.vue'
 import { CALENDAR } from '../util'
 export default {
   data () {
@@ -72,7 +65,8 @@ export default {
   },
   components: {
     EventForm,
-    EventDetail
+    EventDetail,
+    CalendarSchedule
   },
   computed: {
     calendars () {
@@ -216,18 +210,8 @@ export default {
       // dragEvent.start = day
       // dragEvent.end = dayjs(dragEvent.start).add(betweenDays, 'day').format('YYYY-MM-DD')
     },
-    // カレンダーに表示するタイトルを加工する
-    formatTitle (dayEvent) {
-      // スケジュールの日数を確認
-      let scheduleDays = Math.ceil(dayEvent.width/100)
-      // タイトルは1日あたり7文字までとする。
-      if (dayEvent.title.length > scheduleDays * 20) {
-        let returnStr = dayEvent.title.slice(0, (scheduleDays * 7 - 1))
-        return returnStr + '…'
-      }
-      return dayEvent.title
-    },
     eventDetail (dayEvent) {
+      console.log(dayEvent)
       this.detail_flg = true
       // dayEventを直接渡してしまうと参照渡しになってしまうので、
       // ここでは新たにオブジェクトを作成する。
@@ -266,20 +250,21 @@ export default {
     },
     // 一つの日付のマスに表示する、イベントの数を制御
     checkEventNum () {
+      console.log('check')
       const dom = this.$refs.calendarBody
       const rect = dom.getBoundingClientRect()
       this.eventNum = Math.floor((rect.height / this.calendar_row_num - 28) / 23)
     }
   },
   created () {
-    this.$store.dispatch('events/getScheduleList')
     this.today = this.currentDate.format('YYYY-MM-DD')
     this.currentYear = this.changeYear = dayjs().year()
-    this.$store.commit('page/setPage', CALENDAR)
+    this.$store.commit('page/setPage', CALENDAR)// headerに現在選ばれているコンポーネントを通知する。
     this.getHoliday()
+    this.$store.dispatch('events/getScheduleList')// DBに保存しているイベントの一覧を取得する。vuex
   },
   mounted () {
-    window.addEventListener('resize', this.handleResize)
+    window.addEventListener('resize', this.handleResize)// resizeイベントを検知
     this.checkEventNum()
   },
   watch: {

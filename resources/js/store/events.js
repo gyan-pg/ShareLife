@@ -4,7 +4,8 @@ import { OK, UNAUTHORIZED, UNAUTHORIZED_MESSAGE } from '../util'
 
 const state = {
   event: [],
-  holiday: {}
+  holiday: {},
+  loaded: false
 }
 
 const mutations = {
@@ -13,6 +14,9 @@ const mutations = {
   },
   setHolidays (state, holidays) {
     state.holiday = holidays
+  },
+  setStatus (state) {
+    state.loaded = true
   }
 }
 
@@ -21,6 +25,7 @@ const actions = {
     const response = await axios.get('/api/schedule/show')
     if (response.status === OK) {
       context.commit('setEvent', response.data)
+      context.commit('setStatus')
     } else if (response.status === UNAUTHORIZED) {
       context.commit('error/setCode', UNAUTHORIZED, { root: true })
       context.commit('messages/setMessage')
