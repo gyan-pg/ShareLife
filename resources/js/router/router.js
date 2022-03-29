@@ -5,7 +5,6 @@ import store from '../store/index'
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import Mypage from '../pages/Mypage.vue'
-import Index from '../pages/Index.vue'
 import SystemError from '../pages/errors/System.vue'
 import NotFound from '../pages/errors/NotFound.vue'
 import Agreement from '../pages/Agreement.vue'
@@ -19,7 +18,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    component: Index,
+    component: Login,
     beforeEnter (to, from, next) {
       if (store.getters['auth/check']) {
         next('/mypage')

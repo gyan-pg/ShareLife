@@ -4,6 +4,10 @@
   display: flex;
   justify-content: space-between;
   border-bottom: $border_default;
+  transition: $transtime_default;
+  &.active {
+    background: rgba(255, 255, 255, 0.8);
+  }
   &__left {
     display: inline-block;
     margin-left: 5%;
@@ -16,5 +20,18 @@
   }
   &__menu {
     margin-left: $space_m;
+    &--top {
+      color: white;
+      transition: $transtime_default;
+      &.active {
+        color: $color_font_default;
+      }
+    }
+  }
+  &--top {
+    @extend .c-nav;
+    position: fixed;
+    border: none;
+    z-index: 10;
   }
 }

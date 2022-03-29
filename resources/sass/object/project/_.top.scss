@@ -1,0 +1,58 @@
+.p-top {
+  &__hero {
+    background-image: url('../storage/images/hero4.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+  }
+  &__about {
+    padding: $space_4l 0;
+    &--content {
+      position: relative;
+      margin-top: $space_4l;
+      border: 3px solid $color_main_green;
+      padding: $space_3l;
+      border-radius: 20px;
+      box-shadow: #cacaca 0 10px 15px;
+    }
+  }
+  &__usage {
+    padding: $space_3l 0;
+    background: $color_main_light_cream;
+  }
+  &__message {
+    background: rgba(200, 255, 255, 0.6);
+    border-radius: 30px;
+    padding: $space_3l;
+    text-align: center;
+    color: white;
+    font-size: $fontsize_2l;
+    position: relative;
+    display: inline-block;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-family: $font_top_message;
+    transition: $transtime_slow;
+    opacity: 0;
+    &.active {
+      opacity: 1;
+      top: 50%;
+    }
+    &--title {
+      display: inline-block;
+      margin-top: $space_2l;
+      font-size: $fontsize_top_message;
+      position: relative;
+      opacity: 0;
+      transition: $transtime_slow;
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+  &__conclusion {
+    padding: $space_3l 0;
+  }
+}

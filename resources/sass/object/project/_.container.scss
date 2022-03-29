@@ -36,7 +36,7 @@
   }
   &--input-notice {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     height: 20px;
   }
   &--header-icon {
@@ -174,7 +174,7 @@
   }
   &--event-date {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
   }
   &--top-adjustment {
@@ -231,7 +231,7 @@
   }
   &--adjustment-result {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     margin-top: $space_s;
     font-size: $fontsize_ms;
     &__left {
@@ -262,5 +262,36 @@
   &--user-title {
     text-align: center;
     margin-bottom: $space_m;
+  }
+  &--invitation-image {
+    height: 300px;
+    width: 100%;
+  }
+  &--top-middle {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  &--usage-flex {
+    display: flex;
+    justify-content: center;
+    margin-bottom: $space_l;
+    &__left, &__right {
+      width: 50%;
+    }
+    &__leftside, &__center, &__rightside {
+      padding: $space_l;
+      width: 33%;
+    }
+  }
+  &--usage__disp {
+    max-width: 980px;
+    height: 540px;
+    padding: 0 $space_l;
+    margin: 0 auto;
+    margin-bottom: $space_l;
+  }
+  &--top-btn-center {
+    margin-top: $space_2l;
+    text-align: center;
   }
 }

@@ -37,9 +37,8 @@ const createApp = async () => { // ログイン状態のチェックを行った
     router,
     store,
     components: {
-      App
-    },
-    template: '<App />'
+      'app-main': App
+    }
   });
 }
 

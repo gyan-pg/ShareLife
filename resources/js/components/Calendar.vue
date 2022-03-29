@@ -60,7 +60,7 @@ export default {
       calendar_row_num: null,
       editEvent: null,
       eventNum: null,// 日付のますに表示するイベントの数
-      height: window.innerHeight
+      height: window.innerHeight,
     }
   },
   components: {
@@ -245,12 +245,13 @@ export default {
       this.$store.dispatch('events/getHolidayList', this.currentDate.year())
     },
     handleResize () {
-      this.height = window.innerHeight
-      this.checkEventNum()
+      if (this.$store.state.page.page === CALENDAR) {
+        this.height = window.innerHeight
+        this.checkEventNum()
+      }
     },
     // 一つの日付のマスに表示する、イベントの数を制御
     checkEventNum () {
-      console.log('check')
       const dom = this.$refs.calendarBody
       const rect = dom.getBoundingClientRect()
       this.eventNum = Math.floor((rect.height / this.calendar_row_num - 28) / 23)
@@ -266,6 +267,10 @@ export default {
   mounted () {
     window.addEventListener('resize', this.handleResize)// resizeイベントを検知
     this.checkEventNum()
+  },
+  // ページ遷移の際に、登録したeventListenerを削除しておかないとエラーが大量発生する。
+  destroyed () {
+    window.removeEventListener('resize', this.handleResize)
   },
   watch: {
     currentDate (newValue) {

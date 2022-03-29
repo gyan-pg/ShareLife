@@ -1,0 +1,31 @@
+.c-popup {
+  position: absolute;
+  background: white;
+  width: 150px;
+  padding: $space_s;
+  border-radius: 10px;
+  border: $border_default;
+  z-index: 2;
+  top: 38px;
+  left: 0;
+  &:before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-left: $border_default;
+    border-top: $border_default;
+    transform: rotate(45deg);
+    position: absolute;
+    top: -11px;
+    left: 53px;
+    background: white;
+  }
+  &--agreement {
+    font-size: $fontsize_ms;
+    left: -53px;
+    &:before {
+      left: 64px;
+    }
+  }
+}

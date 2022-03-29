@@ -31,12 +31,15 @@ export default {
       default: false
     },
     start: null,
-    end: null
+    end: null,
+    clickDate: {
+      String
+    }
   },
   data () {
     return {
       calendar: [],
-      currentDate: dayjs(),
+      currentDate: null,
     }
   },
   computed: {
@@ -98,6 +101,9 @@ export default {
     closeCalendar () {
       this.$emit('close-calendar')
     }
+  },
+  created () {
+    this.currentDate = dayjs(this.clickDate)
   }
 }
 </script>

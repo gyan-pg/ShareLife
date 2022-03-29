@@ -7,7 +7,7 @@ $space_ml: 30px;
 $space_l: 40px;
 $space_2l: 60px;
 $space_3l: 80px;
-$space_4l: 160px;
+$space_4l: 120px;
 
 // --color--
 // main https://colorhunt.co/palette/96ceb4ffeeadd9534fffad60
@@ -34,7 +34,7 @@ $color_font_white: #fefefe;
 $color_bg_default: #fcfafa;
 $color_bg_disable: #999;
 $color_bg_light_gray: #f8f8f8;
-$color_bg_bright_gray: #f9f9f9;
+$color_bg_bright_gray: #fafaf4;
 $color_bg_active: #b7ffff;
 $color_bg_white: #fff;
 $color_bg_input: #fff;
@@ -86,9 +86,12 @@ $fontsize_title_back: 120px;
 // font-family
 $font_default: 'Noto Sans JP', sans-serif;
 $font_soft: "M PLUS Rounded 1c";
+$font_logo: 'Nunito', sans-serif;
+$font_top_message: "Sawarabi Gothic";
 
 // transition
 $transtime_default: .5s;
+$transtime_slow: 1s;
 
 // height
 $height_header: 80px;

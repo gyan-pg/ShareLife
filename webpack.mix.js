@@ -12,6 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+   .js('resources/js/top_app.js', 'public/js')
    .sass('resources/sass/style.scss', 'public/css')
    .browserSync({
     proxy:{
@@ -21,7 +22,8 @@ mix.js('resources/js/app.js', 'public/js')
       'resources/views/**/*.blade.php',
       'resources/views/*.blade.php',
       'public/css/style.css',
-      'public/js/app.js'
+      'public/js/app.js',
+      'public/js/top_app.js'
     ]
   })
   .version();

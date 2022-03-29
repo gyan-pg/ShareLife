@@ -1,0 +1,12 @@
+.c-logo {
+  font-size: $fontsize_2l;
+  font-family: $font_logo;
+  font-weight: 700;
+  &--top {
+    color: white;
+    transition: $transtime_default;
+    &.active {
+      color: $color_font_default;
+    }
+  }
+}

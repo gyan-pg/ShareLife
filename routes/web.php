@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/{any?}', function () {
-    return view('index');
-})->where('any', '.+');
+use Illuminate\Support\Facades\Log;
+
+Route::group(['middleware' => 'guest'], function(){
+  Route::get('/', 'TopController@top');
+  Route::get('/top', 'TopController@top');
+});
+// Route::group(['middleware' => 'auth'], function(){
+//   Route::get('/', 'TopController@index');
+//   Route::get('/top', 'TopController@index');
+// });
+
+Route::get('/{any?}', 'TopController@index')->where('any', '.+');

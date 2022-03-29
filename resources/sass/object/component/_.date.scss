@@ -1,0 +1,10 @@
+.c-date {
+  line-height: $height_form_row;
+  display: inline-block;
+  &--adjustment {
+    font-family: $font_soft;
+    font-size: $fontsize_2l;
+    text-align: center;
+    margin-bottom: $space_m;
+  }
+}

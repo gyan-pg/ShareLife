@@ -74,4 +74,24 @@
     @extend .c-text--number;
     background: $color_main_orange;
   }
+  &--top-message {
+    text-align: center;
+    font-weight: bold;
+    font-size: $fontsize_top_message;
+    margin-bottom: $space_2l;
+  }
+  &--top-description {
+    text-align: center;
+    font-size: $fontsize_2l;
+  }
+  &--top-about {
+    margin-bottom: $space_l;
+  }
+  &--usage-description {
+    padding: $space_2l;
+    text-align: left;
+  }
+  &--usage-section {
+    padding: $space_s 0;
+  }
 }

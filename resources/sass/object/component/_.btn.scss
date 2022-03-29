@@ -73,4 +73,34 @@
   &--form-tab-kotei {
     background: $color_bg_light_red;
   }
+  &--top-register {
+    background: $color_main_green;
+    color: white;
+    padding: 0;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    border-radius: 50%;
+    box-shadow: $box_shadow_dark;
+    transition: $transtime_default;
+    &:hover {
+      transform: scale(0.95);
+      box-shadow: none;
+      background: $color_main_orange;
+    }
+  }
+  &--select {
+    background: $color_main_green;
+    color: white;
+    text-align: center;
+    border-radius: 50%;
+    margin: 0 $space_s;
+    transition: $transtime_default;
+    &:hover {
+      background: $color_main_light_red;
+    }
+    &.active {
+      background: $color_main_light_red;
+    }
+  }
 }

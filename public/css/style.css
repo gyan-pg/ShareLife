@@ -626,6 +626,41 @@ button:hover {
   background: #ffefef;
 }
 
+.c-btn--top-register {
+  background: #96CEB4;
+  color: white;
+  padding: 0;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  border-radius: 50%;
+  box-shadow: #cacaca 0 0 15px;
+  transition: 0.5s;
+}
+
+.c-btn--top-register:hover {
+  transform: scale(0.95);
+  box-shadow: none;
+  background: #FFAD60;
+}
+
+.c-btn--select {
+  background: #96CEB4;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  margin: 0 10px;
+  transition: 0.5s;
+}
+
+.c-btn--select:hover {
+  background: #f7b1af;
+}
+
+.c-btn--select.active {
+  background: #f7b1af;
+}
+
 .c-calendar__body {
   height: calc(100vh - 80px - 80px - 50px - 30px);
   min-height: 200px;
@@ -764,7 +799,7 @@ button:hover {
 
 .c-calendar__date-container:hover,
 .c-calendar__date-container--input:hover {
-  background: #f9f9f9;
+  background: #fafaf4;
 }
 
 .c-calendar__date-container--input {
@@ -838,11 +873,12 @@ button:hover {
 
 .c-calendar__hidden-event {
   position: absolute;
+  line-height: 27px;
   z-index: 2;
   width: 30px;
   height: 30px;
-  top: -28px;
-  right: 10px;
+  top: -23px;
+  right: 5px;
   border: 1px solid #bbb;
   border-radius: 50%;
   background: white;
@@ -858,13 +894,15 @@ button:hover {
 }
 
 .c-calendar__container-event-list {
-  position: absolute;
+  position: relative;
   border-radius: 10px;
+  z-index: 2;
+  top: -100px;
   box-shadow: #ededed 0 0 15px;
   width: 200px;
   background: white;
   border: 1px solid #bbb;
-  padding: 10px;
+  padding: 10px 20px;
 }
 
 .c-date {
@@ -1215,6 +1253,11 @@ button:hover {
 .c-image {
   -o-object-fit: cover;
      object-fit: cover;
+  width: 100%;
+}
+
+.c-image--half-width {
+  width: 50%;
 }
 
 .c-image--wait {
@@ -1244,6 +1287,16 @@ button:hover {
   border-radius: 50%;
 }
 
+.c-image--disp {
+  border-radius: 30px;
+  border: 3px solid #333;
+}
+
+.c-image--top-about {
+  height: 30px;
+  margin-left: 20px;
+}
+
 .c-link--router {
   display: inline-block;
   padding: 5px 10px;
@@ -1251,12 +1304,34 @@ button:hover {
   color: white;
 }
 
-.c-nav {
+.c-logo {
+  font-size: 26px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+}
+
+.c-logo--top {
+  color: white;
+  transition: 0.5s;
+}
+
+.c-logo--top.active {
+  color: #333;
+}
+
+.c-nav,
+.c-nav--top {
   width: 100%;
   height: 80px;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #bbb;
+  transition: 0.5s;
+}
+
+.c-nav.active,
+.active.c-nav--top {
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .c-nav__left {
@@ -1273,6 +1348,21 @@ button:hover {
 
 .c-nav__menu {
   margin-left: 20px;
+}
+
+.c-nav__menu--top {
+  color: white;
+  transition: 0.5s;
+}
+
+.c-nav__menu--top.active {
+  color: #333;
+}
+
+.c-nav--top {
+  position: fixed;
+  border: none;
+  z-index: 10;
 }
 
 .c-popup {
@@ -1399,6 +1489,31 @@ button:hover {
   background: #FFAD60;
 }
 
+.c-text--top-message {
+  text-align: center;
+  font-weight: bold;
+  font-size: 48px;
+  margin-bottom: 60px;
+}
+
+.c-text--top-description {
+  text-align: center;
+  font-size: 26px;
+}
+
+.c-text--top-about {
+  margin-bottom: 40px;
+}
+
+.c-text--usage-description {
+  padding: 60px;
+  text-align: left;
+}
+
+.c-text--usage-section {
+  padding: 10px 0;
+}
+
 .c-title {
   padding: 10px;
   font-size: 20px;
@@ -1481,6 +1596,85 @@ button:hover {
   margin-bottom: 10px;
 }
 
+.c-title--top-about {
+  position: absolute;
+  top: -55px;
+  left: 50%;
+  transform: rotate(-15deg) translateX(-50%);
+  font-size: 26px;
+  background: #FFEEAD;
+  padding: 20px 40px;
+  border-left: 4px dotted rgba(0, 0, 0, 0.1);
+  border-right: 4px dotted rgba(0, 0, 0, 0.1);
+  box-shadow: #ededed 0 0 15px;
+  color: #D9534F;
+}
+
+.c-title--top-accent {
+  display: inline-block;
+  font-size: 30px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.c-title--top-accent:before {
+  content: "";
+  display: block;
+  width: 50%;
+  height: 50px;
+  background: #f7b1af;
+  transform: rotate(-30deg);
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: -20%;
+}
+
+.c-title--usage {
+  font-size: 36px;
+  position: relative;
+  display: inline-block;
+  padding: 10px 0;
+  margin-bottom: 60px;
+}
+
+.c-title--usage:before,
+.c-title--usage:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  height: 100%;
+  width: 2px;
+  background: #333;
+}
+
+.c-title--usage:before {
+  transform: rotate(-30deg);
+  top: 0;
+  left: -30px;
+}
+
+.c-title--usage:after {
+  transform: rotate(30deg);
+  top: 0;
+  right: -30px;
+}
+
+.c-title--usage__container {
+  text-align: center;
+}
+
+.c-title--usage-sub {
+  font-size: 26px;
+}
+
+.c-title--conclusion {
+  text-align: center;
+  font-size: 26px;
+}
+
 .p-container {
   padding-bottom: 60px;
 }
@@ -1529,7 +1723,7 @@ button:hover {
 
 .p-container--input-notice {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   height: 20px;
 }
 
@@ -1693,7 +1887,7 @@ button:hover {
 
 .p-container--event-date {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -1763,7 +1957,7 @@ button:hover {
 
 .p-container--adjustment-result {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   margin-top: 10px;
   font-size: 14px;
 }
@@ -1799,6 +1993,47 @@ button:hover {
 .p-container--user-title {
   text-align: center;
   margin-bottom: 20px;
+}
+
+.p-container--invitation-image {
+  height: 300px;
+  width: 100%;
+}
+
+.p-container--top-middle {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.p-container--usage-flex {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.p-container--usage-flex__left,
+.p-container--usage-flex__right {
+  width: 50%;
+}
+
+.p-container--usage-flex__leftside,
+.p-container--usage-flex__center,
+.p-container--usage-flex__rightside {
+  padding: 40px;
+  width: 33%;
+}
+
+.p-container--usage__disp {
+  max-width: 980px;
+  height: 540px;
+  padding: 0 40px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+
+.p-container--top-btn-center {
+  margin-top: 60px;
+  text-align: center;
 }
 
 .p-wrapper--invitation {
@@ -1856,6 +2091,71 @@ button:hover {
 
 .p-wrapper--adjustment-form {
   margin-top: 40px;
+}
+
+.p-top__hero {
+  background-image: url(/images/hero4.jpeg?d2509dcbdf5cda0f4a7abfefc2ea6e3e);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+}
+
+.p-top__about {
+  padding: 120px 0;
+}
+
+.p-top__about--content {
+  position: relative;
+  margin-top: 120px;
+  border: 3px solid #96CEB4;
+  padding: 80px;
+  border-radius: 20px;
+  box-shadow: #cacaca 0 10px 15px;
+}
+
+.p-top__usage {
+  padding: 80px 0;
+  background: #FFffbe;
+}
+
+.p-top__message {
+  background: rgba(200, 255, 255, 0.6);
+  border-radius: 30px;
+  padding: 80px;
+  text-align: center;
+  color: white;
+  font-size: 26px;
+  position: relative;
+  display: inline-block;
+  top: 55%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-family: "Sawarabi Gothic";
+  transition: 1s;
+  opacity: 0;
+}
+
+.p-top__message.active {
+  opacity: 1;
+  top: 50%;
+}
+
+.p-top__message--title {
+  display: inline-block;
+  margin-top: 60px;
+  font-size: 48px;
+  position: relative;
+  opacity: 0;
+  transition: 1s;
+}
+
+.p-top__message--title.active {
+  opacity: 1;
+}
+
+.p-top__conclusion {
+  padding: 80px 0;
 }
 
 @-webkit-keyframes rotate {
@@ -1959,6 +2259,10 @@ button:hover {
 
 .u-mb-l {
   margin-bottom: 40px;
+}
+
+.u-mb-2l {
+  margin-bottom: 60px;
 }
 
 .u-pt-s {

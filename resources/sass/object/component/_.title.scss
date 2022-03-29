@@ -67,4 +67,72 @@
     display: inline-block;
     margin-bottom: $space_s;
   }
+  &--top-about {
+    position: absolute;
+    top: -55px;
+    left: 50%;
+    transform: rotate(-15deg) translateX(-50%);
+    font-size: $fontsize_2l;
+    background: $color_main_cream;
+    padding: $space_m $space_l;
+    border-left: 4px dotted rgba(0,0,0,0.1);
+    border-right: 4px dotted rgba(0,0,0,0.1);
+    box-shadow: $box_shadow_default;
+    color: $color_main_red;
+  }
+  &--top-accent {
+    display: inline-block;
+    font-size: 30px;
+    padding: $space_s $space_m;
+    margin-bottom: $space_m;
+    overflow: hidden;
+    position: relative;
+    &:before {
+      content: '';
+      display: block;
+      width: 50%;
+      height: 50px;
+      background: $color_main_light_red;
+      transform: rotate(-30deg);
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      right: -20%;
+    }
+  }
+  &--usage {
+    font-size: $fontsize_top_section;
+    position: relative;
+    display: inline-block;
+    padding: $space_s 0;
+    margin-bottom: $space_2l;
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      display: inline-block;
+      height: 100%;
+      width: 2px;
+      background: $color_font_default;
+    }
+    &:before {
+      transform: rotate(-30deg);
+      top: 0;
+      left: -30px;
+    }
+    &:after {
+      transform: rotate(30deg);
+      top: 0;
+      right: -30px;
+    }
+    &__container {
+      text-align: center;
+    }
+  }
+  &--usage-sub {
+    font-size: $fontsize_2l;
+  }
+  &--conclusion {
+    text-align: center;
+    font-size: $fontsize_2l;
+  }
 }

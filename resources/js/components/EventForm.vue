@@ -33,7 +33,7 @@
           <!-- 日時選択用カレンダー -->
           <div class="p-wrapper--small-calendar">
             <transition name="fade">
-              <SmallCalendar v-if="open_calendar" :end_flg="end_flg" :start_flg="start_flg" 
+              <SmallCalendar v-if="open_calendar" :end_flg="end_flg" :start_flg="start_flg" :clickDate="schedule.start"
               :start="schedule.start" :end="schedule.end" @close-calendar="closeCalendar" @get-date="getDate"/>
             </transition>
           </div>
