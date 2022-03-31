@@ -22,18 +22,18 @@
     background: $color_main_light_cream;
   }
   &__message {
-    background: rgba(200, 255, 255, 0.6);
+    background: rgba(247, 175,  175, 0.65);
     border-radius: 30px;
     padding: $space_3l;
     text-align: center;
     color: white;
     font-size: $fontsize_2l;
+    font-family: $font_very_soft;
     position: relative;
     display: inline-block;
     top: 55%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    font-family: $font_top_message;
     transition: $transtime_slow;
     opacity: 0;
     &.active {
@@ -44,8 +44,11 @@
       display: inline-block;
       margin-top: $space_2l;
       font-size: $fontsize_top_message;
+      text-shadow: 2px 2px 3px #bbb;
       position: relative;
       opacity: 0;
+      font-family: $font_logo;
+      font-weight: bold;
       transition: $transtime_slow;
       &.active {
         opacity: 1;

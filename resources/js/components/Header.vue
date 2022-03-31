@@ -2,7 +2,7 @@
   <header id="l-header">
     <nav class="c-nav">
       <div class="c-nav__left">
-        <a v-if="!isLogin" class="c-logo" href="http://localhost:3000/top">Share Life</a>
+        <a v-if="!isLogin" class="c-logo" href="http://share-life-pg.com/top">Share Life</a>
         <router-link v-else to="/" class="c-logo">Share Life</router-link>
       </div>
       <!-- ゲスト時に表示 -->

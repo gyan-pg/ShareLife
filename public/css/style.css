@@ -2120,18 +2120,18 @@ button:hover {
 }
 
 .p-top__message {
-  background: rgba(200, 255, 255, 0.6);
+  background: rgba(247, 175, 175, 0.65);
   border-radius: 30px;
   padding: 80px;
   text-align: center;
   color: white;
   font-size: 26px;
+  font-family: "Zen Maru Gothic", sans-serif;
   position: relative;
   display: inline-block;
   top: 55%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
-  font-family: "Sawarabi Gothic";
   transition: 1s;
   opacity: 0;
 }
@@ -2145,8 +2145,11 @@ button:hover {
   display: inline-block;
   margin-top: 60px;
   font-size: 48px;
+  text-shadow: 2px 2px 3px #bbb;
   position: relative;
   opacity: 0;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
   transition: 1s;
 }
 

@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class himokuSeeder extends Seeder
+class HimokuSeeder extends Seeder
 {
     /**
      * Run the database seeds.

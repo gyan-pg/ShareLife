@@ -45858,7 +45858,7 @@ var render = function () {
                   "a",
                   {
                     staticClass: "c-logo",
-                    attrs: { href: "http://localhost:3000/top" },
+                    attrs: { href: "http://share-life-pg.com/top" },
                   },
                   [_vm._v("Share Life")]
                 )
@@ -64485,6 +64485,7 @@ window.axios.interceptors.response.use(function (response) {
     _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('error/setCode', _util__WEBPACK_IMPORTED_MODULE_0__["INTERNAL_SERVER_ERROR"], {
       root: true
     });
+    console.log(error.response);
   } else {
     return error.response || error;
   }
