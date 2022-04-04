@@ -2,6 +2,9 @@
   &__body {
     height: calc(100vh - $height_footer - $height_footer - $height_head_container - $height_head_dotw);
     min-height: 200px;
+    @include mq () {
+      height: calc(100vh - $height_footer_sm - $height_footer_sm - $height_head_container - $height_head_dotw);
+    }
   }
   &--input {
     margin: 0 auto;
@@ -139,6 +142,11 @@
     position: relative;
     z-index: 1;
     border-radius: 3px;
+    @include mq () {
+      font-size: $fontsize_xs;
+      height: 15px;
+      line-height: 15px;
+    }
     &.hide {
       display: none;
     }
@@ -159,6 +167,9 @@
     &:hover {
       cursor: auto;
     }
+    @include mq () {
+      display: none;
+    }
   }
   &--small {
     box-shadow: 0px 0px 10px #ccc;
@@ -169,6 +180,9 @@
     transform: translateX(-50%);
     z-index: 2;
     border-radius: 10px;
+    @include mq {
+      left: 60%;
+    }
     &.left {
       left: 40%;
     }
@@ -206,6 +220,11 @@
     background: white;
     border: $border_default;
     padding: $space_s $space_m;
-
+  }
+  &__spacer {
+    height: 23px;
+    @include mq () {
+      height: 18px;
+    }
   }
 }

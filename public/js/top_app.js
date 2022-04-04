@@ -10988,15 +10988,46 @@ return jQuery;
 
 // jquery読み込み
 window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-$(function () {
-  var $window = $(window); // スクロールで下ナビゲーションのスタイルが変わるやつ
+$(window).on('load', function () {
+  // heroのメッセージがふわっとするやつ
+  var $top_message = $('.js-top__message');
+  var $top_message_title = $('.js-top__message--title'); // 読み込み時のみ実行
 
+  setTimeout(function () {
+    $top_message.addClass('active');
+    setTimeout(function () {
+      $top_message_title.addClass('active');
+    }, 1000);
+  }, 500);
+});
+$(function () {
+  var $window = $(window);
   var $nav = $('.js-nav');
   var $nav_item = $('.js-nav-item');
-  var nav_height = $('.js-nav').height();
-  var windowHeight = $window.height();
-  $window.scroll(function () {
-    var scroll = $(this).scrollTop();
+  var nav_height = $('.js-nav').height(); // menuの制御
+
+  var $hamberger = $('.js-hamburger');
+  var $navMenu = $('.js-nav-menu');
+  $hamberger.on('click', function () {
+    $(this).toggleClass('active');
+    $navMenu.toggleClass('active');
+  }); // aboutのDOM
+
+  var $about1 = $('.js-about-1');
+  var $about2 = $('.js-about-2');
+  var $about3 = $('.js-about-3'); // 使い方のDOM
+
+  var $usageLeft = $('.js-usage-top-left');
+  var $usageRight = $('.js-usage-top-right'); // aboutを表示するスクロールの感覚
+
+  var showSpan = $about1.outerHeight(true); // heroバナー部の高さ
+
+  var windowHeight = $window.height(); // aboutの高さ
+
+  var aboutHeight = $('#about').outerHeight(); // スクロールきっかけでスタイルが変化するやつ
+
+  $window.on('scroll', function () {
+    var scroll = $(this).scrollTop(); // スクロールがheroを超えるちょっと前
 
     if (scroll > windowHeight - nav_height) {
       $nav_item.addClass('active');
@@ -11004,20 +11035,43 @@ $(function () {
     } else {
       $nav_item.removeClass('active');
       $nav.removeClass('active');
+    } // スクロールがheroを超えた後 1つ目のaboutの表示
+
+
+    if (scroll > windowHeight) {
+      $about1.addClass('active');
+    } else {
+      $about1.removeClass('active');
+    } // 2つ目のaboutの表示
+
+
+    if (scroll > windowHeight + showSpan) {
+      $about2.addClass('active');
+    } else {
+      $about2.removeClass('active');
+    } // 3つ目のabout
+
+
+    if (scroll > windowHeight + showSpan * 2) {
+      $about3.addClass('active');
+    } else {
+      $about3.removeClass('active');
+    } // 使い方のところの表示
+
+
+    if (scroll > windowHeight + aboutHeight - windowHeight * 1 / 2) {
+      $usageLeft.addClass('active');
+      $usageRight.addClass('active');
+    } else {
+      $usageLeft.removeClass('active');
+      $usageRight.removeClass('active');
     }
-  }); // heroのメッセージがふわっとするやつ
-
-  var $top_message = $('.js-top__message');
-  var $top_message_title = $('.js-top__message--title'); // 読み込み時のみ実行
-
-  $top_message.addClass('active');
-  setTimeout(function () {
-    $top_message_title.addClass('active');
-  }, 1000); // チーム結成後の画面の説明
+  }); // チーム結成後の画面の説明
 
   var $slide1 = $('.js-slide1');
   var $slide2 = $('.js-slide2');
-  var $slide3 = $('.js-slide3'); // 制御用のボタン
+  var $slide3 = $('.js-slide3'); // スライドの切り替え
+  // 制御用のボタン
 
   var $showBtn1 = $('.js-show-slide1');
   var $showBtn2 = $('.js-show-slide2');

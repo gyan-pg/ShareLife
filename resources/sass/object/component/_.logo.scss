@@ -2,6 +2,9 @@
   font-size: $fontsize_2l;
   font-family: $font_logo;
   font-weight: 700;
+  @include mq () {
+    font-size: $fontsize_l;
+  }
   &--top {
     color: white;
     transition: $transtime_default;

@@ -13,6 +13,7 @@ class TopController extends Controller
 
   public function index()
   {
-    return view('index');
+    $url = url('');
+    return view('index', compact('url'));
   }
 }

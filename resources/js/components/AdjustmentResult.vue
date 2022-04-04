@@ -1,12 +1,13 @@
 <template>
   <div class="p-container--adjustment-result">
-    <div class="p-container--adjustment-result__left">
-      {{ item.himoku }}<span v-if="item.comment" @click="openComment" v-click-outside="closeComment" class="material-icons c-icon--adjustment-comment">chat</span>
+    <div class="p-container--adjustment-result__left">{{ item.himoku }}</div>
+    <div class="p-container--adjustment-result__left price">{{ item.cost }}円</div>
+    <div class="p-container--adjustment-result__left icon">
+      <span v-if="item.comment" @click="openComment" v-click-outside="closeComment" class="material-icons c-icon--adjustment-comment">chat</span>
       <transition name="slideup">
-        <div v-if="comment_flg" class="c-popup">{{item.comment}}</div>
+        <div v-if="comment_flg" class="c-popup c-popup--adjustment">{{item.comment}}</div>
       </transition>
     </div>
-    <div class="p-container--adjustment-result__left">{{ item.cost }}円</div>
     <div class="p-container--adjustment-result__right">
       <img class="c-image c-image--adjustment-sumbnail" :src="image">
     </div>

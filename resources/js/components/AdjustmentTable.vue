@@ -42,7 +42,7 @@
                 <span v-if="hendo_open" @click="openHendoList" class="material-icons c-icon--adjustment-expand">remove_circle</span>
               </div>
             </div>
-            <div v-else class="c-text">登録されていません。</div>
+            <div v-else class="c-text u-mt-s">登録されていません。</div>
           </div>
 
           <!-- 固定費 -->
@@ -63,7 +63,7 @@
                 <span v-if="kotei_open" @click="openKoteiList" class="material-icons c-icon--adjustment-expand">remove_circle</span>
               </div>
             </div>
-            <div v-else class="c-text">登録されていません。</div>
+            <div v-else class="c-text u-mt-s">登録されていません。</div>
           </div>
 
           <!-- 計算 -->

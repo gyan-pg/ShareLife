@@ -8,6 +8,7 @@ $space_l: 40px;
 $space_2l: 60px;
 $space_3l: 80px;
 $space_4l: 120px;
+$space_5l: 160px;
 
 // --color--
 // main https://colorhunt.co/palette/96ceb4ffeeadd9534fffad60
@@ -16,6 +17,7 @@ $color_main_cream: #FFEEAD;// main2
 $color_main_light_cream: #FFffbe;
 $color_main_red: #D9534F;// accent1
 $color_main_light_red: #f7b1af;
+$color_main_pink: #ffcaef;
 $color_main_orange: #FFAD60;// accent2
 $color_main_light_orange: #ffcf82;
 $color_main_navy: #88c3ca;
@@ -97,7 +99,9 @@ $transtime_slow: 1s;
 
 // height
 $height_header: 80px;
+$height_header_sm: 40px;
 $height_footer: 80px;
+$height_footer_sm: 40px;
 $height_head_container: 50px;
 $height_event_user_image: 60px;
 $height_head_dotw: 30px;
@@ -108,7 +112,7 @@ $height_agreement_title: 25px;
 
 $height_author: 75px;
 $height_msg: 60px;
-$height_hero: 800px;
+$height_msg_ms: 40px;
 
 // width
 $form_single: 400px;

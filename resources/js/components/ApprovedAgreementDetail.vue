@@ -1,14 +1,17 @@
 <template>
   <div>
-    <span class="c-text--number">No.{{ index+1 }}</span>
-    <span class="c-text--content">{{ agree.title }}</span>
-    <div class="p-container--agreements-detail">
-      <span v-if="agree.content" class="material-icons c-icon--adjustment-comment" @click="openContent" v-click-outside="closeContent">chat</span>
-      <span class="material-icons c-icon--agreement-delete" @click="deleteAgreement">delete</span>
-      <transition name="slideup">
-        <div class="c-popup c-popup--agreement" v-if="open_flg">{{ agree.content }}</div>
-      </transition>
+    <div>
+      <span class="c-text--number">No.{{ index+1 }}</span>
+      <div class="p-container--agreements-detail">
+        <span v-if="agree.content" class="material-icons c-icon--adjustment-comment" @click="openContent" v-click-outside="closeContent">chat</span>
+        <span class="material-icons c-icon--agreement-delete" @click="deleteAgreement">delete</span>
+        <transition name="slideup">
+          <div class="c-popup c-popup--agreement" v-if="open_flg">{{ agree.content }}</div>
+        </transition>
+      </div>
     </div>
+
+    <span class="c-text--content">{{ agree.title }}</span>
   </div>
 </template>
 

@@ -1,23 +1,25 @@
 <template>
   <div>
-    <span class="c-text--number-orange">No.{{ index+1 }}</span>
-    <span>{{ agree.title }}</span>
-    <div class="p-container--agreements-detail">
-      <span v-if="agree.content" class="material-icons c-icon--adjustment-comment" @click="openContent" v-click-outside="closeContent">chat</span>
-      <transition name="slideup">
-        <div class="c-popup c-popup--agreement" v-if="open_flg">{{ agree.content }}</div>
-      </transition>
+    <div class="p-container--agreement-item">
+      <span class="c-text--number-orange">No.{{ index+1 }}</span>
+      <div class="p-container--agreements-detail">
+        <span v-if="agree.content" class="material-icons c-icon--adjustment-comment" @click="openContent" v-click-outside="closeContent">chat</span>
+        <span v-if="agree.user_id === myId" class="material-icons c-icon--agreement-delete" @click="deleteAgreement">delete</span>
+        <span v-if="agree.user_id === myId" class="material-icons c-icon--agreement-delete" @click="editAgreement(agree)">edit</span>
+        <!-- パートナーが作った決め事で、まだ承認されていない時。 -->
+        <div class="p-container--judge" v-if="agree.user_id !== myId">
+          <button type="button" class="c-btn c-btn--judge" @click="approveAgreement(agree.id)">承認する</button>
+          <button type="button" class="c-btn c-btn--judge" @click="denyAgreement(agree.id)">承認しない</button>
+        </div>
+        <transition name="slideup">
+          <div class="c-popup c-popup--agreement" v-if="open_flg">{{ agree.content }}</div>
+        </transition>
+      </div>
     </div>
-    <span v-if="agree.user_id === myId" class="material-icons c-icon--agreement-delete" @click="deleteAgreement">delete</span>
-    <span v-if="agree.user_id === myId" class="material-icons c-icon--agreement-delete" @click="editAgreement(agree)">edit</span>
+    <span class="c-text--content">{{ agree.title }}</span>
     
     <!-- パートナーから決め事を拒否された時用メッセージ -->
-    <span v-if="agree.approval === 'deny'">パートナーに否認されました。内容を修正しましょう！</span>
-    <!-- パートナーが作った決め事で、まだ承認されていない時。 -->
-    <div v-if="agree.user_id !== myId">
-      <button type="button" class="c-btn" @click="approveAgreement(agree.id)">承認する</button>
-      <button type="button" class="c-btn" @click="denyAgreement(agree.id)">承認しない</button>
-    </div>
+    <span class="c-text--content c-text--deny" v-if="agree.approval === 'deny'">パートナーに否認されました。内容を修正しましょう！</span>
   </div>
 </template>
 

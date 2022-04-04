@@ -9,6 +9,9 @@
   &__label {
     display: inline-block;
     font-size: $fontsize_ms;
+    &--password {
+      line-height: $height_form_row;
+    }
     &--event {
       white-space: nowrap;
       margin-right: $space_m;
@@ -23,6 +26,9 @@
     padding: $space_xs $space_s;
     font-size: $fontsize_ms;
     margin-top: $space_s;
+    @include mq () {
+      font-size: $fontsize_default;
+    }
     &--event {
       margin: 0;
     }
@@ -39,19 +45,31 @@
       border-bottom: 3px solid $color_main_green;
       font-size: $fontsize_ml;
       padding: $space_xs $space_s;
+      @include mq () {
+        font-size: $fontsize_default;
+      }
       &::placeholder {
         font-size: $fontsize_ml;
+        @include mq {
+          font-size: $fontsize_default;
+        }
       }
     }
     &--adjustment {
       border-bottom: 2px solid $color_main_green;
       width: 100%;
       font-size: $fontsize_ms;
+      @include mq () {
+        font-size: $fontsize_default;
+      }
     }
     &--adjustment-red {
       border-bottom: 2px solid $color_main_light_red;
       width: 100%;
       font-size: $fontsize_ms;
+      @include mq () {
+        font-size: $fontsize_default;
+      }
     }
   }
   &__textarea {
@@ -71,12 +89,23 @@
     background: $color_bg_light_gray;
     padding: $space_xs $space_m;
     border-radius: 10px;
+    @include mq () {
+      font-size: $fontsize_ms;
+      padding: $space_xs $space_s;
+    }
     &:hover {
       cursor: pointer;
     }
     &.active {
       background: $color_bg_active;
     }
+  }
+  &__date-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__nyoro {
   }
   &__radio {
     display: none;

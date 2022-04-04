@@ -29,6 +29,17 @@ Route::post('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 // 退会
 Route::post('/withdraw', 'WithdrawController@withdraw');
+
+// -- パスワード関係 --
+// パスワード再設定用のメール送信
+Route::post('/password/reception', 'PasswordResetController@resetReception');
+// パスワード再設定用のトークンチェック
+Route::post('/checktoken', 'PasswordResetController@checkToken');
+// パスワード再設定を行う
+Route::put('/password/reset', 'PasswordResetController@passwordResetting');
+// パスワード変更
+Route::put('/password/change', 'PasswordChangeController@passwordChange');
+
 // ログインユーザーを返却するだけのapi
 Route::get('/user', function(){
   return Auth::user();

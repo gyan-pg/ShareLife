@@ -2,7 +2,7 @@
   <header id="l-header">
     <nav class="c-nav">
       <div class="c-nav__left">
-        <a v-if="!isLogin" class="c-logo" href="http://share-life-pg.com/top">Share Life</a>
+        <a v-if="!isLogin" class="c-logo" :href="home_url">Share Life</a>
         <router-link v-else to="/" class="c-logo">Share Life</router-link>
       </div>
       <!-- ゲスト時に表示 -->
@@ -15,34 +15,30 @@
         <router-link to="/mypage" v-if="checkTeam"><div class="p-container--header-icon" data-text="カレンダー"><span class="material-icons c-icon--header" :class="[page === CALENDAR ? 'active' : '']">calendar_month</span></div></router-link>
         <router-link to="/adjustment" v-if="checkTeam"><div class="p-container--header-icon" data-text="わりかん！"><span class="material-icons c-icon--header" :class="[page === ADJUSTMENT ? 'active' : '']">payments</span></div></router-link>
         <router-link to="/agreement" v-if="checkTeam"><div class="p-container--header-icon" data-text="きめごと！"><span class="material-icons c-icon--header" :class="[page === AGREEMENT ? 'active' : '']">library_books</span></div></router-link>
-        <div class="p-container--header-icon" data-text="ユーザー！" v-click-outside="closeProfile"><span class="material-icons c-icon--header" @click="showProfile">person</span>
-          <transition name="fade">
-            <Profile v-if="show_prof_flg" @openProfEdit="openProfileEdit"/>
-          </transition>
-        </div>
-
-        <div class="p-container--header-icon" data-text="その他" @click="showSmallMenu" v-click-outside="closeSmallMenu">
-          <span class="material-icons c-icon--header">logout</span>
-          <!-- <i class="fa-solid fa-gear c-icon--header"></i> -->
-          <transition name="fade">
-            <div v-if="show_menu_flg" class="p-container--header-submenu">
-              <span class="c-text--menu" @click="logout">ログアウト</span>
-              <router-link to="/withdraw"><span class="c-text--menu">退会</span></router-link>
-            </div>
-          </transition>
-        </div>
+        <div class="p-container--header-icon" data-text="ユーザー！"><span class="material-icons c-icon--header" @click.stop="showProfile">person</span></div>
+        <div class="p-container--header-icon" data-text="その他"><span class="material-icons c-icon--header" @click.stop="showSmallMenu">logout</span></div>
       </div>
     </nav>
     <transition name="fade">
       <ProfileEditForm v-if="show_edit_flg" @closeProfileEdit="closeProfileEdit"/>
     </transition>
+    <transition name="fade">
+      <PasswordEditForm v-if="show_pass_flg" @closePassEdit="closePassEdit"/>
+    </transition>
+    <transition name="fade">
+      <Profile v-if="show_prof_flg" @openProfEdit="openProfileEdit" @closeProfile="closeProfile"/>
+    </transition>
+    <transition name="fade">
+      <SmallMenu v-if="show_menu_flg" @showSmallMenu="showSmallMenu" @logout="logout" @openPasswordEdit="openPasswordEdit" @closeSmallMenu="closeSmallMenu"/>
+    </transition>
   </header>
 </template>
 
 <script>
-import ClickOutside from 'vue-click-outside'
 import Profile from './Profile.vue'
 import ProfileEditForm from './ProfileEditForm.vue'
+import PasswordEditForm from './PasswordEditForm.vue'
+import SmallMenu from './SmallMenu.vue'
 import { ADJUSTMENT, CALENDAR, AGREEMENT} from '../util'
 export default {
   data () {
@@ -50,14 +46,21 @@ export default {
       show_menu_flg: false,
       show_prof_flg: false,
       show_edit_flg: false,
+      show_pass_flg: false,
       ADJUSTMENT,
       CALENDAR,
-      AGREEMENT
+      AGREEMENT,
+      home_url: null,
+      // スマホとPCでclick outsideの動作順が違うため、
+      // 動作判定用の変数を準備
+      closeOutSide: false
     }
   },
   components: {
     Profile,
-    ProfileEditForm
+    ProfileEditForm,
+    PasswordEditForm,
+    SmallMenu
   },
   computed: {
     isLogin () {
@@ -75,6 +78,7 @@ export default {
   },
   methods: {
     async logout () {
+      this.show_menu_flg = false
       const response = await this.$store.dispatch('auth/logout')
       this.$store.commit('auth/setTeam', null)
       this.$store.commit('auth/setOwner', null)
@@ -82,16 +86,26 @@ export default {
       this.$router.push('/login')
     },
     showSmallMenu () {
-      this.show_menu_flg = !this.show_menu_flg
+      if (!this.closeOutSide) this.show_menu_flg = !this.show_menu_flg
+      this.show_prof_flg = false
     },
     closeSmallMenu () {
       this.show_menu_flg = false
+      this.closeOutSide = true
+      setTimeout(() => {
+        this.closeOutSide = false
+      }, 200);
     },
     showProfile () {
-      this.show_prof_flg = !this.show_prof_flg
+      if (!this.closeOutSide) this.show_prof_flg = !this.show_prof_flg
+      this.show_menu_flg = false
     },
     closeProfile () {
       this.show_prof_flg = false
+      this.closeOutSide = true
+      setTimeout(() => {
+        this.closeOutSide = false
+      }, 200);
     },
     openProfileEdit () {
       this.show_edit_flg = !this.show_edit_flg
@@ -99,13 +113,18 @@ export default {
     },
     closeProfileEdit () {
       this.show_edit_flg = false
+    },
+    openPasswordEdit () {
+      this.show_pass_flg = !this.show_pass_flg
+      this.show_menu_flg = false
+    },
+    closePassEdit () {
+      this.show_pass_flg = false
     }
   },
-  // directivesオプションでローカルディレクティブに登録することで、
-  // ライブラリの機能が使用できるようになる。
-  // importとdirectivesに登録する名前はClickOutsideとしないと動かない。
-  directives: {
-    ClickOutside,
+  created () {
+    // ロゴのURLを取得
+    this.home_url = window.location.protocol + '//' + window.location.host
   }
 }
 </script>

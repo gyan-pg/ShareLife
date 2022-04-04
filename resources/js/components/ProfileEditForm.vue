@@ -31,7 +31,9 @@
           <!-- このコンポーネントでのバリデーション結果 -->
           <span v-if="error_flg && errors_js.email" class="c-text--error">{{ errors_js.email }}</span>
           <!-- サーバー側からのエラーの表示 -->
-          <div v-if="error_flg && errors.email"><span class="c-text--error" v-for="(error, index) in errors.email" :key="index">{{ error }}</span></div>
+          <div v-if="error_flg && errors.email">
+            <span class="c-text--error" v-for="(error, index) in errors.email" :key="index">{{ error }}</span>
+          </div>
         </div>
 
         <!-- 画像 -->

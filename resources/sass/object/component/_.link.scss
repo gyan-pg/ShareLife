@@ -5,4 +5,9 @@
     background: #333;
     color: white;
   }
+  &--sm {
+    @include mq () {
+      text-decoration: underline;
+    }
+  }
 }

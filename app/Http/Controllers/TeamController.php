@@ -10,7 +10,6 @@ use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class TeamController extends Controller
@@ -21,7 +20,6 @@ class TeamController extends Controller
       $response = new Collection();
       $team = new Team();
       $result = $team->where('user1_id', Auth::id())->orWhere('user2_id', Auth::id())->first();
-      Log::debug($result);
       // チーム情報がある時は、それぞれのユーザー情報を取得
       if ($result) {
         $owner = User::find($result->user1_id);
@@ -55,7 +53,6 @@ class TeamController extends Controller
   }
 
   public function approveTeam (Request $request) {
-    Log::debug($request);
     $team = new Team();
     $result = $team->where('id', $request->id)->update(['status' => 'approve']);
     // 変更に成功した時

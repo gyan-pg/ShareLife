@@ -9,7 +9,6 @@ use App\Team;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class ScheduleController extends Controller
 {
@@ -49,7 +48,6 @@ class ScheduleController extends Controller
   // スケジュールの削除
   public function delete($id)
   {
-    Log::debug($id);
     // スケジュールのidのバリデーション
     // 空ではないか
     if($id === ""){
@@ -76,7 +74,6 @@ class ScheduleController extends Controller
   //スケジュールの更新
   public function changeSchedule(ScheduleRequest $request)
   {
-    Log::debug($request);
     $schedule = new Schedule();
     $schedule->where('id', $request->id)->update(['title' => $request->title,
     'detail' => $request->detail, 'start' => $request->start, 'end' => $request->end, 'color' => $request->color]);

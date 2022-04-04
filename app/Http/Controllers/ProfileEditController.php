@@ -6,7 +6,6 @@ use App\Http\Requests\ProfileEditRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileEditController extends Controller
@@ -31,8 +30,6 @@ class ProfileEditController extends Controller
 
   public function updateImage(Request $request)
   {
-    Log::debug('update image');
-    Log::debug($request);
     $request->validate([
       'image' => 'file|mimes:png,jpeg,jpg,gif|max:500'
     ]);
@@ -52,8 +49,6 @@ class ProfileEditController extends Controller
 
   public function updateProfile(ProfileEditRequest $request)
   {
-    Log::debug('update profile');
-    Log::debug($request);
 
     $user = new User();
     $user->where('id', Auth::id())->update(['name' => $request->name, 'email' => $request->email]);

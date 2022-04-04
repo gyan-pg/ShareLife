@@ -1,6 +1,9 @@
 .c-title {
   padding: $space_s;
   font-size: $fontsize_ml;
+  @include mq () {
+    padding: $space_xs $space_s;
+  }
   &--head {
     background: $color_main_orange;
     border-radius: 10px 10px 0 0;
@@ -39,6 +42,11 @@
     font-size: $fontsize_m;
     font-family: $font_soft;
     line-height: $height_agreement_title;
+    @include mq () {
+      font-size: $fontsize_default;
+      line-height: 20px;
+      padding: 0 $space_s;
+    }
     &:before {
       content: '';
       display: inline-block;
@@ -87,6 +95,9 @@
     margin-bottom: $space_m;
     overflow: hidden;
     position: relative;
+    @include mq () {
+      font-size: $fontsize_l;
+    }
     &:before {
       content: '';
       display: block;
@@ -105,7 +116,12 @@
     position: relative;
     display: inline-block;
     padding: $space_s 0;
-    margin-bottom: $space_2l;
+    margin-bottom: $space_4l;
+    background: linear-gradient(transparent 70%, $color_main_light_red 80%);
+    @include mq () {
+      font-size: $fontsize_l;
+      margin-bottom: $space_2l;
+    }
     &:before, &:after {
       content: '';
       position: absolute;
@@ -131,8 +147,29 @@
   &--usage-sub {
     font-size: $fontsize_2l;
   }
+  &--usage-sub-under {
+    display: inline-block;
+    &.green {
+      background: linear-gradient(transparent 65%, $color_main_green 0%);
+    }
+    &.sky {
+      background: linear-gradient(transparent 65%, $color_main_sky 0%);
+    }
+    &.red {
+      background: linear-gradient(transparent 60%, $color_main_light_red 80%);
+    }
+  }
   &--conclusion {
     text-align: center;
     font-size: $fontsize_2l;
+    @include mq () {
+      font-size: $fontsize_l;
+    }
+  }
+  &--password-change {
+    text-align: center;
+    background: $color_main_green;
+    color: white;
+    border-radius: 10px 10px 0 0;
   }
 }

@@ -1,5 +1,8 @@
 .c-text {
   font-size: $fontsize_ms;
+  &--content {
+    font-size: $fontsize_ms;
+  }
   &--error {
     font-size: $fontsize_s;
     color: $color_font_error;
@@ -19,6 +22,10 @@
     background: $color_bg_notice;
     border-radius: 10px;
     border: solid 1px green;
+    @include mq () {
+      font-size: $fontsize_s;
+      line-height: $height_msg_ms;
+    }
   }
   &--flash-error {
     @extend .c-text--flash;
@@ -26,8 +33,9 @@
     border: solid 1px red;
   }
   &--menu {
+    font-size: $fontsize_ms;
+    display: block;
     &:hover {
-      font-size: $fontsize_ms;
       text-decoration: underline;
       cursor: pointer;
     }
@@ -53,6 +61,10 @@
     padding: 0 $space_s;
     border-bottom: 3px solid $color_main_orange;
   }
+  &--agreement {
+    font-size: $fontsize_ms;
+    margin-top: $space_s;
+  }
   &--agreement-content {
     &:before {
       content: attr(data-text);
@@ -65,10 +77,9 @@
     display: inline-block;
     background: $color_main_green;
     color: white;
+    font-size: $fontsize_ms;
     padding: 0 $space_s;
     border-radius: 5px;
-    margin-right: $space_s;
-    line-height: $height_agreement_content_row;
   }
   &--number-orange {
     @extend .c-text--number;
@@ -79,19 +90,51 @@
     font-weight: bold;
     font-size: $fontsize_top_message;
     margin-bottom: $space_2l;
+    @include mq () {
+      font-size: $fontsize_l;
+    }
   }
   &--top-description {
     text-align: center;
     font-size: $fontsize_2l;
+    @include mq () {
+      font-size: $fontsize_default;
+    }
+  }
+  &--top-mb-3l {
+    margin-bottom: $space_3l;
+    @include mq () {
+      margin-bottom: $space_l;
+    }
   }
   &--top-about {
-    margin-bottom: $space_l;
+    font-size: $fontsize_default;
   }
   &--usage-description {
     padding: $space_2l;
     text-align: left;
+    @include mq () {
+      padding: $space_l;
+    }
+    &-team {
+      text-align: center;
+      @include mq () {
+        text-align: left;
+      }
+    }
   }
   &--usage-section {
     padding: $space_s 0;
+  }
+  &--gomen {
+    color: $color_main_red;
+  }
+  &--deny {
+    display: inline-block;
+    margin-left: $space_m;
+    text-decoration: underline;
+    @include mq () {
+      margin: 0;
+    }
   }
 }

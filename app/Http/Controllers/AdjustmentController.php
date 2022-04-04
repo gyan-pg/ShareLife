@@ -8,7 +8,6 @@ use App\Payment;
 use App\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class AdjustmentController extends Controller
 {
@@ -32,7 +31,6 @@ class AdjustmentController extends Controller
   // 支払い登録
   public function register(AdjustmentRequest $request)
   {
-    Log::debug($request);
     $payment = new Payment();
     $team_id = $this->getTeamId();
     $payment->fill(['user_id' => $request->user, 'team_id' => $team_id, 'type' => $request->type,
@@ -41,7 +39,6 @@ class AdjustmentController extends Controller
   // 支払いデータの削除
   public function delete($id)
   {
-    Log::debug($id);
     $payment = new Payment();
 
     // 自分のチームの支払いかを確認する。

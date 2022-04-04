@@ -13,7 +13,7 @@
       draggable="true" @dragstart="dragStart($event, dayEvent.id)" @click.self="eventDetail(dayEvent)"><!-- $eventはDOMイベントと呼ばれる -->
         {{ formatTitle(dayEvent) }}
       </div>
-      <div v-else style="height:23px;"></div>
+      <div v-else class="c-calendar__spacer"></div>
     </div>
     <div>
       <transition name="fade">

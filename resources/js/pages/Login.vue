@@ -30,7 +30,10 @@
         </div>
 
         <div class="p-container--btn-center">
-          <button type="submit" class="c-btn c-btn--submit">送信</button>
+          <button type="submit" class="c-btn c-btn--submit" :disabled="sending">送信</button>
+        </div>
+        <div class="p-container--password-forget">
+          <router-link to="/forgotpass" class="c-link--sm">パスワードを忘れた場合はこちら！</router-link>
         </div>
       </form>
     </section>
@@ -45,7 +48,8 @@ export default {
       loginForm: {
         email: '',
         password: ''
-      }
+      },
+      sending: false
     }
   },
   computed: {
@@ -62,11 +66,12 @@ export default {
   },
   methods: {
     async login () {
+      this.sending = true
       await this.$store.dispatch('auth/login', this.loginForm)
-
       if (this.apiStatus) {
         this.$router.push('/mypage')
       }
+      this.sending = false
     },
     clearError () {
       this.$store.commit('auth/setLoginErrorMessages', null)

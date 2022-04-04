@@ -12,13 +12,26 @@
     border-radius: 50%;
     transition: $transtime_default;
     font-size: $fontsize_default;
+    @include mq () {
+      padding: 0;
+      line-height: 40px;
+      background: transparent;
+      margin-right: $space_s;
+    }
     cursor: pointer;
     &:hover {
       transition: $transtime_default;
       background: $color_active_bg_green;
+      @include mq () {
+        background: transparent;
+      }
     }
     &.active {
       background: $color_active_bg_green;
+      @include mq () {
+        background: transparent;
+        color: $color_main_green;
+      }
     }
   }
   &--forward {
@@ -73,7 +86,7 @@
   }
   &--adjustment-comment {
     @extend .c-icon--adjustment-delete;
-    margin-left: $space_s;
+    margin-left: $space_ms;
     vertical-align: middle;
   }
   &--adjustment-expand {
@@ -88,7 +101,7 @@
   }
   &--agreement-delete {
     @extend .c-icon--adjustment-delete;
-    margin-left: $space_xs;
+    margin-left: $space_ms;
     vertical-align: middle;
   }
   &--profile {

@@ -1,3 +1,6 @@
 #l-main {
   min-height: calc(100vh - $height_footer - $height_header);
+  @include mq () {
+    min-height: calc(100vh - $height_footer_sm - $height_header_sm);
+  }
 }

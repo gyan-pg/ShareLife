@@ -129,7 +129,7 @@ export default {
       this.currentDate = dayjs(this.currentDate).add(1, 'month')
     },
     youbi(dayIndex) {
-      const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+      const week = ['日', '月', '火', '水', '木', '金', '土']
       return week[dayIndex]
     },
     // カレンダーの各日にイベントをセット。

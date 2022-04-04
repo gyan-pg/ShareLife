@@ -1,5 +1,5 @@
 <template>
-  <section class="p-wrapper--profile">
+  <section class="p-wrapper--profile" v-click-outside="closeProfile">
     <div class="p-container--profile">
       <div class="p-container--user-title">
         <span class="c-title--user-name">{{userInfo.name}}</span>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import ClickOutside from 'vue-click-outside'
 export default {
   data () {
     return {
@@ -28,9 +29,15 @@ export default {
     openProfEdit () {
       this.$emit('openProfEdit')
     },
-    closeEditForm () {
-      this.open_flg = false
+    closeProfile () {
+      this.$emit('closeProfile')
     }
+  },
+  // directivesオプションでローカルディレクティブに登録することで、
+  // ライブラリの機能が使用できるようになる。
+  // importとdirectivesに登録する名前はClickOutsideとしないと動かない。
+  directives: {
+    ClickOutside,
   }
 }
 </script>

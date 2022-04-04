@@ -3,23 +3,93 @@
     background-image: url('../storage/images/hero4.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     width: 100%;
     height: 100vh;
   }
   &__about {
-    padding: $space_4l 0;
+    padding: $space_5l 0;
+    @include mq () {
+      padding: $space_2l 0;
+    }
     &--content {
       position: relative;
-      margin-top: $space_4l;
+      margin-top: $space_5l;
       border: 3px solid $color_main_green;
       padding: $space_3l;
       border-radius: 20px;
       box-shadow: #cacaca 0 10px 15px;
+      @include mq () {
+        margin-top: $space_4l;
+        padding: $space_2l $space_m;
+      }
+    }
+    &--item {
+      opacity: 0;
+      transform: translateY(-30px);
+      transition: $transtime_default;
+      margin-bottom: $space_3l;
+      @include mq () {
+        margin-bottom: $space_l;
+      }
+      &.active {
+        opacity: 1;
+        transform: translateY(0);
+        transition: $transtime_default;
+      }
     }
   }
   &__usage {
-    padding: $space_3l 0;
+    padding: $space_5l 0;
+    padding-bottom: $space_4l;
     background: $color_main_light_cream;
+    @include mq () {
+      padding: $space_2l 0;
+    }
+    &--flex {
+      display: flex;
+      justify-content: center;
+      margin-bottom: $space_3l;
+      @include mq () {
+        flex-wrap: wrap;
+      }
+    }
+    &--flex-left {
+      width: 50%;
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: $transtime_default;
+      @include mq () {
+        width: 100%;
+        transform: translateY(-30px);
+      }
+      &.active {
+        transition: $transtime_default;
+        opacity: 1;
+        transform: translateX(0);
+        @include mq () {
+          transform: translateY(0);
+        }
+      }
+    }
+    &--flex-right {
+      width: 50%;
+      opacity: 0;
+      transform: translateX(30px);
+      transition: $transtime_default;
+      @include mq () {
+        width: 100%;
+        transform: translateY(-30px);
+      }
+      &.active {
+        transition: $transtime_default;
+        opacity: 1;
+        transform: translateX(0);
+        @include mq () {
+          transform: translateY(0);
+        }
+      }
+    }
   }
   &__message {
     background: rgba(247, 175,  175, 0.65);
@@ -40,6 +110,10 @@
       opacity: 1;
       top: 50%;
     }
+    @include mq () {
+      padding: $space_m;
+      font-size: $fontsize_l;
+    }
     &--title {
       display: inline-block;
       margin-top: $space_2l;
@@ -53,9 +127,15 @@
       &.active {
         opacity: 1;
       }
+      @include mq () {
+        margin-top: $space_l;
+      }
     }
   }
   &__conclusion {
-    padding: $space_3l 0;
+    padding: $space_5l 0;
+    @include mq () {
+      padding: $space_2l 0;
+    }
   }
 }

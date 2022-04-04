@@ -10,20 +10,35 @@
     width: 500px;
     margin: auto;
     padding-top: $space_2l;
+    @include mq () {
+      width: 100%;
+    }
   }
   &--event-form {
     @extend .p-wrapper--auth;
     position: relative;
     z-index: 3;
+    @include mq () {
+      width: 100%;
+      padding: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
   &--agreement-form {
     @extend .p-wrapper--auth;
     position: relative;
     z-index: 3;
+    @include mq () {
+      width: 100%;
+      padding: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
   &--modal {
     position: fixed;
-    z-index: 3;
+    z-index: 10;
     top: 0;
     left: 0;
     height: 100vh;
@@ -35,14 +50,19 @@
   }
   &--profile {
     position: absolute;
-    z-index: 2;
+    z-index: 20;
     top: 60px;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 5%;
+  }
+  &--submenu {
+    @extend .p-wrapper--profile;
   }
   &--adjustment {
     width: 900px;
     margin: 0 auto;
+    @include mq () {
+      width: 100%;
+    }
   }
   &--adjustment-form {
     margin-top: $space_l;

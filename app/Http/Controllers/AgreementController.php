@@ -7,7 +7,6 @@ use App\Http\Requests\AgreementRequest;
 use App\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class AgreementController extends Controller
 {
@@ -20,7 +19,6 @@ class AgreementController extends Controller
   // 決め事の登録を行う
   public function register(AgreementRequest $request)
   {
-    Log::debug($request);
     $agreement = new Agreement;
     $user_id = Auth::id();
     $agreement->fill(['user_id' => $user_id, 'title' => $request->title, 'team_id' => $request->team_id, 'content' => $request->content])->save();
@@ -38,7 +36,6 @@ class AgreementController extends Controller
     $agreement = new Agreement();
     // 自分の決め事であることを確認
     $created_user = $agreement->find($id)->user;
-    Log::debug($created_user);
     if ($created_user->id !== Auth::id()) {
       return response()->json(['error'=>'エラーが発生しました。'],422);
     }
@@ -61,16 +58,10 @@ class AgreementController extends Controller
     // 決め事のidのバリデーション
     // 空ではないか
     $this->CheckId($id);
-    Log::debug('id');
-    Log::debug($id);
     $agreement = new Agreement();
     // 自分のチームの決め事であることを確認
     $team_id = $agreement->find($id);
-    Log::debug('team_id');
-    Log::debug($team_id);
     $my_team = $team->where('user1_id', Auth::id())->orWhere('user2_id', Auth::id())->first();
-    Log::debug('my_team');
-    Log::debug($my_team->id);
     if ($team_id->team_id !== $my_team->id) {
       return response()->json(['error'=>'エラーが発生しました。'],422);
     }

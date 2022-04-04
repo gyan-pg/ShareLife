@@ -2,4 +2,7 @@
   line-height: $height_footer;
   text-align: center;
   border-top: $border_default;
+  @include mq () {
+    line-height: $height_footer_sm;
+  }
 }

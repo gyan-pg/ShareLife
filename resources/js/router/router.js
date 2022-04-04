@@ -11,6 +11,9 @@ import Agreement from '../pages/Agreement.vue'
 import Adjustment from '../pages/Adjustment.vue'
 import PreRegister from '../pages/PreRegister.vue'
 import Withdraw from '../pages/Withdraw.vue'
+import ForgotPassword from '../pages/ForgotPassword.vue'
+import ResetEmailSend from '../pages/ResetEmailSend.vue'
+import Reset from '../pages/Reset.vue'
 
 // これ書いてないと、router-viewなどが使えない
 Vue.use(VueRouter)
@@ -48,6 +51,36 @@ const routes = [
         next()
       }
     }
+  },
+  {
+    path: '/forgotpass',
+    component: ForgotPassword,
+    beforeEnter (to, from, next) {
+      if (store.getters['auth/check']) {
+        next('/mypage')
+      } else {
+        next()
+      }
+    }
+  },
+  {
+    path: '/resetemailsend',
+    component: ResetEmailSend,
+    beforeEnter (to, from, next) {
+      if (store.getters['auth/check']) {
+        next('/mypage')
+      } else {
+        if (from.fullPath === '/forgotpass') {
+          next()
+        } else {
+          next('/login')
+        }
+      }
+    }
+  },
+  {
+    path: '/reset/:token',
+    component: Reset
   },
   {
     path: '/preRegister',

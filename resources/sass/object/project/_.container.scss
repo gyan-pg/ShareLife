@@ -43,6 +43,9 @@
     display: inline-block;
     position: relative;
     margin-right: $space_s;
+    @include mq () {
+      height: 100%;
+    }
     &::before {
       transition: $transtime_default;
       cursor: auto;
@@ -57,6 +60,9 @@
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
+      @include mq () {
+        display: none;
+      }
     }
     &:hover::before {
       transition: $transtime_default;
@@ -65,16 +71,11 @@
   }
   &--header-submenu {
     padding: $space_s;
-    position: absolute;
-    top: 60px;
-    width: 100px;
+    width: 130px;
     line-height: 30px;
     border: $border_default;
     font-size: $fontsize_ms;
-    left: 50%;
-    transform: translateX(-50%);
     background: $color_bg_white;
-    box-shadow: $box_shadow_default;
     border-radius: 10px;
   }
   &--agreements {
@@ -82,6 +83,12 @@
     padding: $space_l;
     margin: 0 auto;
     min-height: calc(100vh - $height_footer - $height_header);
+    @include mq () {
+      padding: $space_m;
+    }
+  }
+  &--agreement-item {
+    line-height: $height_agreement_content_row;
   }
   &--agreements-row {
     margin-top: $space_m;
@@ -89,6 +96,9 @@
     border: $border_default;
     border-radius: 20px;
     background: $color_bg_light_green;
+    @include mq () {
+      padding: $space_s 0;;
+    }
   }
   &--agreements-row-red {
     @extend .p-container--agreements-row;
@@ -96,13 +106,19 @@
   }
   &--agreements-content {
     padding: 0 $space_l;
+    @include mq () {
+      padding: 0 $space_m;
+    }
   }
   &--agreements-item {
-    margin-bottom: $space_s;
+    margin-top: $space_ms;
   }
   &--agreements-detail {
     display: inline-block;
     position: relative;
+  }
+  &--judge {
+    display: inline-block;
   }
   &--profile {
     border: $border_default;
@@ -123,6 +139,10 @@
   &--image-profile-edit {
     @extend .p-container--image-profile;
     width: 200px;
+    @include mq () {
+      width: 100px;
+      height: 100px;
+    }
   }
   &--withdraw {
     width: 500px;
@@ -153,6 +173,12 @@
     height: $height_form_row;
     display: flex;
     justify-content: space-between;
+    &__left-40 {
+      width: 40%;
+    }
+    &__right-60 {
+      width: 60%;
+    }
   }
   &--form-detail {
     height: auto;
@@ -180,15 +206,26 @@
   &--top-adjustment {
     display: flex;
     min-height: calc(100vh - $height_footer - $height_header);
+    @include mq () {
+      flex-wrap: wrap;
+    }
     &__left {
       width: 40%;
       padding: $space_l;
       padding-right: $space_m;
+      @include mq () {
+        width: 100%;
+        padding: $space_m;
+      }
     }
     &__right {
       width: 60%;
       padding: $space_l;
       padding-left: $space_m;
+      @include mq () {
+        width: 100%;
+        padding: $space_m;
+      }
     }
     &__left-frame, &__right-frame {
       border: $border_default;
@@ -235,9 +272,21 @@
     margin-top: $space_s;
     font-size: $fontsize_ms;
     &__left {
-      width: 20%;
+      width: 15%;
       border-bottom: $border_bright;
       position: relative;
+      @include mq () {
+        width: 20%;
+      }
+      &.price {
+        width: 25%;
+        @include mq () {
+          width: 25%;
+        }
+      }
+      &.icon {
+        width: 10%;
+      }
     }
     &__right {
       margin-left: $space_m;
@@ -271,27 +320,32 @@
     max-width: 1200px;
     margin: 0 auto;
   }
-  &--usage-flex {
-    display: flex;
-    justify-content: center;
-    margin-bottom: $space_l;
-    &__left, &__right {
-      width: 50%;
-    }
-    &__leftside, &__center, &__rightside {
-      padding: $space_l;
-      width: 33%;
-    }
-  }
   &--usage__disp {
     max-width: 980px;
     height: 540px;
     padding: 0 $space_l;
     margin: 0 auto;
     margin-bottom: $space_l;
+    @include mq () {
+      height: 300px;
+    }
   }
   &--top-btn-center {
     margin-top: $space_2l;
     text-align: center;
+  }
+  &--password-forget {
+    padding-top: $space_m;
+    text-align: center;
+    font-size: $fontsize_ms;
+    color: $color_font_bright;
+    &:hover {
+      color: $color_font_default;
+      text-decoration: underline;
+    }
+  }
+  &--sending-image {
+    text-align: center;
+    overflow: hidden;
   }
 }

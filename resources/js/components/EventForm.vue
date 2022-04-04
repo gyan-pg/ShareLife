@@ -19,10 +19,8 @@
             <div class="p-container--form-left">
               <label class="c-form__label--event"><span class="material-icons c-icon--form-item">schedule</span></label>
             </div>
-            <div class="p-container--form-right">
-              <div class="u-tc">
-                <div class="c-form__date" :class="{'active': start_flg }" @click="openStartForm">{{ formatDayStr(schedule.start) }}</div><span class="u-mrl-s">〜</span><div class="c-form__date" :class="{'active': end_flg }" @click="openCloseForm">{{ formatDayStr(schedule.end) }}</div>
-              </div>
+            <div class="p-container--form-right c-form__date-container">
+              <div class="c-form__date" :class="{'active': start_flg }" @click="openStartForm">{{ formatDayStr(schedule.start) }}</div><span class="c-form__nyoro">〜</span><div class="c-form__date" :class="{'active': end_flg }" @click="openCloseForm">{{ formatDayStr(schedule.end) }}</div>
             </div>
           </div>
           <!-- エラー表示 -->

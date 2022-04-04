@@ -66,6 +66,12 @@
     &.active {
       z-index: 3;
     }
+    &:hover {
+      text-decoration: underline;
+    }
+    @include mq () {
+      text-decoration: underline;
+    }
   }
   &--form-tab-hendo {
     background: $color_bg_light_green;
@@ -101,6 +107,30 @@
     }
     &.active {
       background: $color_main_light_red;
+    }
+  }
+  &--500 {
+    margin-top: $space_m;
+    color: white;
+    background: $color_main_navy;
+    &:hover {
+      background: $color_main_light_red;
+    }
+  }
+  &--judge {
+    background: $color_main_light_red;
+    padding: 0 $space_s;
+    font-size: $fontsize_s;
+    color: white;
+    border-radius: 5px;
+    margin-left: $space_s;
+    transition: $transtime_default;
+    &:first-of-type {
+      margin-left: $space_m;
+    }
+    &:hover {
+      transition: $transtime_default;
+      background: $color_main_red;
     }
   }
 }

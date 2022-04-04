@@ -7,7 +7,8 @@
   border: $border_default;
   z-index: 2;
   top: 38px;
-  left: 0;
+  left: -37px;
+  font-size: $fontsize_ms;
   &:before {
     content: '';
     display: block;
@@ -23,7 +24,9 @@
   }
   &--agreement {
     font-size: $fontsize_ms;
-    left: -53px;
+    left: -50px;
+    top: 40px;
+    line-height: 25px;
     &:before {
       left: 64px;
     }
