@@ -53,7 +53,6 @@ export default {
       home_url: null,
       // スマホとPCでclick outsideの動作順が違うため、
       // 動作判定用の変数を準備
-      closeOutSide: false
     }
   },
   components: {
@@ -86,26 +85,16 @@ export default {
       this.$router.push('/login')
     },
     showSmallMenu () {
-      if (!this.closeOutSide) this.show_menu_flg = !this.show_menu_flg
-      this.show_prof_flg = false
+      this.show_menu_flg = !this.show_menu_flg
     },
     closeSmallMenu () {
       this.show_menu_flg = false
-      this.closeOutSide = true
-      setTimeout(() => {
-        this.closeOutSide = false
-      }, 200);
     },
     showProfile () {
-      if (!this.closeOutSide) this.show_prof_flg = !this.show_prof_flg
-      this.show_menu_flg = false
+      this.show_prof_flg = !this.show_prof_flg
     },
     closeProfile () {
       this.show_prof_flg = false
-      this.closeOutSide = true
-      setTimeout(() => {
-        this.closeOutSide = false
-      }, 200);
     },
     openProfileEdit () {
       this.show_edit_flg = !this.show_edit_flg

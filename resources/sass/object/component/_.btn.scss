@@ -100,8 +100,11 @@
     color: white;
     text-align: center;
     border-radius: 50%;
-    margin: 0 $space_s;
+    height: 35px;
+    width: 35px;
     transition: $transtime_default;
+    margin: 0 $space_s;
+    padding: 0;
     &:hover {
       background: $color_main_light_red;
     }

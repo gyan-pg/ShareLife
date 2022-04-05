@@ -1,5 +1,5 @@
 <template>
-  <section class="p-wrapper--profile" v-click-outside="closeProfile">
+  <section class="p-wrapper--profile">
     <div class="p-container--profile">
       <div class="p-container--user-title">
         <span class="c-title--user-name">{{userInfo.name}}</span>
@@ -9,11 +9,11 @@
       </div>
       <span class="material-icons c-icon--profile" @click="openProfEdit">more_horiz</span>
     </div>
+    <div class="p-outside" @click="closeProfile"></div>
   </section>
 </template>
 
 <script>
-import ClickOutside from 'vue-click-outside'
 export default {
   data () {
     return {
@@ -36,8 +36,5 @@ export default {
   // directivesオプションでローカルディレクティブに登録することで、
   // ライブラリの機能が使用できるようになる。
   // importとdirectivesに登録する名前はClickOutsideとしないと動かない。
-  directives: {
-    ClickOutside,
-  }
 }
 </script>

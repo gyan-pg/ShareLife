@@ -4453,10 +4453,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       ADJUSTMENT: _util__WEBPACK_IMPORTED_MODULE_5__["ADJUSTMENT"],
       CALENDAR: _util__WEBPACK_IMPORTED_MODULE_5__["CALENDAR"],
       AGREEMENT: _util__WEBPACK_IMPORTED_MODULE_5__["AGREEMENT"],
-      home_url: null,
-      // スマホとPCでclick outsideの動作順が違うため、
+      home_url: null // スマホとPCでclick outsideの動作順が違うため、
       // 動作判定用の変数を準備
-      closeOutSide: false
+
     };
   },
   components: {
@@ -4513,30 +4512,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     showSmallMenu: function showSmallMenu() {
-      if (!this.closeOutSide) this.show_menu_flg = !this.show_menu_flg;
-      this.show_prof_flg = false;
+      this.show_menu_flg = !this.show_menu_flg;
     },
     closeSmallMenu: function closeSmallMenu() {
-      var _this2 = this;
-
       this.show_menu_flg = false;
-      this.closeOutSide = true;
-      setTimeout(function () {
-        _this2.closeOutSide = false;
-      }, 200);
     },
     showProfile: function showProfile() {
-      if (!this.closeOutSide) this.show_prof_flg = !this.show_prof_flg;
-      this.show_menu_flg = false;
+      this.show_prof_flg = !this.show_prof_flg;
     },
     closeProfile: function closeProfile() {
-      var _this3 = this;
-
       this.show_prof_flg = false;
-      this.closeOutSide = true;
-      setTimeout(function () {
-        _this3.closeOutSide = false;
-      }, 200);
     },
     openProfileEdit: function openProfileEdit() {
       this.show_edit_flg = !this.show_edit_flg;
@@ -4995,8 +4980,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
-/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -5011,7 +4994,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5030,13 +5013,10 @@ __webpack_require__.r(__webpack_exports__);
     closeProfile: function closeProfile() {
       this.$emit('closeProfile');
     }
-  },
-  // directivesオプションでローカルディレクティブに登録することで、
+  } // directivesオプションでローカルディレクティブに登録することで、
   // ライブラリの機能が使用できるようになる。
   // importとdirectivesに登録する名前はClickOutsideとしないと動かない。
-  directives: {
-    ClickOutside: vue_click_outside__WEBPACK_IMPORTED_MODULE_0___default.a
-  }
+
 });
 
 /***/ }),
@@ -5534,8 +5514,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
-/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -5546,7 +5524,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     logout: function logout() {
@@ -5558,9 +5536,6 @@ __webpack_require__.r(__webpack_exports__);
     closeSmallMenu: function closeSmallMenu() {
       this.$emit('closeSmallMenu');
     }
-  },
-  directives: {
-    ClickOutside: vue_click_outside__WEBPACK_IMPORTED_MODULE_0___default.a
   }
 });
 
@@ -47055,45 +47030,33 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    {
-      directives: [
-        {
-          name: "click-outside",
-          rawName: "v-click-outside",
-          value: _vm.closeProfile,
-          expression: "closeProfile",
-        },
-      ],
-      staticClass: "p-wrapper--profile",
-    },
-    [
-      _c("div", { staticClass: "p-container--profile" }, [
-        _c("div", { staticClass: "p-container--user-title" }, [
-          _c("span", { staticClass: "c-title--user-name" }, [
-            _vm._v(_vm._s(_vm.userInfo.name)),
-          ]),
+  return _c("section", { staticClass: "p-wrapper--profile" }, [
+    _c("div", { staticClass: "p-container--profile" }, [
+      _c("div", { staticClass: "p-container--user-title" }, [
+        _c("span", { staticClass: "c-title--user-name" }, [
+          _vm._v(_vm._s(_vm.userInfo.name)),
         ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-container--image-profile" }, [
-          _c("img", {
-            staticClass: "c-image c-image--profile",
-            attrs: { src: _vm.userInfo.image },
-          }),
-        ]),
-        _vm._v(" "),
-        _c(
-          "span",
-          {
-            staticClass: "material-icons c-icon--profile",
-            on: { click: _vm.openProfEdit },
-          },
-          [_vm._v("more_horiz")]
-        ),
       ]),
-    ]
-  )
+      _vm._v(" "),
+      _c("div", { staticClass: "p-container--image-profile" }, [
+        _c("img", {
+          staticClass: "c-image c-image--profile",
+          attrs: { src: _vm.userInfo.image },
+        }),
+      ]),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass: "material-icons c-icon--profile",
+          on: { click: _vm.openProfEdit },
+        },
+        [_vm._v("more_horiz")]
+      ),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-outside", on: { click: _vm.closeProfile } }),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -47508,45 +47471,30 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    {
-      directives: [
-        {
-          name: "click-outside",
-          rawName: "v-click-outside",
-          value: _vm.closeSmallMenu,
-          expression: "closeSmallMenu",
-        },
+  return _c("section", { staticClass: "p-wrapper--submenu" }, [
+    _c(
+      "div",
+      { staticClass: "p-container--header-submenu" },
+      [
+        _c("a", { staticClass: "c-text--menu", on: { click: _vm.logout } }, [
+          _vm._v("ログアウト"),
+        ]),
+        _vm._v(" "),
+        _c("router-link", { attrs: { to: "/withdraw" } }, [
+          _c("span", { staticClass: "c-text--menu" }, [_vm._v("退会")]),
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "c-text--menu", on: { click: _vm.openPasswordEdit } },
+          [_vm._v("パスワード変更")]
+        ),
       ],
-      staticClass: "p-wrapper--submenu",
-    },
-    [
-      _c(
-        "div",
-        { staticClass: "p-container--header-submenu" },
-        [
-          _c("a", { staticClass: "c-text--menu", on: { click: _vm.logout } }, [
-            _vm._v("ログアウト"),
-          ]),
-          _vm._v(" "),
-          _c("router-link", { attrs: { to: "/withdraw" } }, [
-            _c("span", { staticClass: "c-text--menu" }, [_vm._v("退会")]),
-          ]),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "c-text--menu",
-              on: { click: _vm.openPasswordEdit },
-            },
-            [_vm._v("パスワード変更")]
-          ),
-        ],
-        1
-      ),
-    ]
-  )
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-outside", on: { click: _vm.closeSmallMenu } }),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
