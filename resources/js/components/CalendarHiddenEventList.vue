@@ -1,10 +1,11 @@
 <template>
-  <div class="c-calendar__container-event-list">
+  <div class="c-calendar__container-event-list js-hide-list" :style="{right: offsetX+'px', bottom: offsetY+'px'}">
     <div v-for="event in Events" :key="event.id">
       <div :style="`width:100%;background-color: ${event.color}`" class="c-calendar__event" @click="eventDetail(event)">
         {{ formatTitle(event) }}
       </div>
     </div>
+    <div class="p-outside" @click="closeEventList"></div>
   </div>
 </template>
 
@@ -15,6 +16,16 @@ export default {
   props: {
     Events: {
       type: Array
+    },
+    windowWidth: {
+      type: Number,
+      required: true
+    }
+  },
+  data () {
+    return {
+      offsetX: 0,
+      offsetY: 0
     }
   },
   components: {
@@ -34,6 +45,18 @@ export default {
     },
     eventDetail (event) {
       this.$emit('eventDetail', event)
+      this.closeEventList()
+    },
+    closeEventList () {
+      this.$emit('closeEventList')
+    }
+  },
+  mounted () {
+    const elementRect = document.querySelector('.js-hide-list').getBoundingClientRect()
+    console.log(this.windowWidth)
+    console.log(elementRect)
+    if (this.windowWidth < elementRect.right) {
+      this.offsetX = elementRect.right - this.windowWidth
     }
   }
 }

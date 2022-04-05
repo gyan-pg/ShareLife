@@ -3566,13 +3566,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     Events: {
       type: Array
+    },
+    windowWidth: {
+      type: Number,
+      required: true
     }
+  },
+  data: function data() {
+    return {
+      offsetX: 0,
+      offsetY: 0
+    };
   },
   components: {
     EventDetail: _EventDetail_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -3592,6 +3603,19 @@ __webpack_require__.r(__webpack_exports__);
     },
     eventDetail: function eventDetail(event) {
       this.$emit('eventDetail', event);
+      this.closeEventList();
+    },
+    closeEventList: function closeEventList() {
+      this.$emit('closeEventList');
+    }
+  },
+  mounted: function mounted() {
+    var elementRect = document.querySelector('.js-hide-list').getBoundingClientRect();
+    console.log(this.windowWidth);
+    console.log(elementRect);
+
+    if (this.windowWidth < elementRect.right) {
+      this.offsetX = elementRect.right - this.windowWidth;
     }
   }
 });
@@ -3608,10 +3632,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CalendarHiddenEventList_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CalendarHiddenEventList.vue */ "./resources/js/components/CalendarHiddenEventList.vue");
-/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
-/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _EventDetail_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EventDetail.vue */ "./resources/js/components/EventDetail.vue");
-/* harmony import */ var _EventForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EventForm.vue */ "./resources/js/components/EventForm.vue");
+/* harmony import */ var _EventDetail_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EventDetail.vue */ "./resources/js/components/EventDetail.vue");
+/* harmony import */ var _EventForm_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EventForm.vue */ "./resources/js/components/EventForm.vue");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -3650,7 +3672,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     Events: {
@@ -3672,12 +3693,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       clickEvent: null,
       show_hiddenList_flg: false,
       form_flg: false
-    }, _defineProperty(_ref, "clickEvent", null), _defineProperty(_ref, "editEvent", null), _defineProperty(_ref, "detail_flg", false), _ref;
+    }, _defineProperty(_ref, "clickEvent", null), _defineProperty(_ref, "editEvent", null), _defineProperty(_ref, "detail_flg", false), _defineProperty(_ref, "windowWidth", null), _ref;
   },
   components: {
     CalendarHiddenEventList: _CalendarHiddenEventList_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    EventDetail: _EventDetail_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    EventForm: _EventForm_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    EventDetail: _EventDetail_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    EventForm: _EventForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   methods: {
     dragStart: function dragStart($event, dayEventId) {
@@ -3709,6 +3730,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     openEventList: function openEventList() {
+      this.windowWidth = window.innerWidth;
       this.show_hiddenList_flg = !this.show_hiddenList_flg;
     },
     closeEventList: function closeEventList() {
@@ -3751,9 +3773,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     Events: function Events() {
       this.getIndex();
     }
-  },
-  directives: {
-    ClickOutside: vue_click_outside__WEBPACK_IMPORTED_MODULE_1___default.a
   }
 });
 
@@ -45454,25 +45473,35 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "c-calendar__container-event-list" },
-    _vm._l(_vm.Events, function (event) {
-      return _c("div", { key: event.id }, [
-        _c(
-          "div",
-          {
-            staticClass: "c-calendar__event",
-            style: "width:100%;background-color: " + event.color,
-            on: {
-              click: function ($event) {
-                return _vm.eventDetail(event)
+    {
+      staticClass: "c-calendar__container-event-list js-hide-list",
+      style: { right: _vm.offsetX + "px", bottom: _vm.offsetY + "px" },
+    },
+    [
+      _vm._l(_vm.Events, function (event) {
+        return _c("div", { key: event.id }, [
+          _c(
+            "div",
+            {
+              staticClass: "c-calendar__event",
+              style: "width:100%;background-color: " + event.color,
+              on: {
+                click: function ($event) {
+                  return _vm.eventDetail(event)
+                },
               },
             },
-          },
-          [_vm._v("\n      " + _vm._s(_vm.formatTitle(event)) + "\n    ")]
-        ),
-      ])
-    }),
-    0
+            [_vm._v("\n      " + _vm._s(_vm.formatTitle(event)) + "\n    ")]
+          ),
+        ])
+      }),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "p-outside",
+        on: { click: _vm.closeEventList },
+      }),
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -45507,14 +45536,6 @@ var render = function () {
               ? _c(
                   "div",
                   {
-                    directives: [
-                      {
-                        name: "click-outside",
-                        rawName: "v-click-outside",
-                        value: _vm.closeEventList,
-                        expression: "closeEventList",
-                      },
-                    ],
                     staticClass: "c-calendar__hidden-event",
                     on: { click: _vm.openEventList },
                   },
@@ -45571,8 +45592,11 @@ var render = function () {
             [
               _vm.show_hiddenList_flg
                 ? _c("CalendarHiddenEventList", {
-                    attrs: { Events: _vm.Events },
-                    on: { eventDetail: _vm.eventDetail },
+                    attrs: { windowWidth: _vm.windowWidth, Events: _vm.Events },
+                    on: {
+                      eventDetail: _vm.eventDetail,
+                      closeEventList: _vm.closeEventList,
+                    },
                   })
                 : _vm._e(),
             ],

@@ -3,7 +3,7 @@
   <div class="c-calendar__event-container">
     <!-- 隠れている予定の数の表示 -->
     <div v-if="eventNum" class="c-calendar__hidden-container">
-      <div v-if="hiddenEventNum" @click="openEventList" v-click-outside="closeEventList" class="c-calendar__hidden-event">{{ hiddenEventNum }}</div>
+      <div v-if="hiddenEventNum" @click="openEventList" class="c-calendar__hidden-event">{{ hiddenEventNum }}</div>
     </div>
     
     <div v-for="(dayEvent, index) in Events" :key="dayEvent.id">
@@ -17,7 +17,7 @@
     </div>
     <div>
       <transition name="fade">
-        <CalendarHiddenEventList v-if="show_hiddenList_flg" :Events="Events" @eventDetail="eventDetail"/>
+        <CalendarHiddenEventList v-if="show_hiddenList_flg" :windowWidth="windowWidth" :Events="Events" @eventDetail="eventDetail" @closeEventList="closeEventList"/>
       </transition>
     </div>
      <!-- イベント入力フォーム -->
@@ -33,7 +33,6 @@
 
 <script>
 import CalendarHiddenEventList from './CalendarHiddenEventList.vue'
-import ClickOutside from 'vue-click-outside'
 import EventDetail from './EventDetail.vue'
 import EventForm from './EventForm.vue'
 export default {
@@ -57,6 +56,7 @@ export default {
       clickEvent: null,
       editEvent: null,
       detail_flg: false,
+      windowWidth: null
     }
   },
   components: {
@@ -92,6 +92,7 @@ export default {
       }
     },
     openEventList () {
+      this.windowWidth = window.innerWidth
       this.show_hiddenList_flg = !this.show_hiddenList_flg
     },
     closeEventList () {
@@ -134,9 +135,6 @@ export default {
     Events () {
       this.getIndex()
     }
-  },
-  directives: {
-    ClickOutside,
   }
 }
 </script>
