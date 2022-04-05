@@ -989,7 +989,7 @@ button:hover {
 .c-calendar__container-event-list {
   position: relative;
   border-radius: 10px;
-  z-index: 2;
+  z-index: 10;
   top: -100px;
   box-shadow: #ededed 0 0 15px;
   width: 200px;
@@ -1441,7 +1441,13 @@ button:hover {
 }
 
 .c-image--half-width {
-  width: 50%;
+  width: 83%;
+}
+
+@media screen and (max-width: 599px) {
+  .c-image--half-width {
+    width: 60%;
+  }
 }
 
 .c-image--wait {
@@ -1481,7 +1487,7 @@ button:hover {
 .c-image--disp {
   border-radius: 30px;
   border: 3px solid #333;
-  box-shadow: #cacaca 0 0 15px;
+  box-shadow: 0 5px 15px #888;
 }
 
 .c-image--top-about {
@@ -1926,7 +1932,7 @@ button:hover {
 }
 
 .c-text--usage-section {
-  padding: 10px 0;
+  padding: 30px 0;
 }
 
 .c-text--gomen {
@@ -2144,6 +2150,14 @@ button:hover {
 
 .c-title--usage-sub-under.red {
   background: linear-gradient(transparent 60%, #f7b1af 80%);
+}
+
+.c-title--usage-sub-under.orange {
+  background: linear-gradient(transparent 60%, #ffcf82 80%);
+}
+
+.c-title--usage-sub-under.syuiro {
+  background: linear-gradient(transparent 60%, #f8d2a7 80%);
 }
 
 .c-title--conclusion {
@@ -2823,10 +2837,17 @@ button:hover {
 }
 
 .p-top__usage--flex-right {
-  width: 50%;
+  position: relative;
   opacity: 0;
   transform: translateX(30px);
   transition: 0.5s;
+  background: radial-gradient(white 35%, #FFffbe 75%);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 599px) {

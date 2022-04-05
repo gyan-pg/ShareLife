@@ -73,10 +73,17 @@
       }
     }
     &--flex-right {
-      width: 50%;
+      position: relative;
       opacity: 0;
       transform: translateX(30px);
       transition: $transtime_default;
+      background: radial-gradient(white 35%, $color_main_light_cream 75%);
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       @include mq () {
         width: 100%;
         transform: translateY(-30px);

@@ -158,6 +158,12 @@
     &.red {
       background: linear-gradient(transparent 60%, $color_main_light_red 80%);
     }
+    &.orange {
+      background: linear-gradient(transparent 60%, $color_main_light_orange 80%);
+    }
+    &.syuiro {
+      background: linear-gradient(transparent 60%, $color_main_syuiro 80%);
+    }
   }
   &--conclusion {
     text-align: center;

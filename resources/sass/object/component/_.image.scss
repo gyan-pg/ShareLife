@@ -2,7 +2,10 @@
   object-fit: cover;
   width: 100%;
   &--half-width {
-    width: 50%;
+    width: 83%;
+    @include mq () {
+      width: 60%;
+    }
   }
   &--wait {
     width: 100%;
@@ -33,7 +36,7 @@
   &--disp {
     border-radius: 30px;
     border: 3px solid #333;
-    box-shadow: $box_shadow_dark;
+    box-shadow: $box_shadow_top;
   }
   &--top-about {
     height: 30px;

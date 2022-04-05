@@ -78,15 +78,15 @@
       <h2 class="c-title--usage">Share Lifeの使い方</h2>
         <div class="p-top__usage--flex p-container--top-middle">
           <div class="p-top__usage--flex-left js-usage-top-left">
-            <h3 class="c-title--usage-sub"><span class="c-title--usage-sub-under red">チーム登録</span></h3>
+            <h3 class="c-title--usage-sub"><span class="c-title--usage-sub-under syuiro">チーム登録</span></h3>
             <p class="c-text--usage-description">会員登録したユーザー同士でチームを組めます。<br>パートナーを誘ってチームを組むことで、機能がすべて使えるようになります。ログインしてすぐに表示されるフォームに、パートナーの登録しているメールアドレスを入力して招待するだけです。<br>
             ※あらかじめ２人揃っての会員登録が必要となります。</p>
           </div>
           <div class="p-top__usage--flex-right js-usage-top-right">
-            <img class="c-image c-image--half-width" src="/storage/images/holding-hands2.png">
+            <img class="c-image c-image--half-width" src="/storage/images/holding-hands3.png">
           </div>
         </div>
-        <h3 class="c-title--usage-sub"><span class="c-title--usage-sub-under red">チーム結成後</span></h3>
+        <h3 class="c-title--usage-sub"><span class="c-title--usage-sub-under syuiro">チーム結成後</span></h3>
         <p class="c-text--usage-description c-text--usage-description-team">チームを結成した後は、以下の機能がご利用になれます。</p>
         <div class="p-container--btn-center u-mb-m">
           <button type="button" class="c-btn c-btn--select js-show-slide1">1</button>
