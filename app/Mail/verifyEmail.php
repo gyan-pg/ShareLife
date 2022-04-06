@@ -28,8 +28,8 @@ class verifyEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Agree | 仮会員登録が完了しました。')
-                    ->from('mail@agree-port.com')
+        return $this->subject('Share Life | 仮会員登録が完了しました。')
+                    ->from('mail@share-life-pg.com')
                     ->view('emails.verifyEmail')
                     ->with(['token' => $this->token]);
     }

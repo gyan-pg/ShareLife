@@ -28,7 +28,8 @@ class PartnerIvitationEmail extends Mailable
      */
     public function build()
     {
-      return $this->subject('Agree | パートナー招待がありました。')
+      return $this->subject('Share Life | パートナー招待がありました。')
+                  ->from('mail@share-life-pg.com')
                   ->view('emails.partnerInvitationEmail')
                   ->with(['owner' => $this->owner]);
     }
