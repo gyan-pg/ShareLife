@@ -29,8 +29,8 @@
         </div>
 
         <div class="p-container--btn-right">
-          <button class="c-btn c-btn--submit" type="submit">保存</button>
-          <button class="c-btn c-btn--submit" type="button" @click="closeForm" :disabled="sending">閉じる</button>
+          <button class="c-btn c-btn--submit" type="submit" :disabled="sending">保存</button>
+          <button class="c-btn c-btn--submit" type="button" @click="closeForm">閉じる</button>
         </div>
         <p v-if="errors" class="c-text--error">{{ errors.server }}</p>
       </form>
