@@ -53,8 +53,6 @@ export default {
   },
   mounted () {
     const elementRect = document.querySelector('.js-hide-list').getBoundingClientRect()
-    console.log(this.windowWidth)
-    console.log(elementRect)
     if (this.windowWidth < elementRect.right) {
       this.offsetX = elementRect.right - this.windowWidth
     }

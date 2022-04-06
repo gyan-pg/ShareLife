@@ -41,7 +41,6 @@ export default {
     },
     async deleteAgreement () {
       const result = confirm('このルールを消去しますか？')
-      console.log(this.agree.id)
       if (result) {
         const response = await axios.delete(`/api/agreement/${this.agree.id}`)
         if (response.status === OK) {
@@ -56,9 +55,6 @@ export default {
   },
   directives: {
     ClickOutside,
-  },
-  created () {
-    console.log(this.agree)
   }
 }
 </script>

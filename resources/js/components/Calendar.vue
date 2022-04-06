@@ -211,7 +211,6 @@ export default {
       // dragEvent.end = dayjs(dragEvent.start).add(betweenDays, 'day').format('YYYY-MM-DD')
     },
     eventDetail (dayEvent) {
-      console.log(dayEvent)
       this.detail_flg = true
       // dayEventを直接渡してしまうと参照渡しになってしまうので、
       // ここでは新たにオブジェクトを作成する。

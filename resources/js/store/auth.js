@@ -102,7 +102,6 @@ const actions = {
   async register (context, data) {
     context.commit('setApiStatus', null)
     const response = await Axios.post('/api/register', data)
-    console.log(response)
     if (response.status === CREATED) {
       context.commit('setUser', response.data)
       context.commit('setApiStatus', true)
@@ -240,7 +239,6 @@ const actions = {
   async tokenCheck (context, data) {
     context.setApiStatus = null
     const response = await Axios.post('/api/checktoken', data)
-    console.log(response)
     if (response.status === OK) {
       context.commit('setApiStatus', true)
       context.commit('setTokenStatus', response.data.result)

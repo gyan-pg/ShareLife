@@ -88,7 +88,6 @@ export default {
       if (result){
         this.sending = true
         const response = await axios.post('/api/team/invitation', this.formData)
-        console.log(response)
 
         if (response.status === UNPROCESSABLE_ENTITY) {
           this.error.email = response.data.errors.email[0]

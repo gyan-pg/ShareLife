@@ -182,6 +182,7 @@ export default {
         if (res.status === UNPROCESSABLE_ENTITY) {
           this.error_flg = true
           this.errors = res.data.errors
+          this.sending = false
         }
       // resetボタンが押された時
       } else if (this.reset_flg) {
@@ -189,7 +190,7 @@ export default {
         
         // 問題があった時
         if (res_reset === undefined) {
-          this.closeProfileEdit
+          this.closeProfileEdit()
           return false
         }
       }
@@ -269,143 +270,3 @@ export default {
   }
 }
 </script>
-
-<style>
-/* 
-<template>
-  <div v-show="value" class="photo-form">
-    <h2 class="title">Submit a photo</h2>
-    <div v-show="loading" class="panel">
-      <loader-component>Sending your photo...</loader-component>
-    </div>
-    <form v-show="!loading" class="form" @submit.prevent="submit">
-      <div class="errors" v-if="errors">
-        <ul v-if="errors.photo">
-          <li v-for="msg in errors.photo" :key="msg">{{ msg }}</li>
-        </ul>
-      </div>
-      <input class="form__item" type="file" @change="onFileChange">
-      <output clalss="form__output" v-if="preview">
-        <img :src="preview" alt="">
-      </output>
-      <div class="form__button">
-        <button type="submit" class="button button--inverse">submit</button>
-        <button type="button" class="button button--inverse" @click="reset">cancel</button>
-      </div>
-    </form>
-  </div>
-</template>
-
-<script>
-import { CREATED, UNPROCESSABLE_ENTITY } from '../util'
-import Loader from './Loader.vue'
-export default {
-  props: {
-    value: {
-      type: Boolean,
-      required: true
-    }
-  },
-  data: function() {
-    return {
-      loading: false,
-      preview: null,
-      photo: null,
-      errors: null
-    }
-  },
-  components: {
-    'loader-component': Loader
-  },
-  methods: {
-    // フォームでファイルが選択されたら実行される
-    onFileChange (event) {
-      // 何も選択されていなかったら処理中断
-      if (event.target.files.length === 0) {
-        this.reset()
-        return false
-      }
-
-      // ファイルが画像ではなかったら処理中断
-      if (! event.target.files[0].type.match('image.*')) {
-        this.reset()
-        return false
-      }
-
-      // FileReaderクラスのインスタンスを取得
-      const reader = new FileReader()
-
-      // ファイルを読み込む
-      // 読み込まれたファイルはデータURL形式で受け取れる
-      reader.readAsDataURL(event.target.files[0])
-
-      // ファイルを読み込み終わったタイミングで実行する処理
-      // FileReader().onloadはファイルの読み込みが正常に完了した場合に発火するイベント。
-      reader.onload = e => {
-        // previewに読み込み結果（データURL）を代入する
-        // previewに値が入ると<output>につけたv-ifがtrueと判定される
-        // また<output>内部の<img>のsrc属性はpreviewの値を参照しているので
-        // 結果として画像が表示される
-        this.preview = e.target.result
-      }
-      this.photo = event.target.files[0]
-      console.log(event)
-    },
-    reset () {
-      this.preview = ''
-      this.photo = null
-      // this.$elはコンポーネントそのもののDOM要素を指す。
-      // よって、このコンポーネントのテンプレート内のDOM全てをさす。
-      // その中からinputの中身を直接nullにしている。
-      // nullは意図的に何もないよ、ということを示す値。真偽判定で偽となる。
-      this.$el.querySelector('input[type="file"]').value = null
-      // console.log(this.$el)
-    },
-    async submit () {
-      this.loading = true
-      const formData = new FormData()
-      // FormData()オブジェクト自体は、サーバーにデータを送信する際に使用するオブジェクト。
-      // FormData().appendでkey, valueの形でデータを追加する。
-      // お決まりパターンらしい。
-      formData.append('photo', this.photo)
-      // ajax通信でファイルを送る際には、formDataオブジェクトを送る。
-      const response = await axios.post('/api/photos', formData)
-
-      this.loading = false
-
-      console.log(response)
-
-      // エラーハンドリング サーバー側からエラーの文言が帰ってきた時
-      // 表示されているウィンドウを閉じないようにするために、resetメソッドの前に配置
-      if (response.status === UNPROCESSABLE_ENTITY) {
-        this.errors = response.data.errors
-        return false
-      }
-
-      this.reset()
-      // 親コンポーネントにinputに対応するメソッドは書かれていないが、第二引数にfalseとすることで、
-      // 親コンポーネントに渡る値がfalseとなる結果、親コンポーネントのphoto-formのv-showが偽と判断されて表示されなくなる。
-      // 今回のように親コンポーネントから子コンポーネントへv-modelでpropsが渡っている場合にこのようなことができる。
-      // ということらしいが、ややこしいので、自分で書くときはちゃんと省略せずに書こうと思います。
-      this.$emit('input', false)
-
-      // エラーハンドリング なんか失敗した時
-      if (response.status !== CREATED) {
-        this.$store.commit('error/setCode', response.status)
-        return false
-      }
-
-      // メッセージ登録
-      this.$store.commit('message/setContent', {
-        content: '写真が投稿されました！',
-        timeout: 6000
-      })
-      
-      
-      this.$router.push(`/photos/${response.data.id}`) // pushの引数はテンプレートリテラル``(バッククォート)で書くこと。
-    }
-  }
-}
-</script>
-*/
-</style>

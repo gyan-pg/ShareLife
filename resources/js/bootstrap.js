@@ -45,7 +45,7 @@ window.axios.interceptors.response.use(
       store.commit('error/setCode', UNAUTHORIZED , {root: true})
     } else if (error.response.status === INTERNAL_SERVER_ERROR) {
       store.commit('error/setCode', INTERNAL_SERVER_ERROR, {root: true})
-      console.log(error.response)
+      // console.log(error.response)
     } else {
       return error.response || error
     }

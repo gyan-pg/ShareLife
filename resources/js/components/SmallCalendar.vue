@@ -71,7 +71,6 @@ export default {
         }
         calendars.push(weekRow);
       }
-      console.log(calendars)
       return calendars
     },
     getStartDate () { // カレンダーの最初の日付を取得する。

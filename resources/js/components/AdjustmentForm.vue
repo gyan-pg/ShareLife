@@ -69,7 +69,7 @@
       </div>
 
       <div class="p-container--btn-right">
-        <button type="button" class="c-btn c-btn--submit" @click="submitHendo">登録</button>
+        <button type="button" class="c-btn c-btn--submit" @click="submitHendo" :disabled="sending">登録</button>
       </div>
     </div>
 
@@ -138,7 +138,7 @@
       </div>
 
       <div class="p-container--btn-right">
-        <button type="button" class="c-btn c-btn--submit-red" @click="submitKotei">登録</button>
+        <button type="button" class="c-btn c-btn--submit-red" @click="submitKotei" :disabled="sending">登録</button>
       </div>
     </div>
 
@@ -172,7 +172,8 @@ export default {
       },
       error_flg: false,
       open_kotei: false,
-      open_hendo: true
+      open_hendo: true,
+      sending: false,
     }
   },
   computed: {
@@ -191,6 +192,7 @@ export default {
   },
   methods: {
     async submitKotei () {
+      this.sending = true
       this.kotei.type = 'kotei'
       this.kotei.date = this.$store.state.payments.currentDate.format('YYYY-MM-DD')
       this.error_flg = false
@@ -218,8 +220,10 @@ export default {
           }
         }
       }
+      this.sending = false
     },
     async submitHendo () {
+      this.sending = true
       this.hendo.type = 'hendo'
       this.hendo.date = this.$store.state.payments.currentDate.format('YYYY-MM-DD')
       this.error_flg = false
@@ -248,6 +252,7 @@ export default {
           }
         }
       }
+      this.sending = false
     },
     async submit (data) {
       this.error.kotei = {}

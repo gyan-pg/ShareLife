@@ -5,7 +5,7 @@
     <p>下記ボタンを押すと退会が確定します。</p>
     <p>チームの予定や支払いなどの情報は全て削除されます。</p>
     <div class="p-container--btn-center u-mt-m">
-      <button class="c-btn c-btn--submit-navy" @click="submit">退会する</button>
+      <button class="c-btn c-btn--submit-navy" @click="submit" :disabled="sending">退会する</button>
     </div>
   </div>
 </section>
@@ -15,10 +15,13 @@
 import { OK } from '../util'
 export default {
   data () {
-    return {}
+    return {
+      sending: false
+    }
   },
   methods: {
     async submit () {
+      this.sending = true
       const response = await axios.post('/api/withdraw', this.$store.state.auth.user)
       if (response.status === OK) {
         this.$store.commit('auth/setUser', null)
@@ -26,6 +29,7 @@ export default {
         this.$store.commit('messages/setMessage', '退会処理が完了しました。ご利用ありがとうございました。')
         this.$router.push('/')
       } else {
+        this.sending = false
         this.$store.commit('messages/setErrorMessage', '退会処理に失敗しました。管理者にご連絡ください。')
       }
     }

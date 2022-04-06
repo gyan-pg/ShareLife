@@ -262,7 +262,6 @@ export default {
       this.$emit('close-form')
     },
     getDate (date) {
-      console.log(date)
       if (this.start_flg) {
         this.schedule.start = date
         if (dayjs(this.schedule.end).diff(this.schedule.start) < 0) {
