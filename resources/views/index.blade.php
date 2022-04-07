@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ config('app.name') }}</title>
-  {{-- tdkを書くこと --}}
+  <title>Share Life | カップル向け情報管理アプリ</title>
+  <meta name="description" content="Share Lifeは同棲生活を送るカップルに向けての情報管理アプリです。予定・お金・決め事を管理することで、日々の生活をスムーズに送るためのお手伝いをします。">
+  <meta name="keyword" content="予定管理,費用管理,家計簿,カップル,ルール">
 
   <!-- Scripts -->
   <script src="{{ mix('js/app.js') }}" defer></script>
