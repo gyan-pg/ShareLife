@@ -13,9 +13,9 @@
       <!-- ログイン時に表示 -->
       <div v-else class="c-nav__right">
         <router-link to="/mypage" v-if="checkTeam"><div class="p-container--header-icon" data-text="カレンダー"><span class="material-icons c-icon--header" :class="[page === CALENDAR ? 'active' : '']">calendar_month</span></div></router-link>
-        <router-link to="/adjustment" v-if="checkTeam"><div class="p-container--header-icon" data-text="わりかん！"><span class="material-icons c-icon--header" :class="[page === ADJUSTMENT ? 'active' : '']">payments</span></div></router-link>
-        <router-link to="/agreement" v-if="checkTeam"><div class="p-container--header-icon" data-text="きめごと！"><span class="material-icons c-icon--header" :class="[page === AGREEMENT ? 'active' : '']">library_books</span></div></router-link>
-        <div class="p-container--header-icon" data-text="ユーザー！"><span class="material-icons c-icon--header" @click.stop="showProfile">person</span></div>
+        <router-link to="/adjustment" v-if="checkTeam"><div class="p-container--header-icon" data-text="家計簿"><span class="material-icons c-icon--header" :class="[page === ADJUSTMENT ? 'active' : '']">payments</span></div></router-link>
+        <router-link to="/agreement" v-if="checkTeam"><div class="p-container--header-icon" data-text="きめごと"><span class="material-icons c-icon--header" :class="[page === AGREEMENT ? 'active' : '']">library_books</span></div></router-link>
+        <div class="p-container--header-icon" data-text="ユーザー"><span class="material-icons c-icon--header" @click.stop="showProfile">person</span></div>
         <div class="p-container--header-icon" data-text="その他"><span class="material-icons c-icon--header" @click.stop="showSmallMenu">logout</span></div>
       </div>
     </nav>
