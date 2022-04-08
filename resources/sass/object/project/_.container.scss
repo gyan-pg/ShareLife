@@ -306,6 +306,8 @@
       background: $color_main_bright_gray;
       position: absolute;
       top: 50%;
+      position: relative;
+      z-index: -1;
     }
   }
   &--user-title {
