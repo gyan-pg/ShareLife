@@ -73,16 +73,17 @@
             </div>
             <p class="c-text u-mt-s">{{ resultText }}</p>
           </div>
-
         </div>
       </div>
     </div>
+    <MyChart :report="report"/>
   </section>
 </template>
 
 <script>
 import AdjustmentForm from './AdjustmentForm.vue'
 import AdjustmentResult from './AdjustmentResult.vue'
+import MyChart from './MyChart.vue'
 export default {
   data () {
     return {
@@ -95,7 +96,8 @@ export default {
   },
   components: {
     AdjustmentForm,
-    AdjustmentResult
+    AdjustmentResult,
+    MyChart
   },
   computed: {
     kotei_list () {
@@ -168,6 +170,9 @@ export default {
       } else {
         return 'お支払いが登録されていません。'
       }
+    },
+    report () {
+      return this.$store.getters['payments/monthlyReport']
     }
   },
   methods: {
