@@ -60,6 +60,8 @@
   &--adjustment {
     width: 900px;
     margin: 0 auto;
+    padding-bottom: $space_l;
+    min-height: calc(100vh - $height_footer - $height_header);
     @include mq () {
       width: 100%;
     }

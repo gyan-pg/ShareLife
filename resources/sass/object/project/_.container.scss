@@ -205,7 +205,6 @@
   }
   &--top-adjustment {
     display: flex;
-    min-height: calc(100vh - $height_footer - $height_header);
     @include mq () {
       flex-wrap: wrap;
     }
@@ -349,5 +348,13 @@
   &--sending-image {
     text-align: center;
     overflow: hidden;
+  }
+  &--chart {
+    padding: 0 $space_l;
+    position: relative;
+    @include mq () {
+      padding: $space_m;
+      padding-bottom: 0;
+    }
   }
 }

@@ -286,8 +286,10 @@ export default {
     validComment (comment) {
       // コメントがある時
       if (comment) {
-        this.error_flg = true
-        return comment.length > 400 ? 'コメントは400文字以内で入力してください' : ''
+        if (comment.length > 400) {
+          this.error_flg = true
+          return 'コメントは400文字以内で入力してください'
+        }
       }
       return false
     },

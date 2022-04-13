@@ -137,4 +137,15 @@
       margin: 0;
     }
   }
+  &--chart {
+    position: absolute;
+    text-align: center;
+    font-size: $fontsize_ms;
+    top: 59%;
+    left: 50%;
+    transform: translateX(-50%);
+    @include mq () {
+      position: relative;
+    }
+  }
 }
