@@ -3,7 +3,7 @@
   <div class="c-calendar__event-container">
     <!-- 隠れている予定の数の表示 -->
     <div v-if="eventNum" class="c-calendar__hidden-container">
-      <div v-if="hiddenEventNum" @click="openEventList" class="c-calendar__hidden-event">{{ hiddenEventNum }}</div>
+      <div v-if="hiddenEventNum" @click="openEventList" class="c-calendar__hidden-event"><span class="material-icons c-calendar__hidden-icon">more_horiz</span></div>
     </div>
     
     <div v-for="(dayEvent, index) in Events" :key="dayEvent.id">

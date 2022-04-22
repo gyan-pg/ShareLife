@@ -11,8 +11,6 @@
 |
 */
 
-use Illuminate\Support\Facades\Log;
-
 Route::group(['middleware' => 'guest'], function(){
   Route::get('/', 'TopController@top');
   Route::get('/top', 'TopController@top');

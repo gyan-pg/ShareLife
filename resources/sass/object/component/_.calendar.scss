@@ -190,9 +190,16 @@
   &__hidden-container {
     position: relative;
   }
+  &__hidden-icon {
+    line-height: 28px;
+    text-align: center;
+    @include mq () {
+      line-height: 20px;
+      font-size: 16px;
+    }
+  }
   &__hidden-event {
     position: absolute;
-    line-height: 27px;
     z-index: 2;
     width: 30px;
     height: 30px;

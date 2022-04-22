@@ -42,8 +42,8 @@
         <li class="c-nav__menu-list--sm"><span class="c-nav__menu-list--title">MENU</span></li>
         <li class="c-nav__menu-list"><a href="#about" class="c-nav__menu c-nav__menu--top js-nav-item">about</a></li>
         <li class="c-nav__menu-list"><a href="#usage" class="c-nav__menu c-nav__menu--top js-nav-item">usage</a></li>
-        <li class="c-nav__menu-list"><a href="{{ url('/login') }}" class="c-nav__menu c-nav__menu--top js-nav-item">ログイン</a></li>
-        <li class="c-nav__menu-list"><a href="{{ url('/preregister') }}" class="c-nav__menu c-nav__menu--top js-nav-item">ユーザー登録</a></li>
+        <li class="c-nav__menu-list"><a href="{{ url('/login') }}" class="c-nav__menu c-nav__menu--top c-btn--top-login js-nav-item">ログイン</a></li>
+        <li class="c-nav__menu-list"><a href="{{ url('/preregister') }}" class="c-nav__menu c-nav__menu--top c-btn--nav-register js-nav-item">ユーザー登録</a></li>
       </ul>
       <div class="c-nav__hamburger js-hamburger">
         <span></span>
