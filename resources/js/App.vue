@@ -3,7 +3,9 @@
     <Header />
     <main id="l-main">
       <Messages />
-      <router-view />
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
     </main>
     <Footer />
   </div>
@@ -52,3 +54,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .25s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+</style>
