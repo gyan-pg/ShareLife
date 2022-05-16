@@ -45,7 +45,6 @@ Share Life を使えば上記のポイントを簡単に管理することがで
 チームを結成した後は、以下の機能がご利用になれます。
 
 1. ルール決め
-   ルールを作ったユーザーとは別のユーザーが承認するという形です。
    ![agreementsDEMO](https://user-images.githubusercontent.com/92362102/168538471-85e9b0cf-a53e-4b4b-bea1-207b4868240b.gif)
 
 2. 予定の入力
