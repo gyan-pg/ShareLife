@@ -100,6 +100,24 @@
       }
     }
   }
+  &--nav-guest-login {
+    @extend .c-btn--nav-register;
+    background: $color_main_green;
+    @include mq () {
+      background: inherit;
+      padding: 0;
+      border-radius: none;
+      transition: none;
+      color: $color_font_default;
+    }
+    &:hover {
+      background: $color_main_navy;
+      @include mq () {
+        transition: none;
+        background: inherit;
+      }
+    }
+  }
   &--top-register {
     background: $color_main_light_orange;
     color: white;
@@ -155,6 +173,20 @@
     &:hover {
       transition: $transtime_default;
       background: $color_main_red;
+    }
+  }
+  &--disabled {
+    background: $color_bg_disable;
+    &:hover {
+      background: $color_bg_disable;
+    }
+  }
+  &--guest-login {
+    padding: $space_xs $space_s;
+    border: 1px solid $color_bg_disable;
+    border-radius: 3px;
+    &:hover {
+      color: $color_font_bright;
     }
   }
 }

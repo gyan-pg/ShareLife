@@ -20,6 +20,13 @@ const getters = {
   check: state => !!state.user,
   username: state => state.user ? state.user.name : '',
   checkToken: state => state.registerUser ? state.registerUser : '',
+  guest: state => {
+    if ( state.user.id === 100001 || state.user.id === 100002) {
+      return true
+    } else {
+      return false
+    }
+  },
   // チームの相手の情報を返す
   partner: state => {
     if(state.owner.id === state.user.id) {
@@ -146,7 +153,6 @@ const actions = {
     if (response.status === OK) {
       context.commit('setApiStatus', true)
       context.commit('setUser', null)
-      context.commit('setTeam', null)
       context.commit('agreements/setAgreements', [], { root: true })
       return false
     }

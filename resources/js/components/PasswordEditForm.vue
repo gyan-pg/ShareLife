@@ -8,7 +8,7 @@
             <label for="name" class="c-form__label c-form__label--password">パスワード</label>
           </div>
           <div class="p-container--form-row__right-60">
-            <input id="name" class="c-form__input c-form__input--underline" type="password" v-model="formData.password" placeholder="8文字以上半角">
+            <input id="name" class="c-form__input c-form__input--underline" :class="{'c-form__input--disable': guest}" :disabled="guest" type="password" v-model="formData.password" placeholder="8文字以上半角">
           </div>
         </div>
         <!-- エラー表示 -->
@@ -26,7 +26,7 @@
             <label for="password" class="c-form__label c-form__label--password">パスワード(再入力)</label>
           </div>
           <div class="p-container--form-row__right-60">
-            <input id="password" class="c-form__input c-form__input--underline" type="password" v-model="formData.password_confirmation">
+            <input id="password" class="c-form__input c-form__input--underline" :class="{'c-form__input--disable': guest}" :disabled="guest" type="password" v-model="formData.password_confirmation">
           </div>
           <!-- エラー表示 -->
         </div>
@@ -39,7 +39,7 @@
         </div>
 
         <div class="p-container--btn-right">
-          <button class="c-btn c-btn--submit" type="submit" :disabled="sending">保存する</button>
+          <button class="c-btn c-btn--submit" :class="{'c-btn--disabled': guest}" type="submit" :disabled="sending || guest">保存する</button>
           <button class="c-btn c-btn--submit" type="button" @click="closePassEdit">閉じる</button>
         </div>
       </form>
@@ -64,6 +64,9 @@ export default {
     },
     apiStatus () {
       return this.$store.state.auth.apiStatus
+    },
+    guest () {
+      return this.$store.getters['auth/guest']
     }
   },
   methods: {
@@ -79,6 +82,9 @@ export default {
       }
       this.sending = false
     }
+  },
+  created () {
+    this.$store.commit('auth/setPasswordChangeErrorMessages', null)
   }
 }
 </script>

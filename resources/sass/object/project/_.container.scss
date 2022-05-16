@@ -357,4 +357,9 @@
       padding-bottom: 0;
     }
   }
+  &--guest-login {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: $space_m;
+  }
 }

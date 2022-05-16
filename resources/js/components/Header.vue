@@ -7,8 +7,9 @@
       </div>
       <!-- ゲスト時に表示 -->
       <div v-if="!isLogin" class="c-nav__right">
-        <router-link to="/login" class="c-nav__menu">ログイン</router-link>
-        <router-link to="/preRegister" class="c-nav__menu">ユーザー登録</router-link>
+        <router-link to="/guestLogin" class="c-nav__menu c-nav__menu--app">ゲストログイン</router-link>
+        <router-link to="/login" class="c-nav__menu c-nav__menu--app">ログイン</router-link>
+        <router-link to="/preRegister" class="c-nav__menu c-nav__menu--app">ユーザー登録</router-link>
       </div>
       <!-- ログイン時に表示 -->
       <div v-else class="c-nav__right">
@@ -79,10 +80,14 @@ export default {
     async logout () {
       this.show_menu_flg = false
       const response = await this.$store.dispatch('auth/logout')
-      this.$store.commit('auth/setTeam', null)
+      this.$router.push('/login')
+      // チームの情報を即座に削除すると、マイページの表示が切り替わり、UI上良くないので
+      // 1秒の遅延を持たせる。
+      setTimeout( () => {
+        this.$store.commit('auth/setTeam', null)
+      },1000)
       this.$store.commit('auth/setOwner', null)
       this.$store.commit('auth/setTeamMember', null)
-      this.$router.push('/login')
     },
     showSmallMenu () {
       this.show_menu_flg = !this.show_menu_flg

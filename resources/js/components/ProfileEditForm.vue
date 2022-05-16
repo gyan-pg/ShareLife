@@ -9,7 +9,7 @@
             <label for="profile-name" class="c-form__label--event"><span class="material-icons c-icon--form-item">face</span></label>
           </div>
           <div class="p-container--form-right">
-            <input id="profile-name" class="c-form__input c-form__input--underline" placeholder="お名前を入力してください。" v-model="userInfo.name">
+            <input id="profile-name" class="c-form__input c-form__input--underline" :class="{'c-form__input--disable': guest}" placeholder="お名前を入力してください。" v-model="userInfo.name" :disabled="guest">
           </div>
         </div>
         <div class="p-container--input-notice">
@@ -19,12 +19,13 @@
           <div v-if="error_flg && errors.name"><span class="c-text--error" v-for="(error, index) in errors.name" :key="index">{{ error }}</span></div>
         </div>
 
+        <!-- Eメール -->
         <div class="p-container--form-row">
           <div class="p-container--form-left">
             <label for="profile-email" class="c-form__label--event"><span class="material-icons c-icon--form-item">email</span></label>
           </div>
           <div class="p-container--form-right">
-            <input id="profile-email" class="c-form__input c-form__input--underline" placeholder="Eメールアドレスを入力してください。" v-model="userInfo.email">
+            <input id="profile-email" class="c-form__input c-form__input--underline" :class="{'c-form__input--disable': guest}" placeholder="Eメールアドレスを入力してください。" v-model="userInfo.email" :disabled="guest">
           </div>
         </div>
         <div class="p-container--input-notice">
@@ -94,6 +95,11 @@ export default {
       error_flg: false,
       reset_flg: false,
       sending: false,
+    }
+  },
+  computed: {
+    guest () {
+      return this.$store.getters['auth/guest']
     }
   },
   methods: {

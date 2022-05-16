@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import store from '../store/index'
 
 import Login from '../pages/Login.vue'
+import GuestLogin from '../pages/GuestLogin.vue'
 import Register from '../pages/Register.vue'
 import Mypage from '../pages/Mypage.vue'
 import SystemError from '../pages/errors/System.vue'
@@ -44,6 +45,17 @@ const routes = [
   {
     path: '/login',
     component: Login,
+    beforeEnter (to, from, next) {
+      if (store.getters['auth/check']) {
+        next('/mypage')
+      } else {
+        next()
+      }
+    }
+  },
+  {
+    path:'/guestLogin',
+    component: GuestLogin,
     beforeEnter (to, from, next) {
       if (store.getters['auth/check']) {
         next('/mypage')

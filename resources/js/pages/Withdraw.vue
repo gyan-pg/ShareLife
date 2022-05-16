@@ -5,7 +5,7 @@
     <p>下記ボタンを押すと退会が確定します。</p>
     <p>チームの予定や支払いなどの情報は全て削除されます。</p>
     <div class="p-container--btn-center u-mt-m">
-      <button class="c-btn c-btn--submit-navy" @click="submit" :disabled="sending">退会する</button>
+      <button class="c-btn c-btn--submit-navy" :class="{'c-btn--disabled': guest}" @click="submit" :disabled="sending || guest">退会する</button>
     </div>
   </div>
 </section>
@@ -17,6 +17,11 @@ export default {
   data () {
     return {
       sending: false
+    }
+  },
+  computed: {
+    guest () {
+      return this.$store.getters['auth/guest']
     }
   },
   methods: {

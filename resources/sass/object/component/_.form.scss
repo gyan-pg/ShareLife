@@ -71,6 +71,10 @@
         font-size: $fontsize_default;
       }
     }
+    &--disable {
+      background: $color_bg_light_gray;
+      color: gray;
+    }
   }
   &__textarea {
     display: block;

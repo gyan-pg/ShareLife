@@ -148,4 +148,8 @@
       position: relative;
     }
   }
+  &--guest {
+    padding: $space_m;
+    text-align: center;
+  }
 }

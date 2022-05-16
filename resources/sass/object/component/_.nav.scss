@@ -77,6 +77,15 @@
         color: $color_font_default;
       }
     }
+    &--app {
+      @include mq () {
+        font-size: $fontsize_s;
+        padding: 0;
+      }
+      &:hover {
+        color: $color_font_bright;
+      }
+    }
   }
   &__menu-list {
     @include mq () {

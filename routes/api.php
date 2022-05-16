@@ -41,13 +41,13 @@ Route::put('/password/reset', 'PasswordResetController@passwordResetting');
 Route::put('/password/change', 'PasswordChangeController@passwordChange');
 
 // ログインユーザーを返却するだけのapi
-Route::get('/user', function(){
+Route::get('/user', function () {
   return Auth::user();
 })->name('user');
 // ログインしているユーザーのチームidを返却するだけのapi
 Route::get('/user/team', 'TeamController@userTeam');
 // トークンリフレッシュ
-Route::get('/reflesh-token', function(Request $request){
+Route::get('/reflesh-token', function (Request $request) {
   $request->session()->regenerateToken();
   return response()->json();
 });
