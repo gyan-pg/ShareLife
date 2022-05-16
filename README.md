@@ -1,78 +1,55 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## サイトＵＲＬ
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+https://share-life-pg.com/
 
-## About Laravel
+## 開発環境
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   Laravel / PHP / MySQL
+-   Vue.js / Vue CLI / Vue Router / JavaScript / Axios / Options API
+-   CSS Modules / SASS / FLOCSS / Bootstrap / Chart.js
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 開発背景
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+情報共有でスムーズな生活を！
+「Share Life」を開発しました。
 
-## Learning Laravel
+## サービス概要
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+予定・お金・決まり事の管理
+「Share Life」は共同生活を営むカップルのためのサービスです。
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+about
+共同生活をストレスなく送るためには３つのポイントがあります。
 
-## Laravel Sponsors
+１．予定の共有
+お互いの予定を知っておくことで、心配することが減ります。
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+２．生活費の記録
+生活費は２人分を１人で負担するのは厳しいです。共通で使用するものに支払った費用は平等に負担しましょう。
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+３．決まり事の共有
+生活する上でのルールをちゃんと決めましょう。お互い相手に寄り添うことで、より快適に暮らせます。
 
-## Contributing
+Share Life を使えば上記のポイントを簡単に管理することができます。
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Share Life の使い方
 
-## Code of Conduct
+### チーム登録
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+会員登録したユーザー同士でチームを組めます。
+パートナーを誘ってチームを組むことで、機能がすべて使えるようになります。ログインしてすぐに表示されるフォームに、パートナーの登録しているメールアドレスを入力して招待するだけです。
+※あらかじめ２人揃っての会員登録が必要となります。
 
-## Security Vulnerabilities
+### チーム結成後
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+チームを結成した後は、以下の機能がご利用になれます。
 
-## License
+1. ルール決め
+   ルールを作ったユーザーとは別のユーザーが承認するという形です。
+   ![agreementsDEMO](https://user-images.githubusercontent.com/92362102/168538471-85e9b0cf-a53e-4b4b-bea1-207b4868240b.gif)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2. 予定の入力
+   ![registerSchedule](https://user-images.githubusercontent.com/92362102/168533826-267c3efd-f11e-4a79-8eaf-7396748d12f8.gif)
+
+3. 支出の入力
+   ![registerPayment](https://user-images.githubusercontent.com/92362102/168533941-0ae127a4-6425-40fe-858f-e33947fdcfd8.gif)
